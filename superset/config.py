@@ -561,6 +561,9 @@ DEFAULT_FEATURE_FLAGS: dict[str, bool] = {
     "SLACK_ENABLE_AVATARS": False,
     # 允许用户在电子邮件主题中可选地指定日期格式,如果启用则将解析这些格式
     "DATE_FORMAT_IN_EMAIL_SUBJECT": False,
+    # Allow metrics and columns to be grouped into (potentially nested) folders in the
+    # chart builder
+    "DATASET_FOLDERS": False,
 }
 
 # ------------------------------
