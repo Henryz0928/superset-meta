@@ -200,7 +200,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
       return [t(customTitle), customFilter];
     }
     if (lastTab === 'all') {
-      return [t('All'), []];
+      // return [t('All'), []];
+      return ['所有', []];
     }
     return [
       t('Examples'),
@@ -243,7 +244,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
             [TableTab.Viewed]: [],
           }));
           addDangerToast(
-            t('There was an issue fetching your recent activity: %s', errMsg),
+            // t('There was an issue fetching your recent activity: %s', errMsg),
+          '无法获取您最近的活动: %s', errMsg,
           );
         }),
       );
@@ -265,7 +267,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
         .catch((err: unknown) => {
           setDashboardData([]);
           addDangerToast(
-            t('There was an issue fetching your dashboards: %s', err),
+            // t('There was an issue fetching your dashboards: %s', err),
+            '无法获取您的仪表盘: %s', err,
           );
           return Promise.resolve();
         }),
@@ -276,7 +279,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
         })
         .catch((err: unknown) => {
           setChartData([]);
-          addDangerToast(t('There was an issue fetching your chart: %s', err));
+          // addDangerToast(t('There was an issue fetching your chart: %s', err));
+          addDangerToast('无法获取您的图表: %s', err);
           return Promise.resolve();
         }),
       canReadSavedQueries
@@ -288,7 +292,10 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
             .catch((err: unknown) => {
               setQueryData([]);
               addDangerToast(
-                t('There was an issue fetching your saved queries: %s', err),
+                // t('There was an issue fetching your saved queries: %s', err),
+                t('在获取保存的查询时出现了问题: %s', err),
+
+                
               );
               return Promise.resolve();
             })
@@ -328,7 +335,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
 
   const menuData: SubMenuProps = {
     activeChild: 'Home',
-    name: t('Home'),
+    // name: t('Home'),
+    name: '主页',
   };
 
   if (isThumbnailsEnabled) {
@@ -338,7 +346,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
           <WelcomeNav>
             <div className="switch">
               <Switch checked={checked} onClick={handleToggle} />
-              <span>{t('Thumbnails')}</span>
+              {/* <span>{t('Thumbnails')}</span> */}
+              <span>{'缩略图'}</span>
             </div>
           </WelcomeNav>
         ),
@@ -367,7 +376,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
               ghost
               bigger
             >
-              <Collapse.Panel header={t('Recents')} key="1">
+              {/* <Collapse.Panel header={t('Recents')} key="1"> */}
+              <Collapse.Panel header={'近期'} key="1">
                 {activityData &&
                 (activityData[TableTab.Viewed] ||
                   activityData[TableTab.Other] ||
@@ -384,7 +394,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
                   <LoadingCards />
                 )}
               </Collapse.Panel>
-              <Collapse.Panel header={t('Dashboards')} key="2">
+              {/* <Collapse.Panel header={t('Dashboards')} key="2"> */}
+              <Collapse.Panel header={'仪表盘'} key="2">
                 {!dashboardData || isRecentActivityLoading ? (
                   <LoadingCards cover={checked} />
                 ) : (
@@ -398,7 +409,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
                   />
                 )}
               </Collapse.Panel>
-              <Collapse.Panel header={t('Charts')} key="3">
+              {/* <Collapse.Panel header={t('Charts')} key="3"> */}
+              <Collapse.Panel header={'图表'} key="3">
                 {!chartData || isRecentActivityLoading ? (
                   <LoadingCards cover={checked} />
                 ) : (
@@ -413,7 +425,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
                 )}
               </Collapse.Panel>
               {canReadSavedQueries && (
-                <Collapse.Panel header={t('Saved queries')} key="4">
+                // <Collapse.Panel header={t('Saved queries')} key="4">
+                  <Collapse.Panel header={'保存查询'} key="4">
                   {!queryData ? (
                     <LoadingCards cover={checked} />
                   ) : (
