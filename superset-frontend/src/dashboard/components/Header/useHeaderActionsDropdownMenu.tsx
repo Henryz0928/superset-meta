@@ -91,7 +91,8 @@ export const useHeaderActionsMenu = ({
       switch (key) {
         case MenuKeys.RefreshDashboard:
           forceRefreshAllCharts();
-          addSuccessToast(t('Refreshing charts'));
+          // addSuccessToast(t('Refreshing charts'));
+          addSuccessToast(t('刷新图表'));
           break;
         case MenuKeys.EditProperties:
           showPropertiesModal();
@@ -141,7 +142,9 @@ export const useHeaderActionsMenu = ({
   );
 
   const emailSubject = useMemo(
-    () => `${t('Superset dashboard')} ${dashboardTitle}`,
+    // () => `${t('Superset dashboard')} ${dashboardTitle}`,
+    // [dashboardTitle],
+    () => `${t('Superset 仪表盘')} ${dashboardTitle}`,
     [dashboardTitle],
   );
 
@@ -177,25 +180,31 @@ export const useHeaderActionsMenu = ({
             data-test="refresh-dashboard-menu-item"
             disabled={isLoading}
           >
-            {t('Refresh dashboard')}
+            {/* {t('Refresh dashboard')} */}
+            {t('刷新仪表盘')}
           </Menu.Item>
         )}
         {!editMode && !isEmbedded && (
           <Menu.Item key={MenuKeys.ToggleFullscreen}>
-            {getUrlParam(URL_PARAMS.standalone)
+            {/* {getUrlParam(URL_PARAMS.standalone)
               ? t('Exit fullscreen')
-              : t('Enter fullscreen')}
+              : t('Enter fullscreen')} */}
+               {getUrlParam(URL_PARAMS.standalone)
+              ? t('退出全屏')
+              : t('进入全屏')}
           </Menu.Item>
         )}
         {editMode && (
           <Menu.Item key={MenuKeys.EditProperties}>
-            {t('Edit properties')}
+            {/* {t('Edit properties')} */}
+            {t('编辑属性')}
           </Menu.Item>
         )}
         {editMode && (
           <Menu.Item key={MenuKeys.EditCss}>
             <CssEditor
-              triggerNode={<div>{t('Edit CSS')}</div>}
+              // triggerNode={<div>{t('Edit CSS')}</div>}
+              triggerNode={<div>{t('编辑 CSS')}</div>}
               initialCss={css}
               onChange={changeCss}
               addDangerToast={addDangerToast}
@@ -222,7 +231,8 @@ export const useHeaderActionsMenu = ({
               colorScheme={colorScheme}
               onSave={onSave}
               triggerNode={
-                <div data-test="save-as-menu-item">{t('Save as')}</div>
+                // <div data-test="save-as-menu-item">{t('Save as')}</div>
+                <div data-test="save-as-menu-item">{t('保存为')}</div>
               }
               canOverwrite={userCanEdit}
             />
@@ -231,9 +241,12 @@ export const useHeaderActionsMenu = ({
         <DownloadMenuItems
           submenuKey={MenuKeys.Download}
           disabled={isLoading}
-          title={t('Download')}
-          pdfMenuItemTitle={t('Export to PDF')}
-          imageMenuItemTitle={t('Download as Image')}
+          // title={t('Download')}
+          title={t('下载')}
+          // pdfMenuItemTitle={t('Export to PDF')}
+          pdfMenuItemTitle={t('导出为PDF')}
+          // imageMenuItemTitle={t('Download as Image')}
+          imageMenuItemTitle={t('下载图片')}
           dashboardTitle={dashboardTitle}
           dashboardId={dashboardId}
           logEvent={logEvent}
@@ -242,12 +255,16 @@ export const useHeaderActionsMenu = ({
           <ShareMenuItems
             disabled={isLoading}
             data-test="share-dashboard-menu-item"
-            title={t('Share')}
+            // title={t('Share')}
+            title={t('分享')}
             url={url}
-            copyMenuItemTitle={t('Copy permalink to clipboard')}
-            emailMenuItemTitle={t('Share permalink by email')}
+            // copyMenuItemTitle={t('Copy permalink to clipboard')}
+            // emailMenuItemTitle={t('Share permalink by email')}
+            copyMenuItemTitle={t('复制永久链接到剪贴板')}
+            emailMenuItemTitle={t('通过电子邮件分享永久链接')}
             emailSubject={emailSubject}
-            emailBody={t('Check out this dashboard: ')}
+            // emailBody={t('Check out this dashboard: ')}
+            emailBody={t('查看这个仪表板: ')}
             addSuccessToast={addSuccessToast}
             addDangerToast={addDangerToast}
             dashboardId={dashboardId}
@@ -256,7 +273,8 @@ export const useHeaderActionsMenu = ({
         )}
         {!editMode && userCanCurate && (
           <Menu.Item key={MenuKeys.ManageEmbedded}>
-            {t('Embed dashboard')}
+            {/* {t('Embed dashboard')} */}
+            {t('嵌入仪表盘')}
           </Menu.Item>
         )}
         <Menu.Divider />
@@ -264,7 +282,8 @@ export const useHeaderActionsMenu = ({
           showReportSubMenu ? (
             <>
               <HeaderReportDropdown
-                submenuTitle={t('Manage email report')}
+                // submenuTitle={t('Manage email report')}
+                submenuTitle={t('管理电子邮件报告')}
                 dashboardId={dashboardInfo.id}
                 setShowReportSubMenu={setShowReportSubMenu}
                 showReportModal={showReportModal}
@@ -288,7 +307,8 @@ export const useHeaderActionsMenu = ({
           <Menu.Item key={MenuKeys.SetFilterMapping}>
             <FilterScopeModal
               triggerNode={
-                <div className="m-r-5">{t('Set filter mapping')}</div>
+                // <div className="m-r-5">{t('Set filter mapping')}</div>
+                <div className="m-r-5">{t('设置过滤映射')}</div>
               }
             />
           </Menu.Item>
@@ -302,7 +322,8 @@ export const useHeaderActionsMenu = ({
             onChange={changeRefreshInterval}
             editMode={editMode}
             refreshIntervalOptions={refreshIntervalOptions}
-            triggerNode={<div>{t('Set auto-refresh interval')}</div>}
+            // triggerNode={<div>{t('Set auto-refresh interval')}</div>}
+            triggerNode={<div>{t('设置自动刷新间隔')}</div>}
           />
         </Menu.Item>
       </Menu>

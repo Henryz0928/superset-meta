@@ -250,7 +250,8 @@ const Column = props => {
               </Droppable>
             )}
             {columnItems.length === 0 ? (
-              <div css={emptyColumnContentStyles}>{t('Empty column')}</div>
+              // <div css={emptyColumnContentStyles}>{t('Empty column')}</div>
+              <div css={emptyColumnContentStyles}>{t('空列')}</div>
             ) : (
               columnItems.map((componentId, itemIndex) => (
                 <Fragment key={componentId}>

@@ -198,7 +198,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
         );
       });
     onHide();
-    addSuccessToast(t('Successfully changed dataset!'));
+    // addSuccessToast(t('Successfully changed dataset!'));
+    addSuccessToast(t('成功更改数据集！'));
   };
 
   const handlerCancelConfirm = () => {
@@ -217,20 +218,24 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
           {original?.table_name}
         </StyledSpan>
       ),
-      Header: t('Name'),
+      // Header: t('Name'),
+      Header: t('名称'),
       accessor: 'table_name',
     },
     {
-      Header: t('Type'),
+      // Header: t('Type'),
+      Header: t('类型'),
       accessor: 'kind',
       disableSortBy: true,
     },
     {
-      Header: t('Schema'),
+      // Header: t('Schema'),
+      Header: t('模式'),
       accessor: 'schema',
     },
     {
-      Header: t('Connection'),
+      // Header: t('Connection'),
+      Header: t('连接'),
       accessor: 'database.database_name',
       disableSortBy: true,
     },
@@ -240,7 +245,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
           original: { owners = [] },
         },
       }: any) => <FacePile users={owners} />,
-      Header: t('Owners'),
+      // Header: t('Owners'),
+      Header: t('所有者'),
       id: 'owners',
       disableSortBy: true,
     },
@@ -259,7 +265,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
       show={show}
       onHide={onHide}
       responsive
-      title={t('Swap dataset')}
+      // title={t('Swap dataset')}
+      title={t('交换数据集')}
       width={confirmChange ? '432px' : ''}
       height={confirmChange ? 'auto' : '540px'}
       hideFooter={!confirmChange}
@@ -268,13 +275,15 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
           {confirmChange && (
             <ConfirmModalStyled>
               <div className="btn-container">
-                <Button onClick={handlerCancelConfirm}>{t('Cancel')}</Button>
+                {/* <Button onClick={handlerCancelConfirm}>{t('Cancel')}</Button> */}
+                <Button onClick={handlerCancelConfirm}>{t('取消')}</Button>
                 <Button
                   className="proceed-btn"
                   buttonStyle="primary"
                   onClick={handleChangeConfirm}
                 >
-                  {t('Proceed')}
+                  {/* {t('Proceed')} */}
+                  {t('继续')}
                 </Button>
               </div>
             </ConfirmModalStyled>
@@ -291,7 +300,8 @@ const ChangeDatasourceModal: FunctionComponent<ChangeDatasourceModalProps> = ({
               css={theme => ({ marginBottom: theme.gridUnit * 4 })}
               message={
                 <>
-                  <strong>{t('Warning!')}</strong> {CHANGE_WARNING_MSG}
+                  {/* <strong>{t('Warning!')}</strong> {CHANGE_WARNING_MSG} */}
+                  <strong>{t('警告!')}</strong> {CHANGE_WARNING_MSG}
                 </>
               }
             />

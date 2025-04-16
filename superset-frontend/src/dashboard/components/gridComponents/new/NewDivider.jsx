@@ -27,7 +27,8 @@ export default function DraggableNewDivider() {
     <DraggableNewComponent
       id={NEW_DIVIDER_ID}
       type={DIVIDER_TYPE}
-      label={t('Divider')}
+      // label={t('Divider')}
+      label={t('分隔符')}
       className="divider-placeholder"
     />
   );

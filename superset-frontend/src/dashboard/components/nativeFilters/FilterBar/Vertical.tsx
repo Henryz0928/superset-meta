@@ -160,12 +160,16 @@ const VerticalFilterBar: FC<VerticalBarProps> = ({
         <FilterBarEmptyStateContainer>
           <EmptyState
             size="small"
-            title={t('No global filters are currently added')}
+            // title={t('No global filters are currently added')}
+            title={t('当前未添加任何全局过滤器')}
             image="filter.svg"
             description={
               canEdit &&
+              // t(
+              //   'Click on "Add or Edit Filters" option in Settings to create new dashboard filters',
+              // )
               t(
-                'Click on "Add or Edit Filters" option in Settings to create new dashboard filters',
+                '点击“添加或编辑筛选条件”选项以创建新的仪表板筛选条件',
               )
             }
           />

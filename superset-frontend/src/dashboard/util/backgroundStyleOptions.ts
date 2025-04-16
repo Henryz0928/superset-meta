@@ -22,12 +22,14 @@ import { BACKGROUND_TRANSPARENT, BACKGROUND_WHITE } from './constants';
 export default [
   {
     value: BACKGROUND_TRANSPARENT,
-    label: t('Transparent'),
+    // label: t('Transparent'),
+    label: t('透明'),
     className: 'background--transparent',
   },
   {
     value: BACKGROUND_WHITE,
-    label: t('White'),
+    // label: t('White'),
+    label: t('白色'),
     className: 'background--white',
   },
 ];

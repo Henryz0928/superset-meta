@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 # pylint: disable=too-many-lines
-"""A set of constants and methods to manage permissions and security"""
+"""管理权限和安全的一组常量和方法"""
 
 import logging
 import re

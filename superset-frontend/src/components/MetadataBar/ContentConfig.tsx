@@ -76,8 +76,10 @@ const config = (contentType: ContentType) => {
         title: contentType.value,
         tooltip: (
           <div>
-            <Info header={t('Last modified')} text={contentType.value} />
-            <Info header={t('Modified by')} text={contentType.modifiedBy} />
+            {/* <Info header={t('Last modified')} text={contentType.value} />
+            <Info header={t('Modified by')} text={contentType.modifiedBy} /> */}
+            <Info header={t('最后修改于')} text={contentType.value} />
+            <Info header={t('修改于')} text={contentType.modifiedBy} />
           </div>
         ),
       };
@@ -88,11 +90,14 @@ const config = (contentType: ContentType) => {
         title: contentType.createdBy,
         tooltip: (
           <div>
-            <Info header={t('Created by')} text={contentType.createdBy} />
+            {/* <Info header={t('Created by')} text={contentType.createdBy} /> */}
+            <Info header={t('创建于')} text={contentType.createdBy} />
             {!!contentType.owners && (
-              <Info header={t('Owners')} text={contentType.owners} />
+              // <Info header={t('Owners')} text={contentType.owners} />
+              <Info header={t('所有者')} text={contentType.owners} />
             )}
-            <Info header={t('Created on')} text={contentType.createdOn} />
+            {/* <Info header={t('Created on')} text={contentType.createdOn} /> */}
+            <Info header={t('创建于')} text={contentType.createdOn} />
           </div>
         ),
       };
@@ -124,13 +129,15 @@ const config = (contentType: ContentType) => {
         title: contentType.values.join(', '),
         tooltip: (
           <div>
-            <Info header={t('Tags')} text={contentType.values} />
+            {/* <Info header={t('Tags')} text={contentType.values} /> */}
+            <Info header={t('标签')} text={contentType.values} />
           </div>
         ),
       };
 
     default:
-      throw Error(`Invalid type provided: ${type}`);
+      // throw Error(`Invalid type provided: ${type}`);
+      throw Error(`提供的类型无效: ${type}`);
   }
 };
 

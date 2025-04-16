@@ -27,7 +27,8 @@ export default function DraggableNewRow() {
     <DraggableNewComponent
       id={NEW_ROW_ID}
       type={ROW_TYPE}
-      label={t('Row')}
+      // label={t('Row')}
+      label={t('行')}
       className="fa fa-long-arrow-right"
     />
   );

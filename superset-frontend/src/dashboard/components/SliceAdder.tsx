@@ -374,15 +374,21 @@ class SliceAdder extends Component<SliceAdderProps, SliceAdderState> {
               iconSize="m"
               iconColor={theme.colors.primary.dark1}
             />
-            {t('Create new chart')}
+            {/* {t('Create new chart')} */}
+            {t('创建新的图表')}
           </NewChartButton>
         </NewChartButtonContainer>
         <Controls>
           <Input
+            // placeholder={
+            //   this.state.showOnlyMyCharts
+            //     ? t('Filter your charts')
+            //     : t('Filter charts')
+            // }
             placeholder={
               this.state.showOnlyMyCharts
-                ? t('Filter your charts')
-                : t('Filter charts')
+                ? t('过滤您的图表')
+                : t('过滤图表')
             }
             className="search-input"
             onChange={ev => this.handleChange(ev.target.value)}
@@ -393,10 +399,12 @@ class SliceAdder extends Component<SliceAdderProps, SliceAdderState> {
             value={this.state.sortBy}
             onChange={this.handleSelect}
             options={Object.entries(KEYS_TO_SORT).map(([key, label]) => ({
-              label: t('Sort by %s', label),
+              // label: t('Sort by %s', label),
+              label: t('按照 %s 排序', label),
               value: key,
             }))}
-            placeholder={t('Sort by')}
+            // placeholder={t('Sort by')}
+            placeholder={t('排序')}
           />
         </Controls>
         <div
@@ -414,12 +422,17 @@ class SliceAdder extends Component<SliceAdderProps, SliceAdderState> {
             onChange={this.onShowOnlyMyCharts}
             checked={this.state.showOnlyMyCharts}
           />
-          {t('Show only my charts')}
+          {/* {t('Show only my charts')} */}
+          {t('仅显示我的图表')}
           <InfoTooltipWithTrigger
             placement="top"
+            // tooltip={t(
+            //   `You can choose to display all charts that you have access to or only the ones you own.
+            //   Your filter selection will be saved and remain active until you choose to change it.`,
+            // )}
             tooltip={t(
-              `You can choose to display all charts that you have access to or only the ones you own.
-              Your filter selection will be saved and remain active until you choose to change it.`,
+              `您可以选择显示你可以访问的所有图表或仅显示你拥有的图表。
+              您的筛选选择将会被保存并保持活跃，直到您选择更改它。`,
             )}
           />
         </div>

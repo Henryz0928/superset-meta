@@ -651,15 +651,20 @@ const DashboardBuilder = () => {
           !topLevelTabs &&
           dashboardLayout[DASHBOARD_GRID_ID]?.children?.length === 0 && (
             <EmptyState
-              title={t('There are no charts added to this dashboard')}
+              // title={t('There are no charts added to this dashboard')}
+              title={t('这个仪表板中没有添加图表')}
               size="large"
               description={
                 canEdit &&
+                // t(
+                //   'Go to the edit mode to configure the dashboard and add charts',
+                // )
                 t(
-                  'Go to the edit mode to configure the dashboard and add charts',
+                  '进入编辑模式以配置仪表盘并添加图表',
                 )
               }
-              buttonText={canEdit && t('Edit the dashboard')}
+              // buttonText={canEdit && t('Edit the dashboard')}
+              buttonText={canEdit && t('编辑仪表盘')}
               buttonAction={() => {
                 dispatch(setEditMode(true));
                 dispatch(clearDashboardHistory());
@@ -691,11 +696,17 @@ const DashboardBuilder = () => {
                   `}
                 >
                   <BasicErrorAlert
-                    title={t('Unable to load dashboard')}
+                    // title={t('Unable to load dashboard')}
+                    // body={t(
+                    //   `The following filters have the 'Select first filter value by default'
+                    // option checked and could not be loaded, which is preventing the dashboard
+                    // from rendering: %s`,
+                    //   missingInitialFilters.join(', '),
+                    // )}
+                    title={t('无法加载仪表盘')}
                     body={t(
-                      `The following filters have the 'Select first filter value by default'
-                    option checked and could not be loaded, which is preventing the dashboard
-                    from rendering: %s`,
+                      `以下过滤器默认选择第一个过滤器值'
+                    已选中选项并且无法加载，这正阻止着仪表盘渲染: %s`,
                       missingInitialFilters.join(', '),
                     )}
                   />

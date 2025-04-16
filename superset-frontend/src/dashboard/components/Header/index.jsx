@@ -639,9 +639,11 @@ const Header = () => {
                   onClick={discardChanges}
                   buttonStyle="default"
                   data-test="discard-changes-button"
-                  aria-label={t('Discard')}
+                  // aria-label={t('Discard')}
+                  aria-label={t('丢弃')}
                 >
-                  {t('Discard')}
+                  {/* {t('Discard')} */}
+                  {t('丢弃')}
                 </Button>
                 <Button
                   css={saveBtnStyle}
@@ -650,13 +652,15 @@ const Header = () => {
                   buttonStyle="primary"
                   onClick={overwriteDashboard}
                   data-test="header-save-button"
-                  aria-label={t('Save')}
+                  // aria-label={t('Save')}
+                  aria-label={t('保存')}
                 >
                   <Icons.SaveOutlined
                     iconColor={hasUnsavedChanges && theme.colors.primary.light5}
                     iconSize="m"
                   />
-                  {t('Save')}
+                  {/* {t('Save')} */}
+                  {t('保存')}
                 </Button>
               </div>
             )}
@@ -677,9 +681,11 @@ const Header = () => {
                 data-test="edit-dashboard-button"
                 className="action-button"
                 css={editButtonStyle}
-                aria-label={t('Edit dashboard')}
+                // aria-label={t('Edit dashboard')}
+                aria-label={t('修改仪表盘')}
               >
-                {t('Edit dashboard')}
+                {/* {t('Edit dashboard')} */}
+                {t('修改仪表盘')}
               </Button>
             )}
           </div>
@@ -792,8 +798,12 @@ const Header = () => {
 
       {currentReportDeleting && (
         <DeleteModal
+          // description={t(
+          //   'This action will permanently delete %s.',
+          //   currentReportDeleting?.name,
+          // )}
           description={t(
-            'This action will permanently delete %s.',
+            '此操作将永久删除 %s.',
             currentReportDeleting?.name,
           )}
           onConfirm={() => {
@@ -803,7 +813,8 @@ const Header = () => {
           }}
           onHide={() => setCurrentReportDeleting(null)}
           open
-          title={t('Delete Report?')}
+          // title={t('Delete Report?')}
+          title={t('删除报表?')}
         />
       )}
 

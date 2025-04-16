@@ -80,7 +80,8 @@ class Dashboard(BaseSupersetView):
     def new(self) -> FlaskResponse:
         """Creates a new, blank dashboard and redirects to it in edit mode"""
         new_dashboard = DashboardModel(
-            dashboard_title="[ untitled dashboard ]",
+            # dashboard_title="[ untitled dashboard ]",
+            dashboard_title="[ 无标题仪表板 ]",
             owners=[g.user],
         )
         db.session.add(new_dashboard)

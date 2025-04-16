@@ -74,15 +74,16 @@ const propTypes = {
 const defaultProps = {};
 
 // TODO: localize
-const MARKDOWN_PLACE_HOLDER = `# ✨Header 1
-## ✨Header 2
-### ✨Header 3
+const MARKDOWN_PLACE_HOLDER = `# ✨标题 1
+## ✨标题 2
+### ✨标题 3
 
 <br />
 
-Click here to learn more about [markdown formatting](https://bit.ly/1dQOfRK)`;
+点击这里以获取更多信息 [markdown 格式化](https://bit.ly/1dQOfRK)`;
 
-const MARKDOWN_ERROR_MESSAGE = t('This markdown component has an error.');
+// const MARKDOWN_ERROR_MESSAGE = t('This markdown component has an error.');
+const MARKDOWN_ERROR_MESSAGE = t('这个 markdown 组件有一个错误。');
 
 const MarkdownStyles = styled.div`
   ${({ theme }) => css`
@@ -200,8 +201,11 @@ class Markdown extends PureComponent {
   componentDidCatch() {
     if (this.state.editor && this.state.editorMode === 'preview') {
       this.props.addDangerToast(
+        // t(
+        //   'This markdown component has an error. Please revert your recent changes.',
+        // ),
         t(
-          'This markdown component has an error. Please revert your recent changes.',
+          '这个 markdown 组件有错误。请撤销最近的更改。',
         ),
       );
     }

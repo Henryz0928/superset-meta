@@ -68,7 +68,8 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ toggleFiltersBar }) => (
   <Wrapper>
     <TitleArea>
-      <span>{t('Filters')}</span>
+      {/* <span>{t('Filters')}</span> */}
+      <span>{t('过滤器')}</span>
       <FilterBarSettings />
       <HeaderButton
         {...getFilterBarTestId('collapse-button')}

@@ -107,15 +107,15 @@ const GridColumnGuide = styled.div`
       top: 0;
       min-height: 100%;
       background-color: ${addAlpha(
-        theme.colors.primary.base,
-        parseFloat(theme.opacity.light) / 100,
-      )};
+  theme.colors.primary.base,
+  parseFloat(theme.opacity.light) / 100,
+)};
       pointer-events: none;
       box-shadow: inset 0 0 0 1px
         ${addAlpha(
-          theme.colors.primary.base,
-          parseFloat(theme.opacity.mediumHeavy) / 100,
-        )};
+  theme.colors.primary.base,
+  parseFloat(theme.opacity.mediumHeavy) / 100,
+)};
     }
   `};
 `;
@@ -210,9 +210,13 @@ class DashboardGrid extends PureComponent {
 
     const dashboardEmptyState = editMode && (
       <EmptyState
-        title={t('Drag and drop components and charts to the dashboard')}
+        // title={t('Drag and drop components and charts to the dashboard')}
+        title={t('将组件和图表拖放到仪表盘')}
+        // description={t(
+        //   'You can create a new chart or use existing ones from the panel on the right',
+        // )}
         description={t(
-          'You can create a new chart or use existing ones from the panel on the right',
+          '您可以在右侧面板中创建新图表或使用现有图表',
         )}
         size="large"
         buttonText={
@@ -221,7 +225,8 @@ class DashboardGrid extends PureComponent {
               iconSize="m"
               iconColor={theme.colors.primary.light5}
             />
-            {t('Create a new chart')}
+            {/* {t('Create a new chart')} */}
+            {t('创建一个新的报表')}
           </>
         }
         buttonAction={() => {
@@ -235,10 +240,14 @@ class DashboardGrid extends PureComponent {
 
     const topLevelTabEmptyState = editMode ? (
       <EmptyState
-        title={t('Drag and drop components to this tab')}
+        // title={t('Drag and drop components to this tab')}
+        title={t('将组件拖放到此选项卡中')}
         size="large"
+        // description={t(
+        //   `You can create a new chart or use existing ones from the panel on the right`,
+        // )}
         description={t(
-          `You can create a new chart or use existing ones from the panel on the right`,
+          `您可以在右侧面板中创建新图表或使用现有图表`,
         )}
         buttonText={
           <>
@@ -246,7 +255,8 @@ class DashboardGrid extends PureComponent {
               iconSize="m"
               iconColor={theme.colors.primary.light5}
             />
-            {t('Create a new chart')}
+            {/* {t('Create a new chart')} */}
+            {t('创建一个新的报表')}
           </>
         }
         buttonAction={() => {
@@ -258,12 +268,15 @@ class DashboardGrid extends PureComponent {
       />
     ) : (
       <EmptyState
-        title={t('There are no components added to this tab')}
+        // title={t('There are no components added to this tab')}
+        title={t('这个标签页中没有添加任何组件')}
         size="large"
         description={
-          canEdit && t('You can add the components in the edit mode.')
+          // canEdit && t('You can add the components in the edit mode.')
+          canEdit && t('您可以在编辑模式下添加组件。')
         }
-        buttonText={canEdit && t('Edit the dashboard')}
+        // buttonText={canEdit && t('Edit the dashboard')}
+        buttonText={canEdit && t('编辑仪表盘')}
         buttonAction={
           canEdit &&
           (() => {

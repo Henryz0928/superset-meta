@@ -70,14 +70,16 @@ const BuilderComponentPane = ({ topOffset = 0 }) => (
       >
         <Tabs.TabPane
           key={1}
-          tab={t('Charts')}
+          // tab={t('Charts')}
+          tab={t('图表')}
           css={css`
             height: 100%;
           `}
         >
           <SliceAdder />
         </Tabs.TabPane>
-        <Tabs.TabPane key={2} tab={t('Layout elements')}>
+        {/* <Tabs.TabPane key={2} tab={t('Layout elements')}> */}
+        <Tabs.TabPane key={2} tab={t('布局元素')}>
           <NewTabs />
           <NewRow />
           <NewColumn />

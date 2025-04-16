@@ -100,7 +100,8 @@ function SelectFilter(
           onChange={onChange}
           onClear={onClear}
           options={fetchAndFormatSelects}
-          placeholder={t('Select or type a value')}
+          // placeholder={t('Select or type a value')}
+          placeholder={t('选择或输入一个值')}
           showSearch
           value={selectedOption}
         />
@@ -114,7 +115,8 @@ function SelectFilter(
           onChange={onChange}
           onClear={onClear}
           options={selects}
-          placeholder={t('Select or type a value')}
+          // placeholder={t('Select or type a value')}
+          placeholder={t('选择或输入一个值')}
           showSearch
           value={selectedOption}
           loading={loading}

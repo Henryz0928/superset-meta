@@ -35,7 +35,8 @@ export const ModifiedInfo = ({ user, date }: ModifiedInfoProps) => {
 
   if (user) {
     const userName = getOwnerName(user);
-    const title = t('Modified by: %s', userName);
+    // const title = t('Modified by: %s', userName);
+    const title = t('修改于: %s', userName);
     return (
       <Tooltip title={title} placement="bottom">
         {dateSpan}

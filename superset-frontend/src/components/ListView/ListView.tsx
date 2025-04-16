@@ -250,7 +250,8 @@ function ListView<T extends object = any>({
   bulkActions = [],
   bulkSelectEnabled = false,
   disableBulkSelect = () => {},
-  renderBulkSelectCopy = selected => t('%s Selected', selected.length),
+  // renderBulkSelectCopy = selected => t('%s Selected', selected.length),
+  renderBulkSelectCopy = selected => t('%s 已选择', selected.length),
   renderCard,
   showThumbnails,
   cardSortSelectOptions,
@@ -301,7 +302,8 @@ function ListView<T extends object = any>({
     filters.forEach(f => {
       if (!columnAccessors[f.id]) {
         throw new ListViewError(
-          `Invalid filter config, ${f.id} is not present in columns`,
+          // `Invalid filter config, ${f.id} is not present in columns`,
+          `无效的过滤器设置, ${f.id} 不在列中`,
         );
       }
     });
@@ -387,7 +389,8 @@ function ListView<T extends object = any>({
                         className="deselect-all"
                         onClick={() => toggleAllRowsSelected(false)}
                       >
-                        {t('Deselect all')}
+                        {/* {t('Deselect all')} */}
+                        {t('取消所有选择')}
                       </span>
                       <div className="divider" />
                       {bulkActions.map(action => (
@@ -413,7 +416,8 @@ function ListView<T extends object = any>({
                           className="tag-btn"
                           onClick={() => setShowBulkTagModal(true)}
                         >
-                          {t('Add Tag')}
+                          {/* {t('Add Tag')} */}
+                          {t('添加标签')}
                         </span>
                       )}
                     </>
@@ -449,17 +453,21 @@ function ListView<T extends object = any>({
             <EmptyWrapper className={viewMode} data-test="empty-state">
               {query.filters ? (
                 <EmptyState
-                  title={t('No results match your filter criteria')}
-                  description={t('Try different criteria to display results.')}
+                  // title={t('No results match your filter criteria')}
+                  title={t('没有结果匹配您的筛选条件')}
+                  // description={t('Try different criteria to display results.')}
+                  description={t('尝试使用不同的标准来显示结果。')}
                   size="large"
                   image="filter-results.svg"
                   buttonAction={() => handleClearFilterControls()}
-                  buttonText={t('clear all filters')}
+                  // buttonText={t('clear all filters')}
+                  buttonText={t('清除所有过滤条件')}
                 />
               ) : (
                 <EmptyState
                   {...emptyState}
-                  title={emptyState?.title || t('No Data')}
+                  // title={emptyState?.title || t('No Data')}
+                  title={emptyState?.title || t('无数据')}
                   size="large"
                   image={emptyState?.image || 'filter-results.svg'}
                 />

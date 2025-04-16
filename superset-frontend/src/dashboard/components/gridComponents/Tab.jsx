@@ -69,13 +69,13 @@ const propTypes = {
 const defaultProps = {
   availableColumnCount: 0,
   columnWidth: 0,
-  onDropOnTab() {},
-  onDropPositionChange() {},
-  onDragTab() {},
-  onHoverTab() {},
-  onResizeStart() {},
-  onResize() {},
-  onResizeStop() {},
+  onDropOnTab() { },
+  onDropPositionChange() { },
+  onDragTab() { },
+  onHoverTab() { },
+  onResizeStart() { },
+  onResize() { },
+  onResizeStop() { },
 };
 
 const TabTitleContainer = styled.div`
@@ -83,8 +83,7 @@ const TabTitleContainer = styled.div`
     padding: ${gridUnit}px ${gridUnit * 2}px;
     margin: ${-gridUnit}px ${gridUnit * -2}px;
     transition: box-shadow 0.2s ease-in-out;
-    ${
-      isHighlighted && `box-shadow: 0 0 ${gridUnit}px ${colors.primary.light1};`
+    ${isHighlighted && `box-shadow: 0 0 ${gridUnit}px ${colors.primary.light1};`
     }
   `}
 `;
@@ -199,34 +198,44 @@ const Tab = props => {
         )}
         {shouldDisplayEmptyState && (
           <EmptyState
+            // title={
+            //   editMode
+            //     ? t('Drag and drop components to this tab')
+            //     : t('There are no components added to this tab')
+            // }
             title={
               editMode
-                ? t('Drag and drop components to this tab')
-                : t('There are no components added to this tab')
+                ? t('将组件拖放到此选项卡中')
+                : t('这个标签页中没有添加任何组件')
             }
             description={
               canEdit &&
               (editMode ? (
                 <span>
-                  {t('You can')}{' '}
+                  {/* {t('You can')}{' '} */}
+                  {t('您可以')}{' '}
                   <a
                     href={`/chart/add?dashboard_id=${dashboardId}`}
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    {t('create a new chart')}
+                    {/* {t('create a new chart')} */}
+                    {t('创建一个新图表')}
                   </a>{' '}
-                  {t('or use existing ones from the panel on the right')}
+                  {/* {t('or use existing ones from the panel on the right')} */}
+                  {t('或者使用右侧面板中现有的选项')}
                 </span>
               ) : (
                 <span>
-                  {t('You can add the components in the')}{' '}
+                  {/* {t('You can add the components in the')}{' '} */}
+                  {t('您可以在其中添加组件')}{' '}
                   <span
                     role="button"
                     tabIndex={0}
                     onClick={() => dispatch(setEditMode(true))}
                   >
-                    {t('edit mode')}
+                    {/* {t('edit mode')} */}
+                    {t('编辑模式')}
                   </span>
                 </span>
               ))

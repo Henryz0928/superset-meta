@@ -22,17 +22,20 @@ import { SMALL_HEADER, MEDIUM_HEADER, LARGE_HEADER } from './constants';
 export default [
   {
     value: SMALL_HEADER,
-    label: t('Small'),
+    // label: t('Small'),
+    label: t('小'),
     className: 'header-style-option header-small',
   },
   {
     value: MEDIUM_HEADER,
-    label: t('Medium'),
+    // label: t('Medium'),
+    label: t('中'),
     className: 'header-style-option header-medium',
   },
   {
     value: LARGE_HEADER,
-    label: t('Large'),
+    // label: t('Large'),
+    label: t('大'),
     className: 'header-style-option header-large',
   },
 ];

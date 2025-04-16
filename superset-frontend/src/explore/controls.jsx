@@ -442,7 +442,8 @@ export const controls = {
 
   adhoc_filters: {
     type: 'AdhocFilterControl',
-    label: t('Filters'),
+    // label: t('Filters'),
+    label: t('过滤器'),
     default: null,
     description: '',
     mapStateToProps: state => ({
@@ -456,7 +457,8 @@ export const controls = {
 
   color_scheme: {
     type: 'ColorSchemeControl',
-    label: t('Color scheme'),
+    // label: t('Color scheme'),
+    label: t('颜色方案'),
     default: categoricalSchemeRegistry.getDefaultKey(),
     renderTrigger: true,
     choices: () => categoricalSchemeRegistry.keys().map(s => [s, s]),

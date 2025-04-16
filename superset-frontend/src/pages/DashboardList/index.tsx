@@ -75,11 +75,11 @@ import { navigateTo } from 'src/utils/navigationUtils';
 
 const PAGE_SIZE = 25;
 const PASSWORDS_NEEDED_MESSAGE = t(
-  'The passwords for the databases below are needed in order to ' +
-    'import them together with the dashboards. Please note that the ' +
-    '"Secure Extra" and "Certificate" sections of ' +
-    'the database configuration are not present in export files, and ' +
-    'should be added manually after the import if they are needed.',
+  '以下是这些数据库的密码需要用于： ' +
+    '请将它们与仪表板一起导入。请注意， ' +
+    '“Secure Extra”和“Certificate”部分的 ' +
+    '数据库配置不在导出文件中，和 ' +
+    '如果需要，它们应在导入后手动添加。',
 );
 const CONFIRM_OVERWRITE_MESSAGE = t(
   'You are importing one or more dashboards that already exist. ' +
@@ -161,7 +161,8 @@ function DashboardList(props: DashboardListProps) {
     refreshData,
   } = useListViewResource<Dashboard>(
     'dashboard',
-    t('dashboard'),
+    // t('dashboard'),
+    '仪表盘',
     addDangerToast,
     undefined,
     undefined,
@@ -207,7 +208,8 @@ function DashboardList(props: DashboardListProps) {
   const handleDashboardImport = () => {
     showImportModal(false);
     refreshData();
-    addSuccessToast(t('Dashboard imported'));
+    // addSuccessToast(t('Dashboard imported'));
+    addSuccessToast('仪表板导入完成');
   };
 
   // TODO: Fix usage of localStorage keying on the user id
@@ -266,7 +268,8 @@ function DashboardList(props: DashboardListProps) {
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('An error occurred while fetching dashboards: %s', errMsg),
+          // t('An error occurred while fetching dashboards: %s', errMsg),
+          t('获取仪表盘时发生错误: %s', errMsg),
         ),
       ),
     );
@@ -292,7 +295,8 @@ function DashboardList(props: DashboardListProps) {
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected dashboards: ', errMsg),
+          // t('There was an issue deleting the selected dashboards: ', errMsg),
+          t('删除选定的仪表盘时出现了问题: ', errMsg),
         ),
       ),
     );
@@ -342,7 +346,8 @@ function DashboardList(props: DashboardListProps) {
             {dashboardTitle}
           </Link>
         ),
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: '名称',
         accessor: 'dashboard_title',
       },
       {
@@ -353,7 +358,8 @@ function DashboardList(props: DashboardListProps) {
         }: any) => (
           <PublishedLabel isPublished={status === DashboardStatus.PUBLISHED} />
         ),
-        Header: t('Status'),
+        // Header: t('Status'),
+        Header: '状态',
         accessor: 'published',
         size: 'xl',
       },
@@ -377,7 +383,8 @@ function DashboardList(props: DashboardListProps) {
             maxTags={3}
           />
         ),
-        Header: t('Tags'),
+        // Header: t('Tags'),
+        Header: '标签',
         accessor: 'tags',
         disableSortBy: true,
         hidden: !isFeatureEnabled(FeatureFlag.TaggingSystem),
@@ -388,7 +395,8 @@ function DashboardList(props: DashboardListProps) {
             original: { owners = [] },
           },
         }: any) => <FacePile users={owners} />,
-        Header: t('Owners'),
+        // Header: t('Owners'),
+        Header: '所有者',
         accessor: 'owners',
         disableSortBy: true,
         size: 'xl',
@@ -402,7 +410,8 @@ function DashboardList(props: DashboardListProps) {
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: '最后修改',
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
       },
@@ -422,10 +431,12 @@ function DashboardList(props: DashboardListProps) {
             <Actions className="actions">
               {canDelete && (
                 <ConfirmStatusChange
-                  title={t('Please confirm')}
+                  // title={t('Please confirm')}
+                  title={'请确认'}
                   description={
                     <>
-                      {t('Are you sure you want to delete')}{' '}
+                      {/* {t('Are you sure you want to delete')}{' '} */}
+                      {t('您确定要删除吗？')}{' '}
                       <b>{original.dashboard_title}</b>?
                     </>
                   }
@@ -434,7 +445,8 @@ function DashboardList(props: DashboardListProps) {
                   {confirmDelete => (
                     <Tooltip
                       id="delete-action-tooltip"
-                      title={t('Delete')}
+                      // title={t('Delete')}
+                      title={'删除'}
                       placement="bottom"
                     >
                       <span
@@ -455,7 +467,8 @@ function DashboardList(props: DashboardListProps) {
               {canExport && (
                 <Tooltip
                   id="export-action-tooltip"
-                  title={t('Export')}
+                  // title={t('Export')}
+                  title={'导出'}
                   placement="bottom"
                 >
                   <span
@@ -471,7 +484,8 @@ function DashboardList(props: DashboardListProps) {
               {canEdit && (
                 <Tooltip
                   id="edit-action-tooltip"
-                  title={t('Edit')}
+                  // title={t('Edit')}
+                  title={'修改'}
                   placement="bottom"
                 >
                   <span
@@ -487,7 +501,8 @@ function DashboardList(props: DashboardListProps) {
             </Actions>
           );
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: '操作',
         id: 'actions',
         hidden: !canEdit && !canDelete && !canExport,
         disableSortBy: true,
@@ -522,8 +537,10 @@ function DashboardList(props: DashboardListProps) {
       // unfilteredLabel: t('Any'),
       unfilteredLabel: '任何',
       selects: [
-        { label: t('Yes'), value: true },
-        { label: t('No'), value: false },
+        // { label: t('Yes'), value: true },
+        // { label: t('No'), value: false },
+        { label: '是', value: true },
+        { label: '否', value: false },
       ],
     }),
     [],
@@ -532,51 +549,65 @@ function DashboardList(props: DashboardListProps) {
   const filters: Filters = useMemo(() => {
     const filters_list = [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: '名称',
         key: 'search',
         id: 'dashboard_title',
         input: 'search',
         operator: FilterOperator.TitleOrSlug,
       },
       {
-        Header: t('Status'),
+        // Header: t('Status'),
+        Header: '状态',
         key: 'published',
         id: 'published',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('Any'),
+        // unfilteredLabel: t('Any'),
+        unfilteredLabel: '任何',
         selects: [
-          { label: t('Published'), value: true },
-          { label: t('Draft'), value: false },
+          // { label: t('Published'), value: true },
+          // { label: t('Draft'), value: false },
+          { label: '已发布', value: true },
+          { label: '草案', value: false },
         ],
       },
       ...(isFeatureEnabled(FeatureFlag.TaggingSystem) && canReadTag
         ? [
             {
-              Header: t('Tag'),
+              // Header: t('Tag'),
+              Header: '标签',
               key: 'tags',
               id: 'tags',
               input: 'select',
               operator: FilterOperator.DashboardTagById,
-              unfilteredLabel: t('All'),
+              // unfilteredLabel: t('All'),
+              unfilteredLabel: '全部',
               fetchSelects: loadTags,
             },
           ]
         : []),
       {
-        Header: t('Owner'),
+        // Header: t('Owner'),
+        Header: '所有者',
         key: 'owner',
         id: 'owners',
         input: 'select',
         operator: FilterOperator.RelationManyMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '全部',
         fetchSelects: createFetchRelated(
           'dashboard',
           'owners',
           createErrorHandler(errMsg =>
             addDangerToast(
+              // t(
+              //   'An error occurred while fetching dashboard owner values: %s',
+              //   errMsg,
+              // ),
+
               t(
-                'An error occurred while fetching dashboard owner values: %s',
+                '获取仪表板所有者时发生错误: %s',
                 errMsg,
               ),
             ),
@@ -587,31 +618,41 @@ function DashboardList(props: DashboardListProps) {
       },
       ...(user?.userId ? [favoritesFilter] : []),
       {
-        Header: t('Certified'),
+        // Header: t('Certified'),
+        Header: '认证',
         key: 'certified',
         id: 'id',
         urlDisplay: 'certified',
         input: 'select',
         operator: FilterOperator.DashboardIsCertified,
-        unfilteredLabel: t('Any'),
+        // unfilteredLabel: t('Any'),
+        unfilteredLabel: '任何',
         selects: [
-          { label: t('Yes'), value: true },
-          { label: t('No'), value: false },
+          // { label: t('Yes'), value: true },
+          // { label: t('No'), value: false },
+          { label: '是', value: true },
+          { label: '否', value: false },
         ],
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: '修改于',
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '全部',
         fetchSelects: createFetchRelated(
           'dashboard',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
             ),
           ),
@@ -678,7 +719,8 @@ function DashboardList(props: DashboardListProps) {
   const subMenuButtons: SubMenuProps['buttons'] = [];
   if (canDelete || canExport) {
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       buttonStyle: 'secondary',
       'data-test': 'bulk-select',
       onClick: toggleBulkSelect,
@@ -696,7 +738,8 @@ function DashboardList(props: DashboardListProps) {
               vertical-align: text-top;
             `}
           />
-          {t('Dashboard')}
+          {/* {t('Dashboard')} */}
+          {t('仪表盘')}
         </>
       ),
       buttonStyle: 'primary',
@@ -709,7 +752,8 @@ function DashboardList(props: DashboardListProps) {
       name: (
         <Tooltip
           id="import-tooltip"
-          title={t('Import dashboards')}
+          // title={t('Import dashboards')}
+          title={t('导入仪表盘')}
           placement="bottomRight"
         >
           <Icons.DownloadOutlined data-test="import-button" />
@@ -721,11 +765,16 @@ function DashboardList(props: DashboardListProps) {
   }
   return (
     <>
-      <SubMenu name={t('Dashboards')} buttons={subMenuButtons} />
+      {/* <SubMenu name={t('Dashboards')} buttons={subMenuButtons} /> */}
+      <SubMenu name={'仪表盘'} buttons={subMenuButtons} />
       <ConfirmStatusChange
-        title={t('Please confirm')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t(
+        //   'Are you sure you want to delete the selected dashboards?',
+        // )}
         description={t(
-          'Are you sure you want to delete the selected dashboards?',
+          '您确定要删除已选的仪表板吗？',
         )}
         onConfirm={handleBulkDashboardDelete}
       >
@@ -734,7 +783,8 @@ function DashboardList(props: DashboardListProps) {
           if (canDelete) {
             bulkActions.push({
               key: 'delete',
-              name: t('Delete'),
+              // name: t('Delete'),
+              name: t('删除'),
               type: 'danger',
               onSelect: confirmDelete,
             });
@@ -742,7 +792,8 @@ function DashboardList(props: DashboardListProps) {
           if (canExport) {
             bulkActions.push({
               key: 'export',
-              name: t('Export'),
+              // name: t('Export'),
+              name: t('导出'),
               type: 'primary',
               onSelect: handleBulkDashboardExport,
             });
@@ -761,7 +812,8 @@ function DashboardList(props: DashboardListProps) {
                 <DeleteModal
                   description={
                     <>
-                      {t('Are you sure you want to delete')}{' '}
+                      {/* {t('Are you sure you want to delete')}{' '} */}
+                      {t('您确认删除')}{' '}
                       <b>{dashboardToDelete.dashboard_title}</b>?
                     </>
                   }
@@ -778,7 +830,8 @@ function DashboardList(props: DashboardListProps) {
                   }}
                   onHide={() => setDashboardToDelete(null)}
                   open={!!dashboardToDelete}
-                  title={t('Please confirm')}
+                  // title={t('Please confirm')}
+                  title={t('请确认')}
                 />
               )}
               <ListView<Dashboard>
@@ -819,7 +872,8 @@ function DashboardList(props: DashboardListProps) {
 
       <ImportModelsModal
         resourceName="dashboard"
-        resourceLabel={t('dashboard')}
+        // resourceLabel={t('dashboard')}
+        resourceLabel={t('仪表盘')}
         passwordsNeededMessage={PASSWORDS_NEEDED_MESSAGE}
         confirmOverwriteMessage={CONFIRM_OVERWRITE_MESSAGE}
         addDangerToast={addDangerToast}

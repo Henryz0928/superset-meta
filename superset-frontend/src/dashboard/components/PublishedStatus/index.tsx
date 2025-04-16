@@ -30,18 +30,29 @@ export type DashboardPublishedStatusType = {
   savePublished: HeaderProps['savePublished'];
 };
 
+// const draftButtonTooltip = t(
+//   'This dashboard is not published, it will not show up in the list of dashboards. ' +
+//     'Click here to publish this dashboard.',
+// );
 const draftButtonTooltip = t(
-  'This dashboard is not published, it will not show up in the list of dashboards. ' +
-    'Click here to publish this dashboard.',
+  '这个仪表盘未发布，它不会出现在仪表盘列表中。 ' +
+    '点击此处发布此仪表盘。',
 );
 
+// const draftDivTooltip = t(
+//   'This dashboard is not published which means it will not show up in the list of dashboards.' +
+//     ' Favorite it to see it there or access it by using the URL directly.',
+// );
 const draftDivTooltip = t(
-  'This dashboard is not published which means it will not show up in the list of dashboards.' +
-    ' Favorite it to see it there or access it by using the URL directly.',
+  '这个仪表盘未发布，这意味着它不会出现在仪表盘列表中。' +
+    ' 收藏它以查看它或直接使用链接访问它。',
 );
 
+// const publishedTooltip = t(
+//   'This dashboard is published. Click to make it a draft.',
+// );
 const publishedTooltip = t(
-  'This dashboard is published. Click to make it a draft.',
+  '此仪表板已发布。点击可将其保存为草稿。',
 );
 
 export default class PublishedStatus extends Component<DashboardPublishedStatusType> {

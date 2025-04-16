@@ -87,7 +87,8 @@ const FaveStar = ({
     return (
       <Tooltip
         id="fave-unfave-tooltip"
-        title={t('Click to favorite/unfavorite')}
+        // title={t('Click to favorite/unfavorite')}
+        title={t('点击收藏/取消收藏')}
       >
         {content}
       </Tooltip>

@@ -46,7 +46,8 @@ const typeToDefaultMetaData = {
   },
   [DIVIDER_TYPE]: null,
   [HEADER_TYPE]: {
-    text: t('New header'),
+    // text: t('New header'),
+    text: t('新标题'),
     headerSize: MEDIUM_HEADER,
     background: BACKGROUND_TRANSPARENT,
   },
@@ -55,8 +56,10 @@ const typeToDefaultMetaData = {
   [TABS_TYPE]: null,
   [TAB_TYPE]: {
     text: '',
-    defaultText: t('Tab title'),
-    placeholder: t('Tab title'),
+    // defaultText: t('Tab title'),
+    // placeholder: t('Tab title'),
+    defaultText: t('标签标题'),
+    placeholder: t('标签标题'),
   },
   [DYNAMIC_TYPE]: {
     width: GRID_COLUMN_COUNT,

@@ -240,9 +240,12 @@ test('show and sort by chart last modified', async () => {
 
   // Default sort
   expect(chartLastModifiedValues).toHaveLength(3);
-  expect(chartLastModifiedValues[0]).toHaveTextContent('a few seconds ago');
-  expect(chartLastModifiedValues[1]).toHaveTextContent('17 minutes ago');
-  expect(chartLastModifiedValues[2]).toHaveTextContent('a day ago');
+  // expect(chartLastModifiedValues[0]).toHaveTextContent('a few seconds ago');
+  // expect(chartLastModifiedValues[1]).toHaveTextContent('17 minutes ago');
+  // expect(chartLastModifiedValues[2]).toHaveTextContent('a day ago');
+  expect(chartLastModifiedValues[0]).toHaveTextContent('几秒钟前');
+  expect(chartLastModifiedValues[1]).toHaveTextContent('17分钟前');
+  expect(chartLastModifiedValues[2]).toHaveTextContent('一天前');
   expectLastChartRequest();
 
   // Sort by last modified ascending

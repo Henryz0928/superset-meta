@@ -166,7 +166,8 @@ const FilterBarSettings = () => {
           onChange={checked => setCrossFiltersEnabled(checked || false)}
         />{' '}
         <span className="enable-cross-filters-text">
-          {t('Enable cross-filtering')}
+          {/* {t('Enable cross-filtering')} */}
+          {t('启用交叉过滤')}
         </span>
       </StyledMenuLabel>
     ),
@@ -181,7 +182,8 @@ const FilterBarSettings = () => {
         key: ADD_EDIT_FILTERS_MENU_KEY,
         label: (
           <FilterConfigurationLink>
-            {t('Add or edit filters')}
+            {/* {t('Add or edit filters')} */}
+            {t('添加或编辑过滤器')}
           </FilterConfigurationLink>
         ),
       });
@@ -196,20 +198,23 @@ const FilterBarSettings = () => {
       });
       items.push({
         key: CROSS_FILTERS_SCOPING_MENU_KEY,
-        label: t('Cross-filtering scoping'),
+        // label: t('Cross-filtering scoping'),
+        label: t('交叉过滤作用域'),
       });
       items.push({ type: 'divider' });
     }
     if (canEdit) {
       items.push({
         key: 'placement',
-        label: t('Orientation of filter bar'),
+        // label: t('Orientation of filter bar'),
+        label: t('过滤条的方向'),
         children: [
           {
             key: FilterBarOrientation.Vertical,
             label: (
               <Space>
-                {t('Vertical (Left)')}
+                {/* {t('Vertical (Left)')} */}
+                {t('垂直（左）')}
                 {selectedFilterBarOrientation ===
                   FilterBarOrientation.Vertical && (
                   <Icons.CheckOutlined
@@ -227,7 +232,8 @@ const FilterBarSettings = () => {
             key: FilterBarOrientation.Horizontal,
             label: (
               <Space>
-                {t('Horizontal (Top)')}
+                {/* {t('Horizontal (Top)')} */}
+                {t('水平（顶部）')}
                 {selectedFilterBarOrientation ===
                   FilterBarOrientation.Horizontal && (
                   <Icons.CheckOutlined

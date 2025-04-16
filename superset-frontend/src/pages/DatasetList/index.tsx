@@ -554,7 +554,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
         paginate: true,
       },
       {
-        Header: t('Owner'),
+        // Header: t('Owner'),
+        Header: '拥有者',
         key: 'owner',
         id: 'owners',
         input: 'select',

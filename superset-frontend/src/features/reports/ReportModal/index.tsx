@@ -235,7 +235,8 @@ function ReportModal({
   const renderModalFooter = (
     <>
       <StyledFooterButton key="back" onClick={onHide}>
-        {t('Cancel')}
+        {/* {t('Cancel')} */}
+        {t('取消')}
       </StyledFooterButton>
       <StyledFooterButton
         key="submit"
@@ -244,7 +245,8 @@ function ReportModal({
         disabled={!currentReport.name}
         loading={currentReport.isSubmitting}
       >
-        {isEditMode ? t('Save') : t('Add')}
+        {/* {isEditMode ? t('Save') : t('Add')} */}
+        {isEditMode ? t('保存') : t('添加')}
       </StyledFooterButton>
     </>
   );
@@ -252,7 +254,8 @@ function ReportModal({
   const renderMessageContentSection = (
     <>
       <StyledMessageContentTitle>
-        <h4>{t('Message content')}</h4>
+        {/* <h4>{t('Message content')}</h4> */}
+        <h4>{t('消息内容')}</h4>
       </StyledMessageContentTitle>
       <div className="inline-container">
         <Radio.GroupWrapper

@@ -200,11 +200,14 @@ export default function HeaderReportDropDown({
         <Menu.Item onClick={handleShowMenu}>
           {DropdownItemExtension ? (
             <StyledDropdownItemWithIcon>
-              <div>{t('Set up an email report')}</div>
+              {/* <div>{t('Set up an email report')}</div> */}
+              <div>{t('设置一封电子邮件报告')}</div>
               <DropdownItemExtension />
             </StyledDropdownItemWithIcon>
           ) : (
-            t('Set up an email report')
+            // t('Set up an email report')
+            t('设置一封电子邮件报告')
+            
           )}
         </Menu.Item>
         <Menu.Divider />

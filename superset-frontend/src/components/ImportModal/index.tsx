@@ -266,7 +266,8 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
 
   const confirmOverwrite = (event: ChangeEvent<HTMLInputElement>) => {
     const targetValue = (event.currentTarget?.value as string) ?? '';
-    setConfirmedOverwrite(targetValue.toUpperCase() === t('OVERWRITE'));
+    // setConfirmedOverwrite(targetValue.toUpperCase() === t('OVERWRITE'));
+    setConfirmedOverwrite(targetValue.toUpperCase() === t('覆盖'));
   };
 
   const renderPasswordFields = () => {
@@ -290,14 +291,16 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
 
     return (
       <>
-        <h5>{t('Database passwords')}</h5>
+        {/* <h5>{t('Database passwords')}</h5> */}
+        <h5>{t('数据库密码')}</h5>
         <HelperMessage>{passwordsNeededMessage}</HelperMessage>
         {files.map(fileName => (
           <>
             {passwordFields?.indexOf(fileName) >= 0 && (
               <StyledInputContainer key={`password-for-${fileName}`}>
                 <div className="control-label">
-                  {t('%s PASSWORD', fileName.slice(10))}
+                  {/* {t('%s PASSWORD', fileName.slice(10))} */}
+                  {t('%s 密码', fileName.slice(10))}
                   <span className="required">*</span>
                 </div>
                 <input
@@ -317,7 +320,8 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
             {sshTunnelPasswordFields?.indexOf(fileName) >= 0 && (
               <StyledInputContainer key={`ssh_tunnel_password-for-${fileName}`}>
                 <div className="control-label">
-                  {t('%s SSH TUNNEL PASSWORD', fileName.slice(10))}
+                  {/* {t('%s SSH TUNNEL PASSWORD', fileName.slice(10))} */}
+                  {t('%s SSH 管道密码', fileName.slice(10))}
                   <span className="required">*</span>
                 </div>
                 <input
@@ -340,7 +344,8 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
                 key={`ssh_tunnel_private_key-for-${fileName}`}
               >
                 <div className="control-label">
-                  {t('%s SSH TUNNEL PRIVATE KEY', fileName.slice(10))}
+                  {/* {t('%s SSH TUNNEL PRIVATE KEY', fileName.slice(10))} */}
+                  {t('%s SSH 管道专用密钥', fileName.slice(10))}
                   <span className="required">*</span>
                 </div>
                 <textarea
@@ -362,7 +367,8 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
                 key={`ssh_tunnel_private_key_password-for-${fileName}`}
               >
                 <div className="control-label">
-                  {t('%s SSH TUNNEL PRIVATE KEY PASSWORD', fileName.slice(10))}
+                  {/* {t('%s SSH TUNNEL PRIVATE KEY PASSWORD', fileName.slice(10))} */}
+                  {t('%s SSH 管道专用密钥密码', fileName.slice(10))}
                   <span className="required">*</span>
                 </div>
                 <input
@@ -396,7 +402,8 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
         <StyledInputContainer>
           <div className="confirm-overwrite">{confirmOverwriteMessage}</div>
           <div className="control-label">
-            {t('Type "%s" to confirm', t('OVERWRITE'))}
+            {/* {t('Type "%s" to confirm', t('OVERWRITE'))} */}
+            {t('输入 "%s" 确认', t('覆盖'))}
           </div>
           <input
             data-test="overwrite-modal-input"
@@ -425,11 +432,13 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
       }
       onHandledPrimaryAction={onUpload}
       onHide={hide}
-      primaryButtonName={needsOverwriteConfirm ? t('Overwrite') : t('Import')}
+      // primaryButtonName={needsOverwriteConfirm ? t('Overwrite') : t('Import')}
+      primaryButtonName={needsOverwriteConfirm ? t('覆盖') : t('导入')}
       primaryButtonType={needsOverwriteConfirm ? 'danger' : 'primary'}
       width="750px"
       show={show}
-      title={<h4>{t('Import %s', resourceLabel)}</h4>}
+      // title={<h4>{t('Import %s', resourceLabel)}</h4>}
+      title={<h4>{t('导入 %s', resourceLabel)}</h4>}
     >
       <StyledInputContainer>
         <Upload
@@ -444,7 +453,8 @@ const ImportModelsModal: FunctionComponent<ImportModelsModalProps> = ({
           customRequest={() => {}}
           disabled={importingModel}
         >
-          <Button loading={importingModel}>{t('Select file')}</Button>
+          {/* <Button loading={importingModel}>{t('Select file')}</Button> */}
+          <Button loading={importingModel}>{t('选择文件')}</Button>
         </Upload>
       </StyledInputContainer>
       {errorMessage && (

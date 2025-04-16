@@ -94,7 +94,8 @@ function SearchFilter(
       <StyledInput
         allowClear
         data-test="filters-search"
-        placeholder={t('Type a value')}
+        // placeholder={t('Type a value')}
+        placeholder={t('输入一个值')}
         name={name}
         value={value}
         onChange={handleChange}

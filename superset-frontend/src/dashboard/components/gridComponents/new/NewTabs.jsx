@@ -27,7 +27,8 @@ export default function DraggableNewTabs() {
     <DraggableNewComponent
       id={NEW_TABS_ID}
       type={TABS_TYPE}
-      label={t('Tabs')}
+      // label={t('Tabs')}
+      label={t('标签')}
       className="fa fa-window-restore"
     />
   );

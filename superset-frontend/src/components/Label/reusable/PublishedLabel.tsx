@@ -31,7 +31,8 @@ const PublishedLabel: React.FC<PublishedLabelProps> = ({
   onClick,
 }) => {
   const theme = useTheme();
-  const label = isPublished ? t('Published') : t('Draft');
+  // const label = isPublished ? t('Published') : t('Draft');
+  const label = isPublished ? t('已发布') : t('草案');
   const icon = isPublished ? (
     <Icons.CheckCircleOutlined
       iconSize="s"

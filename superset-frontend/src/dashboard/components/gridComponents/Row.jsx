@@ -307,14 +307,14 @@ const Row = props => {
             <Droppable
               {...(rowItems.length === 0
                 ? {
-                    component: rowComponent,
-                    parentComponent: rowComponent,
-                    dropToChild: true,
-                  }
+                  component: rowComponent,
+                  parentComponent: rowComponent,
+                  dropToChild: true,
+                }
                 : {
-                    component: rowItems[0],
-                    parentComponent: rowComponent,
-                  })}
+                  component: rowItems[0],
+                  parentComponent: rowComponent,
+                })}
               depth={depth}
               index={0}
               orientation="row"
@@ -336,7 +336,8 @@ const Row = props => {
             </Droppable>
           )}
           {rowItems.length === 0 && (
-            <div css={emptyRowContentStyles}>{t('Empty row')}</div>
+            // <div css={emptyRowContentStyles}>{t('Empty row')}</div>
+            <div css={emptyRowContentStyles}>{t('空行')}</div>
           )}
           {rowItems.length > 0 &&
             rowItems.map((componentId, itemIndex) => (
@@ -368,8 +369,8 @@ const Row = props => {
                       'empty-droptarget',
                       'empty-droptarget--vertical',
                       remainColumnCount === 0 &&
-                        itemIndex === rowItems.length - 1 &&
-                        'droptarget-side',
+                      itemIndex === rowItems.length - 1 &&
+                      'droptarget-side',
                     )}
                     editMode
                     style={{

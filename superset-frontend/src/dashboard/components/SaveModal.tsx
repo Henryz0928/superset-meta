@@ -149,8 +149,11 @@ class SaveModal extends PureComponent<SaveModalProps, SaveModalState> {
     };
 
     if (saveType === SAVE_TYPE_NEWDASHBOARD && !newDashName) {
+      // this.props.addDangerToast(
+      //   t('You must pick a name for the new dashboard'),
+      // );
       this.props.addDangerToast(
-        t('You must pick a name for the new dashboard'),
+        t('您必须为新的仪表板选择一个名称'),
       );
     } else {
       this.onSave(data, dashboardId, saveType).then((resp: JsonResponse) => {
@@ -167,7 +170,8 @@ class SaveModal extends PureComponent<SaveModalProps, SaveModalState> {
       <ModalTrigger
         ref={this.modal}
         triggerNode={this.props.triggerNode}
-        modalTitle={t('Save dashboard')}
+        // modalTitle={t('Save dashboard')}
+        modalTitle={t('保存仪表盘')}
         modalBody={
           <div>
             <Radio
@@ -184,7 +188,8 @@ class SaveModal extends PureComponent<SaveModalProps, SaveModalState> {
               onChange={this.handleSaveTypeChange}
               checked={this.state.saveType === SAVE_TYPE_NEWDASHBOARD}
             >
-              {t('Save as:')}
+              {/* {t('Save as:')} */}
+              {t('保存为:')}
             </Radio>
             <Input
               type="text"
@@ -198,7 +203,8 @@ class SaveModal extends PureComponent<SaveModalProps, SaveModalState> {
                 checked={this.state.duplicateSlices}
                 onChange={() => this.toggleDuplicateSlices()}
               />
-              <span className="m-l-5">{t('also copy (duplicate) charts')}</span>
+              {/* <span className="m-l-5">{t('also copy (duplicate) charts')}</span> */}
+              <span className="m-l-5">{t('也复制（复制）图表')}</span>
             </div>
           </div>
         }
@@ -209,7 +215,8 @@ class SaveModal extends PureComponent<SaveModalProps, SaveModalState> {
               buttonStyle="primary"
               onClick={this.saveDashboard}
             >
-              {t('Save')}
+              {/* {t('Save')} */}
+              {t('保存')}
             </Button>
           </div>
         }

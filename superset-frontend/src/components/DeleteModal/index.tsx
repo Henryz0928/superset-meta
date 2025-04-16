@@ -65,7 +65,8 @@ export default function DeleteModal({
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const targetValue = event.target.value ?? '';
-    setDisableChange(targetValue.toUpperCase() !== t('DELETE'));
+    // setDisableChange(targetValue.toUpperCase() !== t('DELETE'));
+    setDisableChange(targetValue.toUpperCase() !== t('删除'));
     setConfirmation(targetValue);
   };
 
@@ -80,7 +81,8 @@ export default function DeleteModal({
       disablePrimaryButton={disableChange}
       onHide={hide}
       onHandledPrimaryAction={confirm}
-      primaryButtonName={t('Delete')}
+      // primaryButtonName={t('Delete')}
+      primaryButtonName={t('删除')}
       primaryButtonType="danger"
       show={open}
       title={title}
@@ -89,7 +91,7 @@ export default function DeleteModal({
       <DescriptionContainer>{description}</DescriptionContainer>
       <StyledDiv>
         <FormLabel htmlFor="delete">
-          {t('Type "%s" to confirm', t('DELETE'))}
+          {t('输入 "%s" 确认', t('删除'))}
         </FormLabel>
         <Input
           data-test="delete-modal-input"

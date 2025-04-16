@@ -27,7 +27,8 @@ export default function DraggableNewColumn() {
     <DraggableNewComponent
       id={NEW_COLUMN_ID}
       type={COLUMN_TYPE}
-      label={t('Column')}
+      // label={t('Column')}
+      label={t('列')}
       className="fa fa-long-arrow-down"
     />
   );

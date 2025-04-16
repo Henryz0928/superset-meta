@@ -363,7 +363,8 @@ export function saveDashboardRequest(data, id, saveType) {
         }),
       );
       dispatch(saveDashboardFinished());
-      dispatch(addSuccessToast(t('This dashboard was saved successfully.')));
+      // dispatch(addSuccessToast(t('This dashboard was saved successfully.')));
+      dispatch(addSuccessToast(t('此仪表板已成功保存。')));
       return response;
     };
 
@@ -407,7 +408,9 @@ export function saveDashboardRequest(data, id, saveType) {
         event: 'dashboard_properties_changed',
       });
 
-      dispatch(addSuccessToast(t('This dashboard was saved successfully.')));
+      // dispatch(addSuccessToast(t('This dashboard was saved successfully.')));
+      dispatch(addSuccessToast(t('此仪表板已成功保存。')));
+      
       dispatch(setOverrideConfirm(undefined));
       return response;
     };

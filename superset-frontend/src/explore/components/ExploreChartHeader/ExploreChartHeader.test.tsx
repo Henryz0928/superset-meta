@@ -255,7 +255,8 @@ describe('Additional actions tests', () => {
     expect(screen.getByText('Run in SQL Lab')).toBeInTheDocument();
 
     expect(
-      screen.queryByText('Set up an email report'),
+      // screen.queryByText('Set up an email report'),
+      screen.queryByText('设置一封电子邮件报告'),
     ).not.toBeInTheDocument();
     expect(screen.queryByText('Manage email report')).not.toBeInTheDocument();
   });

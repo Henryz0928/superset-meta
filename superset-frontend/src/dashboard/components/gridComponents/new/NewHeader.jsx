@@ -27,7 +27,8 @@ export default function DraggableNewHeader() {
     <DraggableNewComponent
       id={NEW_HEADER_ID}
       type={HEADER_TYPE}
-      label={t('Header')}
+      // label={t('Header')}
+      label={t('报头')}
       className="fa fa-header"
     />
   );
