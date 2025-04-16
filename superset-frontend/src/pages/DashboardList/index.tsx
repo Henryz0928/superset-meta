@@ -512,13 +512,15 @@ function DashboardList(props: DashboardListProps) {
 
   const favoritesFilter: Filter = useMemo(
     () => ({
-      Header: t('Favorite'),
+      // Header: t('Favorite'),
+      Header: '最喜欢',
       key: 'favorite',
       id: 'id',
       urlDisplay: 'favorite',
       input: 'select',
       operator: FilterOperator.DashboardIsFav,
-      unfilteredLabel: t('Any'),
+      // unfilteredLabel: t('Any'),
+      unfilteredLabel: '任何',
       selects: [
         { label: t('Yes'), value: true },
         { label: t('No'), value: false },

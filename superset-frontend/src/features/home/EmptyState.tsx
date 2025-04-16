@@ -71,8 +71,10 @@ export default function EmptyState({
     const buttonText =
       tableName === WelcomeTable.SavedQueries
         ? isFavorite
-          ? t('SQL Lab queries')
-          : t('SQL query')
+          // ? t('SQL Lab queries')
+          // : t('SQL query')
+          ? 'SQL 查询实验室'
+          : 'SQL 查询'
         : isFavorite
           ? t(tableName.toLowerCase())
           : tableName.slice(0, -1);
@@ -88,8 +90,11 @@ export default function EmptyState({
           navigateTo(url);
         }}
       >
-        {isFavorite
+        {/* {isFavorite
           ? t('See all %(tableName)s', { tableName: buttonText })
+          : buttonText} */}
+            {isFavorite
+          ? t('查看所有 %(tableName)s', { tableName: buttonText })
           : buttonText}
       </Button>
     );
@@ -103,7 +108,8 @@ export default function EmptyState({
       <EmptyStateComponent
         image={image}
         size="large"
-        description={t('Nothing here yet')}
+        // description={t('Nothing here yet')}
+        description={'这里还没有内容'}
       >
         {getActionButton()}
       </EmptyStateComponent>

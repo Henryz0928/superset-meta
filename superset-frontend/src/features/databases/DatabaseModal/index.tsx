@@ -961,7 +961,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
           // tab layout only has one step
           // so it should close immediately on save
           onClose();
-          addSuccessToast(t('Database connected'));
+          // addSuccessToast(t('Database connected'));
+          addSuccessToast('数据库连接成功');
         }
       }
     } else {
@@ -983,7 +984,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
       if (dbId) {
         if (onDatabaseAdd) onDatabaseAdd();
         onClose();
-        addSuccessToast(t('Database connected'));
+        // addSuccessToast(t('Database connected'));
+        addSuccessToast('数据库连接成功');
       }
     }
 
@@ -998,8 +1000,12 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
       if (!dbLoading) {
         fetchResource(databaseId).catch(e =>
           addDangerToast(
+            // t(
+            //   'Sorry there was an error fetching database information: %s',
+            //   e.message,
+            // ),
             t(
-              'Sorry there was an error fetching database information: %s',
+              '抱歉获取数据库信息时出错了: %s',
               e.message,
             ),
           ),
@@ -1058,13 +1064,15 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
   const renderAvailableSelector = () => (
     <div className="available">
       <h4 className="available-label">
-        {t('Or choose from a list of other databases we support:')}
+        {/* {t('Or choose from a list of other databases we support:')} */}
+        {'或从我们支持的其他数据库列表中选择:'}
       </h4>
       <div className="control-label">{t('Supported databases')}</div>
       <AntdSelect
         className="available-select"
         onChange={setDatabaseModel}
-        placeholder={t('Choose a database...')}
+        // placeholder={t('Choose a database...')}
+        placeholder={'选择一个数据库...'}
         showSearch
       >
         {[...(availableDbs?.databases || [])]
@@ -1078,7 +1086,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
           ))}
         {/* Allow users to connect to DB via legacy SQLA form */}
         <AntdSelect.Option value="Other" key="Other">
-          {t('Other')}
+          {/* {t('Other')} */}
+          {'其它'}
         </AntdSelect.Option>
       </AntdSelect>
       <Alert
@@ -1086,15 +1095,22 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         closable={false}
         css={(theme: SupersetTheme) => antDAlertStyles(theme)}
         type="info"
+        // message={
+        //   connectionAlert?.ADD_DATABASE?.message ||
+        //   t('Want to add a new database?')
+        // }
         message={
           connectionAlert?.ADD_DATABASE?.message ||
-          t('Want to add a new database?')
+          '想添加一个新的数据库？'
         }
         description={
           connectionAlert?.ADD_DATABASE ? (
             <>
-              {t(
+              {/* {t(
                 'Any databases that allow connections via SQL Alchemy URIs can be added. ',
+              )} */}
+              {t(
+                '允许通过 SQL Alchemy URI 连接的任何数据库都可以添加。 ',
               )}
               <a
                 href={connectionAlert?.ADD_DATABASE.contact_link}
@@ -1107,15 +1123,19 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             </>
           ) : (
             <>
-              {t(
+              {/* {t(
                 'Any databases that allow connections via SQL Alchemy URIs can be added. Learn about how to connect a database driver ',
+              )} */}
+              {t(
+                '任何允许通过 SQL Alchemy URI 连接的数据库都可以添加。了解如何连接数据库驱动程序。 ',
               )}
               <a
                 href={DOCUMENTATION_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {t('here')}
+                {/* {t('here')} */}
+                {'在这里'}
               </a>
               .
             </>
@@ -1191,7 +1211,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         return (
           <>
             <StyledFooterButton key="back" onClick={handleBackButtonOnConnect}>
-              {t('Back')}
+              {/* {t('Back')} */}
+              {'返回'}
             </StyledFooterButton>
             <StyledFooterButton
               key="submit"
@@ -1199,7 +1220,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               onClick={onSave}
               loading={isLoading}
             >
-              {t('Connect')}
+              {/* {t('Connect')} */}
+              {'连接'}
             </StyledFooterButton>
           </>
         );
@@ -1217,7 +1239,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             data-test="modal-confirm-button"
             loading={isLoading}
           >
-            {t('Finish')}
+            {/* {t('Finish')} */}
+            {'完成'}
           </StyledFooterButton>
         </>
       );
@@ -1237,7 +1260,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             disabled={handleDisableOnImport()}
             loading={isLoading}
           >
-            {t('Connect')}
+            {/* {t('Connect')} */}
+            {'连接'}
           </StyledFooterButton>
         </>
       );
@@ -1249,7 +1273,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
   const renderEditModalFooter = (db: Partial<DatabaseObject> | null) => (
     <>
       <StyledFooterButton key="close" onClick={onClose}>
-        {t('Close')}
+        {/* {t('Close')} */}
+        {'关闭'}
       </StyledFooterButton>
       <StyledFooterButton
         key="submit"
@@ -1259,13 +1284,18 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         loading={isLoading}
         tooltip={
           db?.is_managed_externally
+            // ? t(
+            //     "This database is managed externally, and can't be edited in Superset",
+            //   )
+            // : ''
             ? t(
-                "This database is managed externally, and can't be edited in Superset",
-              )
-            : ''
+              "这个数据库由外部管理，无法在 Superset 中编辑",
+            )
+          : ''
         }
       >
-        {t('Finish')}
+        {/* {t('Finish')} */}
+        {'完成'}
       </StyledFooterButton>
     </>
   );
@@ -1290,7 +1320,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
       !importErrored // This prevents a success toast on error
     ) {
       onClose();
-      addSuccessToast(t('Database connected'));
+      // addSuccessToast(t('Database connected'));
+      addSuccessToast('数据库连接成功');
     }
   }, [
     alreadyExists,
@@ -1423,9 +1454,13 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             css={(theme: SupersetTheme) => antDAlertStyles(theme)}
             type="info"
             showIcon
-            message="Database passwords"
+            // message="Database passwords"
+            message="数据库密码"
+            // description={t(
+            //   `The passwords for the databases below are needed in order to import them. Please note that the "Secure Extra" and "Certificate" sections of the database configuration are not present in explore files and should be added manually after the import if they are needed.`,
+            // )}
             description={t(
-              `The passwords for the databases below are needed in order to import them. Please note that the "Secure Extra" and "Certificate" sections of the database configuration are not present in explore files and should be added manually after the import if they are needed.`,
+              `            以下是所需数据库的密码，以便导入它们。请注意，数据库配置中的“Secure Extra”和“Certificate”部分不会出现在探索文件中，如果需要，应在导入后手动添加。`,
             )}
           />
         </StyledAlertMargin>
@@ -1440,7 +1475,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             }
             validationMethods={{ onBlur: () => {} }}
             errorMessage={validationErrors?.password_needed}
-            label={t('%s PASSWORD', database.slice(10))}
+            // label={t('%s PASSWORD', database.slice(10))}
+            label={'%s 密码', database.slice(10)}
             css={formScrollableStyles}
           />
         )}
@@ -1458,7 +1494,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             }
             validationMethods={{ onBlur: () => {} }}
             errorMessage={validationErrors?.ssh_tunnel_password_needed}
-            label={t('%s SSH TUNNEL PASSWORD', database.slice(10))}
+            // label={t('%s SSH TUNNEL PASSWORD', database.slice(10))}
+            label={t('%s SSH 通道密码', database.slice(10))}
             css={formScrollableStyles}
           />
         )}

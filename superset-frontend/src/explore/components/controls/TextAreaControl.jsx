@@ -59,11 +59,12 @@ const propTypes = {
     'vertical',
   ]),
   textAreaStyles: PropTypes.object,
-  tooltipOptions: PropTypes.oneOf([null, TooltipOptions]),
+  // tooltipOptions: PropTypes.oneOf([null, TooltipOptions]),
+  tooltipOptions: PropTypes.oneOf([null, []]),
 };
 
 const defaultProps = {
-  onChange: () => {},
+  onChange: () => { },
   initialValue: '',
   height: 250,
   minLines: 3,

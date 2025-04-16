@@ -73,7 +73,8 @@ function DashboardTable({
     fetchData,
   } = useListViewResource<Dashboard>(
     'dashboard',
-    t('dashboard'),
+    // t('dashboard'),
+    '仪表盘',
     addDangerToast,
     true,
     defaultTab === TableTab.Mine ? mine : filteredOtherTabData,
@@ -144,7 +145,8 @@ function DashboardTable({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('An error occurred while fetching dashboards: %s', errMsg),
+          // t('An error occurred while fetching dashboards: %s', errMsg),
+          '获取仪表盘时发生错误: %s', errMsg,
         ),
       ),
     );
@@ -152,7 +154,8 @@ function DashboardTable({
   const menuTabs = [
     {
       name: TableTab.Favorite,
-      label: t('Favorite'),
+      // label: t('Favorite'),
+      label: '最喜欢的',
       onClick: () => {
         setActiveTab(TableTab.Favorite);
         setItem(LocalStorageKeys.HomepageDashboardFilter, TableTab.Favorite);
@@ -160,7 +163,8 @@ function DashboardTable({
     },
     {
       name: TableTab.Mine,
-      label: t('Mine'),
+      // label: t('Mine'),
+      label: '我的',
       onClick: () => {
         setActiveTab(TableTab.Mine);
         setItem(LocalStorageKeys.HomepageDashboardFilter, TableTab.Mine);
@@ -193,7 +197,8 @@ function DashboardTable({
                   iconColor={theme.colors.primary.dark1}
                   iconSize="m"
                 />
-                {t('Dashboard')}
+                {/* {t('Dashboard')} */}
+                {'仪表盘'}
               </>
             ),
             buttonStyle: 'tertiary',
@@ -202,15 +207,21 @@ function DashboardTable({
             },
           },
           {
-            name: t('View All »'),
+            // name: t('View All »'),
+            name: '查看全部 »',
             buttonStyle: 'link',
             onClick: () => {
               const target =
+                // activeTab === TableTab.Favorite
+                //   ? `/dashboard/list/?filters=(favorite:(label:${t(
+                //       'Yes',
+                //     )},value:!t))`
+                //   : '/dashboard/list/';
                 activeTab === TableTab.Favorite
-                  ? `/dashboard/list/?filters=(favorite:(label:${t(
-                      'Yes',
-                    )},value:!t))`
-                  : '/dashboard/list/';
+                ? `/dashboard/list/?filters=(favorite:(label:${t(
+                    '是',
+                  )},value:!t))`
+                : '/dashboard/list/';
               history.push(target);
             },
           },
@@ -228,7 +239,8 @@ function DashboardTable({
         <DeleteModal
           description={
             <>
-              {t('Are you sure you want to delete')}{' '}
+              {/* {t('Are you sure you want to delete')}{' '} */}
+              {'您确定要删除吗？'}{' '}
               <b>{dashboardToDelete.dashboard_title}</b>?
             </>
           }
@@ -245,7 +257,8 @@ function DashboardTable({
           }}
           onHide={() => setDashboardToDelete(null)}
           open={!!dashboardToDelete}
-          title={t('Please confirm')}
+          // title={t('Please confirm')}
+          title={'请确认'}
         />
       )}
       {dashboards.length > 0 && (

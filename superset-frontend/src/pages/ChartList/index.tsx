@@ -553,16 +553,20 @@ function ChartList(props: ChartListProps) {
 
   const favoritesFilter: Filter = useMemo(
     () => ({
-      Header: t('Favorite'),
+      // Header: t('Favorite'),
+      Header: '最喜欢的',
       key: 'favorite',
       id: 'id',
       urlDisplay: 'favorite',
       input: 'select',
       operator: FilterOperator.ChartIsFav,
-      unfilteredLabel: t('Any'),
+      // unfilteredLabel: t('Any'),
+      unfilteredLabel: '任何',
       selects: [
-        { label: t('Yes'), value: true },
-        { label: t('No'), value: false },
+        // { label: t('Yes'), value: true },
+        // { label: t('No'), value: false },
+        { label: '是', value: true },
+        { label: '否', value: false },
       ],
     }),
     [],
@@ -571,19 +575,22 @@ function ChartList(props: ChartListProps) {
   const filters: Filters = useMemo(() => {
     const filters_list = [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: '名称',
         key: 'search',
         id: 'slice_name',
         input: 'search',
         operator: FilterOperator.ChartAllText,
       },
       {
-        Header: t('Type'),
+        // Header: t('Type'),
+        Header: '类型',
         key: 'viz_type',
         id: 'viz_type',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '所有',
         selects: registry
           .keys()
           .filter(k => nativeFilterGate(registry.get(k)?.behaviors || []))
@@ -609,19 +616,22 @@ function ChartList(props: ChartListProps) {
         id: 'datasource_id',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '所有',
         fetchSelects: createFetchDatasets,
         paginate: true,
       },
       ...(isFeatureEnabled(FeatureFlag.TaggingSystem) && canReadTag
         ? [
             {
-              Header: t('Tag'),
+              // Header: t('Tag'),
+              Header: '标签',
               key: 'tags',
               id: 'tags',
               input: 'select',
               operator: FilterOperator.ChartTagById,
-              unfilteredLabel: t('All'),
+              // unfilteredLabel: t('All'),
+              unfilteredLabel: '所有',
               fetchSelects: loadTags,
             },
           ]
@@ -632,16 +642,20 @@ function ChartList(props: ChartListProps) {
         id: 'owners',
         input: 'select',
         operator: FilterOperator.RelationManyMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '所有',
         fetchSelects: createFetchRelated(
           'chart',
           'owners',
           createErrorHandler(errMsg =>
             addDangerToast(
-              t(
-                'An error occurred while fetching chart owners values: %s',
-                errMsg,
-              ),
+              // t(
+              //   'An error occurred while fetching chart owners values: %s',
+              //   errMsg,
+              // ),
+              
+                '获取图表所有者值时发生错误: %s',
+                errMsg, 
             ),
           ),
           props.user,
@@ -649,12 +663,14 @@ function ChartList(props: ChartListProps) {
         paginate: true,
       },
       {
-        Header: t('Dashboard'),
+        // Header: t('Dashboard'),
+        Header: '仪表盘',
         key: 'dashboards',
         id: 'dashboards',
         input: 'select',
         operator: FilterOperator.RelationManyMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '所有',
         fetchSelects: fetchDashboards,
         paginate: true,
       },
@@ -666,27 +682,35 @@ function ChartList(props: ChartListProps) {
         urlDisplay: 'certified',
         input: 'select',
         operator: FilterOperator.ChartIsCertified,
-        unfilteredLabel: t('Any'),
+        // unfilteredLabel: t('Any'),
+        unfilteredLabel: '任何',
         selects: [
-          { label: t('Yes'), value: true },
-          { label: t('No'), value: false },
+          // { label: t('Yes'), value: true },
+          // { label: t('No'), value: false },
+          { label: '是', value: true },
+          { label: '否', value: false },
         ],
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: '修改于',
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: '所有',
         fetchSelects: createFetchRelated(
           'chart',
           'changed_by',
           createErrorHandler(errMsg =>
-            t(
-              'An error occurred while fetching dataset datasource values: %s',
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
+            
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
-            ),
           ),
           props.user,
         ),
@@ -700,19 +724,22 @@ function ChartList(props: ChartListProps) {
     {
       desc: false,
       id: 'slice_name',
-      label: t('Alphabetical'),
+      // label: t('Alphabetical'),
+      label: '按字母顺序的',
       value: 'alphabetical',
     },
     {
       desc: true,
       id: 'changed_on_delta_humanized',
-      label: t('Recently modified'),
+      // label: t('Recently modified'),
+      label: '最近修改',
       value: 'recently_modified',
     },
     {
       desc: false,
       id: 'changed_on_delta_humanized',
-      label: t('Least recently modified'),
+      // label: t('Least recently modified'),
+      label: '最近未修改',
       value: 'least_recently_modified',
     },
   ];
@@ -752,7 +779,8 @@ function ChartList(props: ChartListProps) {
   const subMenuButtons: SubMenuProps['buttons'] = [];
   if (canDelete || canExport) {
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: '批量选择',
       buttonStyle: 'secondary',
       'data-test': 'bulk-select',
       onClick: toggleBulkSelect,
@@ -769,7 +797,8 @@ function ChartList(props: ChartListProps) {
               vertical-align: text-top;
             `}
           />
-          <span>{t('Chart')}</span>
+          {/* <span>{t('Chart')}</span> */}
+          <span>{'图表'}</span>
         </>
       ),
       buttonStyle: 'primary',
@@ -782,7 +811,8 @@ function ChartList(props: ChartListProps) {
       name: (
         <Tooltip
           id="import-tooltip"
-          title={t('Import charts')}
+          // title={t('Import charts')}
+          title={'导入图表'}
           placement="bottomRight"
         >
           <Icons.DownloadOutlined
@@ -798,7 +828,8 @@ function ChartList(props: ChartListProps) {
 
   return (
     <>
-      <SubMenu name={t('Charts')} buttons={subMenuButtons} />
+      {/* <SubMenu name={t('Charts')} buttons={subMenuButtons} /> */}
+      <SubMenu name={'图表'} buttons={subMenuButtons} />
       {sliceCurrentlyEditing && (
         <PropertiesModal
           onHide={closeChartEditModal}
@@ -808,8 +839,10 @@ function ChartList(props: ChartListProps) {
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
-        description={t('Are you sure you want to delete the selected charts?')}
+        // title={t('Please confirm')}
+        title={'请确认'}
+        // description={t('Are you sure you want to delete the selected charts?')}
+        description={'您确定要删除已选图表吗？'}
         onConfirm={handleBulkChartDelete}
       >
         {confirmDelete => {
@@ -817,7 +850,8 @@ function ChartList(props: ChartListProps) {
           if (canDelete) {
             bulkActions.push({
               key: 'delete',
-              name: t('Delete'),
+              // name: t('Delete'),
+              name: '删除',
               type: 'danger',
               onSelect: confirmDelete,
             });
@@ -825,7 +859,8 @@ function ChartList(props: ChartListProps) {
           if (canExport) {
             bulkActions.push({
               key: 'export',
-              name: t('Export'),
+              // name: t('Export'),
+              name: '导出',
               type: 'primary',
               onSelect: handleBulkChartExport,
             });
@@ -868,7 +903,8 @@ function ChartList(props: ChartListProps) {
 
       <ImportModelsModal
         resourceName="chart"
-        resourceLabel={t('chart')}
+        // resourceLabel={t('chart')}
+        resourceLabel={'图表'}
         passwordsNeededMessage={PASSWORDS_NEEDED_MESSAGE}
         confirmOverwriteMessage={CONFIRM_OVERWRITE_MESSAGE}
         addDangerToast={addDangerToast}

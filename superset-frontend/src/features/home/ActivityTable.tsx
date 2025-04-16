@@ -100,7 +100,8 @@ const getEntityUrl = (entity: ActivityObject) => {
 
 const getEntityLastActionOn = (entity: ActivityObject) => {
   if ('time' in entity) {
-    return t('Viewed %s', extendedDayjs(entity.time).fromNow());
+    // return t('Viewed %s', extendedDayjs(entity.time).fromNow());
+    return t('查看 %s', extendedDayjs(entity.time).fromNow());
   }
 
   let time: number | string | undefined | null;
@@ -139,7 +140,8 @@ export default function ActivityTable({
   const tabs = [
     {
       name: TableTab.Edited,
-      label: t('Edited'),
+      // label: t('Edited'),
+      label: '已编辑',
       onClick: () => {
         setActiveChild(TableTab.Edited);
         setItem(LocalStorageKeys.HomepageActivityFilter, TableTab.Edited);
@@ -147,7 +149,8 @@ export default function ActivityTable({
     },
     {
       name: TableTab.Created,
-      label: t('Created'),
+      // label: t('Created'),
+      label: '已创建',
       onClick: () => {
         setActiveChild(TableTab.Created);
         setItem(LocalStorageKeys.HomepageActivityFilter, TableTab.Created);
@@ -158,7 +161,8 @@ export default function ActivityTable({
   if (activityData?.[TableTab.Viewed]) {
     tabs.unshift({
       name: TableTab.Viewed,
-      label: t('Viewed'),
+      // label: t('Viewed'),
+      label: '已查看',
       onClick: () => {
         setActiveChild(TableTab.Viewed);
         setItem(LocalStorageKeys.HomepageActivityFilter, TableTab.Viewed);
