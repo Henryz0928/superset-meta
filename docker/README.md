@@ -1,75 +1,74 @@
 <!--
-Licensed to the Apache Software Foundation (ASF) under one
-or more contributor license agreements.  See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership.  The ASF licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License.  You may obtain a copy of the License at
+授权给 Apache 软件基金会(ASF)的一个或多个
+贡献者许可协议。有关版权所有权的更多信息，
+请参阅随本作品分发的 NOTICE 文件。
+ASF 根据 Apache 许可证 2.0 版本向您授权本文件
+（"许可证"）；除非符合许可证的规定，
+否则您不得使用此文件。
+您可以在以下位置获取许可证副本：
 
   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the
-specific language governing permissions and limitations
-under the License.
+除非适用法律要求或书面同意，否则根据许可证分发的
+软件是基于"按原样"的基础分发的，
+没有任何明示或暗示的保证或条件。
+有关许可证下的特定语言管理权限和
+限制，请参阅许可证。
 -->
 
-# Getting Started with Superset using Docker
+# 使用 Docker 开始使用 Superset
 
-Docker is an easy way to get started with Superset.
+Docker 是开始使用 Superset 的一种简单方法。
 
-## Prerequisites
+## 前提条件
 
 1. [Docker](https://www.docker.com/get-started)
 2. [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Configuration
+## 配置
 
-The `/app/pythonpath` folder is mounted from [`./docker/pythonpath_dev`](./pythonpath_dev)
-which contains a base configuration [`./docker/pythonpath_dev/superset_config.py`](./pythonpath_dev/superset_config.py)
-intended for use with local development.
+`/app/pythonpath` 文件夹从 [`./docker/pythonpath_dev`](./pythonpath_dev) 挂载，
+其中包含一个基础配置文件 [`./docker/pythonpath_dev/superset_config.py`](./pythonpath_dev/superset_config.py)，
+用于本地开发。
 
-### Local overrides
+### 本地覆盖
 
-In order to override configuration settings locally, simply make a copy of [`./docker/pythonpath_dev/superset_config_local.example`](./pythonpath_dev/superset_config_local.example)
-into `./docker/pythonpath_dev/superset_config_docker.py` (git ignored) and fill in your overrides.
+要在本地覆盖配置设置，只需将 [`./docker/pythonpath_dev/superset_config_local.example`](./pythonpath_dev/superset_config_local.example)
+复制到 `./docker/pythonpath_dev/superset_config_docker.py`（git 已忽略）并填写您的覆盖设置。
 
-### Local packages
+### 本地包
 
-If you want to add Python packages in order to test things like databases locally, you can simply add a local requirements.txt (`./docker/requirements-local.txt`)
-and rebuild your Docker stack.
+如果您想添加 Python 包以在本地测试数据库等功能，只需添加本地 requirements.txt 文件（`./docker/requirements-local.txt`）
+并重建 Docker 堆栈即可。
 
-Steps:
+步骤：
 
-1. Create `./docker/requirements-local.txt`
-2. Add your new packages
-3. Rebuild docker compose
+1. 创建 `./docker/requirements-local.txt`
+2. 添加您的新包
+3. 重建 docker compose
     1. `docker compose down -v`
     2. `docker compose up`
 
-## Initializing Database
+## 初始化数据库
 
-The database will initialize itself upon startup via the init container ([`superset-init`](./docker-init.sh)). This may take a minute.
+数据库将通过初始化容器（[`superset-init`](./docker-init.sh)）在启动时自行初始化。这可能需要一分钟。
 
-## Normal Operation
+## 正常运行
 
-To run the container, simply run: `docker compose up`
+要运行容器，只需执行：`docker compose up`
 
-After waiting several minutes for Superset initialization to finish, you can open a browser and view [`http://localhost:8088`](http://localhost:8088)
-to start your journey.
+等待几分钟让 Superset 完成初始化后，您可以打开浏览器并访问 [`http://localhost:8088`](http://localhost:8088)
+开始您的旅程。
 
-## Developing
+## 开发
 
-While running, the container server will reload on modification of the Superset Python and JavaScript source code.
-Don't forget to reload the page to take the new frontend into account though.
+在运行时，当修改 Superset 的 Python 和 JavaScript 源代码时，容器服务器将自动重载。
+不过别忘了刷新页面以使新的前端生效。
 
-## Production
+## 生产环境
 
-It is possible to run Superset in non-development mode by using [`docker-compose-non-dev.yml`](../docker-compose-non-dev.yml). This file excludes the volumes needed for development.
+可以通过使用 [`docker-compose-non-dev.yml`](../docker-compose-non-dev.yml) 在非开发模式下运行 Superset。此文件不包括开发所需的卷。
 
-## Resource Constraints
+## 资源限制
 
-If you are attempting to build on macOS and it exits with 137 you need to increase your Docker resources. See instructions [here](https://docs.docker.com/docker-for-mac/#advanced) (search for memory)
+如果您在 macOS 上构建时退出并显示 137，则需要增加 Docker 资源。请参阅[此处](https://docs.docker.com/docker-for-mac/#advanced)的说明（搜索 memory）
