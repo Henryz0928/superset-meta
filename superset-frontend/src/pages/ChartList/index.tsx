@@ -91,7 +91,8 @@ const FlexRowContainer = styled.div`
     margin-right: ${({ theme }) => theme.gridUnit}px;
   }
 `;
-
+//解决errMsg未定义bug
+const errMsg =  '出错了';
 const PAGE_SIZE = 25;
 const PASSWORDS_NEEDED_MESSAGE = t(
   'The passwords for the databases below are needed in order to ' +
