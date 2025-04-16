@@ -1,20 +1,15 @@
 /**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * 根据 Apache License 2.0 版本（"许可证"）授权；
+ * 除非遵守许可证，否则您不得使用此文件。
+ * 您可以在以下位置获取许可证副本：
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * 除非适用法律要求或书面同意，
+ * 根据许可证分发的软件是基于"按原样"分发的，
+ * 不附带任何明示或暗示的担保或条件。
+ * 有关许可证下特定语言的权限和限制，
+ * 请参见许可证。
  */
 import { Suspense, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
@@ -51,19 +46,21 @@ setupAGGridModules();
 
 const bootstrapData = getBootstrapData();
 
+// 存储上一次访问的路径
 let lastLocationPathname: string;
 
 const boundActions = bindActionCreators({ logEvent }, store.dispatch);
 
+// 路径日志记录器组件
 const LocationPathnameLogger = () => {
   const location = useLocation();
   useEffect(() => {
-    // This will log client side route changes for single page app user navigation
+    // 记录单页应用用户导航的客户端路由变化
     boundActions.logEvent(LOG_ACTIONS_SPA_NAVIGATION, {
       path: location.pathname,
     });
-    // reset performance logger timer start point to avoid soft navigation
-    // cause dashboard perf measurement problem
+    // 重置性能日志计时器起点，避免软导航
+    // 导致仪表板性能测量出现问题
     if (lastLocationPathname && lastLocationPathname !== location.pathname) {
       Logger.markTimeOrigin();
     }
@@ -72,6 +69,7 @@ const LocationPathnameLogger = () => {
   return <></>;
 };
 
+// 主应用组件
 const App = () => (
   <Router basename={applicationRoot()}>
     <ScrollToTop />
@@ -109,4 +107,5 @@ const App = () => (
   </Router>
 );
 
+// 导出热更新包装的应用组件
 export default hot(App);

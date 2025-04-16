@@ -1,20 +1,18 @@
 /**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * 授权给 Apache 软件基金会(ASF)，基于一个或多个贡献者
+ * 许可协议。有关详细信息，请参阅随本作品分发的
+ * NOTICE 文件，了解版权所有权相关信息。
+ * ASF 根据 Apache 许可证 2.0 版（"许可证"）
+ * 向您授予本文件的使用许可；除非符合许可证的
+ * 要求，否则您不得使用此文件。
+ * 您可以在以下位置获取许可证副本：
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * 除非适用法律要求或书面同意，根据许可证分发的
+ * 软件是基于"按原样"分发的，不附带任何明示或
+ * 暗示的担保或条件。请参阅许可证了解具体的
+ * 权限和限制。
  */
 import {
   configureStore,
@@ -58,8 +56,8 @@ import { HydrateExplore } from 'src/explore/actions/hydrateExplore';
 import getBootstrapData from 'src/utils/getBootstrapData';
 import { Dataset } from '@superset-ui/chart-controls';
 
-// Some reducers don't do anything, and redux is just used to reference the initial "state".
-// This may change later, as the client application takes on more responsibilities.
+// 某些 reducer 不做任何操作，Redux 仅用于引用初始"状态"。
+// 随着客户端应用程序承担更多责任，这种情况可能会改变。
 const noopReducer =
   <STATE = unknown>(initialState: STATE) =>
   (state: STATE = initialState) =>
@@ -100,10 +98,9 @@ const getMiddleware: ConfigureStoreOptions['middleware'] =
         }).concat(logger, api.middleware)
       : [thunk, logger, api.middleware];
 
-// TODO: This reducer is a combination of the Dashboard and Explore reducers.
-// The correct way of handling this is to unify the actions and reducers from both
-// modules in shared files. This involves a big refactor to unify the parameter types
-// and move files around. We should tackle this in a specific PR.
+// TODO: 这个 reducer 是 Dashboard 和 Explore reducer 的组合。
+// 正确的处理方式是在共享文件中统一这两个模块的 action 和 reducer。
+// 这涉及一个统一参数类型和移动文件的大型重构。我们应该在一个专门的 PR 中处理这个问题。
 const CombinedDatasourceReducers = (
   datasources: DatasourcesState | undefined | { [key: string]: Dataset },
   action: DatasourcesActionPayload | AnyDatasourcesAction | HydrateExplore,
@@ -141,12 +138,12 @@ const reducers = {
   explore,
 };
 
-/* In some cases the jinja template injects two separate React apps into basic.html
- * One for the top navigation Menu and one for the application below the Menu
- * The first app to connect to the Redux debugger wins which is the menu blocking
- * the application from being able to connect to the redux debugger.
- * setupStore with disableDebugger true enables the menu.tsx component to avoid connecting
- * to redux debugger so the application can connect to redux debugger
+/* 在某些情况下，jinja 模板会在 basic.html 中注入两个独立的 React 应用
+ * 一个用于顶部导航菜单，另一个用于菜单下方的应用程序
+ * 第一个连接到 Redux 调试器的应用会获胜，这就是菜单阻止
+ * 应用程序连接到 Redux 调试器的原因。
+ * 使用 disableDebugger 为 true 的 setupStore 可以让 menu.tsx 组件避免连接
+ * Redux 调试器，从而使应用程序可以连接到 Redux 调试器
  */
 export function setupStore({
   disableDebugger = false,

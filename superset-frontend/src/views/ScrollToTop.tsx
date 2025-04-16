@@ -1,20 +1,18 @@
 /**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * 授权给 Apache 软件基金会(ASF)，基于一个或多个贡献者
+ * 许可协议。有关详细信息，请参阅随本作品分发的
+ * NOTICE 文件，了解版权所有权相关信息。
+ * ASF 根据 Apache 许可证 2.0 版（"许可证"）
+ * 向您授予本文件的使用许可；除非符合许可证的
+ * 要求，否则您不得使用此文件。
+ * 您可以在以下位置获取许可证副本：
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * 除非适用法律要求或书面同意，根据许可证分发的
+ * 软件是基于"按原样"分发的，不附带任何明示或
+ * 暗示的担保或条件。请参阅许可证了解具体的
+ * 权限和限制。
  */
 
 import { useEffect } from 'react';
