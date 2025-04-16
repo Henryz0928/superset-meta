@@ -55,8 +55,10 @@ const renderDisabledSaveButton = () => (
 
 const renderOverlay = () => (
   <Menu>
-    <Menu.Item>{t('Settings')}</Menu.Item>
-    <Menu.Item>{t('Delete')}</Menu.Item>
+    {/* <Menu.Item>{t('Settings')}</Menu.Item> */}
+    {/* <Menu.Item>{t('Delete')}</Menu.Item> */}
+    <Menu.Item>{'设置'}</Menu.Item>
+    <Menu.Item>{'删除'}</Menu.Item>
   </Menu>
 );
 

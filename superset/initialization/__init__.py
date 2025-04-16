@@ -228,7 +228,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         app_root = appbuilder.app.config["APPLICATION_ROOT"]
         appbuilder.add_link(
             "Home",
-            label=__("Home"),
+            # label=__("Home"),
+            label=__("主页"),
             href="/superset/welcome/",
             cond=lambda: bool(appbuilder.app.config["LOGO_TARGET_PATH"]),
         )
@@ -236,7 +237,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             DatabaseView,
             "Databases",
-            label=__("Database Connections"),
+            # label=__("Database Connections"),
+            label=__("数据库连接"),
             icon="fa-database",
             category="Data",
             category_label=__("Data"),
@@ -244,7 +246,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             DashboardModelView,
             "Dashboards",
-            label=__("Dashboards"),
+            # label=__("Dashboards"),
+            label=__("仪表盘"),
             icon="fa-dashboard",
             category="",
             category_icon="",
@@ -252,7 +255,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             SliceModelView,
             "Charts",
-            label=__("Charts"),
+            # label=__("Charts"),
+            label=__("报表"),
             icon="fa-bar-chart",
             category="",
             category_icon="",
@@ -260,7 +264,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
 
         appbuilder.add_link(
             "Datasets",
-            label=__("Datasets"),
+            # label=__("Datasets"),
+            label=__("数据集"),
             href=f"{app_root}/tablemodelview/list/",
             icon="fa-table",
             category="",
@@ -270,16 +275,19 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             RolesListView,
             "List Roles",
-            label=__("List Roles"),
+            # label=__("List Roles"),
+            label=__("角色名单"),
             category="Security",
-            category_label=__("Security"),
+            # category_label=__("Security"),
+            category_label=__("安全"),
             icon="fa-lock",
         )
 
         appbuilder.add_view(
             DynamicPluginsView,
             "Plugins",
-            label=__("Plugins"),
+            # label=__("Plugins"),
+            label=__("插件"),
             category="Manage",
             category_label=__("Manage"),
             icon="fa-puzzle-piece",
@@ -290,7 +298,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             CssTemplateModelView,
             "CSS Templates",
-            label=__("CSS Templates"),
+            # label=__("CSS Templates"),
+            label=__("CSS 模板"),
             icon="fa-css3",
             category="Manage",
             category_label=__("Manage"),
@@ -323,7 +332,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         #
         appbuilder.add_link(
             "SQL Editor",
-            label=__("SQL Lab"),
+            # label=__("SQL Lab"),
+            label=__("SQL 实验室"),
             href=f"{app_root}/sqllab/",
             category_icon="fa-flask",
             icon="fa-flask",
@@ -332,7 +342,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         )
         appbuilder.add_link(
             "Saved Queries",
-            label=__("Saved Queries"),
+            # label=__("Saved Queries"),
+            label=__("保存查询"),
             href=f"{app_root}/savedqueryview/list/",
             icon="fa-save",
             category="SQL Lab",
@@ -340,7 +351,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         )
         appbuilder.add_link(
             "Query Search",
-            label=__("Query History"),
+            # label=__("Query History"),
+            label=__("查询历史"),
             href=f"{app_root}/sqllab/history/",
             icon="fa-search",
             category_icon="fa-flask",
@@ -350,7 +362,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             TagModelView,
             "Tags",
-            label=__("Tags"),
+            # label=__("Tags"),
+            label=__("标签"),
             icon="",
             category_icon="",
             category="Manage",
@@ -360,7 +373,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             LogModelView,
             "Action Log",
-            label=__("Action Log"),
+            # label=__("Action Log"),
+             label=__("操作日志"),
             category="Security",
             category_label=__("Security"),
             icon="fa-list-ol",
@@ -377,7 +391,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             AlertView,
             "Alerts & Report",
-            label=__("Alerts & Reports"),
+            # label=__("Alerts & Reports"),
+            label=__("警报与报告"),
             category="Manage",
             category_label=__("Manage"),
             icon="fa-exclamation-triangle",
@@ -387,7 +402,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             AnnotationLayerView,
             "Annotation Layers",
-            label=__("Annotation Layers"),
+            # label=__("Annotation Layers"),
+            label=__("注释层"),
             href="AnnotationLayerView.list",
             icon="fa-comment",
             category_icon="",
@@ -399,7 +415,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             RowLevelSecurityView,
             "Row Level Security",
             href="RowLevelSecurityView.list",
-            label=__("Row Level Security"),
+            # label=__("Row Level Security"),
+            label=__("行级安全"),     
             category="Security",
             category_label=__("Security"),
             icon="fa-lock",

@@ -39,9 +39,12 @@ export const MainNavigation = (args: any) => (
 
 export const InteractiveMenu = (args: any) => (
   <Menu {...args}>
-    <Menu.Item>Dashboards</Menu.Item>
+    {/* <Menu.Item>Dashboards</Menu.Item>
     <Menu.Item>Charts</Menu.Item>
-    <Menu.Item>Datasets</Menu.Item>
+    <Menu.Item>Datasets</Menu.Item> */}
+    <Menu.Item>仪表盘</Menu.Item>
+    <Menu.Item>报表</Menu.Item>
+    <Menu.Item>数据集</Menu.Item>
   </Menu>
 );
 

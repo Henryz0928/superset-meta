@@ -183,39 +183,46 @@ const RightMenu = ({
   const showUploads = allowUploads || isAdmin;
   const dropdownItems: MenuObjectProps[] = [
     {
-      label: t('Data'),
+      // label: t('Data'),
+      label: '数据',
       icon: 'fa-database',
       childs: [
         {
-          label: t('Connect database'),
+          // label: t('Connect database'),
+          label: '连接数据库',
           name: GlobalMenuDataOptions.DbConnection,
           perm: canDatabase && !nonExamplesDBConnected,
         },
         {
-          label: t('Create dataset'),
+          // label: t('Create dataset'),
+          label: '创建数据集',
           name: GlobalMenuDataOptions.DatasetCreation,
           url: '/dataset/add/',
           perm: canDataset && nonExamplesDBConnected,
         },
         {
-          label: t('Connect Google Sheet'),
+          // label: t('Connect Google Sheet'),
+          label: '连接 Google Sheet',
           name: GlobalMenuDataOptions.GoogleSheets,
           perm: canDatabase && HAS_GSHEETS_INSTALLED,
         },
         {
-          label: t('Upload CSV to database'),
+          // label: t('Upload CSV to database'),
+          label: '上传 CSV 到数据库',
           name: GlobalMenuDataOptions.CSVUpload,
           perm: canUploadCSV && showUploads,
           disable: isAdmin && !allowUploads,
         },
         {
-          label: t('Upload Excel to database'),
+          // label: t('Upload Excel to database'),
+          label: '上传 Excel 到数据库',
           name: GlobalMenuDataOptions.ExcelUpload,
           perm: canUploadExcel && showUploads,
           disable: isAdmin && !allowUploads,
         },
         {
-          label: t('Upload Columnar file to database'),
+          // label: t('Upload Columnar file to database'),
+          label: '将列式文件上传到数据库',
           name: GlobalMenuDataOptions.ColumnarUpload,
           perm: canUploadColumnar && showUploads,
           disable: isAdmin && !allowUploads,
@@ -223,14 +230,16 @@ const RightMenu = ({
       ],
     },
     {
-      label: t('SQL query'),
+      // label: t('SQL query'),
+      label: 'SQL 查询',
       url: '/sqllab?new=true',
       icon: 'fa-fw fa-search',
       perm: 'can_sqllab',
       view: 'Superset',
     },
     {
-      label: t('Chart'),
+      // label: t('Chart'),
+      label: '报表',
       url: Number.isInteger(dashboardId)
         ? `/chart/add?dashboard_id=${dashboardId}`
         : '/chart/add',
@@ -239,7 +248,8 @@ const RightMenu = ({
       view: 'Chart',
     },
     {
-      label: t('Dashboard'),
+      // label: t('Dashboard'),
+      label: '仪表盘',
       url: '/dashboard/new',
       icon: 'fa-fw fa-dashboard',
       perm: 'can_write',
@@ -494,7 +504,8 @@ const RightMenu = ({
         )}
         <StyledSubMenu
           key="sub3_settings"
-          title={t('Settings')}
+          // title={t('Settings')}
+          title={'设置'}
           icon={<Icons.CaretDownOutlined iconSize="xs" />}
         >
           {settings?.map?.((section, index) => [
@@ -529,20 +540,24 @@ const RightMenu = ({
 
           {!navbarRight.user_is_anonymous && [
             <Menu.Divider key="user-divider" />,
-            <Menu.ItemGroup key="user-section" title={t('User')}>
+            // <Menu.ItemGroup key="user-section" title={t('User')}>
+            <Menu.ItemGroup key="user-section" title={'用户'}>
               {navbarRight.user_info_url && (
                 <Menu.Item key="info">
-                  <a href={navbarRight.user_info_url}>{t('Info')}</a>
+                  {/* <a href={navbarRight.user_info_url}>{t('Info')}</a> */}
+                  <a href={navbarRight.user_info_url}>{'信息'}</a>
                 </Menu.Item>
               )}
               <Menu.Item key="logout" onClick={handleLogout}>
-                <a href={navbarRight.user_logout_url}>{t('Logout')}</a>
+                {/* <a href={navbarRight.user_logout_url}>{t('Logout')}</a> */}
+                <a href={navbarRight.user_logout_url}>{'注销'}</a>
               </Menu.Item>
             </Menu.ItemGroup>,
           ]}
           {(navbarRight.version_string || navbarRight.version_sha) && [
             <Menu.Divider key="version-info-divider" />,
-            <Menu.ItemGroup key="about-section" title={t('About')}>
+            // <Menu.ItemGroup key="about-section" title={t('About')}>
+            <Menu.ItemGroup key="about-section" title={'关于'}>
               <div className="about-section">
                 {navbarRight.show_watermark && (
                   <div css={versionInfoStyles}>
@@ -581,7 +596,8 @@ const RightMenu = ({
             href={navbarRight.documentation_url}
             target="_blank"
             rel="noreferrer"
-            title={navbarRight.documentation_text || t('Documentation')}
+            // title={navbarRight.documentation_text || t('Documentation')}
+            title={navbarRight.documentation_text || '文档'}
           >
             {navbarRight.documentation_icon ? (
               <i className={navbarRight.documentation_icon} />

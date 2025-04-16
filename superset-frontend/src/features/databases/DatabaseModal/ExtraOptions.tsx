@@ -372,7 +372,8 @@ const ExtraOptions = ({
       <Collapse.Panel
         header={
           <div>
-            <h4>{t('Security')}</h4>
+            {/* <h4>{t('Security')}</h4> */}
+            <h4>{'安全'}</h4>
             <p className="helper">{t('Add extra connection information.')}</p>
           </div>
         }

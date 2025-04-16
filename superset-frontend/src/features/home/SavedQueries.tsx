@@ -259,7 +259,8 @@ const SavedQueries = ({
         tabs={[
           {
             name: TableTab.Mine,
-            label: t('Mine'),
+            // label: t('Mine'),
+            label: '我的',
             onClick: () =>
               getData(TableTab.Mine).then(() => setActiveTab(TableTab.Mine)),
           },
@@ -284,13 +285,15 @@ const SavedQueries = ({
                   iconSize="m"
                   iconColor={theme.colors.primary.dark1}
                 />
-                {t('SQL Query')}
+                {/* {t('SQL Query')} */}
+                {'SQL 查询'}
               </Link>
             ),
             buttonStyle: 'tertiary',
           },
           {
-            name: t('View All »'),
+            // name: t('View All »'),
+            name: '查看所有 »',
             buttonStyle: 'link',
             onClick: () => {
               navigateTo('/savedqueryview/list');
@@ -309,7 +312,8 @@ const SavedQueries = ({
                 imgFallbackURL={assetUrl(
                   '/static/assets/images/empty-query.svg',
                 )}
-                description={t('Modified %s', q.changed_on_delta_humanized)}
+                // description={t('Modified %s', q.changed_on_delta_humanized)}
+                description={'修改过的 %s', q.changed_on_delta_humanized}
                 cover={
                   q?.sql?.length && showThumbnails && featureFlag ? (
                     <QueryContainer>

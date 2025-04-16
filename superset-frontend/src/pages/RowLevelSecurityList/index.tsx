@@ -70,7 +70,8 @@ function RowLevelSecurityList(props: RLSProps) {
     toggleBulkSelect,
   } = useListViewResource<RLSObject>(
     'rowlevelsecurity',
-    t('Row Level Security'),
+    // t('Row Level Security'),
+    '行级安全',
     addDangerToast,
     true,
     undefined,
@@ -94,7 +95,8 @@ function RowLevelSecurityList(props: RLSProps) {
     }).then(
       () => {
         refreshData();
-        addSuccessToast(t('Deleted %s', name));
+        // addSuccessToast(t('Deleted %s', name));
+        addSuccessToast('已删除 %s', name);
       },
       createErrorHandler(errMsg =>
         addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),

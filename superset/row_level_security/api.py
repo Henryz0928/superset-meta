@@ -67,7 +67,9 @@ class RLSRestApi(BaseSupersetModelRestApi):
         "bulk_delete",
     }
     resource_name = "rowlevelsecurity"
-    class_permission_name = "Row Level Security"
+    # class_permission_name = "Row Level Security"
+    # openapi_spec_tag = "Row Level Security"
+    class_permission_name = "行级安全"
     openapi_spec_tag = "Row Level Security"
     method_permission_name = MODEL_API_RW_METHOD_PERMISSION_MAP
     allow_browser_login = True

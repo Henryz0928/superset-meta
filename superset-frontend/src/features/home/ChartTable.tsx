@@ -144,7 +144,8 @@ function ChartTable({
   const menuTabs = [
     {
       name: TableTab.Favorite,
-      label: t('Favorite'),
+      // label: t('Favorite'),
+      label: '最喜欢',
       onClick: () => {
         setActiveTab(TableTab.Favorite);
         setItem(LocalStorageKeys.HomepageChartFilter, TableTab.Favorite);
@@ -152,7 +153,8 @@ function ChartTable({
     },
     {
       name: TableTab.Mine,
-      label: t('Mine'),
+      // label: t('Mine'),
+      label: '我的',
       onClick: () => {
         setActiveTab(TableTab.Mine);
         setItem(LocalStorageKeys.HomepageChartFilter, TableTab.Mine);
@@ -194,7 +196,8 @@ function ChartTable({
                   iconSize="m"
                   data-test="add-annotation-layer-button"
                 />
-                {t('Chart')}
+                {/* {t('Chart')} */}
+                {'报表'}
               </>
             ),
             buttonStyle: 'tertiary',
@@ -203,7 +206,8 @@ function ChartTable({
             },
           },
           {
-            name: t('View All »'),
+            // name: t('View All »'),
+            name: '查看所有 »',
             buttonStyle: 'link',
             onClick: () => {
               const target =
