@@ -190,7 +190,8 @@ export const usernameField = ({
     validationMethods={{ onBlur: getValidation }}
     errorMessage={validationErrors?.username}
     placeholder={t('e.g. Analytics')}
-    label={t('Username')}
+    // label={t('Username')}
+    label={t('用户名')}
     onChange={changeMethods.onParametersChange}
   />
 );
@@ -211,7 +212,8 @@ export const passwordField = ({
     validationMethods={{ onBlur: getValidation }}
     errorMessage={validationErrors?.password}
     placeholder={t('e.g. ********')}
-    label={t('Password')}
+    // label={t('Password')}
+    label={t('密码')}
     onChange={changeMethods.onParametersChange}
   />
 );

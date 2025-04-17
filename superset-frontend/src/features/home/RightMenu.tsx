@@ -323,8 +323,12 @@ const RightMenu = ({
     setShowDatabaseModal(false);
   };
 
+  // const tooltipText = t(
+  //   "Enable 'Allow file uploads to database' in any database's settings",
+  // );
+
   const tooltipText = t(
-    "Enable 'Allow file uploads to database' in any database's settings",
+    "在任何数据库的设置中启用“允许将文件上传到数据库”功能",
   );
 
   const buildMenuItem = (item: MenuObjectChildProps) =>
@@ -561,22 +565,26 @@ const RightMenu = ({
               <div className="about-section">
                 {navbarRight.show_watermark && (
                   <div css={versionInfoStyles}>
-                    {t('Powered by Apache Superset')}
+                    {/* {t('Powered by Apache Superset')} */}
+                    {t('由 Apache Superset 提供支持')}
                   </div>
                 )}
                 {navbarRight.version_string && (
                   <div css={versionInfoStyles}>
-                    {t('Version')}: {navbarRight.version_string}
+                    {/* {t('Version')}: {navbarRight.version_string} */}
+                    {t('版本')}: {navbarRight.version_string}
                   </div>
                 )}
                 {navbarRight.version_sha && (
                   <div css={versionInfoStyles}>
+                    {/* {t('SHA')}: {navbarRight.version_sha} */}
                     {t('SHA')}: {navbarRight.version_sha}
                   </div>
                 )}
                 {navbarRight.build_number && (
                   <div css={versionInfoStyles}>
-                    {t('Build')}: {navbarRight.build_number}
+                    {/* {t('Build')}: {navbarRight.build_number} */}
+                    {t('构建')}: {navbarRight.build_number}
                   </div>
                 )}
               </div>
@@ -628,7 +636,8 @@ const RightMenu = ({
       {navbarRight.user_is_anonymous && (
         <StyledAnchor href={navbarRight.user_login_url}>
           <i className="fa fa-fw fa-sign-in" />
-          {t('Login')}
+          {/* {t('Login')} */}
+          {t('登陆')}
         </StyledAnchor>
       )}
       <TelemetryPixel
