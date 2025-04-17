@@ -1490,7 +1490,7 @@ WEBDRIVER_AUTH_FUNC = None
 
 # 要按原样传递给webdriver的任何配置选项
 WEBDRIVER_CONFIGURATION = {
-    "options": {"capabilities": {}, "preferences": {}},
+    "options": {"capabilities": {}, "preferences": {}, "binary_location": ""},
     "service": {"log_output": "/dev/null", "service_args": [], "port": 0, "env": {}},
 }
 
