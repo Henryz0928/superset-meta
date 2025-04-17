@@ -1,19 +1,17 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
+# 授权给Apache软件基金会(ASF)，基于一个或多个
+# 贡献者许可协议。请参阅随附的NOTICE文件，
+# 以获取有关版权所有权的更多信息。
+# ASF根据Apache许可证2.0版（"许可证"）
+# 向您授权此文件；除非符合许可证，
+# 否则不得使用此文件。您可以在以下网址获取许可证副本：
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+# 除非适用法律要求或书面同意，否则根据许可证分发的
+# 软件是基于"按原样"分发的，
+# 没有任何明示或暗示的担保或条件。
+# 有关许可证下特定的语言管理权限和
+# 限制，请参阅许可证。
 from __future__ import annotations
 
 import logging
@@ -42,24 +40,33 @@ def create_app(
     superset_config_module: Optional[str] = None,
     superset_app_root: Optional[str] = None,
 ) -> Flask:
+    """
+    创建并配置Superset应用实例。
+
+    参数:
+        superset_config_module: 自定义配置模块的路径，如果为None则使用环境变量中的配置
+        superset_app_root: 应用的根路径，可用于在非根目录部署应用
+
+    返回:
+        配置好的Flask应用实例
+    """
     app = SupersetApp(__name__)
 
     try:
-        # Allow user to override our config completely
+        # 允许用户完全覆盖我们的配置
         config_module = superset_config_module or os.environ.get(
             "SUPERSET_CONFIG", "superset.config"
         )
         app.config.from_object(config_module)
 
-        # Allow application to sit on a non-root path
-        # *Please be advised that this feature is in BETA.*
+        # 允许应用部署在非根路径上
+        # *请注意，此功能仍处于测试阶段。*
         app_root = cast(
             str, superset_app_root or os.environ.get("SUPERSET_APP_ROOT", "/")
         )
         if app_root != "/":
             app.wsgi_app = AppRootMiddleware(app.wsgi_app, app_root)
-            # If not set, manually configure options that depend on the
-            # value of app_root so things work out of the box
+            # 如果未设置，手动配置依赖于app_root值的选项，以便开箱即用
             if not app.config["STATIC_ASSETS_PREFIX"]:
                 app.config["STATIC_ASSETS_PREFIX"] = app_root
             if app.config["APPLICATION_ROOT"] == "/":
@@ -70,21 +77,29 @@ def create_app(
 
         return app
 
-    # Make sure that bootstrap errors ALWAYS get logged
+    # 确保引导错误始终被记录
     except Exception:
-        logger.exception("Failed to create app")
+        logger.exception("创建应用失败")
         raise
 
 
 class SupersetApp(Flask):
+    """
+    Superset应用类，继承自Flask。
+    用于扩展Flask功能，为Superset特定需求提供基础。
+    """
+
     pass
 
 
 class AppRootMiddleware:
-    """A middleware that attaches the application to a fixed prefix location.
+    """
+    一个将应用附加到固定前缀位置的中间件。
 
-    See https://wsgi.readthedocs.io/en/latest/definitions.html for definitions
-    of SCRIPT_NAME and PATH_INFO.
+    该中间件负责处理应用部署在非根路径时的URL路由和重定向。
+
+    请参阅 https://wsgi.readthedocs.io/en/latest/definitions.html
+    了解SCRIPT_NAME和PATH_INFO的定义。
     """
 
     def __init__(
@@ -92,12 +107,29 @@ class AppRootMiddleware:
         wsgi_app: WSGIApplication,
         app_root: str,
     ):
+        """
+        初始化中间件。
+
+        参数:
+            wsgi_app: WSGI应用实例
+            app_root: 应用根路径前缀
+        """
         self.wsgi_app = wsgi_app
         self.app_root = app_root
 
     def __call__(
         self, environ: WSGIEnvironment, start_response: StartResponse
     ) -> Iterable[bytes]:
+        """
+        WSGI调用接口，处理请求路径与应用根路径的适配。
+
+        参数:
+            environ: WSGI环境字典
+            start_response: WSGI响应启动函数
+
+        返回:
+            应用处理结果
+        """
         original_path_info = environ.get("PATH_INFO", "")
         if original_path_info.startswith(self.app_root):
             environ["PATH_INFO"] = original_path_info.removeprefix(self.app_root)

@@ -368,7 +368,7 @@ PUBLIC_ROLE_LIKE: str | None = None
 # Babel 翻译配置
 # ---------------------------------------------------
 # 设置默认语言
-BABEL_DEFAULT_LOCALE = "en"
+BABEL_DEFAULT_LOCALE = "zh"
 # 应用程序默认翻译路径
 BABEL_DEFAULT_FOLDER = "superset/translations"
 # 应用程序允许的翻译语言
