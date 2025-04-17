@@ -806,11 +806,17 @@ const SqlEditor: FC<Props> = ({
         {hideActions ? (
           <Alert
             type="warning"
+            // message={t(
+            //   'The database that was used to generate this query could not be found',
+            // )}
+            // description={t(
+            //   'Choose one of the available databases on the left panel.',
+            // )}
             message={t(
-              'The database that was used to generate this query could not be found',
+              '用于生成此查询的数据库无法找到',
             )}
             description={t(
-              'Choose one of the available databases on the left panel.',
+              '在左侧面板上选择一个可用的数据库。',
             )}
             closable={false}
           />
@@ -833,7 +839,8 @@ const SqlEditor: FC<Props> = ({
                     <EstimateQueryCostButton
                       getEstimate={getQueryCostEstimate}
                       queryEditorId={queryEditor.id}
-                      tooltip={t('Estimate the cost before running a query')}
+                      // tooltip={t('Estimate the cost before running a query')}
+                      tooltip={t('在运行查询之前估算成本')}
                     />
                   </span>
                 )}

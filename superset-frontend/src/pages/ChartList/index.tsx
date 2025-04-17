@@ -677,7 +677,8 @@ function ChartList(props: ChartListProps) {
       },
       ...(userId ? [favoritesFilter] : []),
       {
-        Header: t('Certified'),
+        // Header: t('Certified'),
+        Header: t('认证'),
         key: 'certified',
         id: 'id',
         urlDisplay: 'certified',

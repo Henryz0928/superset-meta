@@ -247,7 +247,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             label=__("数据库连接"),
             icon="fa-database",
             category="Data",
-            category_label=__("Data"),
+            # category_label=__("Data"),
+            category_label=__("数据"),
         )
         appbuilder.add_view(
             DashboardModelView,
@@ -292,9 +293,11 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             UsersListView,
             "List Users",
-            label=__("List Users"),
+            # label=__("List Users"),
+            label=__("用户列表"),
             category="Security",
-            category_label=__("Security"),
+            # category_label=__("Security"),
+            category_label=__("安全"),
         )
 
         appbuilder.add_view(
@@ -303,7 +306,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             # label=__("Plugins"),
             label=__("插件"),
             category="Manage",
-            category_label=__("Manage"),
+            # category_label=__("Manage"),
+            category_label=__("管理"),
             icon="fa-puzzle-piece",
             menu_cond=lambda: feature_flag_manager.is_feature_enabled(
                 "DYNAMIC_PLUGINS"
@@ -316,7 +320,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             label=__("CSS 模板"),
             icon="fa-css3",
             category="Manage",
-            category_label=__("Manage"),
+            # category_label=__("Manage"),
+            category_label=__("管理"),
             category_icon="",
         )
 
@@ -371,7 +376,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             icon="fa-search",
             category_icon="fa-flask",
             category="SQL Lab",
-            category_label=__("SQL Lab"),
+            # category_label=__("SQL Lab"),
+            category_label=__("SQL 实验室"),
         )
         appbuilder.add_view(
             TagModelView,
@@ -390,7 +396,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             # label=__("Action Log"),
              label=__("操作日志"),
             category="Security",
-            category_label=__("Security"),
+            # category_label=__("Security"),
+            category_label=__("安全"),
             icon="fa-list-ol",
             menu_cond=lambda: (
                 self.config["FAB_ADD_SECURITY_VIEWS"]
@@ -408,7 +415,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             # label=__("Alerts & Reports"),
             label=__("警报与报告"),
             category="Manage",
-            category_label=__("Manage"),
+            # category_label=__("Manage"),
+            category_label=__("管理"),
             icon="fa-exclamation-triangle",
             menu_cond=lambda: feature_flag_manager.is_feature_enabled("ALERT_REPORTS"),
         )
@@ -422,7 +430,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             icon="fa-comment",
             category_icon="",
             category="Manage",
-            category_label=__("Manage"),
+            # category_label=__("Manage"),
+            category_label=__("管理"),
         )
 
         appbuilder.add_view(
@@ -432,7 +441,8 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             # label=__("Row Level Security"),
             label=__("行级安全"),     
             category="Security",
-            category_label=__("Security"),
+            # category_label=__("Security"),
+            category_label=__("安全"),
             icon="fa-lock",
         )
 

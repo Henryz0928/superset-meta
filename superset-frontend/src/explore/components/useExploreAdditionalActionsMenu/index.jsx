@@ -310,7 +310,8 @@ export const useExploreAdditionalActionsMenu = (
             </Menu.Item>
           )}
           <Menu.SubMenu
-            title={t('On dashboards')}
+            // title={t('On dashboards')}
+            title={t('在仪表板上')}
             key={MENU_KEYS.DASHBOARDS_ADDED_TO}
           >
             <DashboardsSubMenu
@@ -320,7 +321,8 @@ export const useExploreAdditionalActionsMenu = (
           </Menu.SubMenu>
           <Menu.Divider />
         </>
-        <Menu.SubMenu title={t('Download')} key={MENU_KEYS.DOWNLOAD_SUBMENU}>
+        {/* <Menu.SubMenu title={t('Download')} key={MENU_KEYS.DOWNLOAD_SUBMENU}> */}
+        <Menu.SubMenu title={t('下载')} key={MENU_KEYS.DOWNLOAD_SUBMENU}>
           {VIZ_TYPES_PIVOTABLE.includes(latestQueryFormData.viz_type) ? (
             <>
               <Menu.Item

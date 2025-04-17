@@ -210,13 +210,15 @@ const mockedProps = {
       {
         name: 'Security',
         icon: 'fa-cogs',
-        label: 'Security',
+        // label: 'Security',
+        label: '安全',
         index: 1,
         childs: [
           {
             name: 'List Users',
             icon: 'fa-user',
-            label: 'List Users',
+            // label: 'List Users',
+            label: '用户名单',
             url: '/users/list/',
             index: 1,
           },

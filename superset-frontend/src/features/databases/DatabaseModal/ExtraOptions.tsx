@@ -374,13 +374,15 @@ const ExtraOptions = ({
           <div>
             {/* <h4>{t('Security')}</h4> */}
             <h4>{'安全'}</h4>
-            <p className="helper">{t('Add extra connection information.')}</p>
+            {/* <p className="helper">{t('Add extra connection information.')}</p> */}
+            <p className="helper">{t('添加额外的连接信息。')}</p>
           </div>
         }
         key="3"
       >
         <StyledInputContainer>
-          <div className="control-label">{t('Secure extra')}</div>
+          {/* <div className="control-label">{t('Secure extra')}</div> */}
+          <div className="control-label">{t('额外安全')}</div>
           <div className="input-container">
             <StyledJsonEditor
               name="masked_encrypted_extra"

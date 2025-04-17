@@ -232,7 +232,8 @@ function SelectPageSize({
 }
 
 const getNoResultsMessage = (filter: string) =>
-  filter ? t('No matching records found') : t('No records found');
+  // filter ? t('No matching records found') : t('No records found');
+filter ? t('未找到匹配的记录') : t('未找到记录');
 
 export default function TableChart<D extends DataRecord = DataRecord>(
   props: TableChartTransformedProps<D> & {
@@ -269,7 +270,8 @@ export default function TableChart<D extends DataRecord = DataRecord>(
     basicColorColumnFormatters,
   } = props;
   const comparisonColumns = [
-    { key: 'all', label: t('Display all') },
+    // { key: 'all', label: t('Display all') },
+    { key: 'all', label: t('显示所有') },
     { key: '#', label: '#' },
     { key: '△', label: '△' },
     { key: '%', label: '%' },

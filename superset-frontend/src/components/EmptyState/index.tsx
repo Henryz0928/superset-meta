@@ -167,7 +167,8 @@ const handleMouseDown = (e: SyntheticEvent) => {
 export const EmptyState: React.FC<EmptyStateProps> = ({
   // title = t('No results'),
   title = '无结果',
-  description = t('There is currently no information to display.'),
+  // description = t('There is currently no information to display.'),
+  description = t('当前没有可显示的信息。'),
   image = 'empty.svg',
   buttonText,
   buttonAction,
