@@ -22,7 +22,7 @@ set -eo pipefail
 # 使 Python 交互式运行
 if [ "$DEV_MODE" == "true" ]; then
     if [ "$(whoami)" = "root" ] && command -v uv > /dev/null 2>&1; then
-      echo "以可编辑模式重新安装应用"
+      echo "可编辑模式重新安装应用"
       uv pip install -e .
     fi
 fi

@@ -166,12 +166,17 @@ const ModalHeader = ({
     <StyledFormHeader>
       <div className="select-db">
         <p className="helper-top">
-          {t('STEP %(stepCurr)s OF %(stepLast)s', {
+          {/* {t('STEP %(stepCurr)s OF %(stepLast)s', {
+            stepCurr: 1,
+            stepLast: 3,
+          })} */}
+          {t('步骤 %(stepCurr)s 到 %(stepLast)s', {
             stepCurr: 1,
             stepLast: 3,
           })}
         </p>
-        <h4>{t('Select a database to connect')}</h4>
+        {/* <h4>{t('Select a database to connect')}</h4> */}
+        <h4>{t('选择一个要连接的数据库')}</h4>
       </div>
     </StyledFormHeader>
   );
@@ -180,13 +185,20 @@ const ModalHeader = ({
     <StyledStickyHeader>
       <StyledFormHeader>
         <p className="helper-top">
-          {t('STEP %(stepCurr)s OF %(stepLast)s', {
+          {/* {t('STEP %(stepCurr)s OF %(stepLast)s', {
+            stepCurr: 2,
+            stepLast: 2,
+          })} */}
+           {t('步骤 %(stepCurr)s 到 %(stepLast)s', {
             stepCurr: 2,
             stepLast: 2,
           })}
         </p>
         <h4>
-          {t('Enter the required %(dbModelName)s credentials', {
+          {/* {t('Enter the required %(dbModelName)s credentials', {
+            dbModelName: dbModel.name,
+          })} */}
+           {t('输入所需的 %(dbModelName)s 凭证', {
             dbModelName: dbModel.name,
           })}
         </h4>

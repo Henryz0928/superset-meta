@@ -835,8 +835,11 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
 
       const errors = await getValidation(dbToUpdate, true);
       if (!isEmpty(validationErrors) || errors?.length) {
+        // addDangerToast(
+        //   t('Connection failed, please check your connection settings.'),
+        // );
         addDangerToast(
-          t('Connection failed, please check your connection settings.'),
+          t('连接失败，请检查您的连接设置。'),
         );
         setLoading(false);
         return;
@@ -1067,7 +1070,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         {/* {t('Or choose from a list of other databases we support:')} */}
         {'或从我们支持的其他数据库列表中选择:'}
       </h4>
-      <div className="control-label">{t('Supported databases')}</div>
+      {/* <div className="control-label">{t('Supported databases')}</div> */}
+      <div className="control-label">{t('支持的数据库')}</div>
       <AntdSelect
         className="available-select"
         onChange={setDatabaseModel}
@@ -1513,7 +1517,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             }
             validationMethods={{ onBlur: () => {} }}
             errorMessage={validationErrors?.ssh_tunnel_private_key_needed}
-            label={t('%s SSH TUNNEL PRIVATE KEY', database.slice(10))}
+            // label={t('%s SSH TUNNEL PRIVATE KEY', database.slice(10))}
+            label={t('%s SSH 管道专用密钥', database.slice(10))}
             css={formScrollableStyles}
           />
         )}
@@ -1533,7 +1538,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             errorMessage={
               validationErrors?.ssh_tunnel_private_key_password_needed
             }
-            label={t('%s SSH TUNNEL PRIVATE KEY PASSWORD', database.slice(10))}
+            // label={t('%s SSH TUNNEL PRIVATE KEY PASSWORD', database.slice(10))}
+            label={t('%s SSH 管道专用密钥密码', database.slice(10))}
             css={formScrollableStyles}
           />
         )}
@@ -1571,8 +1577,11 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
             type="warning"
             showIcon
             message=""
+            // description={t(
+            //   'You are importing one or more databases that already exist. Overwriting might cause you to lose some of your work. Are you sure you want to overwrite?',
+            // )}
             description={t(
-              'You are importing one or more databases that already exist. Overwriting might cause you to lose some of your work. Are you sure you want to overwrite?',
+              '您正在导入一个或多个已存在的数据库。覆盖可能会导致您丢失部分工作。您确定要覆盖吗？',
             )}
           />
         </StyledAlertMargin>
@@ -1582,7 +1591,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
           required
           validationMethods={{ onBlur: () => {} }}
           errorMessage={validationErrors?.confirm_overwrite}
-          label={t('Type "%s" to confirm', t('OVERWRITE'))}
+          // label={t('Type "%s" to confirm', t('OVERWRITE'))}
+          label={t('输入 "%s" 确认', t('覆盖'))}
           onChange={confirmOverwrite}
           css={formScrollableStyles}
         />
@@ -1646,9 +1656,13 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
       return (
         <ErrorAlertContainer>
           <ErrorMessageWithStackTrace
-            title={t('Database Creation Error')}
+            // title={t('Database Creation Error')}
+            // description={t(
+            //   'We are unable to connect to your database. Click "See more" for database-provided information that may help troubleshoot the issue.',
+            // )}
+            title={t('数据库创建错误')}
             description={t(
-              'We are unable to connect to your database. Click "See more" for database-provided information that may help troubleshoot the issue.',
+              '我们无法连接到您的数据库。点击“查看更多”以获取数据库提供的可能有助于排查问题的信息。',
             )}
             descriptionDetails={
               alertErrors?.[0] || validationErrors?.description
@@ -1697,7 +1711,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
           redirectURL('/dataset/add/');
         }}
       >
-        {t('CREATE DATASET')}
+        {/* {t('CREATE DATASET')} */}
+        {t('创建数据集')}
       </Button>
       <Button
         buttonStyle="secondary"
@@ -1707,7 +1722,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
           redirectURL(`/sqllab?db=true`);
         }}
       >
-        {t('QUERY DATA IN SQL LAB')}
+        {/* {t('QUERY DATA IN SQL LAB')} */}
+        {t('在 SQL LAB 中查询数据')}
       </Button>
     </StyledBtns>
   );
@@ -1832,7 +1848,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         onHandledPrimaryAction={onSave}
         primaryButtonName={t('Connect')}
         show={show}
-        title={<h4>{t('Connect a database')}</h4>}
+        // title={<h4>{t('Connect a database')}</h4>}
+        title={<h4>{t('连接数据库')}</h4>}
         width="500px"
       >
         <ModalHeader
@@ -1867,7 +1884,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
       data-test="database-modal"
       onHandledPrimaryAction={onSave}
       onHide={onClose}
-      primaryButtonName={isEditMode ? t('Save') : t('Connect')}
+      // primaryButtonName={isEditMode ? t('Save') : t('Connect')}
+      primaryButtonName={isEditMode ? t('保存') : t('连接')}
       width="500px"
       centered
       show={show}
@@ -1888,7 +1906,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               `}
             />
           )}
-          {isEditMode ? t('Edit database') : t('Connect a database')}
+          {/* {isEditMode ? t('Edit database') : t('Connect a database')} */}
+          {isEditMode ? t('修改数据库') : t('连接数据库')}
         </h4>
       }
       footer={modalFooter}
@@ -1913,7 +1932,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
         onTabClick={tabChange}
         animated={{ inkBar: true, tabPane: true }}
       >
-        <Tabs.TabPane tab={<span>{t('Basic')}</span>} key="1">
+        {/* <Tabs.TabPane tab={<span>{t('Basic')}</span>} key="1"> */}
+        <Tabs.TabPane tab={<span>{t('基础')}</span>} key="1">
           {useSqlAlchemyForm ? (
             <StyledAlignment>
               <SqlAlchemyForm
@@ -1956,11 +1976,15 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                     }
                     css={theme => alchemyButtonLinkStyles(theme)}
                   >
-                    {t('Connect this database using the dynamic form instead')}
+                    {/* {t('Connect this database using the dynamic form instead')} */}
+                    {t('使用动态表单连接此数据库')}
                   </Button>
                   <InfoTooltip
+                    // tooltip={t(
+                    //   'Click this link to switch to an alternate form that exposes only the required fields needed to connect this database.',
+                    // )}
                     tooltip={t(
-                      'Click this link to switch to an alternate form that exposes only the required fields needed to connect this database.',
+                      '点击此链接切换到仅暴露连接此数据库所需字段的替代形式。',
                     )}
                     viewBox="0 -6 24 24"
                   />
@@ -1975,12 +1999,16 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               <Alert
                 closable={false}
                 css={(theme: SupersetTheme) => antDAlertStyles(theme)}
-                message={t('Additional fields may be required')}
+                // message={t('Additional fields may be required')}
+                message={t('可能还需要其他字段')}
                 showIcon
                 description={
                   <>
-                    {t(
+                    {/* {t(
                       'Select databases require additional fields to be completed in the Advanced tab to successfully connect the database. Learn what requirements your databases has ',
+                    )} */}
+                    {t(
+                      '选择的数据库需要在高级选项卡中完成额外的字段以成功连接数据库。了解您的数据库有哪些要求 ',
                     )}
                     <a
                       href={DOCUMENTATION_LINK}
@@ -1988,7 +2016,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                       rel="noopener noreferrer"
                       className="additional-fields-alert-description"
                     >
-                      {t('here')}
+                      {/* {t('here')} */}
+                      {t('这类')}
                     </a>
                     .
                   </>
@@ -1999,7 +2028,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
           )}
           {showDBError && errorAlert()}
         </Tabs.TabPane>
-        <Tabs.TabPane tab={<span>{t('Advanced')}</span>} key="2">
+        {/* <Tabs.TabPane tab={<span>{t('Advanced')}</span>} key="2"> */}
+        <Tabs.TabPane tab={<span>{t('高级')}</span>} key="2">
           <ExtraOptions
             extraExtension={dbConfigExtraExtension}
             db={db as DatabaseObject}
@@ -2046,7 +2076,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
       name="database"
       onHandledPrimaryAction={onSave}
       onHide={onClose}
-      primaryButtonName={hasConnectedDb ? t('Finish') : t('Connect')}
+      // primaryButtonName={hasConnectedDb ? t('Finish') : t('Connect')}
+      primaryButtonName={hasConnectedDb ? t('完成') : t('连接')}
       width="500px"
       centered
       show={show}
@@ -2058,7 +2089,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
               margin: auto ${theme.gridUnit * 2}px auto 0;
             `}
           />
-          {t('Connect a database')}
+          {/* {t('Connect a database')} */}
+          {t('连接数据库')}
         </h4>
       }
       footer={renderModalFooter()}
@@ -2112,7 +2144,8 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                       type="link"
                       css={importDbButtonLinkStyles}
                     >
-                      {t('Import database from file')}
+                      {/* {t('Import database from file')} */}
+                      {t('从文件导入数据库')}
                     </Button>
                   </Upload>
                 </StyledUploadWrapper>
@@ -2150,13 +2183,19 @@ const DatabaseModal: FunctionComponent<DatabaseModalProps> = ({
                         }
                         css={buttonLinkStyles}
                       >
-                        {t(
+                        {/* {t(
                           'Connect this database with a SQLAlchemy URI string instead',
+                        )} */}
+                        {t(
+                          '使用 SQLAlchemy URI 字符串连接这个数据库 instead',
                         )}
                       </Button>
                       <InfoTooltip
+                        // tooltip={t(
+                        //   'Click this link to switch to an alternate form that allows you to input the SQLAlchemy URL for this database manually.',
+                        // )}
                         tooltip={t(
-                          'Click this link to switch to an alternate form that allows you to input the SQLAlchemy URL for this database manually.',
+                          '点击此链接切换到一个允许您手动输入此数据库的 SQLAlchemy URL 的替代形式。',
                         )}
                         viewBox="0 -6 24 24"
                       />
