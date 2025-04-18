@@ -115,7 +115,8 @@ const SelectAsyncControl = ({
   return (
     <Select
       allowClear={allowClear}
-      ariaLabel={ariaLabel || t('Select ...')}
+      // ariaLabel={ariaLabel || t('Select ...')}
+      ariaLabel={ariaLabel || t('选择 ...')}
       value={getValue()}
       header={<ControlHeader {...props} />}
       mode={multi ? 'multiple' : 'single'}

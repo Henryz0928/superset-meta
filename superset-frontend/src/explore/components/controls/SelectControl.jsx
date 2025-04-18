@@ -236,7 +236,8 @@ export default class SelectControl extends PureComponent {
       allowNewOptions: freeForm,
       autoFocus,
       ariaLabel:
-        ariaLabel || (typeof label === 'string' ? label : t('Select ...')),
+        // ariaLabel || (typeof label === 'string' ? label : t('Select ...')),
+        ariaLabel || (typeof label === 'string' ? label : t('选择 ...')),
       allowClear: clearable,
       disabled,
       filterOption:

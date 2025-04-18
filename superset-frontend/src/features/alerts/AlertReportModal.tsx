@@ -1774,13 +1774,15 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           {tabsEnabled && contentType === ContentType.Dashboard && (
             <StyledInputContainer>
               <>
-                <div className="control-label">{t('Select tab')}</div>
+                {/* <div className="control-label">{t('Select tab')}</div> */}
+                <div className="control-label">{t('选择标签页')}</div>
                 <StyledTreeSelect
                   disabled={tabOptions?.length === 0}
                   treeData={tabOptions}
                   value={currentAlert?.extra?.dashboard?.anchor}
                   onSelect={updateAnchorState}
-                  placeholder={t('Select a tab')}
+                  // placeholder={t('Select a tab')}
+                  placeholder={t('选择标签页')}
                 />
               </>
             </StyledInputContainer>

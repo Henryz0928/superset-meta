@@ -54,7 +54,8 @@ const createProps = () => ({
   value: [],
   dataEndpoint: datasetsOwnersEndpoint,
   multi: true,
-  placeholder: 'Select ...',
+  // placeholder: 'Select ...',
+  placeholder: '选择 ...',
   onChange: jest.fn(),
   mutator: jest.fn(),
 });

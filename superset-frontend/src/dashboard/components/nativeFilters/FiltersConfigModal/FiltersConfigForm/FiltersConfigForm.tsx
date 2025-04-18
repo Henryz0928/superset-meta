@@ -280,22 +280,26 @@ const FilterTypeInfo = styled.div<{ expanded: boolean }>`
 const FilterTabs = {
   configuration: {
     key: 'configuration',
-    name: t('Settings'),
+    // name: t('Settings'),
+    name: t('设置'),
   },
   scoping: {
     key: 'scoping',
-    name: t('Scoping'),
+    // name: t('Scoping'),
+    name: t('作用域'),
   },
 };
 
 export const FilterPanels = {
   configuration: {
     key: 'configuration',
-    name: t('Filter Configuration'),
+    // name: t('Filter Configuration'),
+    name: t('过滤配置'),
   },
   settings: {
     key: 'settings',
-    name: t('Filter Settings'),
+    // name: t('Filter Settings'),
+    name: t('过滤设置'),
   },
 };
 
@@ -321,13 +325,21 @@ export interface FiltersConfigFormProps {
 const FILTERS_WITH_ADHOC_FILTERS = ['filter_select', 'filter_range'];
 
 // TODO: Rename the filter plugins and remove this mapping
+// const FILTER_TYPE_NAME_MAPPING = {
+//   [t('Select filter')]: t('Value'),
+//   [t('Range filter')]: t('Numerical range'),
+//   [t('Time filter')]: t('Time range'),
+//   [t('Time column')]: t('Time column'),
+//   [t('Time grain')]: t('Time grain'),
+//   [t('Group By')]: t('Group by'),
+// };
 const FILTER_TYPE_NAME_MAPPING = {
-  [t('Select filter')]: t('Value'),
-  [t('Range filter')]: t('Numerical range'),
-  [t('Time filter')]: t('Time range'),
-  [t('Time column')]: t('Time column'),
-  [t('Time grain')]: t('Time grain'),
-  [t('Group By')]: t('Group by'),
+  [t('选择过滤器')]: t('值'),
+  [t('范围过滤器')]: t('数值范围'),
+  [t('时间过滤器')]: t('时间范围'),
+  [t('时间列')]: t('时间列'),
+  [t('时间粒度')]: t('时间粒度'),
+  [t('按组聚合')]: t('按组聚合'),
 };
 
 /**
@@ -544,8 +556,11 @@ const FiltersConfigForm = (
                   });
                 });
             } else {
+              // throw new Error(
+              //   `Received unexpected response status (${response.status}) while fetching chart data`,
+              // );
               throw new Error(
-                `Received unexpected response status (${response.status}) while fetching chart data`,
+                `收到意外的响应状态 (${response.status}) 正在获取图表数据`,
               );
             }
           } else {
@@ -666,7 +681,8 @@ const FiltersConfigForm = (
     if (hasTimeRange || hasAdhoc) {
       return Promise.resolve();
     }
-    return Promise.reject(new Error(t('Pre-filter is required')));
+    // return Promise.reject(new Error(t('Pre-filter is required')));
+    return Promise.reject(new Error(t('预过滤器是必需的')));
   };
 
   const availableFilters = getAvailableFilters(filterId);
@@ -783,13 +799,19 @@ const FiltersConfigForm = (
       name={['filters', filterId, 'granularity_sqla']}
       label={
         <>
-          <StyledLabel>{t('Time column')}</StyledLabel>&nbsp;
+          {/* <StyledLabel>{t('Time column')}</StyledLabel>&nbsp; */}
+          <StyledLabel>{t('时间列')}</StyledLabel>&nbsp;
           <InfoTooltipWithTrigger
             placement="top"
+            // tooltip={
+            //   hasTimeDependency
+            //     ? t('Time column to apply dependent temporal filter to')
+            //     : t('Time column to apply time range to')
+            // }
             tooltip={
               hasTimeDependency
-                ? t('Time column to apply dependent temporal filter to')
-                : t('Time column to apply time range to')
+                ? t('时间列以应用依赖时间过滤器')
+                : t('应用于时间范围的时间列')
             }
           />
         </>
@@ -840,7 +862,8 @@ const FiltersConfigForm = (
             name={['filters', filterId, 'name']}
             label={<StyledLabel>{t('Filter name')}</StyledLabel>}
             initialValue={filterToEdit?.name}
-            rules={[{ required: !isRemoved, message: t('Name is required') }]}
+            // rules={[{ required: !isRemoved, message: t('Name is required') }]}
+            rules={[{ required: !isRemoved, message: t('名称是必需的') }]}
           >
             <Input
               {...getFiltersConfigModalTestId('name-input')}
@@ -850,13 +873,15 @@ const FiltersConfigForm = (
           <StyledFormItem
             expanded={expanded}
             name={['filters', filterId, 'filterType']}
-            rules={[{ required: !isRemoved, message: t('Name is required') }]}
+            // rules={[{ required: !isRemoved, message: t('Name is required') }]}
+            rules={[{ required: !isRemoved, message: t('名称是必需的') }]}
             initialValue={filterToEdit?.filterType || 'filter_select'}
             label={<StyledLabel>{t('Filter Type')}</StyledLabel>}
             {...getFiltersConfigModalTestId('filter-type')}
           >
             <Select
-              ariaLabel={t('Filter type')}
+              // ariaLabel={t('Filter type')}
+              ariaLabel={t('过滤类型')}
               options={nativeFilterVizTypes.map(filterType => {
                 // @ts-ignore
                 const name = nativeFilterItems[filterType]?.value.name;
@@ -874,7 +899,8 @@ const FiltersConfigForm = (
                   label: mappedName || name,
                   customLabel: isDisabled ? (
                     <Tooltip
-                      title={t('Datasets do not contain a temporal column')}
+                      // title={t('Datasets do not contain a temporal column')}
+                      title={t('数据集不包含时间列')}
                     >
                       {mappedName || name}
                     </Tooltip>
@@ -896,9 +922,12 @@ const FiltersConfigForm = (
         </StyledContainer>
         {formFilter?.filterType === 'filter_time' && (
           <FilterTypeInfo expanded={expanded}>
-            {t(`Dashboard time range filters apply to temporal columns defined in
+            {/* {t(`Dashboard time range filters apply to temporal columns defined in
           the filter section of each chart. Add temporal columns to the chart
-          filters to have this dashboard filter impact those charts.`)}
+          filters to have this dashboard filter impact those charts.`)} */}
+           {t(`仪表板时间范围过滤器应用于定义的时间列中
+          每个图表的过滤器部分。向图表中添加时间列。
+          将这些过滤器应用到仪表板，以便影响这些图表。`)}
           </FilterTypeInfo>
         )}
         {hasDataset && (
@@ -907,7 +936,8 @@ const FiltersConfigForm = (
               <StyledFormItem
                 expanded={expanded}
                 name={['filters', filterId, 'dataset']}
-                label={<StyledLabel>{t('Dataset')}</StyledLabel>}
+                // label={<StyledLabel>{t('Dataset')}</StyledLabel>}
+                label={<StyledLabel>{t('数据集')}</StyledLabel>}
                 initialValue={
                   datasetDetails
                     ? {
@@ -925,7 +955,8 @@ const FiltersConfigForm = (
                     : undefined
                 }
                 rules={[
-                  { required: !isRemoved, message: t('Dataset is required') },
+                  // { required: !isRemoved, message: t('Dataset is required') },
+                  { required: !isRemoved, message: t('数据集是必需的') },
                 ]}
                 {...getFiltersConfigModalTestId('datasource-input')}
               >
@@ -947,7 +978,8 @@ const FiltersConfigForm = (
             ) : (
               <StyledFormItem
                 expanded={expanded}
-                label={<StyledLabel>{t('Dataset')}</StyledLabel>}
+                // label={<StyledLabel>{t('Dataset')}</StyledLabel>}
+                label={<StyledLabel>{t('数据集')}</StyledLabel>}
               >
                 <Loading position="inline-centered" />
               </StyledFormItem>
@@ -1002,11 +1034,15 @@ const FiltersConfigForm = (
                   <CollapsibleControl
                     initialValue={hasPreFilter}
                     title={t('Pre-filter available values')}
-                    tooltip={t(`Add filter clauses to control the filter's source query,
-                    though only in the context of the autocomplete i.e., these conditions
-                    do not impact how the filter is applied to the dashboard. This is useful
-                    when you want to improve the query's performance by only scanning a subset
-                    of the underlying data or limit the available values displayed in the filter.`)}
+                    // tooltip={t(`Add filter clauses to control the filter's source query,
+                    // though only in the context of the autocomplete i.e., these conditions
+                    // do not impact how the filter is applied to the dashboard. This is useful
+                    // when you want to improve the query's performance by only scanning a subset
+                    // of the underlying data or limit the available values displayed in the filter.`)}
+                    tooltip={t(`添加过滤条件以控制过滤器的源查询，
+                      尽管这些条件仅在自动补全的上下文中适用这些条件。
+                      不要影响过滤器在仪表盘上的应用方式。这在您希望通过只扫描子集来提高查询性能时很有用
+                      只扫描底层数据的一部分或限制过滤器中显示的可用值。`)}
                     onChange={checked => {
                       formChanged();
                       if (checked) {
@@ -1056,7 +1092,8 @@ const FiltersConfigForm = (
                         name={['filters', filterId, 'time_range']}
                         label={<StyledLabel>{t('Time range')}</StyledLabel>}
                         initialValue={
-                          filterToEdit?.time_range || t('No filter')
+                          // filterToEdit?.time_range || t('No filter')
+                          filterToEdit?.time_range || t('无过滤器')
                         }
                         required={!hasAdhoc}
                         rules={[
@@ -1088,7 +1125,8 @@ const FiltersConfigForm = (
                 <CleanFormItem name={['filters', filterId, 'sortFilter']}>
                   <CollapsibleControl
                     initialValue={hasSorting}
-                    title={t('Sort filter values')}
+                    // title={t('Sort filter values')}
+                    title={t('排序过滤值')}
                     onChange={checked => {
                       onSortChanged(checked || undefined);
                       formChanged();
@@ -1103,12 +1141,15 @@ const FiltersConfigForm = (
                         'sortAscending',
                       ]}
                       initialValue={sort}
-                      label={<StyledLabel>{t('Sort type')}</StyledLabel>}
+                      // label={<StyledLabel>{t('Sort type')}</StyledLabel>}
+                      label={<StyledLabel>{t('排序类型')}</StyledLabel>}
                     >
                       <Radio.GroupWrapper
                         options={[
-                          { value: true, label: t('Sort ascending') },
-                          { value: false, label: t('Sort descending') },
+                          // { value: true, label: t('Sort ascending') },
+                          // { value: false, label: t('Sort descending') },
+                          { value: true, label: t('排序升序') },
+                          { value: false, label: t('降序排列') },
                         ]}
                         onChange={value => {
                           onSortChanged(value.target.value);
@@ -1123,11 +1164,15 @@ const FiltersConfigForm = (
                         initialValue={filterToEdit?.sortMetric}
                         label={
                           <>
-                            <StyledLabel>{t('Sort Metric')}</StyledLabel>&nbsp;
+                            {/* <StyledLabel>{t('Sort Metric')}</StyledLabel>&nbsp; */}
+                            <StyledLabel>{t('排序度量')}</StyledLabel>&nbsp;
                             <InfoTooltipWithTrigger
                               placement="top"
+                              // tooltip={t(
+                              //   'If a metric is specified, sorting will be done based on the metric value',
+                              // )}
                               tooltip={t(
-                                'If a metric is specified, sorting will be done based on the metric value',
+                                '如果指定了度量标准，将根据度量标准值进行排序',
                               )}
                             />
                           </>
@@ -1136,7 +1181,8 @@ const FiltersConfigForm = (
                       >
                         <Select
                           allowClear
-                          ariaLabel={t('Sort metric')}
+                          // ariaLabel={t('Sort metric')}
+                          ariaLabel={t('排序度量')}
                           name="sortMetric"
                           options={metrics.map((metric: Metric) => ({
                             value: metric.metric_name,
@@ -1160,7 +1206,8 @@ const FiltersConfigForm = (
                 <CleanFormItem name={['filters', filterId, 'rangeFilter']}>
                   <CollapsibleControl
                     initialValue={hasEnableSingleValue}
-                    title={t('Single Value')}
+                    // title={t('Single Value')}
+                    title={t('单一值')}
                     onChange={checked => {
                       onEnableSingleValueChanged(
                         checked ? SingleValueType.Exact : undefined,
@@ -1178,7 +1225,8 @@ const FiltersConfigForm = (
                       ]}
                       initialValue={enableSingleValue}
                       label={
-                        <StyledLabel>{t('Single value type')}</StyledLabel>
+                        // <StyledLabel>{t('Single value type')}</StyledLabel>
+                        <StyledLabel>{t('单值类型')}</StyledLabel>
                       }
                     >
                       <Radio.GroupWrapper
@@ -1188,12 +1236,15 @@ const FiltersConfigForm = (
                         }}
                         options={[
                           {
-                            label: t('Minimum'),
+                            // label: t('Minimum'),
+                            label: t('最小值'),
                             value: SingleValueType.Minimum,
                           },
-                          { label: t('Exact'), value: SingleValueType.Exact },
+                          // { label: t('Exact'), value: SingleValueType.Exact },
+                          { label: t('精确的'), value: SingleValueType.Exact },
                           {
-                            label: t('Maximum'),
+                            // label: t('Maximum'),
+                            label: t('最大值'),
                             value: SingleValueType.Maximum,
                           },
                         ]}
@@ -1213,7 +1264,8 @@ const FiltersConfigForm = (
               expanded={expanded}
               name={['filters', filterId, 'description']}
               initialValue={filterToEdit?.description}
-              label={<StyledLabel>{t('Description')}</StyledLabel>}
+              // label={<StyledLabel>{t('Description')}</StyledLabel>}
+              label={<StyledLabel>{t('描述')}</StyledLabel>}
             >
               <TextArea onChange={debouncedFormChanged} />
             </StyledFormItem>
@@ -1227,7 +1279,8 @@ const FiltersConfigForm = (
                 checked={hasDefaultValue}
                 disabled={isRequired || defaultToFirstItem}
                 initialValue={hasDefaultValue}
-                title={t('Filter has default value')}
+                // title={t('Filter has default value')}
+                title={t('过滤器有默认值')}
                 tooltip={defaultValueTooltip}
                 onChange={value => {
                   setHasDefaultValue(value);
@@ -1245,7 +1298,8 @@ const FiltersConfigForm = (
                     name={['filters', filterId, 'defaultDataMask']}
                     initialValue={initialDefaultValue}
                     data-test="default-input"
-                    label={<StyledLabel>{t('Default Value')}</StyledLabel>}
+                    // label={<StyledLabel>{t('Default Value')}</StyledLabel>}
+                    label={<StyledLabel>{t('默认值')}</StyledLabel>}
                     required={hasDefaultValue}
                     rules={[
                       {
@@ -1274,7 +1328,8 @@ const FiltersConfigForm = (
                             return [...prevErroredFilters, filterId];
                           });
                           return Promise.reject(
-                            new Error(t('Please choose a valid value')),
+                            // new Error(t('Please choose a valid value')),
+                            new Error(t('请选择一个有效值')),
                           );
                         },
                       },
@@ -1287,7 +1342,8 @@ const FiltersConfigForm = (
                             error={error.errors?.[0]}
                             fallback={
                               <BasicErrorAlert
-                                title={t('Cannot load filter')}
+                                // title={t('Cannot load filter')}
+                                title={t('无法加载过滤器')}
                                 body={error.error}
                                 level="error"
                               />
@@ -1321,7 +1377,8 @@ const FiltersConfigForm = (
                           />
                         )}
                         {hasDataset && datasetId && (
-                          <Tooltip title={t('Refresh the default values')}>
+                          // <Tooltip title={t('Refresh the default values')}>
+                          <Tooltip title={t('刷新默认值')}>
                             <Icons.SyncOutlined
                               iconSize="xl"
                               iconColor={theme.colors.primary.base}
@@ -1334,7 +1391,8 @@ const FiltersConfigForm = (
                         )}
                       </DefaultValueContainer>
                     ) : (
-                      t('Fill all required fields to enable "Default Value"')
+                      // t('Fill all required fields to enable "Default Value"')
+                      t('填写所有必填字段以启用“默认值”')
                     )}
                   </StyledRowSubFormItem>
                 )}

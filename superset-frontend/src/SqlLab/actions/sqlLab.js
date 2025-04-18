@@ -114,7 +114,8 @@ export const CtasEnum = {
   Table: 'TABLE',
   View: 'VIEW',
 };
-const ERR_MSG_CANT_LOAD_QUERY = t("The query couldn't be loaded");
+// const ERR_MSG_CANT_LOAD_QUERY = t("The query couldn't be loaded");
+const ERR_MSG_CANT_LOAD_QUERY = t("查询无法加载");
 
 // a map of SavedQuery field names to the different names used client-side,
 // because for now making the names consistent is too complicated
@@ -181,14 +182,18 @@ export function scheduleQuery(query) {
       .then(() =>
         dispatch(
           addSuccessToast(
+            // t(
+            //   'Your query has been scheduled. To see details of your query, navigate to Saved queries',
+            // ),
             t(
-              'Your query has been scheduled. To see details of your query, navigate to Saved queries',
+              '您的查询已安排好。要查看查询详情，请导航到保存的查询。',
             ),
           ),
         ),
       )
       .catch(() =>
-        dispatch(addDangerToast(t('Your query could not be scheduled'))),
+        // dispatch(addDangerToast(t('Your query could not be scheduled'))),
+      dispatch(addDangerToast(t('您的查询无法安排'))),
       );
 }
 
@@ -221,7 +226,8 @@ export function estimateQueryCost(queryEditor) {
             const message =
               error.error ||
               error.statusText ||
-              t('Failed at retrieving results');
+              // t('Failed at retrieving results');
+              t('获取结果失败');
             return dispatch({
               type: COST_ESTIMATE_FAILED,
               query: queryEditor,
@@ -319,8 +325,8 @@ export function fetchQueryResults(query, displayLimit, timeoutInMs) {
           const message =
             error.error ||
             error.statusText ||
-            t('Failed at retrieving results');
-
+            // t('Failed at retrieving results');
+            t('获取结果失败');
           return dispatch(
             queryFailed(query, message, error.link, error.errors),
           );
@@ -368,7 +374,8 @@ export function runQuery(query, runPreviewOnly) {
             error.error ||
             error.message ||
             error.statusText ||
-            t('Unknown error');
+            // t('Unknown error');
+            t('未知错误');
           if (message.includes('CSRF token')) {
             message = t(COMMON_ERR_MESSAGES.SESSION_TIMED_OUT);
           }
@@ -421,9 +428,12 @@ export function postStopQuery(query) {
       body: JSON.stringify({ client_id: query.id }),
       headers: { 'Content-Type': 'application/json' },
     })
+      // .then(() => dispatch(stopQuery(query)))
+      // .then(() => dispatch(addSuccessToast(t('Query was stopped.'))))
+      // .catch(() => dispatch(addDangerToast(t('Failed to stop query.'))));
       .then(() => dispatch(stopQuery(query)))
-      .then(() => dispatch(addSuccessToast(t('Query was stopped.'))))
-      .catch(() => dispatch(addDangerToast(t('Failed to stop query.'))));
+      .then(() => dispatch(addSuccessToast(t('查询已停止。'))))
+      .catch(() => dispatch(addDangerToast(t('停止查询失败。'))));
   };
 }
 
@@ -447,10 +457,15 @@ function migrateTable(table, queryEditorId, dispatch) {
     .catch(() =>
       dispatch(
         addWarningToast(
+          // t(
+          //   'Unable to migrate table schema state to backend. Superset will retry ' +
+          //     'later. Please contact your administrator if this problem persists.',
+          // ),
           t(
-            'Unable to migrate table schema state to backend. Superset will retry ' +
-              'later. Please contact your administrator if this problem persists.',
+            '无法将查询状态迁移到后端。Superset 会稍后重试。 ' +
+              '请在问题持续存在时联系管理员。',
           ),
+          
         ),
       ),
     );
@@ -465,9 +480,13 @@ function migrateQuery(queryId, queryEditorId, dispatch) {
     .catch(() =>
       dispatch(
         addWarningToast(
+          // t(
+          //   'Unable to migrate query state to backend. Superset will retry later. ' +
+          //     'Please contact your administrator if this problem persists.',
+          // ),
           t(
-            'Unable to migrate query state to backend. Superset will retry later. ' +
-              'Please contact your administrator if this problem persists.',
+            '无法将查询状态迁移到后端。Superset 会稍后重试。 ' +
+              '请在问题持续存在时联系管理员。',
           ),
         ),
       ),
@@ -525,9 +544,13 @@ export function syncQueryEditor(queryEditor) {
       .catch(() =>
         dispatch(
           addWarningToast(
+            // t(
+            //   'Unable to migrate query editor state to backend. Superset will retry ' +
+            //     'later. Please contact your administrator if this problem persists.',
+            // ),
             t(
-              'Unable to migrate query editor state to backend. Superset will retry ' +
-                'later. Please contact your administrator if this problem persists.',
+              '无法将查询编辑器状态迁移到后端。Superset 会重试。 ' +
+                '稍后，如果此问题持续，请联系您的管理员。',
             ),
           ),
         ),

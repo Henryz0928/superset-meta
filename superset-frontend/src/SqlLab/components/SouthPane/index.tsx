@@ -162,7 +162,8 @@ const SouthPane = ({
         onEdit={removeTable}
         hideAdd
       >
-        <Tabs.TabPane tab={t('Results')} key="Results" closable={false}>
+        {/* <Tabs.TabPane tab={t('Results')} key="Results" closable={false}> */}
+        <Tabs.TabPane tab={t('结果')} key="Results" closable={false}>
           <Results
             height={innerTabContentHeight}
             latestQueryId={latestQueryId}
@@ -170,7 +171,8 @@ const SouthPane = ({
             defaultQueryLimit={defaultQueryLimit}
           />
         </Tabs.TabPane>
-        <Tabs.TabPane tab={t('Query history')} key="History" closable={false}>
+        {/* <Tabs.TabPane tab={t('Query history')} key="History" closable={false}> */}
+        <Tabs.TabPane tab={t('查询历史')} key="History" closable={false}>
           <QueryHistory
             queryEditorId={queryEditorId}
             displayLimit={displayLimit}

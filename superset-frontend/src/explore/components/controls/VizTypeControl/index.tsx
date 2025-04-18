@@ -58,7 +58,8 @@ function VizSupportValidation({ vizType }: { vizType: string }) {
       {/* TODO: Remove fa-icon */}
       {/* eslint-disable-next-line icons/no-fa-icons-usage */}
       <i className="fa fa-exclamation-circle text-danger" />{' '}
-      <small>{t('This visualization type is not supported.')}</small>
+      {/* <small>{t('This visualization type is not supported.')}</small> */}
+      <small>{t('不支持此可视化类型。')}</small>
     </div>
   );
 }
@@ -118,13 +119,15 @@ const VizTypeControl = ({
         `}
       >
         <span role="button" tabIndex={0} onClick={openModal}>
-          {t('View all charts')}
+          {/* {t('View all charts')} */}
+          {t('查看所有图表')}
         </span>
       </div>
       <UnpaddedModal
         show={showModal}
         onHide={onCancel}
-        title={t('Select a visualization type')}
+        // title={t('Select a visualization type')}
+        title={t('选择一种可视化类型')}
         primaryButtonName={t('Select')}
         disablePrimaryButton={!selectedViz}
         onHandledPrimaryAction={onSubmit}

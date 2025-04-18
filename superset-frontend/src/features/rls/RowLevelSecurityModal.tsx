@@ -141,7 +141,8 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
     clearError,
   } = useSingleViewResource<RLSObject>(
     `rowlevelsecurity`,
-    t('rowlevelsecurity'),
+    // t('rowlevelsecurity'),
+    t('行级安全'),
     addDangerToast,
   );
 
@@ -262,13 +263,15 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
         if (!response) {
           return;
         }
-        addSuccessToast(`Rule updated`);
+        // addSuccessToast(`Rule updated`);
+        addSuccessToast(t('规则已修改'));
         hide();
       });
     } else if (currentRule) {
       createResource(data).then(response => {
         if (!response) return;
-        addSuccessToast(t('Rule added'));
+        // addSuccessToast(t('Rule added'));
+        addSuccessToast(t('规则已添加'));
         hide();
       });
     }
@@ -327,7 +330,8 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
       responsive
       show={show}
       onHide={hide}
-      primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      // primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      primaryButtonName={isEditMode ? t('保存') : t('添加')}
       disablePrimaryButton={disableSave}
       onHandledPrimaryAction={onSave}
       width="30%"
@@ -348,7 +352,8 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
               `}
             />
           )}
-          {isEditMode ? t('Edit Rule') : t('Add Rule')}
+          {/* {isEditMode ? t('Edit Rule') : t('Add Rule')} */}
+          {isEditMode ? t('修改规则') : t('添加规则')}
         </h4>
       }
     >
@@ -366,26 +371,34 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
                   onTextChange(target),
               }}
               css={noMargins}
-              label={t('Rule Name')}
+              // label={t('Rule Name')}
+              label={t('规则名称')}
               data-test="rule-name-test"
-              tooltipText={t('The name of the rule must be unique')}
+              // tooltipText={t('The name of the rule must be unique')}
+              tooltipText={t('规则的名称必须唯一')}
               hasTooltip
             />
           </StyledInputContainer>
           <StyledInputContainer>
             <div className="control-label">
-              {t('Filter Type')}{' '}
+              {/* {t('Filter Type')}{' '} */}
+              {t('过滤类型')}{' '}
               <InfoTooltip
+                // tooltip={t(
+                //   'Regular filters add where clauses to queries if a user belongs to a role referenced in the filter, base filters apply filters to all queries except the roles defined in the filter, and can be used to define what users can see if no RLS filters within a filter group apply to them.',
+                // )}
                 tooltip={t(
-                  'Regular filters add where clauses to queries if a user belongs to a role referenced in the filter, base filters apply filters to all queries except the roles defined in the filter, and can be used to define what users can see if no RLS filters within a filter group apply to them.',
+                  '常规过滤器会在查询中添加 where 子句，如果用户属于过滤器中引用的角色；基础过滤器则对所有查询应用过滤器，除非这些查询与过滤器中定义的角色相关，并且可以用于定义如果没有该过滤组内的 RLS 过滤器适用时，用户可以看到的内容。',
                 )}
               />
             </div>
             <div className="input-container">
               <Select
                 name="filter_type"
-                ariaLabel={t('Filter Type')}
-                placeholder={t('Filter Type')}
+                // ariaLabel={t('Filter Type')}
+                ariaLabel={t('过滤类型')}
+                // placeholder={t('Filter Type')}
+                placeholder={t('过滤类型')}
                 onChange={onFilterChange}
                 value={currentRule?.filter_type}
                 options={FILTER_OPTIONS}
@@ -395,16 +408,21 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
           </StyledInputContainer>
           <StyledInputContainer>
             <div className="control-label">
-              {t('Datasets')} <span className="required">*</span>
+              {/* {t('Datasets')} <span className="required">*</span> */}
+              {t('数据集')} <span className="required">*</span>
               <InfoTooltip
+                // tooltip={t(
+                //   'These are the datasets this filter will be applied to.',
+                // )}
                 tooltip={t(
-                  'These are the datasets this filter will be applied to.',
+                  '这些是此过滤器将要应用的数据集。',
                 )}
               />
             </div>
             <div className="input-container">
               <AsyncSelect
-                ariaLabel={t('Tables')}
+                // ariaLabel={t('Tables')}
+                ariaLabel={t('表格')}
                 mode="multiple"
                 onChange={onTablesChange}
                 value={(currentRule?.tables as SelectValue[]) || []}
@@ -415,18 +433,25 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
 
           <StyledInputContainer>
             <div className="control-label">
-              {currentRule.filter_type === FilterType.Base
+              {/* {currentRule.filter_type === FilterType.Base
                 ? t('Excluded roles')
-                : t('Roles')}{' '}
+                : t('Roles')}{' '} */}
+                 {currentRule.filter_type === FilterType.Base
+                ? t('排除的角色')
+                : t('角色')}{' '}
               <InfoTooltip
+                // tooltip={t(
+                //   'For regular filters, these are the roles this filter will be applied to. For base filters, these are the roles that the filter DOES NOT apply to, e.g. Admin if admin should see all data.',
+                // )}
                 tooltip={t(
-                  'For regular filters, these are the roles this filter will be applied to. For base filters, these are the roles that the filter DOES NOT apply to, e.g. Admin if admin should see all data.',
+                  '对于常规过滤器，这些是将应用此过滤器的角色。对于基础过滤器，这些是过滤器不会应用到的角色，例如，如果管理员应该看到所有数据，则为 Admin。',
                 )}
               />
             </div>
             <div className="input-container">
               <AsyncSelect
-                ariaLabel={t('Roles')}
+                // ariaLabel={t('Roles')}
+                ariaLabel={t('角色')}
                 mode="multiple"
                 onChange={onRolesChange}
                 value={(currentRule?.roles as SelectValue[]) || []}
@@ -444,10 +469,14 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
                   onTextChange(target),
               }}
               css={noMargins}
-              label={t('Group Key')}
+              // label={t('Group Key')}
+              label={t('组键')}
               hasTooltip
+              // tooltipText={t(
+              //   `Filters with the same group key will be ORed together within the group, while different filter groups will be ANDed together. Undefined group keys are treated as unique groups, i.e. are not grouped together. For example, if a table has three filters, of which two are for departments Finance and Marketing (group key = 'department'), and one refers to the region Europe (group key = 'region'), the filter clause would apply the filter (department = 'Finance' OR department = 'Marketing') AND (region = 'Europe').`,
+              // )}
               tooltipText={t(
-                `Filters with the same group key will be ORed together within the group, while different filter groups will be ANDed together. Undefined group keys are treated as unique groups, i.e. are not grouped together. For example, if a table has three filters, of which two are for departments Finance and Marketing (group key = 'department'), and one refers to the region Europe (group key = 'region'), the filter clause would apply the filter (department = 'Finance' OR department = 'Marketing') AND (region = 'Europe').`,
+                `具有相同组键的过滤器将在组内以 OR 方式组合，而不同的过滤器组将以 AND 方式组合。未定义的组键被视为唯一的组，即不会被组合在一起。例如，如果一个表有三个过滤器，其中两个是针对部门 Finance 和 Marketing（组键 = 'department'），一个是指地区 Europe（组键 = 'region'），那么过滤器条件将应用过滤器 (department = 'Finance' OR department = 'Marketing') AND (region = 'Europe')。`,
               )}
               data-test="group-key-test"
             />
@@ -464,17 +493,22 @@ function RowLevelSecurityModal(props: RowLevelSecurityModalProps) {
                     onTextChange(target),
                 }}
                 css={noMargins}
-                label={t('Clause')}
+                // label={t('Clause')}
+                label={t('条款')}
                 hasTooltip
+                // tooltipText={t(
+                //   'This is the condition that will be added to the WHERE clause. For example, to only return rows for a particular client, you might define a regular filter with the clause `client_id = 9`. To display no rows unless a user belongs to a RLS filter role, a base filter can be created with the clause `1 = 0` (always false).',
+                // )}
                 tooltipText={t(
-                  'This is the condition that will be added to the WHERE clause. For example, to only return rows for a particular client, you might define a regular filter with the clause `client_id = 9`. To display no rows unless a user belongs to a RLS filter role, a base filter can be created with the clause `1 = 0` (always false).',
+                  '这是将被添加到 WHERE 子句中的条件。例如，要仅返回特定客户的数据行，可以定义一个常规过滤器，其子句为 `client_id = 9`。除非用户属于 RLS 过滤器角色，否则不显示任何行，这时可以创建一个基础过滤器，其子句为 `1 = 0`（始终为假）。',
                 )}
                 data-test="clause-test"
               />
             </div>
           </StyledInputContainer>
           <StyledInputContainer>
-            <div className="control-label">{t('Description')}</div>
+            {/* <div className="control-label">{t('Description')}</div> */}
+            <div className="control-label">{t('描述')}</div>
             <div className="input-container">
               <StyledTextArea
                 rows={4}

@@ -99,7 +99,8 @@ function RowLevelSecurityList(props: RLSProps) {
         addSuccessToast('已删除 %s', name);
       },
       createErrorHandler(errMsg =>
-        addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),
+        // addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),
+        addDangerToast(t('删除时出现了一个问题 %s: %s', name, errMsg)),
       ),
     );
   }
@@ -110,10 +111,12 @@ function RowLevelSecurityList(props: RLSProps) {
     }).then(
       () => {
         refreshData();
-        addSuccessToast(t(`Deleted`));
+        // addSuccessToast(t(`Deleted`));
+        addSuccessToast(t(`已删除`));
       },
       createErrorHandler(errMsg =>
-        addDangerToast(t('There was an issue deleting rules: %s', errMsg)),
+        // addDangerToast(t('There was an issue deleting rules: %s', errMsg)),
+        addDangerToast(t('删除规则时出现了一个问题: %s', errMsg)),
       ),
     );
   }
@@ -132,21 +135,25 @@ function RowLevelSecurityList(props: RLSProps) {
     () => [
       {
         accessor: 'name',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
       },
       {
         accessor: 'filter_type',
-        Header: t('Filter Type'),
+        // Header: t('Filter Type'),
+        Header: t('过滤类型'),
         size: 'xl',
       },
       {
         accessor: 'group_key',
-        Header: t('Group Key'),
+        // Header: t('Group Key'),
+        Header: t('组键'),
         size: 'xl',
       },
       {
         accessor: 'clause',
-        Header: t('Clause'),
+        // Header: t('Clause'),
+        Header: t('条款'),
       },
       {
         Cell: ({
@@ -157,7 +164,8 @@ function RowLevelSecurityList(props: RLSProps) {
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改于'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
       },
@@ -175,10 +183,12 @@ function RowLevelSecurityList(props: RLSProps) {
             <Actions className="actions">
               {canWrite && (
                 <ConfirmStatusChange
-                  title={t('Please confirm')}
+                  // title={t('Please confirm')}
+                  title={t('请确认')}
                   description={
                     <>
-                      {t('Are you sure you want to delete')}{' '}
+                      {/* {t('Are you sure you want to delete')}{' '} */}
+                      {t('您确定要删除吗？')}{' '}
                       <b>{original.name}</b>
                     </>
                   }
@@ -187,7 +197,8 @@ function RowLevelSecurityList(props: RLSProps) {
                   {confirmDelete => (
                     <Tooltip
                       id="delete-action-tooltip"
-                      title={t('Delete')}
+                      // title={t('Delete')}
+                      title={t('删除')}
                       placement="bottom"
                     >
                       <span
@@ -208,7 +219,8 @@ function RowLevelSecurityList(props: RLSProps) {
               {canEdit && (
                 <Tooltip
                   id="edit-action-tooltip"
-                  title={t('Edit')}
+                  // title={t('Edit')}
+                  title={t('修改')}
                   placement="bottom"
                 >
                   <span
@@ -224,7 +236,8 @@ function RowLevelSecurityList(props: RLSProps) {
             </Actions>
           );
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         hidden: !canEdit && !canWrite && !canExport,
         disableSortBy: true,
@@ -247,7 +260,8 @@ function RowLevelSecurityList(props: RLSProps) {
   );
 
   const emptyState = {
-    title: t('No Rules yet'),
+    // title: t('No Rules yet'),
+    title: t('暂无规则'),
     image: 'filter-results.svg',
     buttonAction: () => handleRuleEdit(null),
     buttonText: canEdit ? (
@@ -261,7 +275,8 @@ function RowLevelSecurityList(props: RLSProps) {
           `}
           data-test="add-rule-empty"
         />
-        {t('Rule')}
+        {/* {t('Rule')} */}
+        {t('规则')}
       </>
     ) : null,
   };
@@ -269,44 +284,56 @@ function RowLevelSecurityList(props: RLSProps) {
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'search',
         id: 'name',
         input: 'search',
         operator: FilterOperator.StartsWith,
       },
       {
-        Header: t('Filter Type'),
+        // Header: t('Filter Type'),
+        Header: t('过滤类型'),
         key: 'filter_type',
         id: 'filter_type',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('Any'),
+        // unfilteredLabel: t('Any'),
+        unfilteredLabel: t('任何'),
         selects: [
-          { label: t('Regular'), value: 'Regular' },
-          { label: t('Base'), value: 'Base' },
+          // { label: t('Regular'), value: 'Regular' },
+          // { label: t('Base'), value: 'Base' },
+          { label: t('常规'), value: 'Regular' },
+          { label: t('基础'), value: 'Base' },
         ],
       },
       {
-        Header: t('Group Key'),
+        // Header: t('Group Key'),
+        Header: t('组键'),
         key: 'search',
         id: 'group_key',
         input: 'search',
         operator: FilterOperator.StartsWith,
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: t('修改于'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'rowlevelsecurity',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
             ),
           ),
@@ -336,14 +363,16 @@ function RowLevelSecurityList(props: RLSProps) {
             `}
             data-test="add-rule"
           />
-          {t('Rule')}
+          {/* {t('Rule')} */}
+          {t('规则')}
         </>
       ),
       buttonStyle: 'primary',
       onClick: () => handleRuleEdit(null),
     });
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       buttonStyle: 'secondary',
       'data-test': 'bulk-select',
       onClick: toggleBulkSelect,
@@ -352,10 +381,13 @@ function RowLevelSecurityList(props: RLSProps) {
 
   return (
     <>
-      <SubMenu name={t('Row Level Security')} buttons={subMenuButtons} />
+      {/* <SubMenu name={t('Row Level Security')} buttons={subMenuButtons} /> */}
+      <SubMenu name={t('行级安全')} buttons={subMenuButtons} />
       <ConfirmStatusChange
-        title={t('Please confirm')}
-        description={t('Are you sure you want to delete the selected rules?')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t('Are you sure you want to delete the selected rules?')}
+        description={t('您确定要删除已选规则吗？')}
         onConfirm={handleBulkRulesDelete}
       >
         {confirmDelete => {
@@ -363,7 +395,8 @@ function RowLevelSecurityList(props: RLSProps) {
           if (canWrite) {
             bulkActions.push({
               key: 'delete',
-              name: t('Delete'),
+              // name: t('Delete'),
+              name: t('删除'),
               type: 'danger',
               onSelect: confirmDelete,
             });

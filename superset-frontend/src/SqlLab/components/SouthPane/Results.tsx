@@ -68,7 +68,8 @@ const Results: FC<Props> = ({
     return (
       <StyledEmptyStateWrapper>
         <EmptyState
-          title={t('Run a query to display results')}
+          // title={t('Run a query to display results')}
+          title={t('运行查询以显示结果')}
           image="document.svg"
         />
       </StyledEmptyStateWrapper>
@@ -84,7 +85,8 @@ const Results: FC<Props> = ({
     return (
       <Alert
         type="warning"
-        message={t('No stored results found, you need to re-run your query')}
+        // message={t('No stored results found, you need to re-run your query')}
+        message={t('未找到存储的结果，您需要重新运行查询')}
       />
     );
   }

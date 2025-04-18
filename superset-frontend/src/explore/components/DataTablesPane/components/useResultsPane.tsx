@@ -88,7 +88,8 @@ export const useResultsPane = ({
         })
         .catch(response => {
           getClientErrorObject(response).then(({ error, message }) => {
-            setResponseError(error || message || t('Sorry, an error occurred'));
+            // setResponseError(error || message || t('Sorry, an error occurred'));
+            setResponseError(error || message || t('抱歉，发生错误'));
           });
         })
         .finally(() => {
@@ -108,7 +109,8 @@ export const useResultsPane = ({
   }
 
   if (errorMessage) {
-    const title = t('Run a query to display results');
+    // const title = t('Run a query to display results');
+    const title = t('运行查询以显示结果');
     return Array(queryCount).fill(
       <EmptyState image="document.svg" title={title} />,
     );
@@ -134,7 +136,8 @@ export const useResultsPane = ({
   }
 
   if (resultResp.length === 0) {
-    const title = t('No results were returned for this query');
+    // const title = t('No results were returned for this query');
+    const title = t('本次查询未返回任何结果');
     return Array(queryCount).fill(
       <EmptyState image="document.svg" title={title} />,
     );

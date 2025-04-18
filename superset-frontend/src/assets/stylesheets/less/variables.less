@@ -24,7 +24,8 @@
 /* component styles. This will allow us to more easily adjust theming   */
 /************************************************************************/
 
-@primary-color: #20a7c9;
+// @primary-color: #20a7c9;
+@primary-color: #050f2c;
 @indicator-color: @primary-color;
 
 @brand-primary-dark1: #1a85a0;
@@ -172,14 +173,12 @@
 .set-otf-options(@use-ligatures);
 
 .set-otf-options(true) {
-  @font-feature-settings:
-    'liga' on,
+  @font-feature-settings: 'liga' on,
     'calt' on;
 }
 
 .set-otf-options(false) {
-  @font-feature-settings:
-    'liga' off,
+  @font-feature-settings: 'liga' off,
     'calt' off;
 }
 

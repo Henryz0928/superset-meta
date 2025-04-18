@@ -23,13 +23,15 @@ export const commonMenuData = {
   tabs: [
     {
       name: 'Saved queries',
-      label: t('Saved queries'),
+      // label: t('Saved queries'),
+      label: t('保存的查询'),
       url: '/savedqueryview/list/',
       usesRouter: true,
     },
     {
       name: 'Query history',
-      label: t('Query history'),
+      // label: t('Query history'),
+      label: t('查询历史'),
       url: '/sqllab/history/',
       usesRouter: true,
     },

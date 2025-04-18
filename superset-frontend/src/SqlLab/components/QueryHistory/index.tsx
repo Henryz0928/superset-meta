@@ -144,7 +144,8 @@ const QueryHistory = ({
   ) : (
     <StyledEmptyStateWrapper>
       <EmptyState
-        title={t('Run a query to display query history')}
+        // title={t('Run a query to display query history')}
+        title={t('运行查询以显示查询历史')}
         size="medium"
         image="document.svg"
       />

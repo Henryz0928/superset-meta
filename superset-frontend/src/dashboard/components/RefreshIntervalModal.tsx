@@ -95,7 +95,8 @@ class RefreshIntervalModal extends PureComponent<
   onSave() {
     this.props.onChange(this.state.refreshFrequency, this.props.editMode);
     this.modalRef?.current?.close();
-    this.props.addSuccessToast(t('Refresh interval saved'));
+    // this.props.addSuccessToast(t('Refresh interval saved'));
+    this.props.addSuccessToast(t('刷新间隔已保存'));
   }
 
   onCancel() {
@@ -127,13 +128,15 @@ class RefreshIntervalModal extends PureComponent<
   onSaveValue(value: number) {
     this.props.onChange(value, this.props.editMode);
     this.modalRef?.current?.close();
-    this.props.addSuccessToast(t('Refresh interval saved'));
+    // this.props.addSuccessToast(t('Refresh interval saved'));
+    this.props.addSuccessToast(t('刷新间隔已保存'));
   }
 
   createIntervalOptions(refreshIntervalOptions: [number, string][]) {
     const refresh_options = [];
 
-    refresh_options.push({ value: -1, label: t('Custom interval') });
+    // refresh_options.push({ value: -1, label: t('Custom interval') });
+    refresh_options.push({ value: -1, label: t('自定义间隔') });
     refresh_options.push(
       ...refreshIntervalOptions.map(option => ({
         value: option[0],
@@ -175,15 +178,19 @@ class RefreshIntervalModal extends PureComponent<
         second_value >= 60
       ) {
         this.props.addSuccessToast(
+          // t(
+          //   'Put positive values and valid minute and second value less than 60',
+          // ),
           t(
-            'Put positive values and valid minute and second value less than 60',
+            '输入一个正数，并确保分钟和秒数都小于 60',
           ),
         );
       }
       // Convert given input to seconds
       const value = hour_value * 60 * 60 + minute_value * 60 + second_value;
       if (value === 0) {
-        this.props.addSuccessToast(t('Put some positive value greater than 0'));
+        // this.props.addSuccessToast(t('Put some positive value greater than 0'));
+        this.props.addSuccessToast(t('输入一个大于 0 的正数'));
         return;
       }
       this.handleFrequencyChange(value);
@@ -212,15 +219,18 @@ class RefreshIntervalModal extends PureComponent<
       <StyledModalTrigger
         ref={this.modalRef}
         triggerNode={this.props.triggerNode}
-        modalTitle={t('Refresh interval')}
+        // modalTitle={t('Refresh interval')}
+        modalTitle={t('刷新间隔')}
         modalBody={
           <div>
             <div id="refresh_from_dropdown">
               <FormLabel>
-                <b>{t('Refresh frequency')}</b>
+                {/* <b>{t('Refresh frequency')}</b> */}
+                <b>{t('刷新频率')}</b>
               </FormLabel>
               <Select
-                ariaLabel={t('Refresh interval')}
+                // ariaLabel={t('Refresh interval')}
+                ariaLabel={t('刷新间隔')}
                 options={this.createIntervalOptions(refreshIntervalOptions)}
                 value={refreshFrequency}
                 onChange={this.handleFrequencyChange}
@@ -231,14 +241,16 @@ class RefreshIntervalModal extends PureComponent<
               <StyledDiv>
                 <InnerStyledDiv>
                   <FormLabel>
-                    <b>{t('HOUR')}</b>
+                    {/* <b>{t('HOUR')}</b> */}
+                    <b>{t('小时')}</b>
                   </FormLabel>{' '}
                   <br />
                   <Input
                     type="number"
                     min="0"
                     className="form-control input-sm"
-                    placeholder={t('Type a number')}
+                    // placeholder={t('Type a number')}
+                    placeholder={t('输入一个数字')}
                     onChange={event => {
                       this.setState({
                         custom_hour: Number(event.target.value),
@@ -249,11 +261,13 @@ class RefreshIntervalModal extends PureComponent<
                 </InnerStyledDiv>
                 <InnerStyledDiv>
                   <FormLabel>
-                    <b>{t('MINUTE')}</b>
+                    {/* <b>{t('MINUTE')}</b> */}
+                    <b>{t('分钟')}</b>
                   </FormLabel>{' '}
                   <br />
                   <Select
-                    ariaLabel={t('Minutes value')}
+                    // ariaLabel={t('Minutes value')}
+                    ariaLabel={t('分钟值')}
                     options={this.min_sec_options('minutes')}
                     value={custom_min}
                     onChange={(value: number) => {
@@ -266,11 +280,13 @@ class RefreshIntervalModal extends PureComponent<
                 </InnerStyledDiv>
                 <InnerStyledDiv>
                   <FormLabel>
-                    <b>{t('SECOND')}</b>
+                    {/* <b>{t('SECOND')}</b> */}
+                    <b>{t('秒')}</b>
                   </FormLabel>{' '}
                   <br />
                   <Select
-                    ariaLabel={t('Seconds value')}
+                    // ariaLabel={t('Seconds value')}
+                    ariaLabel={t('秒值')}
                     options={this.min_sec_options('seconds')}
                     value={custom_sec}
                     onChange={(value: number) => {
@@ -291,7 +307,8 @@ class RefreshIntervalModal extends PureComponent<
                     <>
                       <div>{refreshWarning}</div>
                       <br />
-                      <strong>{t('Are you sure you want to proceed?')}</strong>
+                      {/* <strong>{t('Are you sure you want to proceed?')}</strong> */}
+                      <strong>{t('您确定要继续吗？')}</strong>
                     </>
                   }
                 />
@@ -302,7 +319,8 @@ class RefreshIntervalModal extends PureComponent<
         modalFooter={
           <>
             <Button onClick={this.onCancel} buttonSize="small">
-              {t('Cancel')}
+              {/* {t('Cancel')} */}
+              {t('取消')}
             </Button>
             <Button
               buttonStyle="primary"
@@ -316,7 +334,8 @@ class RefreshIntervalModal extends PureComponent<
                 )
               }
             >
-              {editMode ? t('Save') : t('Save for this session')}
+              {/* {editMode ? t('Save') : t('Save for this session')} */}
+              {editMode ? t('保存') : t('保存会话')}
             </Button>
           </>
         }
