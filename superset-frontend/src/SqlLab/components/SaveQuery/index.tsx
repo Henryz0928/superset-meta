@@ -98,7 +98,8 @@ const SaveQuery = ({
     [queryEditor, columns],
   );
   const logAction = useLogAction({ queryEditorId });
-  const defaultLabel = query.name || query.description || t('Undefined');
+  // const defaultLabel = query.name || query.description || t('Undefined');
+  const defaultLabel = query.name || query.description || t('未定义');
   const [description, setDescription] = useState<string>(
     query.description || '',
   );
@@ -118,7 +119,8 @@ const SaveQuery = ({
           setShowSaveDatasetModal(true);
         }}
       >
-        {t('Save dataset')}
+        {/* {t('Save dataset')} */}
+        {t('保存数据集')}
       </Menu.Item>
     </Menu>
   );
@@ -163,7 +165,8 @@ const SaveQuery = ({
     <Form layout="vertical">
       <Row>
         <Col xs={24}>
-          <FormItem label={t('Name')}>
+          {/* <FormItem label={t('Name')}> */}
+          <FormItem label={t('名称')}>
             <Input type="text" value={label} onChange={onLabelChange} />
           </FormItem>
         </Col>
@@ -171,7 +174,8 @@ const SaveQuery = ({
       <br />
       <Row>
         <Col xs={24}>
-          <FormItem label={t('Description')}>
+          {/* <FormItem label={t('Description')}> */}
+          <FormItem label={t('描述')}>
             <TextArea
               rows={4}
               value={description}
@@ -207,22 +211,27 @@ const SaveQuery = ({
       <SaveDatasetModal
         visible={showSaveDatasetModal}
         onHide={() => setShowSaveDatasetModal(false)}
-        buttonTextOnSave={t('Save & Explore')}
-        buttonTextOnOverwrite={t('Overwrite & Explore')}
+        // buttonTextOnSave={t('Save & Explore')}
+        // buttonTextOnOverwrite={t('Overwrite & Explore')}
+        buttonTextOnSave={t('保存并浏览')}
+        buttonTextOnOverwrite={t('覆盖并浏览')}
         datasource={getDatasourceAsSaveableDataset(query)}
       />
       <Modal
         className="save-query-modal"
         onHandledPrimaryAction={onSaveWrapper}
         onHide={close}
-        primaryButtonName={isSaved ? t('Save') : t('Save as')}
+        // primaryButtonName={isSaved ? t('Save') : t('Save as')}
+        primaryButtonName={isSaved ? t('保存') : t('保存为')}
         width="620px"
         show={showSave}
-        title={<h4>{t('Save query')}</h4>}
+        // title={<h4>{t('Save query')}</h4>}
+        title={<h4>{t('保存查询')}</h4>}
         footer={
           <>
             <Button onClick={close} data-test="cancel-query" cta>
-              {t('Cancel')}
+              {/* {t('Cancel')} */}
+              {t('取消')}
             </Button>
             <Button
               buttonStyle={isSaved ? undefined : 'primary'}
@@ -230,7 +239,8 @@ const SaveQuery = ({
               className="m-r-3"
               cta
             >
-              {isSaved ? t('Save as new') : t('Save')}
+              {/* {isSaved ? t('Save as new') : t('Save')} */}
+              {isSaved ? t('保存为新文件') : t('保存')}
             </Button>
             {isSaved && (
               <Button
@@ -239,7 +249,8 @@ const SaveQuery = ({
                 className="m-r-3"
                 cta
               >
-                {t('Update')}
+                {/* {t('Update')} */}
+                {t('修改')}
               </Button>
             )}
           </>

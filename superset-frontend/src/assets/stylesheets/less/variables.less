@@ -18,23 +18,39 @@
  */
 
 /************************************************************************/
-/* COLORS                                                               */
-/* Please attempt to use and standardize on these colors,               */
-/* rather than including specific color values in                       */
-/* component styles. This will allow us to more easily adjust theming   */
+/* 颜色                                                                 */
+/* 请尝试使用并标准化这些颜色,                                            */
+/* 而不是包含具体的颜色值                                                 */
+/* 组件样式。这将使我们更容易调整主题。                                    */
 /************************************************************************/
 
 // @primary-color: #20a7c9;
-@primary-color: #050f2c;
+// @primary-color: #050f2c;
+// @indicator-color: @primary-color;
+
+// @brand-primary-dark1: #1a85a0;
+// @brand-primary-dark2: #156378;
+// @brand-primary-light1: #79cade;
+// @brand-primary-light2: #a5dae9;
+// @brand-primary-light3: #d2edf4;
+// @brand-primary-light4: #e9f6f9;
+// @brand-primary-light5: #f3f8fa;
+@primary-color: #663779;
 @indicator-color: @primary-color;
 
-@brand-primary-dark1: #1a85a0;
-@brand-primary-dark2: #156378;
-@brand-primary-light1: #79cade;
-@brand-primary-light2: #a5dae9;
-@brand-primary-light3: #d2edf4;
-@brand-primary-light4: #e9f6f9;
-@brand-primary-light5: #f3f8fa;
+// 深色系（加亮一点主色）
+@brand-primary-dark1: #0a1a3f; // 比主色亮一阶，用作 hover、边框等
+@brand-primary-dark2: #13294f; // 再亮一阶，可做标题色
+
+// 中间层（视觉舒服的主调色）
+@brand-primary-light1: #2c4d73; // 中间层，用于背景块、悬浮卡片等
+@brand-primary-light2: #4d6b8c; // 更亮些，适合次要按钮或选中状态
+
+// 浅色层（柔和的背景或禁用状态）
+@brand-primary-light3: #7a96b1;
+@brand-primary-light4: #aabfd1;
+@brand-primary-light5: #dde6ee; // 非常淡的背景色，保留统一感
+
 
 @brand-secondary: #444e7c;
 @brand-secondary-dark1: #363e63;

@@ -79,8 +79,10 @@ export const CardSortSelect = ({
   return (
     <SortContainer>
       <Select
-        ariaLabel={t('Sort')}
-        header={<FormLabel>{t('Sort')}</FormLabel>}
+        // ariaLabel={t('Sort')}
+        // header={<FormLabel>{t('Sort')}</FormLabel>}
+        ariaLabel={t('排序')}
+        header={<FormLabel>{t('排序')}</FormLabel>}
         labelInValue
         onChange={handleOnChange}
         options={formattedOptions}

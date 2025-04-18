@@ -97,9 +97,9 @@ const defaultProps = {
   timeColumn: '',
   intervalEndColumn: '',
 
-  addAnnotationLayer: () => {},
-  removeAnnotationLayer: () => {},
-  close: () => {},
+  addAnnotationLayer: () => { },
+  removeAnnotationLayer: () => { },
+  close: () => { },
 };
 
 const NotFoundContentWrapper = styled.div`
@@ -112,17 +112,20 @@ const NotFoundContentWrapper = styled.div`
 const NotFoundContent = () => (
   <NotFoundContentWrapper>
     <EmptyState
-      title={t('No annotation layers')}
+      // title={t('No annotation layers')}
+      title={t('无注解层')}
       size="small"
       description={
         <span>
-          {t('Add an annotation layer')}{' '}
+          {/* {t('Add an annotation layer')}{' '} */}
+          {t('添加一个注解层')}{' '}
           <a
             href="/annotationlayer/list"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t('here')}
+            {/* {t('here')} */}
+            {t('这里')}
           </a>
           .
         </span>
@@ -572,30 +575,45 @@ class AnnotationLayer extends PureComponent {
     let description = '';
     if (requiresQuery(sourceType)) {
       if (sourceType === ANNOTATION_SOURCE_TYPES.NATIVE) {
-        label = t('Annotation layer');
-        description = t('Select the Annotation Layer you would like to use.');
+        // label = t('Annotation layer');
+        // description = t('Select the Annotation Layer you would like to use.');
+        label = t('注解层');
+        description = t('选择您想要使用的注释层。');
       } else {
-        label = t('Chart');
+        // label = t('Chart');
+        // description = t(
+        //   `Use another existing chart as a source for annotations and overlays.
+        //   Your chart must be one of these visualization types: [%s]`,
+        //   this.getSupportedSourceTypes(annotationType)
+        //     .map(x => x.label)
+        //     .join(', '),
+        // );
+        label = t('图表');
         description = t(
-          `Use another existing chart as a source for annotations and overlays.
-          Your chart must be one of these visualization types: [%s]`,
+          `使用另一个现有的图表作为注释和叠加的来源。
+         您的图表必须是这些可视化类型之一: [%s]`,
           this.getSupportedSourceTypes(annotationType)
             .map(x => x.label)
             .join(', '),
         );
       }
     } else if (annotationType === ANNOTATION_TYPES.FORMULA) {
-      label = t('Formula');
-      description = t(`Expects a formula with depending time parameter 'x'
-        in milliseconds since epoch. mathjs is used to evaluate the formulas.
-        Example: '2x+5'`);
+      // label = t('Formula');
+      // description = t(`Expects a formula with depending time parameter 'x'
+      //   in milliseconds since epoch. mathjs is used to evaluate the formulas.
+      //   Example: '2x+5'`);
+      label = t('公式');
+      description = t(`期望有一个依赖时间参数 'x' 的公式
+        该参数以自纪元以来的毫秒数表示。使用 mathjs 评估公式。
+        示例：'2x+5'`);
     }
     if (requiresQuery(sourceType)) {
       return (
         <AsyncSelect
           /* key to force re-render on sourceType change */
           key={sourceType}
-          ariaLabel={t('Annotation layer value')}
+          // ariaLabel={t('Annotation layer value')}
+          ariaLabel={t('注解层值')}
           name="annotation-layer-value"
           header={this.renderChartHeader(label, description, value)}
           options={this.fetchOptions}
@@ -616,9 +634,14 @@ class AnnotationLayer extends PureComponent {
           placeholder=""
           value={value}
           onChange={this.handleTextValue}
+          // validationErrors={
+          //   !this.isValidFormulaAnnotation(value, annotationType)
+          //     ? [t('Bad formula.')]
+          //     : []
+          // }
           validationErrors={
             !this.isValidFormulaAnnotation(value, annotationType)
-              ? [t('Bad formula.')]
+              ? [t('错误公式。')]
               : []
           }
         />
@@ -655,39 +678,55 @@ class AnnotationLayer extends PureComponent {
         <div style={{ marginRight: '2rem' }}>
           <PopoverSection
             isSelected
-            title={t('Annotation Slice Configuration')}
-            info={t(`This section allows you to configure how to use the slice
-              to generate annotations.`)}
+            // title={t('Annotation Slice Configuration')}
+            // info={t(`This section allows you to configure how to use the slice
+            //   to generate annotations.`)}
+            title={t('注释切片配置')}
+            info={t(`本部分允许您配置如何使用切片生成注释。`)}
           >
             {(annotationType === ANNOTATION_TYPES.EVENT ||
               annotationType === ANNOTATION_TYPES.INTERVAL) && (
-              <SelectControl
-                ariaLabel={t('Annotation layer time column')}
-                hovered
-                name="annotation-layer-time-column"
-                label={
-                  annotationType === ANNOTATION_TYPES.INTERVAL
-                    ? t('Interval start column')
-                    : t('Event time column')
-                }
-                description={t(
-                  'This column must contain date/time information.',
-                )}
-                validationErrors={!timeColumn ? ['Mandatory'] : []}
-                clearable={false}
-                options={timeColumnOptions}
-                value={timeColumn}
-                onChange={v => this.setState({ timeColumn: v })}
-              />
-            )}
+                <SelectControl
+                  // ariaLabel={t('Annotation layer time column')}
+                  ariaLabel={t('注解层时间列')}
+                  hovered
+                  name="annotation-layer-time-column"
+                  // label={
+                  //   annotationType === ANNOTATION_TYPES.INTERVAL
+                  //     ? t('Interval start column')
+                  //     : t('Event time column')
+                  // }
+                  // description={t(
+                  //   'This column must contain date/time information.',
+                  // )}
+                  label={
+                    annotationType === ANNOTATION_TYPES.INTERVAL
+                      ? t('间隔起始列')
+                      : t('事件时间列')
+                  }
+                  description={t(
+                    '此列必须包含日期/时间信息。',
+                  )}
+                  validationErrors={!timeColumn ? ['Mandatory'] : []}
+                  clearable={false}
+                  options={timeColumnOptions}
+                  value={timeColumn}
+                  onChange={v => this.setState({ timeColumn: v })}
+                />
+              )}
             {annotationType === ANNOTATION_TYPES.INTERVAL && (
               <SelectControl
-                ariaLabel={t('Annotation layer interval end')}
+                // ariaLabel={t('Annotation layer interval end')}
+                ariaLabel={t('注解层间隔结束')}
                 hovered
                 name="annotation-layer-intervalEnd"
-                label={t('Interval End column')}
+                // label={t('Interval End column')}
+                // description={t(
+                //   'This column must contain date/time information.',
+                // )}
+                label={t('区间结束列')}
                 description={t(
-                  'This column must contain date/time information.',
+                  '此列必须包含日期/时间信息。',
                 )}
                 validationErrors={!intervalEndColumn ? ['Mandatory'] : []}
                 options={columns}
@@ -696,23 +735,32 @@ class AnnotationLayer extends PureComponent {
               />
             )}
             <SelectControl
-              ariaLabel={t('Annotation layer title column')}
+              // ariaLabel={t('Annotation layer title column')}
+              ariaLabel={t('注解层标题列')}
               hovered
               name="annotation-layer-title"
-              label={t('Title Column')}
-              description={t('Pick a title for you annotation.')}
-              options={[{ value: '', label: t('None') }].concat(columns)}
+              // label={t('Title Column')}
+              // description={t('Pick a title for you annotation.')}
+              // options={[{ value: '', label: t('None') }].concat(columns)}
+              label={t('标题列')}
+              description={t('为你的注解选择一个标题。')}
+              options={[{ value: '', label: t('无') }].concat(columns)}
               value={titleColumn}
               onChange={value => this.setState({ titleColumn: value })}
             />
             {annotationType !== ANNOTATION_TYPES.TIME_SERIES && (
               <SelectControl
-                ariaLabel={t('Annotation layer description columns')}
+                // ariaLabel={t('Annotation layer description columns')}
+                ariaLabel={t('注解层描述列')}
                 hovered
                 name="annotation-layer-title"
-                label={t('Description Columns')}
+                // label={t('Description Columns')}
+                // description={t(
+                //   "Pick one or more columns that should be shown in the annotation. If you don't select a column all of them will be shown.",
+                // )}
+                label={t('描述 列')}
                 description={t(
-                  "Pick one or more columns that should be shown in the annotation. If you don't select a column all of them will be shown.",
+                  "选择一个或多个应在注解中显示的列。如果没有选择列，所有列都将显示。",
                 )}
                 multi
                 options={columns}
@@ -724,9 +772,11 @@ class AnnotationLayer extends PureComponent {
               <CheckboxControl
                 hovered
                 name="annotation-override-time_range"
-                label={t('Override time range')}
-                description={t(`This controls whether the "time_range" field from the current
-                  view should be passed down to the chart containing the annotation data.`)}
+                // label={t('Override time range')}
+                // description={t(`This controls whether the "time_range" field from the current
+                //   view should be passed down to the chart containing the annotation data.`)}
+                label={t('覆盖时间范围')}
+                description={t(`这控制是否从当前应该将当前视图的时间粒度字段传递给包含注解数据的图表。`)}
                 value={'time_range' in overrides}
                 onChange={v => {
                   delete overrides.time_range;
@@ -742,9 +792,11 @@ class AnnotationLayer extends PureComponent {
               <CheckboxControl
                 hovered
                 name="annotation-override-timegrain"
-                label={t('Override time grain')}
-                description={t(`This controls whether the time grain field from the current
-                  view should be passed down to the chart containing the annotation data.`)}
+                // label={t('Override time grain')}
+                // description={t(`This controls whether the time grain field from the current
+                //   view should be passed down to the chart containing the annotation data.`)}
+                label={t('覆盖时间粒度')}
+                description={t(`这个控件是否应该将当前视图的时间粒度字段传递给包含注解数据的图表。应该将当前视图的时间粒度字段传递给包含注解数据的图表。`)}
                 value={'time_grain_sqla' in overrides}
                 onChange={v => {
                   delete overrides.time_grain_sqla;
@@ -765,9 +817,11 @@ class AnnotationLayer extends PureComponent {
               <TextControl
                 hovered
                 name="annotation-layer-timeshift"
-                label={t('Time Shift')}
-                description={t(`Time delta in natural language
-                  (example:  24 hours, 7 days, 56 weeks, 365 days)`)}
+                // label={t('Time Shift')}
+                // description={t(`Time delta in natural language
+                //   (example:  24 hours, 7 days, 56 weeks, 365 days)`)}
+                label={t('时间偏移')}
+                description={t(`时间差用自然语言表示(示例: 24 小时, 7 天, 56 周, 365 天)`)}
                 placeholder=""
                 value={overrides.time_shift}
                 onChange={v =>
@@ -805,31 +859,44 @@ class AnnotationLayer extends PureComponent {
     return (
       <PopoverSection
         isSelected
-        title={t('Display configuration')}
-        info={t('Configure your how you overlay is displayed here.')}
+        // title={t('Display configuration')}
+        // info={t('Configure your how you overlay is displayed here.')}
+        title={t('显示配置')}
+        info={t('配置您在此处显示的叠加方式。')}
       >
         <SelectControl
-          ariaLabel={t('Annotation layer stroke')}
-          name="annotation-layer-stroke"
-          label={t('Style')}
+          // ariaLabel={t('Annotation layer stroke')}
+          // label={t('Style')}
           // see '../../../visualizations/nvd3_vis.css'
+          // options={[
+          //   { value: 'solid', label: t('Solid') },
+          //   { value: 'dashed', label: t('Dashed') },
+          //   { value: 'longDashed', label: t('Long dashed') },
+          //   { value: 'dotted', label: t('Dotted') },
+          // ]}
+          name="annotation-layer-stroke"
+          ariaLabel={t('注解层描边')}
+          label={t('样式')}
           options={[
-            { value: 'solid', label: t('Solid') },
-            { value: 'dashed', label: t('Dashed') },
-            { value: 'longDashed', label: t('Long dashed') },
-            { value: 'dotted', label: t('Dotted') },
+            { value: 'solid', label: t('实线') },
+            { value: 'dashed', label: t('虚线') },
+            { value: 'longDashed', label: t('长虚线') },
+            { value: 'dotted', label: t('点状') },
           ]}
           value={style}
           clearable={false}
           onChange={v => this.setState({ style: v })}
         />
         <SelectControl
-          ariaLabel={t('Annotation layer opacity')}
+          // ariaLabel={t('Annotation layer opacity')}
+          ariaLabel={t('注解层透明度')}
           name="annotation-layer-opacity"
-          label={t('Opacity')}
+          // label={t('Opacity')}
+          label={t('透明度')}
           // see '../../../visualizations/nvd3_vis.css'
           options={[
-            { value: '', label: t('Solid') },
+            // { value: '', label: t('Solid') },
+            { value: '', label: t('实线') },
             { value: 'opacityLow', label: '0.2' },
             { value: 'opacityMedium', label: '0.5' },
             { value: 'opacityHigh', label: '0.8' },
@@ -838,7 +905,8 @@ class AnnotationLayer extends PureComponent {
           onChange={value => this.setState({ opacity: value })}
         />
         <div>
-          <ControlHeader label={t('Color')} />
+          {/* <ControlHeader label={t('Color')} /> */}
+          <ControlHeader label={t('颜色')} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <CompactPicker
               color={color}
@@ -851,13 +919,15 @@ class AnnotationLayer extends PureComponent {
               buttonSize="xsmall"
               onClick={() => this.setState({ color: AUTOMATIC_COLOR })}
             >
-              {t('Automatic Color')}
+              {/* {t('Automatic Color')} */}
+              {t('自动颜色')}
             </Button>
           </div>
         </div>
         <TextControl
           name="annotation-layer-stroke-width"
-          label={t('Line width')}
+          // label={t('Line width')}
+          label={t('线宽')}
           isInt
           value={width}
           onChange={v => this.setState({ width: v })}
@@ -866,8 +936,10 @@ class AnnotationLayer extends PureComponent {
           <CheckboxControl
             hovered
             name="annotation-layer-show-markers"
-            label={t('Show Markers')}
-            description={t('Shows or hides markers for the time series')}
+            // label={t('Show Markers')}
+            // description={t('Shows or hides markers for the time series')}
+            label={t('显示标记')}
+            description={t('显示或隐藏时间序列标记')}
             value={showMarkers}
             onChange={v => this.setState({ showMarkers: v })}
           />
@@ -876,8 +948,10 @@ class AnnotationLayer extends PureComponent {
           <CheckboxControl
             hovered
             name="annotation-layer-hide-line"
-            label={t('Hide Line')}
-            description={t('Hides the Line for the time series')}
+            // label={t('Hide Line')}
+            // description={t('Hides the Line for the time series')}
+            label={t('隐藏线条')}
+            description={t('隐藏时间序列的线条')}
             value={hideLine}
             onChange={v => this.setState({ hideLine: v })}
           />
@@ -893,8 +967,8 @@ class AnnotationLayer extends PureComponent {
     const metadata = getChartMetadataRegistry().get(this.props.vizType);
     const supportedAnnotationTypes = metadata
       ? metadata.supportedAnnotationTypes.map(
-          type => ANNOTATION_TYPES_METADATA[type],
-        )
+        type => ANNOTATION_TYPES_METADATA[type],
+      )
       : [];
     const supportedSourceTypes = this.getSupportedSourceTypes(annotationType);
 
@@ -909,36 +983,46 @@ class AnnotationLayer extends PureComponent {
           <div style={{ marginRight: '2rem' }}>
             <PopoverSection
               isSelected
-              title={t('Layer configuration')}
-              info={t('Configure the basics of your Annotation Layer.')}
+              // title={t('Layer configuration')}
+              // info={t('Configure the basics of your Annotation Layer.')}
+              title={t('层配置')}
+              info={t('配置注释层的基本设置。')}
             >
               <TextControl
                 name="annotation-layer-name"
-                label={t('Name')}
+                // label={t('Name')}
+                label={t('名称')}
                 placeholder=""
                 value={name}
                 onChange={v => this.setState({ name: v })}
-                validationErrors={!name ? [t('Mandatory')] : []}
+                // validationErrors={!name ? [t('Mandatory')] : []}
+                validationErrors={!name ? [t('强制的')] : []}
               />
               <CheckboxControl
                 name="annotation-layer-hide"
-                label={t('Hide layer')}
+                // label={t('Hide layer')}
+                label={t('隐藏层')}
                 value={!show}
                 onChange={v => this.setState({ show: !v })}
               />
               <CheckboxControl
                 name="annotation-label-show"
-                label={t('Show label')}
+                // label={t('Show label')}
+                label={t('显示标签')}
                 value={showLabel}
                 hovered
-                description={t('Whether to always show the annotation label')}
+                // description={t('Whether to always show the annotation label')}
+                description={t('是否始终显示注解标签')}
                 onChange={v => this.setState({ showLabel: v })}
               />
               <SelectControl
-                ariaLabel={t('Annotation layer type')}
+                // ariaLabel={t('Annotation layer type')}
+                ariaLabel={t('注解层类型')}
                 hovered
-                description={t('Choose the annotation layer type')}
-                label={t('Annotation layer type')}
+                // description={t('Choose the annotation layer type')}
+                // label={t('Annotation layer type')}
+                description={t('选择注解图层类型')}
+                label={t('注解层类型')}
                 name="annotation-layer-type"
                 clearable={false}
                 options={supportedAnnotationTypes}
@@ -947,16 +1031,20 @@ class AnnotationLayer extends PureComponent {
               />
               {supportedSourceTypes.length > 0 && (
                 <SelectControl
-                  ariaLabel={t('Annotation source type')}
+                  // ariaLabel={t('Annotation source type')}
+                  ariaLabel={t('注释来源类型')}
                   hovered
-                  description={t('Choose the source of your annotations')}
-                  label={t('Annotation source')}
+                  // description={t('Choose the source of your annotations')}
+                  // label={t('Annotation source')}
+                  description={t('选择注释的来源')}
+                  label={t('注释来源')}
                   name="annotation-source-type"
                   options={supportedSourceTypes}
                   notFoundContent={<NotFoundContent />}
                   value={sourceType}
                   onChange={this.handleAnnotationSourceType}
-                  validationErrors={!sourceType ? [t('Mandatory')] : []}
+                  // validationErrors={!sourceType ? [t('Mandatory')] : []}
+                  validationErrors={!sourceType ? [t('强制的')] : []}
                 />
               )}
               {this.renderValueConfiguration()}
@@ -968,11 +1056,13 @@ class AnnotationLayer extends PureComponent {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {isNew ? (
             <Button buttonSize="small" onClick={() => this.props.close()}>
-              {t('Cancel')}
+              {/* {t('Cancel')} */}
+              {t('取消')}
             </Button>
           ) : (
             <Button buttonSize="small" onClick={this.deleteAnnotation}>
-              {t('Remove')}
+              {/* {t('Remove')} */}
+              {t('删除')}
             </Button>
           )}
           <div>
@@ -981,7 +1071,8 @@ class AnnotationLayer extends PureComponent {
               disabled={!isValid}
               onClick={this.applyAnnotation}
             >
-              {t('Apply')}
+              {/* {t('Apply')} */}
+              {t('应用')}
             </Button>
 
             <Button
@@ -990,7 +1081,8 @@ class AnnotationLayer extends PureComponent {
               disabled={!isValid}
               onClick={this.submitAnnotation}
             >
-              {t('OK')}
+              {/* {t('OK')} */}
+              {t('确定')}
             </Button>
           </div>
         </div>

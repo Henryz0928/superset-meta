@@ -59,7 +59,8 @@ const Footer: FC<FooterProps> = ({
         data-test="native-filter-modal-cancel-button"
         onClick={onCancel}
       >
-        {t('Cancel')}
+        {/* {t('Cancel')} */}
+        {t('取消')}
       </Button>
       <Button
         disabled={!canSave}
@@ -68,7 +69,8 @@ const Footer: FC<FooterProps> = ({
         onClick={handleSave}
         data-test="native-filter-modal-save-button"
       >
-        {t('Save')}
+        {/* {t('Save')} */}
+        {t('保存')}
       </Button>
     </>
   );

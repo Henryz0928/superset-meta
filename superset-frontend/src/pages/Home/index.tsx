@@ -204,7 +204,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
       return ['所有', []];
     }
     return [
-      t('Examples'),
+      // t('Examples'),
+      t('示例'),
       [
         {
           col: 'created_by',

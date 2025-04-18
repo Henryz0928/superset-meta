@@ -606,7 +606,8 @@ const PropertiesModal = ({
             data-test="properties-modal-cancel-button"
             cta
           >
-            {t('Cancel')}
+            {/* {t('Cancel')} */}
+            {t('取消')}
           </Button>
           <Button
             data-test="properties-modal-apply-button"

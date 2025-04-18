@@ -210,24 +210,43 @@ const StyledVirtualTable = styled(VirtualTable)(
 `,
 );
 
+// const defaultLocale = {
+//   filterTitle: t('Filter menu'),
+//   filterConfirm: t('OK'),
+//   filterReset: t('Reset'),
+//   filterEmptyText: t('No filters'),
+//   filterCheckall: t('Select all items'),
+//   filterSearchPlaceholder: t('Search in filters'),
+//   emptyText: t('No data'),
+//   selectAll: t('Select current page'),
+//   selectInvert: t('Invert current page'),
+//   selectNone: t('Clear all data'),
+//   selectionAll: t('Select all data'),
+//   sortTitle: t('Sort'),
+//   expand: t('Expand row'),
+//   collapse: t('Collapse row'),
+//   triggerDesc: t('Click to sort descending'),
+//   triggerAsc: t('Click to sort ascending'),
+//   cancelSort: t('Click to cancel sorting'),
+// };
 const defaultLocale = {
-  filterTitle: t('Filter menu'),
-  filterConfirm: t('OK'),
-  filterReset: t('Reset'),
-  filterEmptyText: t('No filters'),
-  filterCheckall: t('Select all items'),
-  filterSearchPlaceholder: t('Search in filters'),
-  emptyText: t('No data'),
-  selectAll: t('Select current page'),
-  selectInvert: t('Invert current page'),
-  selectNone: t('Clear all data'),
-  selectionAll: t('Select all data'),
-  sortTitle: t('Sort'),
-  expand: t('Expand row'),
-  collapse: t('Collapse row'),
-  triggerDesc: t('Click to sort descending'),
-  triggerAsc: t('Click to sort ascending'),
-  cancelSort: t('Click to cancel sorting'),
+  filterTitle: t('过滤菜单'),
+  filterConfirm: t('确定'),
+  filterReset: t('重置'),
+  filterEmptyText: t('无过滤'),
+  filterCheckall: t('全选所有项'),
+  filterSearchPlaceholder: t('在筛选器中搜索'),
+  emptyText: t('无数据'),
+  selectAll: t('选择当前页面'),
+  selectInvert: t('反转当前页面'),
+  selectNone: t('清除所有数据'),
+  selectionAll: t('全选所有数据'),
+  sortTitle: t('排序'),
+  expand: t('展开行'),
+  collapse: t('折叠行'),
+  triggerDesc: t('单击以降序排序'),
+  triggerAsc: t('单击以升序排序'),
+  cancelSort: t('单击以取消排序'),
 };
 
 const selectionMap = {
@@ -290,13 +309,19 @@ export function Table<RecordType extends object>(
   // Log use of experimental features
   useEffect(() => {
     if (reorderable === true) {
+      // logging.warn(
+      //   'EXPERIMENTAL FEATURE ENABLED: The "reorderable" prop of Table is experimental and NOT recommended for use in production deployments.',
+      // );
       logging.warn(
-        'EXPERIMENTAL FEATURE ENABLED: The "reorderable" prop of Table is experimental and NOT recommended for use in production deployments.',
+        '实验特性启用：表格的“可重新排序”属性是实验性的，不建议在生产部署中使用。',
       );
     }
     if (resizable === true) {
+      // logging.warn(
+      //   'EXPERIMENTAL FEATURE ENABLED: The "resizable" prop of Table is experimental and NOT recommended for use in production deployments.',
+      // );
       logging.warn(
-        'EXPERIMENTAL FEATURE ENABLED: The "resizable" prop of Table is experimental and NOT recommended for use in production deployments.',
+        '实验功能已启用：表格的“可调整大小”属性是实验性的，不建议在生产部署中使用。',
       );
     }
   }, [reorderable, resizable]);

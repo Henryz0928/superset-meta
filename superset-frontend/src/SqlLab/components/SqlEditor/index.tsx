@@ -702,13 +702,16 @@ const SqlEditor: FC<Props> = ({
     const qe = queryEditor;
     const successful = latestQuery?.state === 'success';
     const scheduleToolTip = successful
-      ? t('Schedule the query periodically')
-      : t('You must run the query successfully first');
+      // ? t('Schedule the query periodically')
+      // : t('You must run the query successfully first');
+      ? t('将查询周期性地安排执行')
+      : t('您必须先成功运行查询');
     return (
       <Menu css={{ width: theme.gridUnit * 50 }}>
         <Menu.Item css={{ display: 'flex', justifyContent: 'space-between' }}>
           {' '}
-          <span>{t('Render HTML')}</span>{' '}
+          {/* <span>{t('Render HTML')}</span>{' '} */}
+          <span>{t('渲染 HTML')}</span>{' '}
           <Switch
             checked={renderHTMLEnabled}
             onChange={handleToggleRenderHTMLEnabled}
@@ -716,7 +719,8 @@ const SqlEditor: FC<Props> = ({
         </Menu.Item>
         <Menu.Item css={{ display: 'flex', justifyContent: 'space-between' }}>
           {' '}
-          <span>{t('Autocomplete')}</span>{' '}
+          {/* <span>{t('Autocomplete')}</span>{' '} */}
+          <span>{t('自动补全')}</span>{' '}
           <Switch
             checked={autocompleteEnabled}
             onChange={handleToggleAutocompleteEnabled}
@@ -734,7 +738,8 @@ const SqlEditor: FC<Props> = ({
           </Menu.Item>
         )}
         <Menu.Item onClick={() => formatCurrentQuery()}>
-          {t('Format SQL')}
+          {/* {t('Format SQL')} */}
+          {t('格式化 SQL')}
         </Menu.Item>
         {!isEmpty(scheduledQueriesConf) && (
           <Menu.Item>
@@ -752,7 +757,8 @@ const SqlEditor: FC<Props> = ({
         )}
         <Menu.Item>
           <KeyboardShortcutButton>
-            {t('Keyboard shortcuts')}
+            {/* {t('Keyboard shortcuts')} */}
+            {t('快捷键')}
           </KeyboardShortcutButton>
         </Menu.Item>
       </Menu>
@@ -781,7 +787,8 @@ const SqlEditor: FC<Props> = ({
             }}
             key="1"
           >
-            {t('CREATE TABLE AS')}
+            {/* {t('CREATE TABLE AS')} */}
+            {t('创建表作为')}
           </Menu.Item>
         )}
         {allowCVAS && (
@@ -795,7 +802,8 @@ const SqlEditor: FC<Props> = ({
             }}
             key="2"
           >
-            {t('CREATE VIEW AS')}
+            {/* {t('CREATE VIEW AS')} */}
+            {t('创建视图为')}
           </Menu.Item>
         )}
       </Menu>
@@ -949,8 +957,10 @@ const SqlEditor: FC<Props> = ({
 
   const createModalPlaceHolder =
     createAs === CtasEnum.View
-      ? t('Specify name to CREATE VIEW AS schema in: public')
-      : t('Specify name to CREATE TABLE AS schema in: public');
+      // ? t('Specify name to CREATE VIEW AS schema in: public')
+      // : t('Specify name to CREATE TABLE AS schema in: public');
+      ? t('在 public 模式下，指定名称以创建视图：')
+      : t('在 public 模式下指定名称以创建表：');
 
   const leftBarStateClass = hideLeftBar
     ? 'schemaPane-exit-done'
@@ -992,9 +1002,13 @@ const SqlEditor: FC<Props> = ({
         <EmptyState
           image="vector.svg"
           size="large"
-          title={t('Select a database to write a query')}
+          // title={t('Select a database to write a query')}
+          title={t('选择一个数据库来编写查询')}
+          // description={t(
+          //   'Choose one of the available databases from the panel on the left.',
+          // )}
           description={t(
-            'Choose one of the available databases from the panel on the left.',
+            '从左侧面板中选择一个可用的数据库。',
           )}
         />
       ) : (
@@ -1007,7 +1021,8 @@ const SqlEditor: FC<Props> = ({
         footer={
           <>
             <Button onClick={() => setShowCreateAsModal(false)}>
-              {t('Cancel')}
+              {/* {t('Cancel')} */}
+              {t('取消')}
             </Button>
             {createAs === CtasEnum.Table && (
               <Button
@@ -1015,7 +1030,8 @@ const SqlEditor: FC<Props> = ({
                 disabled={ctas.length === 0}
                 onClick={createTableAs}
               >
-                {t('Create')}
+                {/* {t('Create')} */}
+                {t('创建')}
               </Button>
             )}
             {createAs === CtasEnum.View && (
@@ -1024,13 +1040,15 @@ const SqlEditor: FC<Props> = ({
                 disabled={ctas.length === 0}
                 onClick={createViewAs}
               >
-                {t('Create')}
+                {/* {t('Create')} */}
+                {t('创建')}
               </Button>
             )}
           </>
         }
       >
-        <span>{t('Name')}</span>
+        {/* <span>{t('Name')}</span> */}
+        <span>{t('名称')}</span>
         <Input placeholder={createModalPlaceHolder} onChange={ctasChanged} />
       </Modal>
     </StyledSqlEditor>

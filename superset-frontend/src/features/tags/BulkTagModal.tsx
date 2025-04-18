@@ -72,17 +72,24 @@ const BulkTagModal: FC<BulkTagModalProps> = ({
         const tagged = json.result.objects_tagged;
         if (skipped.length > 0) {
           addSuccessToast(
+            // t(
+            //   '%s items could not be tagged because you don’t have edit permissions to all selected objects.',
+            //   skipped.length,
+            //   resourceName,
+            // ),
             t(
-              '%s items could not be tagged because you don’t have edit permissions to all selected objects.',
+              '%s 因为您没有选中对象的所有编辑权限，无法对这些项进行标记。',
               skipped.length,
               resourceName,
             ),
           );
         }
-        addSuccessToast(t('Tagged %s %ss', tagged.length, resourceName));
+        // addSuccessToast(t('Tagged %s %ss', tagged.length, resourceName));
+        addSuccessToast(t('标记 %s %ss', tagged.length, resourceName));
       })
       .catch(err => {
-        addDangerToast(t('Failed to tag items'));
+        // addDangerToast(t('Failed to tag items'));
+        addDangerToast(t('无法标记项目'));
       });
 
     refreshData();
@@ -92,7 +99,8 @@ const BulkTagModal: FC<BulkTagModalProps> = ({
 
   return (
     <Modal
-      title={t('Bulk tag')}
+      // title={t('Bulk tag')}
+      title={t('批量标签')}
       show={show}
       onHide={() => {
         setTags([]);
@@ -105,23 +113,27 @@ const BulkTagModal: FC<BulkTagModalProps> = ({
             buttonStyle="secondary"
             onClick={onHide}
           >
-            {t('Cancel')}
+            {/* {t('Cancel')} */}
+            {t('取消')}
           </Button>
           <Button
             data-test="modal-save-dashboard-button"
             buttonStyle="primary"
             onClick={onSave}
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
         </div>
       }
     >
       <BulkTagModalContainer>
         <div className="bulk-tag-text">
-          {t('You are adding tags to %s %ss', selected.length, resourceName)}
+          {/* {t('You are adding tags to %s %ss', selected.length, resourceName)} */}
+          {t('您正在添加标签到 %s %ss', selected.length, resourceName)}
         </div>
-        <FormLabel>{t('tags')}</FormLabel>
+        {/* <FormLabel>{t('tags')}</FormLabel> */}
+        <FormLabel>{t('标签')}</FormLabel>
         <AsyncSelect
           ariaLabel="tags"
           // @ts-ignore
@@ -130,7 +142,8 @@ const BulkTagModal: FC<BulkTagModalProps> = ({
           onHide={onHide}
           // @ts-ignore
           onChange={tags => setTags(tags)}
-          placeholder={t('Select Tags')}
+          // placeholder={t('Select Tags')}
+          placeholder={t('选择标签')}
           mode="multiple"
         />
       </BulkTagModalContainer>

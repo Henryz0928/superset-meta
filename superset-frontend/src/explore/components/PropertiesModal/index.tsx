@@ -90,12 +90,15 @@ function PropertiesModal({
   }, [tags.length]);
 
   function showError({ error, statusText, message }: any) {
-    let errorText = error || statusText || t('An error has occurred');
+    // let errorText = error || statusText || t('An error has occurred');
+    let errorText = error || statusText || t('发生了错误');
     if (message === 'Forbidden') {
-      errorText = t('You do not have permission to edit this chart');
+      // errorText = t('You do not have permission to edit this chart');
+      errorText = t('您没有权限编辑此图表');
     }
     Modal.error({
-      title: t('Error'),
+      // title: t('Error'),
+      title: t('错误'),
       content: errorText,
       okButtonProps: { danger: true, className: 'btn-danger' },
     });
@@ -193,7 +196,8 @@ function PropertiesModal({
         owners: selectedOwners,
       };
       onSave(updatedChart);
-      addSuccessToast(t('Chart properties updated'));
+      // addSuccessToast(t('Chart properties updated'));
+      addSuccessToast(t('图表属性已更新'));
       onHide();
     } catch (res) {
       const clientError = await getClientErrorObject(res);
@@ -202,7 +206,8 @@ function PropertiesModal({
     setSubmitting(false);
   };
 
-  const ownersLabel = t('Owners');
+  // const ownersLabel = t('Owners');
+  const ownersLabel = t('所有者');
 
   // get the owners of this slice
   useEffect(() => {
@@ -257,7 +262,8 @@ function PropertiesModal({
             `}
             data-test="edit-alt"
           />
-          {t('Edit Chart Properties')}
+          {/* {t('Edit Chart Properties')} */}
+          {t('编辑图表属性')}
         </span>
       }
       footer={
@@ -269,7 +275,8 @@ function PropertiesModal({
             onClick={onHide}
             cta
           >
-            {t('Cancel')}
+            {/* {t('Cancel')} */}
+            {t('取消')}
           </Button>
           <Button
             data-test="properties-modal-save-button"
@@ -279,15 +286,21 @@ function PropertiesModal({
             onClick={form.submit}
             disabled={submitting || !name || slice.is_managed_externally}
             tooltip={
+              // slice.is_managed_externally
+              //   ? t(
+              //       "This chart is managed externally, and can't be edited in Superset",
+              //     )
+              //   : ''
               slice.is_managed_externally
-                ? t(
-                    "This chart is managed externally, and can't be edited in Superset",
-                  )
-                : ''
+              ? t(
+                  "这个图表由外部管理，无法在 Superset 中编辑",
+                )
+              : ''
             }
             cta
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
         </>
       }
@@ -311,10 +324,13 @@ function PropertiesModal({
       >
         <Row gutter={16}>
           <Col xs={24} md={12}>
-            <h3>{t('Basic information')}</h3>
-            <FormItem label={t('Name')} required>
+            {/* <h3>{t('Basic information')}</h3> */}
+            <h3>{t('基本信息')}</h3>
+            {/* <FormItem label={t('Name')} required> */}
+            <FormItem label={t('名称')} required>
               <Input
-                aria-label={t('Name')}
+                // aria-label={t('Name')}
+                aria-label={t('名称')}
                 name="name"
                 data-test="properties-modal-name-input"
                 type="text"
@@ -325,51 +341,70 @@ function PropertiesModal({
               />
             </FormItem>
             <FormItem>
-              <StyledFormItem label={t('Description')} name="description">
+              {/* <StyledFormItem label={t('Description')} name="description"> */}
+              <StyledFormItem label={t('描述')} name="description">
                 <TextArea rows={3} style={{ maxWidth: '100%' }} />
               </StyledFormItem>
               <StyledHelpBlock className="help-block">
-                {t(
+                {/* {t(
                   'The description can be displayed as widget headers in the dashboard view. Supports markdown.',
+                )} */}
+                {t(
+                  '描述可以在仪表盘视图中显示为小部件标题。支持 Markdown。',
                 )}
               </StyledHelpBlock>
             </FormItem>
-            <h3>{t('Certification')}</h3>
+            {/* <h3>{t('Certification')}</h3> */}
+            <h3>{t('认证')}</h3>
             <FormItem>
-              <StyledFormItem label={t('Certified by')} name="certified_by">
-                <Input aria-label={t('Certified by')} />
+              {/* <StyledFormItem label={t('Certified by')} name="certified_by"> */}
+              {/* <Input aria-label={t('Certified by')} /> */}
+              <StyledFormItem label={t('认证由')} name="certified_by">
+                <Input aria-label={t('认证由')} />
               </StyledFormItem>
               <StyledHelpBlock className="help-block">
-                {t('Person or group that has certified this chart.')}
+                {/* {t('Person or group that has certified this chart.')} */}
+                {t('认证此图表的人员或团体。')}
               </StyledHelpBlock>
             </FormItem>
             <FormItem>
               <StyledFormItem
-                label={t('Certification details')}
+                // label={t('Certification details')}
+                label={t('认证详情')}
                 name="certification_details"
               >
-                <Input aria-label={t('Certification details')} />
+                {/* <Input aria-label={t('Certification details')} /> */}
+                <Input aria-label={t('认证详情')} />
               </StyledFormItem>
               <StyledHelpBlock className="help-block">
-                {t(
+                {/* {t(
                   'Any additional detail to show in the certification tooltip.',
+                )} */}
+                 {t(
+                  '需要在认证提示框中显示的额外详细信息。',
                 )}
               </StyledHelpBlock>
             </FormItem>
           </Col>
           <Col xs={24} md={12}>
-            <h3>{t('Configuration')}</h3>
+            {/* <h3>{t('Configuration')}</h3> */}
+            <h3>{t('配置')}</h3>
             <FormItem>
-              <StyledFormItem label={t('Cache timeout')} name="cache_timeout">
+              {/* <StyledFormItem label={t('Cache timeout')} name="cache_timeout"> */}
+              <StyledFormItem label={t('缓存超时')} name="cache_timeout">
                 <Input aria-label="Cache timeout" />
               </StyledFormItem>
               <StyledHelpBlock className="help-block">
-                {t(
+                {/* {t(
                   "Duration (in seconds) of the caching timeout for this chart. Set to -1 to bypass the cache. Note this defaults to the dataset's timeout if undefined.",
+                )} */}
+                 {t(
+                  "此图表的缓存超时持续时间（以秒为单位）。设置为 -1 可跳过缓存。注意如果未定义，则默认采用数据集的超时时间。",
                 )}
               </StyledHelpBlock>
             </FormItem>
-            <h3 style={{ marginTop: '1em' }}>{t('Access')}</h3>
+            {/* <h3 style={{ marginTop: '1em' }}>{t('Access')}</h3> */}
+            <h3 style={{ marginTop: '1em' }}>{t('访问')}</h3>
             <FormItem label={ownersLabel}>
               <AsyncSelect
                 ariaLabel={ownersLabel}
@@ -382,18 +417,23 @@ function PropertiesModal({
                 allowClear
               />
               <StyledHelpBlock className="help-block">
-                {t(
+                {/* {t(
                   'A list of users who can alter the chart. Searchable by name or username.',
+                )} */}
+                {t(
+                  '可以修改图表的用户列表。可通过姓名或用户名搜索。',
                 )}
               </StyledHelpBlock>
             </FormItem>
             {isFeatureEnabled(FeatureFlag.TaggingSystem) && (
-              <h3 css={{ marginTop: '1em' }}>{t('Tags')}</h3>
+              // <h3 css={{ marginTop: '1em' }}>{t('Tags')}</h3>
+              <h3 css={{ marginTop: '1em' }}>{t('标签')}</h3>
             )}
             {isFeatureEnabled(FeatureFlag.TaggingSystem) && (
               <FormItem>
                 <AsyncSelect
-                  ariaLabel="Tags"
+                  // ariaLabel="Tags"
+                  ariaLabel="标签"
                   mode="multiple"
                   value={tagsAsSelectValues}
                   options={loadTags}
@@ -402,7 +442,8 @@ function PropertiesModal({
                   allowClear
                 />
                 <StyledHelpBlock className="help-block">
-                  {t('A list of tags that have been applied to this chart.')}
+                  {/* {t('A list of tags that have been applied to this chart.')} */}
+                  {t('已应用到此图表的标签列表。')}
                 </StyledHelpBlock>
               </FormItem>
             )}

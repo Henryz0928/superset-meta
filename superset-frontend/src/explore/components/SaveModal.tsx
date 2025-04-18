@@ -439,7 +439,8 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
   renderFooter = () => (
     <div data-test="save-modal-footer">
       <Button id="btn_cancel" buttonSize="small" onClick={this.onHide}>
-        {t('Cancel')}
+        {/* {t('Cancel')} */}
+        {t('取消')}
       </Button>
       <Button
         id="btn_modal_save_goto_dash"
@@ -452,7 +453,8 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
         }
         onClick={() => this.saveOrOverwrite(true)}
       >
-        {t('Save & go to dashboard')}
+        {/* {t('Save & go to dashboard')} */}
+        {t('保存并前往仪表板')}
       </Button>
       <Button
         id="btn_modal_save"

@@ -668,19 +668,22 @@ function DashboardList(props: DashboardListProps) {
     {
       desc: false,
       id: 'dashboard_title',
-      label: t('Alphabetical'),
+      // label: t('Alphabetical'),
+      label: t('字母顺序'),
       value: 'alphabetical',
     },
     {
       desc: true,
       id: 'changed_on_delta_humanized',
-      label: t('Recently modified'),
+      // label: t('Recently modified'),
+      label: t('最近修改'),
       value: 'recently_modified',
     },
     {
       desc: false,
       id: 'changed_on_delta_humanized',
-      label: t('Least recently modified'),
+      // label: t('Least recently modified'),
+      label: t('最近未修改'),
       value: 'least_recently_modified',
     },
   ];

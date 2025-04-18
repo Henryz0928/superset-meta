@@ -126,7 +126,8 @@ const TagModal: FC<TagModalProps> = ({
           setSavedQueriesToTag(resourceMap[TaggableResources.SavedQuery]);
         },
         (error: Response) => {
-          addDangerToast('Error Fetching Tagged Objects');
+          // addDangerToast('Error Fetching Tagged Objects');
+          addDangerToast('获取标记对象时出错');
         },
       );
       setTagName(editTag.name);
@@ -236,11 +237,13 @@ const TagModal: FC<TagModalProps> = ({
         .then(({ json = {} }) => {
           refreshData();
           clearTagForm();
-          addSuccessToast(t('Tag updated'));
+          // addSuccessToast(t('Tag updated'));
+          addSuccessToast(t('标签已更新'));
           onHide();
         })
         .catch(err => {
-          addDangerToast(err.message || 'Error Updating Tag');
+          // addDangerToast(err.message || 'Error Updating Tag');
+          addDangerToast(err.message || '更新标签时出错');
         });
     } else {
       SupersetClient.post({
@@ -254,10 +257,12 @@ const TagModal: FC<TagModalProps> = ({
         .then(({ json = {} }) => {
           refreshData();
           clearTagForm();
-          addSuccessToast(t('Tag created'));
+          // addSuccessToast(t('Tag created'));
+          addSuccessToast(t('标签创建'));
           onHide();
         })
-        .catch(err => addDangerToast(err.message || 'Error Creating Tag'));
+        // .catch(err => addDangerToast(err.message || 'Error Creating Tag'));
+        .catch(err => addDangerToast(err.message || '创建标记时出错'));
     }
   };
 
@@ -276,37 +281,44 @@ const TagModal: FC<TagModalProps> = ({
             buttonStyle="secondary"
             onClick={onHide}
           >
-            {t('Cancel')}
+            {/* {t('Cancel')} */}
+            {t('取消')}
           </Button>
           <Button
             data-test="modal-save-dashboard-button"
             buttonStyle="primary"
             onClick={onSave}
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
         </div>
       }
     >
       <StyledModalBody>
-        <FormLabel>{t('Tag name')}</FormLabel>
+        {/* <FormLabel>{t('Tag name')}</FormLabel> */}
+        <FormLabel>{t('标签名称')}</FormLabel>
         <Input
           className="tag-input"
           onChange={handleTagNameChange}
-          placeholder={t('Name of your tag')}
+          // placeholder={t('Name of your tag')}
+          placeholder={t('您的标签名称')}
           value={tagName}
         />
-        <FormLabel>{t('Description')}</FormLabel>
+        {/* <FormLabel>{t('Description')}</FormLabel> */}
+        <FormLabel>{t('描述')}</FormLabel>
         <Input
           className="tag-input"
           onChange={handleDescriptionChange}
-          placeholder={t('Add description of your tag')}
+          // placeholder={t('Add description of your tag')}
+          placeholder={t('添加您的标签描述')}
           value={description}
         />
         <Divider />
         <AsyncSelect
           className="tag-input"
-          ariaLabel={t('Select dashboards')}
+          // ariaLabel={t('Select dashboards')}
+          ariaLabel={t('选择仪表盘')}
           mode="multiple"
           name="dashboards"
           // @ts-ignore
@@ -315,24 +327,28 @@ const TagModal: FC<TagModalProps> = ({
           onChange={value =>
             handleOptionChange(TaggableResources.Dashboard, value)
           }
-          header={<FormLabel>{t('Dashboards')}</FormLabel>}
+          // header={<FormLabel>{t('Dashboards')}</FormLabel>}
+          header={<FormLabel>{t('仪表盘')}</FormLabel>}
           allowClear
         />
         <AsyncSelect
           className="tag-input"
-          ariaLabel={t('Select charts')}
+          // ariaLabel={t('Select charts')}
+          ariaLabel={t('选择图表')}
           mode="multiple"
           name="charts"
           // @ts-ignore
           value={chartsToTag}
           options={loadCharts}
           onChange={value => handleOptionChange(TaggableResources.Chart, value)}
-          header={<FormLabel>{t('Charts')}</FormLabel>}
+          // header={<FormLabel>{t('Charts')}</FormLabel>}
+          header={<FormLabel>{t('图表')}</FormLabel>}
           allowClear
         />
         <AsyncSelect
           className="tag-input"
-          ariaLabel={t('Select saved queries')}
+          // ariaLabel={t('Select saved queries')}
+          ariaLabel={t('选择已保存的查询')}
           mode="multiple"
           name="savedQueries"
           // @ts-ignore
@@ -341,7 +357,8 @@ const TagModal: FC<TagModalProps> = ({
           onChange={value =>
             handleOptionChange(TaggableResources.SavedQuery, value)
           }
-          header={<FormLabel>{t('Saved queries')}</FormLabel>}
+          // header={<FormLabel>{t('Saved queries')}</FormLabel>}
+          header={<FormLabel>{t('保存的查询')}</FormLabel>}
           allowClear
         />
       </StyledModalBody>
