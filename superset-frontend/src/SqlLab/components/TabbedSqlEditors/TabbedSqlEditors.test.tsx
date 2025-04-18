@@ -219,6 +219,7 @@ test('should have an empty state when query editors is empty', async () => {
   fireEvent.click(removeTabButton);
 
   await waitFor(() =>
-    expect(getByText('Add a new tab to create SQL Query')).toBeInTheDocument(),
-  );
+    // expect(getByText('Add a new tab to create SQL Query')).toBeInTheDocument(),
+  expect(getByText('添加一个新的标签以创建 SQL 查询')).toBeInTheDocument(),
+);
 });

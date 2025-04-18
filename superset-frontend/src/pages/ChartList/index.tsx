@@ -259,7 +259,8 @@ function ChartList(props: ChartListProps) {
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected charts: %s', errMsg),
+          // t('There was an issue deleting the selected charts: %s', errMsg),
+          t('删除选中的图表时出现了问题: %s', errMsg),
         ),
       ),
     );
@@ -293,7 +294,8 @@ function ChartList(props: ChartListProps) {
     const response: void | JsonResponse = await SupersetClient.get({
       endpoint: `/api/v1/dashboard/?q=${queryParams}`,
     }).catch(() =>
-      addDangerToast(t('An error occurred while fetching dashboards')),
+      // addDangerToast(t('An error occurred while fetching dashboards')),
+      addDangerToast(t('获取仪表盘时发生错误')),
     );
     const dashboards = response?.json?.result?.map(
       ({
@@ -361,7 +363,8 @@ function ChartList(props: ChartListProps) {
             {description && <InfoTooltip tooltip={description} />}
           </FlexRowContainer>
         ),
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         accessor: 'slice_name',
       },
       {
@@ -370,7 +373,8 @@ function ChartList(props: ChartListProps) {
             original: { viz_type: vizType },
           },
         }: any) => registry.get(vizType)?.name || vizType,
-        Header: t('Type'),
+        // Header: t('Type'),
+        Header: t('类型'),
         accessor: 'viz_type',
         size: 'xxl',
       },
@@ -387,7 +391,8 @@ function ChartList(props: ChartListProps) {
             <GenericLink to={dsUrl}>{dsNameTxt?.split('.')[1]}</GenericLink>
           </Tooltip>
         ),
-        Header: t('Dataset'),
+        // Header: t('Dataset'),
+        Header: t('数据集'),
         accessor: 'datasource_id',
         disableSortBy: true,
         size: 'xl',
@@ -398,7 +403,8 @@ function ChartList(props: ChartListProps) {
             original: { dashboards },
           },
         }: any) => <DashboardCrossLinks dashboards={dashboards} />,
-        Header: t('On dashboards'),
+        // Header: t('On dashboards'),
+        Header: t('在仪表盘上'),
         accessor: 'dashboards',
         disableSortBy: true,
         size: 'xxl',
@@ -419,7 +425,8 @@ function ChartList(props: ChartListProps) {
             maxTags={3}
           />
         ),
-        Header: t('Tags'),
+        // Header: t('Tags'),
+        Header: t('标签'),
         accessor: 'tags',
         disableSortBy: true,
         hidden: !isFeatureEnabled(FeatureFlag.TaggingSystem),
@@ -430,7 +437,8 @@ function ChartList(props: ChartListProps) {
             original: { owners = [] },
           },
         }: any) => <FacePile users={owners} />,
-        Header: t('Owners'),
+        // Header: t('Owners'),
+        Header: t('所有者'),
         accessor: 'owners',
         disableSortBy: true,
         size: 'xl',
@@ -444,7 +452,8 @@ function ChartList(props: ChartListProps) {
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改于'),
         accessor: 'last_saved_at',
         size: 'xl',
       },
@@ -467,10 +476,12 @@ function ChartList(props: ChartListProps) {
             <StyledActions className="actions">
               {canDelete && (
                 <ConfirmStatusChange
-                  title={t('Please confirm')}
+                  // title={t('Please confirm')}
+                  title={t('请确认')}
                   description={
                     <>
-                      {t('Are you sure you want to delete')}{' '}
+                      {/* {t('Are you sure you want to delete')}{' '} */}
+                      {t('您确定要删除吗？')}{' '}
                       <b>{original.slice_name}</b>?
                     </>
                   }
@@ -479,7 +490,8 @@ function ChartList(props: ChartListProps) {
                   {confirmDelete => (
                     <Tooltip
                       id="delete-action-tooltip"
-                      title={t('Delete')}
+                      // title={t('Delete')}
+                      title={t('删除')}
                       placement="bottom"
                     >
                       <span
@@ -497,7 +509,8 @@ function ChartList(props: ChartListProps) {
               {canExport && (
                 <Tooltip
                   id="export-action-tooltip"
-                  title={t('Export')}
+                  // title={t('Export')}
+                  title={t('导出')}
                   placement="bottom"
                 >
                   <span
@@ -513,7 +526,8 @@ function ChartList(props: ChartListProps) {
               {canEdit && (
                 <Tooltip
                   id="edit-action-tooltip"
-                  title={t('Edit')}
+                  // title={t('Edit')}
+                  title={t('修改')}
                   placement="bottom"
                 >
                   <span
@@ -529,7 +543,8 @@ function ChartList(props: ChartListProps) {
             </StyledActions>
           );
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
         hidden: !canEdit && !canDelete,
@@ -612,7 +627,8 @@ function ChartList(props: ChartListProps) {
           }),
       },
       {
-        Header: t('Dataset'),
+        // Header: t('Dataset'),
+        Header: t('数据集'),
         key: 'dataset',
         id: 'datasource_id',
         input: 'select',
@@ -638,7 +654,8 @@ function ChartList(props: ChartListProps) {
           ]
         : []),
       {
-        Header: t('Owner'),
+        // Header: t('Owner'),
+        Header: t('所有者'),
         key: 'owner',
         id: 'owners',
         input: 'select',

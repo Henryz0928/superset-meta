@@ -245,14 +245,20 @@ class TabbedSqlEditors extends PureComponent<TabbedSqlEditorsProps> {
 
     const emptyTab = (
       <StyledTab>
-        <TabTitle>{t('Add a new tab')}</TabTitle>
+        {/* <TabTitle>{t('Add a new tab')}</TabTitle> */}
+        <TabTitle>{t('添加一个新标签页')}</TabTitle>
         <Tooltip
           id="add-tab"
           placement="bottom"
+          // title={
+          //   userOS === 'Windows'
+          //     ? t('New tab (Ctrl + q)')
+          //     : t('New tab (Ctrl + t)')
+          // }
           title={
             userOS === 'Windows'
-              ? t('New tab (Ctrl + q)')
-              : t('New tab (Ctrl + t)')
+              ? t('新标签页 (Ctrl + q)')
+              : t('新标签页 (Ctrl + t)')
           }
         >
           <Icons.PlusCircleOutlined
@@ -276,7 +282,8 @@ class TabbedSqlEditors extends PureComponent<TabbedSqlEditorsProps> {
         <EmptyState
           image="empty_sql_chart.svg"
           size="large"
-          description={t('Add a new tab to create SQL Query')}
+          // description={t('Add a new tab to create SQL Query')}
+          description={t('添加一个新的标签以创建 SQL 查询')}
         />
       </EditableTabs.TabPane>
     );
@@ -297,10 +304,15 @@ class TabbedSqlEditors extends PureComponent<TabbedSqlEditorsProps> {
           <Tooltip
             id="add-tab"
             placement="bottom"
+            // title={
+            //   userOS === 'Windows'
+            //     ? t('New tab (Ctrl + q)')
+            //     : t('New tab (Ctrl + t)')
+            // }
             title={
               userOS === 'Windows'
-                ? t('New tab (Ctrl + q)')
-                : t('New tab (Ctrl + t)')
+                ? t('新标签页 (Ctrl + q)')
+                : t('新标签页 (Ctrl + t)')
             }
           >
             <Icons.PlusCircleOutlined

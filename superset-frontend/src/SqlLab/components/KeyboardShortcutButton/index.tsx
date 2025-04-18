@@ -43,23 +43,40 @@ export enum KeyboardShortcut {
 }
 
 export const KEY_MAP: Record<KeyboardShortcut, string | undefined> = {
-  [KeyboardShortcut.CtrlR]: t('Run query'),
-  [KeyboardShortcut.CtrlEnter]: t('Run query'),
-  [KeyboardShortcut.AltEnter]: t('Run query'),
-  [KeyboardShortcut.CtrlShiftEnter]: t('Run current query'),
-  [KeyboardShortcut.CtrlX]: userOS === 'MacOS' ? t('Stop query') : undefined,
-  [KeyboardShortcut.CtrlE]: userOS !== 'MacOS' ? t('Stop query') : undefined,
-  [KeyboardShortcut.CtrlQ]: userOS === 'Windows' ? t('New tab') : undefined,
-  [KeyboardShortcut.CtrlT]: userOS !== 'Windows' ? t('New tab') : undefined,
-  [KeyboardShortcut.CtrlP]: t('Previous Line'),
-  [KeyboardShortcut.CtrlShiftF]: t('Format SQL'),
-  [KeyboardShortcut.CtrlLeft]: t('Switch to the previous tab'),
-  [KeyboardShortcut.CtrlRight]: t('Switch to the next tab'),
+  // [KeyboardShortcut.CtrlR]: t('Run query'),
+  // [KeyboardShortcut.CtrlEnter]: t('Run query'),
+  // [KeyboardShortcut.AltEnter]: t('Run query'),
+  // [KeyboardShortcut.CtrlShiftEnter]: t('Run current query'),
+  // [KeyboardShortcut.CtrlX]: userOS === 'MacOS' ? t('Stop query') : undefined,
+  // [KeyboardShortcut.CtrlE]: userOS !== 'MacOS' ? t('Stop query') : undefined,
+  // [KeyboardShortcut.CtrlQ]: userOS === 'Windows' ? t('New tab') : undefined,
+  // [KeyboardShortcut.CtrlT]: userOS !== 'Windows' ? t('New tab') : undefined,
+  // [KeyboardShortcut.CtrlP]: t('Previous Line'),
+  // [KeyboardShortcut.CtrlShiftF]: t('Format SQL'),
+  // [KeyboardShortcut.CtrlLeft]: t('Switch to the previous tab'),
+  // [KeyboardShortcut.CtrlRight]: t('Switch to the next tab'),
+  // // default ace editor shortcuts
+  // [KeyboardShortcut.CmdF]: userOS === 'MacOS' ? t('Find') : undefined,
+  // [KeyboardShortcut.CtrlF]: userOS !== 'MacOS' ? t('Find') : undefined,
+  // [KeyboardShortcut.CmdOptF]: userOS === 'MacOS' ? t('Replace') : undefined,
+  // [KeyboardShortcut.CtrlH]: userOS !== 'MacOS' ? t('Replace') : undefined,
+  [KeyboardShortcut.CtrlR]: t('运行查询'),
+  [KeyboardShortcut.CtrlEnter]: t('运行查询'),
+  [KeyboardShortcut.AltEnter]: t('运行查询'),
+  [KeyboardShortcut.CtrlShiftEnter]: t('运行当前查询'),
+  [KeyboardShortcut.CtrlX]: userOS === 'MacOS' ? t('停止查询') : undefined,
+  [KeyboardShortcut.CtrlE]: userOS !== 'MacOS' ? t('停止查询') : undefined,
+  [KeyboardShortcut.CtrlQ]: userOS === 'Windows' ? t('新标签页') : undefined,
+  [KeyboardShortcut.CtrlT]: userOS !== 'Windows' ? t('新标签页') : undefined,
+  [KeyboardShortcut.CtrlP]: t('上一行'),
+  [KeyboardShortcut.CtrlShiftF]: t('格式化 SQL'),
+  [KeyboardShortcut.CtrlLeft]: t('切换到上一个标签页'),
+  [KeyboardShortcut.CtrlRight]: t('切换到下一个标签页'),
   // default ace editor shortcuts
-  [KeyboardShortcut.CmdF]: userOS === 'MacOS' ? t('Find') : undefined,
-  [KeyboardShortcut.CtrlF]: userOS !== 'MacOS' ? t('Find') : undefined,
-  [KeyboardShortcut.CmdOptF]: userOS === 'MacOS' ? t('Replace') : undefined,
-  [KeyboardShortcut.CtrlH]: userOS !== 'MacOS' ? t('Replace') : undefined,
+  [KeyboardShortcut.CmdF]: userOS === 'MacOS' ? t('查找') : undefined,
+  [KeyboardShortcut.CtrlF]: userOS !== 'MacOS' ? t('查找') : undefined,
+  [KeyboardShortcut.CmdOptF]: userOS === 'MacOS' ? t('替换') : undefined,
+  [KeyboardShortcut.CtrlH]: userOS !== 'MacOS' ? t('替换') : undefined,
 };
 
 const KeyMapByCommand = Object.entries(KEY_MAP).reduce<
@@ -93,7 +110,8 @@ const ShortcutCode = styled.code`
 
 const KeyboardShortcutButton: FC<{}> = ({ children }) => (
   <ModalTrigger
-    modalTitle={t('Keyboard shortcuts')}
+    // modalTitle={t('Keyboard shortcuts')}
+    modalTitle={t('快捷键')}
     modalBody={
       <div>
         {Object.entries(KeyMapByCommand).map(([description, shortcuts]) => (

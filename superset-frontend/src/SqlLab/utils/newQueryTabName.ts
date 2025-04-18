@@ -20,8 +20,11 @@
 import { t } from '@superset-ui/core';
 import { QueryEditor } from '../types';
 
-const untitledQueryRegex = /^Untitled Query (\d+)$/; // Literal notation isn't recompiled
-const untitledQuery = 'Untitled Query ';
+// const untitledQueryRegex = /^Untitled Query (\d+)$/; // Literal notation isn't recompiled
+// const untitledQuery = 'Untitled Query ';
+const untitledQueryRegex = /^未命名查询 (\d+)$/; // Literal notation isn't recompiled
+const untitledQuery = '未命名查询 ';
+
 
 export const newQueryTabName = (
   queryEditors: QueryEditor[],

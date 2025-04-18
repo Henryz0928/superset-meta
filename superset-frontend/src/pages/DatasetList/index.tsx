@@ -156,7 +156,9 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
     fetchData,
     toggleBulkSelect,
     refreshData,
-  } = useListViewResource<Dataset>('dataset', t('dataset'), addDangerToast);
+  } = 
+  // useListViewResource<Dataset>('dataset', t('dataset'), addDangerToast);
+  useListViewResource<Dataset>('dataset', t('数据集'), addDangerToast);
 
   const [datasetCurrentlyDeleting, setDatasetCurrentlyDeleting] = useState<
     | (Dataset & {
@@ -202,7 +204,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
   const handleDatasetImport = () => {
     showImportModal(false);
     refreshData();
-    addSuccessToast(t('Dataset imported'));
+    // addSuccessToast(t('Dataset imported'));
+    addSuccessToast(t('数据集已导入'));
   };
 
   const canEdit = hasPerm('can_write');
@@ -238,7 +241,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
         })
         .catch(() => {
           addDangerToast(
-            t('An error occurred while fetching dataset related data'),
+            // t('An error occurred while fetching dataset related data'),
+            t('获取数据集相关数据时发生错误'),
           );
         });
     },
@@ -258,8 +262,12 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
       })
       .catch(
         createErrorHandler(errMsg =>
+          // t(
+          //   'An error occurred while fetching dataset related data: %s',
+          //   errMsg,
+          // ),
           t(
-            'An error occurred while fetching dataset related data: %s',
+            '获取数据集相关数据时发生错误: %s',
             errMsg,
           ),
         ),
@@ -340,7 +348,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
             return titleLink;
           }
         },
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         accessor: 'table_name',
       },
       {
@@ -349,13 +358,15 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
             original: { kind },
           },
         }: any) => <DatasetTypeLabel datasetType={kind} />,
-        Header: t('Type'),
+        // Header: t('Type'),
+        Header: t('类型'),
         accessor: 'kind',
         disableSortBy: true,
         size: 'md',
       },
       {
-        Header: t('Database'),
+        // Header: t('Database'),
+        Header: t('数据库'),
         accessor: 'database.database_name',
         size: 'lg',
       },
@@ -375,7 +386,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
             original: { owners = [] },
           },
         }: any) => <FacePile users={owners} />,
-        Header: t('Owners'),
+        // Header: t('Owners'),
+        Header: t('所有者'),
         id: 'owners',
         disableSortBy: true,
         size: 'lg',
@@ -389,7 +401,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
       },
@@ -417,7 +430,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
               {canDelete && (
                 <Tooltip
                   id="delete-action-tooltip"
-                  title={t('Delete')}
+                  // title={t('Delete')}
+                  title={t('删除')}
                   placement="bottom"
                 >
                   <span
@@ -433,7 +447,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
               {canExport && (
                 <Tooltip
                   id="export-action-tooltip"
-                  title={t('Export')}
+                  // title={t('Export')}
+                  title={t('导出')}
                   placement="bottom"
                 >
                   <span
@@ -449,11 +464,18 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
               {canEdit && (
                 <Tooltip
                   id="edit-action-tooltip"
+                  // title={
+                  //   allowEdit
+                  //     ? t('Edit')
+                  //     : t(
+                  //         'You must be a dataset owner in order to edit. Please reach out to a dataset owner to request modifications or edit access.',
+                  //       )
+                  // }
                   title={
                     allowEdit
-                      ? t('Edit')
+                      ? t('修改')
                       : t(
-                          'You must be a dataset owner in order to edit. Please reach out to a dataset owner to request modifications or edit access.',
+                          '您必须是数据集的所有者才能编辑。请联系数据集的所有者以请求修改或编辑权限。',
                         )
                   }
                   placement="bottomRight"
@@ -471,7 +493,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
               {canDuplicate && original.kind === 'virtual' && (
                 <Tooltip
                   id="duplicate-action-tooltip"
-                  title={t('Duplicate')}
+                  // title={t('Duplicate')}
+                  title={t('重复')}
                   placement="bottom"
                 >
                   <span
@@ -487,7 +510,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
             </Actions>
           );
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         hidden: !canEdit && !canDelete && !canDuplicate,
         disableSortBy: true,
@@ -503,36 +527,44 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
   const filterTypes: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'search',
         id: 'table_name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Type'),
+        // Header: t('Type'),
+        Header: t('类型'),
         key: 'sql',
         id: 'sql',
         input: 'select',
         operator: FilterOperator.DatasetIsNullOrEmpty,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         selects: [
-          { label: t('Virtual'), value: false },
-          { label: t('Physical'), value: true },
+          // { label: t('Virtual'), value: false },
+          // { label: t('Physical'), value: true },
+          { label: t('虚拟'), value: false },
+          { label: t('物理'), value: true },
         ],
       },
       {
-        Header: t('Database'),
+        // Header: t('Database'),
+        Header: t('数据库'),
         key: 'database',
         id: 'database',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         fetchSelects: createFetchRelated(
           'dataset',
           'database',
           createErrorHandler(errMsg =>
-            t('An error occurred while fetching datasets: %s', errMsg),
+            // t('An error occurred while fetching datasets: %s', errMsg),
+            t('在获取数据集时发生错误: %s', errMsg),
           ),
         ),
         paginate: true,
@@ -543,30 +575,37 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
         id: 'schema',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         fetchSelects: createFetchDistinct(
           'dataset',
           'schema',
           createErrorHandler(errMsg =>
-            t('An error occurred while fetching schema values: %s', errMsg),
+            // t('An error occurred while fetching schema values: %s', errMsg),
+            t('获取 schema 时发生错误: %s', errMsg),
           ),
         ),
         paginate: true,
       },
       {
         // Header: t('Owner'),
-        Header: '拥有者',
+        Header: '所有者',
         key: 'owner',
         id: 'owners',
         input: 'select',
         operator: FilterOperator.RelationManyMany,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         fetchSelects: createFetchRelated(
           'dataset',
           'owners',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset owner values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset owner values: %s',
+              '获取数据集所有者时发生错误: %s',
               errMsg,
             ),
           ),
@@ -575,31 +614,39 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
         paginate: true,
       },
       {
-        Header: t('Certified'),
+        // Header: t('Certified'),
+        Header: t('认证'),
         key: 'certified',
         id: 'id',
         urlDisplay: 'certified',
         input: 'select',
         operator: FilterOperator.DatasetIsCertified,
-        unfilteredLabel: t('Any'),
+        // unfilteredLabel: t('Any'),
+        unfilteredLabel: t('任何'),
         selects: [
           { label: t('Yes'), value: true },
           { label: t('No'), value: false },
         ],
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: t('修改于'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'dataset',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
             ),
           ),
@@ -613,14 +660,16 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
 
   const menuData: SubMenuProps = {
     activeChild: 'Datasets',
-    name: t('Datasets'),
+    // name: t('Datasets'),
+    name: t('数据集'),
   };
 
   const buttonArr: Array<ButtonProps> = [];
 
   if (canDelete || canExport) {
     buttonArr.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       onClick: toggleBulkSelect,
       buttonStyle: 'secondary',
     });
@@ -637,7 +686,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
               vertical-align: text-top;
             `}
           />
-          {t('Dataset')}
+          {/* {t('Dataset')} */}
+          {t('数据集')}
         </>
       ),
       onClick: () => {
@@ -650,7 +700,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
       name: (
         <Tooltip
           id="import-tooltip"
-          title={t('Import datasets')}
+          // title={t('Import datasets')}
+          title={t('导入数据集')}
           placement="bottomRight"
         >
           <Icons.DownloadOutlined
@@ -685,11 +736,13 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
       () => {
         refreshData();
         setDatasetCurrentlyDeleting(null);
-        addSuccessToast(t('Deleted: %s', tableName));
+        // addSuccessToast(t('Deleted: %s', tableName));
+        addSuccessToast(t('已删除: %s', tableName));
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting %s: %s', tableName, errMsg),
+          // t('There was an issue deleting %s: %s', tableName, errMsg),
+          t('删除时出现了一个问题 %s: %s', tableName, errMsg),
         ),
       ),
     );
@@ -707,7 +760,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected datasets: %s', errMsg),
+          // t('There was an issue deleting the selected datasets: %s', errMsg),
+          t('删除选中的数据集时遇到问题: %s', errMsg),
         ),
       ),
     );
@@ -715,7 +769,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
 
   const handleDatasetDuplicate = (newDatasetName: string) => {
     if (datasetCurrentlyDuplicating === null) {
-      addDangerToast(t('There was an issue duplicating the dataset.'));
+      // addDangerToast(t('There was an issue duplicating the dataset.'));
+      addDangerToast(t('复制数据集时出现了问题。'));
     }
 
     SupersetClient.post({
@@ -731,7 +786,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue duplicating the selected datasets: %s', errMsg),
+          // t('There was an issue duplicating the selected datasets: %s', errMsg),
+          t('复制选定的数据集时出现了问题: %s', errMsg),
         ),
       ),
     );
@@ -745,17 +801,24 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
           description={
             <>
               <p>
-                {t('The dataset')}
+                {/* {t('The dataset')} */}
+                {t('该数据集')}
                 <b> {datasetCurrentlyDeleting.table_name} </b>
-                {t(
+                {/* {t(
                   'is linked to %s charts that appear on %s dashboards. Are you sure you want to continue? Deleting the dataset will break those objects.',
+                  datasetCurrentlyDeleting.charts.count,
+                  datasetCurrentlyDeleting.dashboards.count,
+                )} */}
+                 {t(
+                  '链接到 %s 图表，这些图表显示在 %s 仪表板。您确定要继续吗？删除数据集将破坏这些对象。',
                   datasetCurrentlyDeleting.charts.count,
                   datasetCurrentlyDeleting.dashboards.count,
                 )}
               </p>
               {datasetCurrentlyDeleting.dashboards.count >= 1 && (
                 <>
-                  <h4>{t('Affected Dashboards')}</h4>
+                  {/* <h4>{t('Affected Dashboards')}</h4> */}
+                  <h4>{t('受影响的仪表盘')}</h4>
                   <ul>
                     {datasetCurrentlyDeleting.dashboards.result
                       .slice(0, 10)
@@ -776,8 +839,13 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
                       )}
                     {datasetCurrentlyDeleting.dashboards.result.length > 10 && (
                       <li>
-                        {t(
+                        {/* {t(
                           '... and %s others',
+                          datasetCurrentlyDeleting.dashboards.result.length -
+                            10,
+                        )} */}
+                          {t(
+                          '... 和 %s 其它',
                           datasetCurrentlyDeleting.dashboards.result.length -
                             10,
                         )}
@@ -788,7 +856,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
               )}
               {datasetCurrentlyDeleting.charts.count >= 1 && (
                 <>
-                  <h4>{t('Affected Charts')}</h4>
+                  {/* <h4>{t('Affected Charts')}</h4> */}
+                  <h4>{t('受影响的图表')}</h4>
                   <ul>
                     {datasetCurrentlyDeleting.charts.result.slice(0, 10).map(
                       (
@@ -810,8 +879,12 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
                     )}
                     {datasetCurrentlyDeleting.charts.result.length > 10 && (
                       <li>
-                        {t(
+                        {/* {t(
                           '... and %s others',
+                          datasetCurrentlyDeleting.charts.result.length - 10,
+                        )} */}
+                          {t(
+                          '... 和 %s 其它',
                           datasetCurrentlyDeleting.charts.result.length - 10,
                         )}
                       </li>
@@ -833,7 +906,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
           }}
           onHide={closeDatasetDeleteModal}
           open
-          title={t('Delete Dataset?')}
+          // title={t('Delete Dataset?')}
+          title={t('删除数据集？')}
         />
       )}
       {datasetCurrentlyEditing && (
@@ -850,9 +924,13 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
         onDuplicate={handleDatasetDuplicate}
       />
       <ConfirmStatusChange
-        title={t('Please confirm')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t(
+        //   'Are you sure you want to delete the selected datasets?',
+        // )}
         description={t(
-          'Are you sure you want to delete the selected datasets?',
+          '您确定要删除已选的数据集吗？',
         )}
         onConfirm={handleBulkDatasetDelete}
       >
@@ -861,7 +939,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
           if (canDelete) {
             bulkActions.push({
               key: 'delete',
-              name: t('Delete'),
+              // name: t('Delete'),
+              name: t('删除'),
               onSelect: confirmDelete,
               type: 'danger',
             });
@@ -869,7 +948,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
           if (canExport) {
             bulkActions.push({
               key: 'export',
-              name: t('Export'),
+              // name: t('Export'),
+              name: t('导出'),
               type: 'primary',
               onSelect: handleBulkDatasetExport,
             });
@@ -904,25 +984,42 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
                 );
 
                 if (!selected.length) {
-                  return t('0 Selected');
+                  // return t('0 Selected');
+                  return t('已选中 0');
                 }
                 if (virtualCount && !physicalCount) {
+                  // return t(
+                  //   '%s Selected (Virtual)',
+                  //   selected.length,
+                  //   virtualCount,
+                  // );
                   return t(
-                    '%s Selected (Virtual)',
+                    '%s 已选中（虚拟）',
                     selected.length,
                     virtualCount,
                   );
                 }
                 if (physicalCount && !virtualCount) {
+                  // return t(
+                  //   '%s Selected (Physical)',
+                  //   selected.length,
+                  //   physicalCount,
+                  // );
                   return t(
-                    '%s Selected (Physical)',
+                    '%s 已选中 (物理)',
                     selected.length,
                     physicalCount,
                   );
                 }
 
+                // return t(
+                //   '%s Selected (%s Physical, %s Virtual)',
+                //   selected.length,
+                //   physicalCount,
+                //   virtualCount,
+                // );
                 return t(
-                  '%s Selected (%s Physical, %s Virtual)',
+                  '%s 已选中 (%s 物理, %s 虚拟)',
                   selected.length,
                   physicalCount,
                   virtualCount,
