@@ -57,7 +57,8 @@ function Footer({
   const history = useHistory();
   const { createResource } = useSingleViewResource<Partial<DatasetObject>>(
     'dataset',
-    t('dataset'),
+    // t('dataset'),
+    t('数据集'),
     addDangerToast,
   );
 
@@ -83,7 +84,8 @@ function Footer({
     history.goBack();
   };
 
-  const tooltipText = t('Select a database table.');
+  // const tooltipText = t('Select a database table.');
+  const tooltipText = t('选择数据库表。');
 
   const onSave = () => {
     if (datasetObject) {
@@ -106,7 +108,8 @@ function Footer({
     }
   };
 
-  const CREATE_DATASET_TEXT = t('Create dataset and create chart');
+  // const CREATE_DATASET_TEXT = t('Create dataset and create chart');
+  const CREATE_DATASET_TEXT = t('创建数据集并生成图表');
   const disabledCheck =
     !datasetObject?.table_name ||
     !hasColumns ||
@@ -114,7 +117,8 @@ function Footer({
 
   return (
     <>
-      <Button onClick={cancelButtonOnClick}>{t('Cancel')}</Button>
+      {/* <Button onClick={cancelButtonOnClick}>{t('Cancel')}</Button> */}
+      <Button onClick={cancelButtonOnClick}>{t('取消')}</Button>
       <Button
         buttonStyle="primary"
         disabled={disabledCheck}

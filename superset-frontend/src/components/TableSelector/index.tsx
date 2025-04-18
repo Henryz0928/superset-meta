@@ -312,14 +312,17 @@ const TableSelector: FunctionComponent<TableSelectorProps> = ({
     const disabled = (currentSchema && !formMode && readOnly) || !currentSchema;
 
     const header = sqlLabMode ? (
-      <FormLabel>{t('See table schema')}</FormLabel>
+      // <FormLabel>{t('See table schema')}</FormLabel>
+      <FormLabel>{t('查看表格 schema')}</FormLabel>
     ) : (
-      <FormLabel>{t('Table')}</FormLabel>
+      // <FormLabel>{t('Table')}</FormLabel>
+      <FormLabel>{t('表格')}</FormLabel>
     );
 
     const select = (
       <Select
-        ariaLabel={t('Select table or type to search tables')}
+        // ariaLabel={t('Select table or type to search tables')}
+        ariaLabel={t('选择表或输入以搜索表')}
         disabled={disabled}
         filterOption={handleFilterOption}
         header={header}
@@ -330,7 +333,8 @@ const TableSelector: FunctionComponent<TableSelectorProps> = ({
           internalTableChange(options)
         }
         options={tableOptions}
-        placeholder={t('Select table or type to search tables')}
+        // placeholder={t('Select table or type to search tables')}
+        placeholder={t('选择表或输入以搜索表')}
         showSearch
         mode={tableSelectMode}
         value={tableSelectValue}
@@ -342,7 +346,8 @@ const TableSelector: FunctionComponent<TableSelectorProps> = ({
     const refreshLabel = !readOnly && (
       <RefreshLabel
         onClick={() => refetch()}
-        tooltipContent={t('Force refresh table list')}
+        // tooltipContent={t('Force refresh table list')}
+        tooltipContent={t('强制刷新表列表')}
       />
     );
 

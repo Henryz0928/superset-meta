@@ -35,10 +35,14 @@ type Option = {
   disabled?: boolean;
 };
 
-const ARIA_LABEL = 'Test';
+// const ARIA_LABEL = 'Test';
+// const NEW_OPTION = 'Kyle';
+// const NO_DATA = 'No Data';
+// const LOADING = 'Loading...';
+const ARIA_LABEL = '测试';
 const NEW_OPTION = 'Kyle';
-const NO_DATA = 'No Data';
-const LOADING = 'Loading...';
+const NO_DATA = '无数据';
+const LOADING = '加载中...';
 const OPTIONS: Option[] = [
   { label: 'John', value: 1, gender: 'Male' },
   { label: 'Liam', value: 2, gender: 'Male' },

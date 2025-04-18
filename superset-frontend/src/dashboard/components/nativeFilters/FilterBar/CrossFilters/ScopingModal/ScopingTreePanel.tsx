@@ -128,7 +128,8 @@ const ChartSelect = ({
       </div>
       <Select
         data-test="select-chart"
-        ariaLabel={t('Select chart')}
+        // ariaLabel={t('Select chart')}
+        ariaLabel={t('选择图表')}
         options={options}
         value={value && value === NEW_CHART_SCOPING_ID ? undefined : value}
         onChange={value => {
@@ -165,7 +166,8 @@ export const ScopingTreePanel = ({
                 font-weight: ${theme.typography.weights.bold};
               `}
             >
-              {t('Cross-filtering is not enabled in this dashboard')}
+              {/* {t('Cross-filtering is not enabled in this dashboard')} */}
+              {t('此仪表板中未启用交叉筛选')}
             </span>
           }
           type="info"
@@ -183,12 +185,19 @@ export const ScopingTreePanel = ({
         />
       )}
       <InfoText>
-        {isDefined(chartId)
+        {/* {isDefined(chartId)
           ? t(
               `Select the charts to which you want to apply cross-filters when interacting with this chart. You can select "All charts" to apply filters to all charts that use the same dataset or contain the same column name in the dashboard.`,
             )
           : t(
               `Select the charts to which you want to apply cross-filters in this dashboard. Deselecting a chart will exclude it from being filtered when applying cross-filters from any chart on the dashboard. You can select "All charts" to apply cross-filters to all charts that use the same dataset or contain the same column name in the dashboard.`,
+            )} */}
+             {isDefined(chartId)
+          ? t(
+              `选择在与该图表交互时要应用交叉过滤器的图表。您可以选择“所有图表”，以将过滤器应用到使用相同数据集或包含相同列名的仪表板上的所有图表。`,
+            )
+          : t(
+              `选择您要在该仪表板中应用交叉过滤的图表。取消选择一个图表将在使用该仪表板上任何图表应用交叉过滤时将其排除在外。您可以选择“所有图表”，以将交叉过滤应用于使用相同数据集或包含相同列名的所有图表。`,
             )}
       </InfoText>
       <ScopingTree
@@ -196,7 +205,8 @@ export const ScopingTreePanel = ({
         initialScope={currentScope}
         forceUpdate={noOp}
         chartId={chartId}
-        title={t('All charts')}
+        // title={t('All charts')}
+        title={t('所有图表')}
       />
     </div>
   );

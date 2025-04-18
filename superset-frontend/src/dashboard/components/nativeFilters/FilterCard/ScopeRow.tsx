@@ -52,12 +52,15 @@ export const ScopeRow = memo(({ filter }: FilterCardRowProps) => {
       return null;
     }
     if (scope.all) {
-      return <span>{t('All charts')}</span>;
+      // return <span>{t('All charts')}</span>;
+      return <span>{t('所有图表')}</span>;
     }
     return (
       <div>
-        {getTooltipSection(scope.tabs, t('Tabs'))}
-        {getTooltipSection(scope.charts, t('Charts'))}
+        {/* {getTooltipSection(scope.tabs, t('Tabs'))}
+        {getTooltipSection(scope.charts, t('Charts'))} */}
+            {getTooltipSection(scope.tabs, t('标签'))}
+            {getTooltipSection(scope.charts, t('图表'))}
       </div>
     );
   }, [elementsTruncated, scope]);

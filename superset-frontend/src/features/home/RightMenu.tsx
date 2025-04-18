@@ -239,7 +239,7 @@ const RightMenu = ({
     },
     {
       // label: t('Chart'),
-      label: '报表',
+      label: '图表',
       url: Number.isInteger(dashboardId)
         ? `/chart/add?dashboard_id=${dashboardId}`
         : '/chart/add',

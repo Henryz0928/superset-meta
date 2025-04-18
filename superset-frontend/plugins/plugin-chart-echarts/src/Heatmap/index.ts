@@ -26,19 +26,32 @@ import thumbnail from './images/thumbnail.png';
 import controlPanel from './controlPanel';
 
 const metadata = new ChartMetadata({
-  category: t('Correlation'),
+  // category: t('Correlation'),
+  // description: t(
+  //   'Visualize a related metric across pairs of groups. Heatmaps excel at showcasing the correlation or strength between two groups. Color is used to emphasize the strength of the link between each pair of groups.',
+  // ),
+  category: t('相关性'),
   description: t(
-    'Visualize a related metric across pairs of groups. Heatmaps excel at showcasing the correlation or strength between two groups. Color is used to emphasize the strength of the link between each pair of groups.',
+    '可视化两个组之间的相关度或强度。热图擅长展示两个组之间的相关性或强度。颜色用于强调每对组之间的联系强度。',
   ),
   exampleGallery: [{ url: example1 }, { url: example2 }, { url: example3 }],
-  name: t('Heatmap'),
+  // name: t('Heatmap'),
+  // tags: [
+  //   t('Business'),
+  //   t('Intensity'),
+  //   t('Density'),
+  //   t('Single Metric'),
+  //   t('ECharts'),
+  //   t('Featured'),
+  // ],
+  name: t('热力图'),
   tags: [
-    t('Business'),
-    t('Intensity'),
-    t('Density'),
-    t('Single Metric'),
+    t('商业'),
+    t('强度'),
+    t('密度'),
+    t('单个度量'),
     t('ECharts'),
-    t('Featured'),
+    t('特色'),
   ],
   thumbnail,
 });

@@ -814,7 +814,7 @@ const Header = () => {
           onHide={() => setCurrentReportDeleting(null)}
           open
           // title={t('Delete Report?')}
-          title={t('删除报表?')}
+          title={t('删除图表?')}
         />
       )}
 

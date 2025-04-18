@@ -368,15 +368,18 @@ export default function DatabaseSelector({
   function renderDatabaseSelect() {
     return renderSelectRow(
       <AsyncSelect
-        ariaLabel={t('Select database or type to search databases')}
+        // ariaLabel={t('Select database or type to search databases')}
+        ariaLabel={t('选择数据库或输入以搜索数据库')}
         optionFilterProps={['database_name', 'value']}
         data-test="select-database"
-        header={<FormLabel>{t('Database')}</FormLabel>}
+        // header={<FormLabel>{t('Database')}</FormLabel>}
+        header={<FormLabel>{t('数据库')}</FormLabel>}
         lazyLoading={false}
         notFoundContent={emptyState}
         onChange={changeDatabase}
         value={currentDb}
-        placeholder={t('Select database or type to search databases')}
+        // placeholder={t('Select database or type to search databases')}
+        placeholder={t('选择数据库或输入以搜索数据库')}
         disabled={!isDatabaseSelectEnabled || readOnly}
         options={loadDatabases}
         sortComparator={sortComparator}
@@ -389,19 +392,24 @@ export default function DatabaseSelector({
     const refreshIcon = !readOnly && (
       <RefreshLabel
         onClick={refetchCatalogs}
-        tooltipContent={t('Force refresh catalog list')}
+        // tooltipContent={t('Force refresh catalog list')}
+        tooltipContent={t('强制刷新目录列表')}
       />
     );
     return renderSelectRow(
       <Select
-        ariaLabel={t('Select catalog or type to search catalogs')}
+        // ariaLabel={t('Select catalog or type to search catalogs')}
+        ariaLabel={t('选择目录或输入以搜索目录')}
         disabled={!currentDb || readOnly}
-        header={<FormLabel>{t('Catalog')}</FormLabel>}
+        // header={<FormLabel>{t('Catalog')}</FormLabel>}
+        header={<FormLabel>{t('目录')}</FormLabel>}
         labelInValue
         loading={loadingCatalogs}
         name="select-catalog"
-        notFoundContent={t('No compatible catalog found')}
-        placeholder={t('Select catalog or type to search catalogs')}
+        // notFoundContent={t('No compatible catalog found')}
+        // placeholder={t('Select catalog or type to search catalogs')}
+        notFoundContent={t('未找到兼容的目录')}
+        placeholder={t('选择目录或输入以搜索目录')}
         onChange={item => changeCatalog(item as CatalogOption)}
         options={catalogOptions}
         showSearch
@@ -416,19 +424,23 @@ export default function DatabaseSelector({
     const refreshIcon = !readOnly && (
       <RefreshLabel
         onClick={refetchSchemas}
-        tooltipContent={t('Force refresh schema list')}
+        // tooltipContent={t('Force refresh schema list')}
+        tooltipContent={t('强制刷新 schema 列表')}
       />
     );
     return renderSelectRow(
       <Select
-        ariaLabel={t('Select schema or type to search schemas')}
+        // ariaLabel={t('Select schema or type to search schemas')}
+        ariaLabel={t('选择模式或类型以搜索 schema')}
         disabled={!currentDb || readOnly}
         header={<FormLabel>{t('Schema')}</FormLabel>}
         labelInValue
         loading={loadingSchemas}
         name="select-schema"
-        notFoundContent={t('No compatible schema found')}
-        placeholder={t('Select schema or type to search schemas')}
+        // notFoundContent={t('No compatible schema found')}
+        // placeholder={t('Select schema or type to search schemas')}
+        notFoundContent={t('找不到兼容的 schema')}
+        placeholder={t('选择 schema 或类型以搜索 schema')}
         onChange={item => changeSchema(item as SchemaOption)}
         options={schemaOptions}
         showSearch

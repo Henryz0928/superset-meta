@@ -136,7 +136,8 @@ export const ChartsScopingListPanel = ({
           buttonSize="xsmall"
           onClick={addNewCustomScope}
         >
-          <Icons.PlusOutlined iconSize="s" /> {t('Add custom scoping')}
+          {/* <Icons.PlusOutlined iconSize="s" /> {t('Add custom scoping')} */}
+          <Icons.PlusOutlined iconSize="s" /> {t('添加自定义作用域')}
         </Button>
       </AddButtonContainer>
       <FilterTitle
@@ -144,7 +145,8 @@ export const ChartsScopingListPanel = ({
         onClick={() => setCurrentChartId(undefined)}
         className={activeChartId === undefined ? 'active' : ''}
       >
-        {t('All charts/global scoping')}
+        {/* {t('All charts/global scoping')} */}
+        {t('所有图表/全局作用域')}
       </FilterTitle>
       <div
         css={css`
@@ -170,7 +172,8 @@ export const ChartsScopingListPanel = ({
           onClick={setCurrentChartId}
           onRemove={removeCustomScope}
           isActive={activeChartId === newScoping.id}
-          label={`[${t('new custom scoping')}]`}
+          // label={`[${t('new custom scoping')}]`}
+          label={`[${t('新的自定义作用域')}]`}
         />
       )}
     </>

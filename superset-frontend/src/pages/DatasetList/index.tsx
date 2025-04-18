@@ -935,7 +935,8 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
 
       <ImportModelsModal
         resourceName="dataset"
-        resourceLabel={t('dataset')}
+        // resourceLabel={t('dataset')}
+        resourceLabel={t('数据集')}
         passwordsNeededMessage={PASSWORDS_NEEDED_MESSAGE}
         confirmOverwriteMessage={CONFIRM_OVERWRITE_MESSAGE}
         addDangerToast={addDangerToast}

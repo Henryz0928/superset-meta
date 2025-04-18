@@ -77,7 +77,8 @@ function traverse({
   if (FILTER_SCOPE_CONTAINER_TYPES.includes(type)) {
     let label = null;
     if (type === DASHBOARD_ROOT_TYPE) {
-      label = t('All charts');
+      // label = t('All charts');
+      label = t('所有图表');
     } else {
       label =
         currentNode.meta && currentNode.meta.text

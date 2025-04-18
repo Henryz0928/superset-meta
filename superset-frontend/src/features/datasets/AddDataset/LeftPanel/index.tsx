@@ -169,7 +169,8 @@ export default function LeftPanel({
             ? {
                 ...table,
                 extra: {
-                  warning_markdown: t('This table already has a dataset'),
+                  // warning_markdown: t('This table already has a dataset'),
+                  warning_markdown: t('这张表已经有一个数据集'),
                 },
               }
             : table
@@ -181,15 +182,22 @@ export default function LeftPanel({
   const getDatabaseEmptyState = (emptyResultsWithSearch: boolean) => (
     <EmptyState
       image="empty.svg"
+      // title={
+      //   emptyResultsWithSearch
+      //     ? t('No databases match your search')
+      //     : t('No databases available')
+      // }
       title={
         emptyResultsWithSearch
-          ? t('No databases match your search')
-          : t('No databases available')
+          ? t('没有数据库匹配您的搜索')
+          : t('没有可用的数据库')
       }
       description={
         <span>
-          {t('Manage your databases')}{' '}
-          <a href="/databaseview/list">{t('here')}</a>
+          {/* {t('Manage your databases')}{' '}
+          <a href="/databaseview/list">{t('here')}</a> */}
+          {t('管理您的数据库')}{' '}
+          <a href="/databaseview/list">{t('这里')}</a>
         </span>
       }
       size="small"

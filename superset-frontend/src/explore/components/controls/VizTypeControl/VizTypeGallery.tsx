@@ -72,13 +72,17 @@ const THUMBNAIL_GRID_UNITS = 24;
 
 export const MAX_ADVISABLE_VIZ_GALLERY_WIDTH = 1090;
 
-const OTHER_CATEGORY = t('Other');
+// const OTHER_CATEGORY = t('Other');
+const OTHER_CATEGORY = t('其它');
 
-const ALL_CHARTS = t('All charts');
+// const ALL_CHARTS = t('All charts');
+const ALL_CHARTS = t('所有图表');
 
-const FEATURED = t('Featured');
+// const FEATURED = t('Featured');
+const FEATURED = t('特色');
 
-const RECOMMENDED_TAGS = [FEATURED, t('ECharts'), t('Advanced-Analytics')];
+// const RECOMMENDED_TAGS = [FEATURED, t('ECharts'), t('Advanced-Analytics')];
+const RECOMMENDED_TAGS = [FEATURED, t('ECharts'), t('高级分析')];
 
 export const VIZ_TYPE_CONTROL_TEST_ID = 'viz-type-control';
 
@@ -612,12 +616,14 @@ export default function VizTypeGallery(props: VizTypeGalleryProps) {
   const sectionMap = useMemo(
     () => ({
       [Sections.Category]: {
-        title: t('Category'),
+        // title: t('Category'),
+        title: t('类型'),
         icon: <Icons.Category iconSize="m" />,
         selectors: categories,
       },
       [Sections.Tags]: {
-        title: t('Tags'),
+        // title: t('Tags'),
+        title: t('标签'),
         icon: <Icons.NumberOutlined iconSize="m" />,
         selectors: tags,
       },
@@ -731,7 +737,8 @@ export default function VizTypeGallery(props: VizTypeGalleryProps) {
           type="text"
           ref={searchInputRef as any /* cast required because emotion */}
           value={searchInputValue}
-          placeholder={t('Search all charts')}
+          // placeholder={t('Search all charts')}
+          placeholder={t('搜索所有图表')}
           onChange={changeSearch}
           onFocus={focusSearch}
           data-test={`${VIZ_TYPE_CONTROL_TEST_ID}__search-input`}
@@ -804,15 +811,18 @@ export default function VizTypeGallery(props: VizTypeGalleryProps) {
               ))}
             </TagsWrapper>
             <Description>
-              {selectedVizMetadata?.description ||
-                t('No description available.')}
+              {/* {selectedVizMetadata?.description ||
+                t('No description available.')} */}
+                 {selectedVizMetadata?.description ||
+                t('无描述可用。')}
             </Description>
             <SectionTitle
               css={css`
                 grid-area: examples-header;
               `}
             >
-              {t('Examples')}
+              {/* {t('Examples')} */}
+              {t('示例')}
             </SectionTitle>
             <Examples>
               {(selectedVizMetadata?.exampleGallery?.length

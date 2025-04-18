@@ -43,7 +43,7 @@ export const InteractiveMenu = (args: any) => (
     <Menu.Item>Charts</Menu.Item>
     <Menu.Item>Datasets</Menu.Item> */}
     <Menu.Item>仪表盘</Menu.Item>
-    <Menu.Item>报表</Menu.Item>
+    <Menu.Item>图表</Menu.Item>
     <Menu.Item>数据集</Menu.Item>
   </Menu>
 );

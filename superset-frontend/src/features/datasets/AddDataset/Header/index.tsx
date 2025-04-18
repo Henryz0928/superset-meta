@@ -33,10 +33,12 @@ import {
   StyledCreateDatasetTitle,
 } from '../../styles';
 
-export const DEFAULT_TITLE = t('New dataset');
+// export const DEFAULT_TITLE = t('New dataset');
+export const DEFAULT_TITLE = t('新建数据集');
 
 const tooltipProps: { text: string; placement: TooltipPlacement } = {
-  text: t('Select a database table and create dataset'),
+  // text: t('Select a database table and create dataset'),
+  text: t('选择一个数据库表，并创建数据集'),
   placement: 'bottomRight',
 };
 
@@ -82,7 +84,8 @@ export default function Header({
       });
     },
     canEdit: false,
-    label: t('dataset name'),
+    // label: t('dataset name'),
+    label: t('数据集名称'),
   };
 
   return (

@@ -39,12 +39,19 @@ const StyledEmptyState = styled(EmptyState)`
   }
 `;
 
+// export const SELECT_MESSAGE = t(
+//   'Datasets can be created from database tables or SQL queries. Select a database table to the left or ',
+// );
+// export const CREATE_MESSAGE = t('create dataset from SQL query');
+// export const VIEW_DATASET_MESSAGE = t(
+//   ' to open SQL Lab. From there you can save the query as a dataset.',
+// );
 export const SELECT_MESSAGE = t(
-  'Datasets can be created from database tables or SQL queries. Select a database table to the left or ',
+  '数据集可以从数据库表或 SQL 查询中创建。请选择左侧的数据库表或 ',
 );
-export const CREATE_MESSAGE = t('create dataset from SQL query');
+export const CREATE_MESSAGE = t('从 SQL 查询创建数据集');
 export const VIEW_DATASET_MESSAGE = t(
-  ' to open SQL Lab. From there you can save the query as a dataset.',
+  ' 要打开 SQL 实验室。从那里您可以将查询保存为数据集。',
 );
 
 const renderEmptyDescription = () => (
@@ -59,14 +66,23 @@ const renderEmptyDescription = () => (
   </>
 );
 
-export const SELECT_TABLE_TITLE = t('Select dataset source');
-export const NO_COLUMNS_TITLE = t('No table columns');
+// export const SELECT_TABLE_TITLE = t('Select dataset source');
+// export const NO_COLUMNS_TITLE = t('No table columns');
+// export const NO_COLUMNS_DESCRIPTION = t(
+//   'This database table does not contain any data. Please select a different table.',
+// );
+// export const ERROR_TITLE = t('An Error Occurred');
+// export const ERROR_DESCRIPTION = t(
+//   'Unable to load columns for the selected table. Please select a different table.',
+// );
+export const SELECT_TABLE_TITLE = t('选择数据集源');
+export const NO_COLUMNS_TITLE = t('没有表列');
 export const NO_COLUMNS_DESCRIPTION = t(
-  'This database table does not contain any data. Please select a different table.',
+  '此数据库表不包含任何数据。请选择其他表格。',
 );
-export const ERROR_TITLE = t('An Error Occurred');
+export const ERROR_TITLE = t('发生错误');
 export const ERROR_DESCRIPTION = t(
-  'Unable to load columns for the selected table. Please select a different table.',
+  '无法加载所选表的列。请选择其他表格。',
 );
 
 interface MessageContentProps {

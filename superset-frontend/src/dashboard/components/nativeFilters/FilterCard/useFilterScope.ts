@@ -57,7 +57,8 @@ export const useFilterScope = (filter: Filter) => {
           filter.scope.rootPath.includes(topLevelTab),
         ))
     ) {
-      return { all: [t('All charts')] };
+      // return { all: [t('All charts')] };
+      return { all: [t('所有图表')] };
     }
 
     // no charts excluded and not every top level tab in scope

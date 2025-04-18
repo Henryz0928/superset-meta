@@ -58,12 +58,15 @@ const DuplicateDatasetModal: FunctionComponent<DuplicateDatasetModalProps> = ({
     <Modal
       show={show}
       onHide={onHide}
-      title={t('Duplicate dataset')}
+      // title={t('Duplicate dataset')}
+      title={t('重复的数据集')}
       disablePrimaryButton={disableSave}
       onHandledPrimaryAction={duplicateDataset}
-      primaryButtonName={t('Duplicate')}
+      // primaryButtonName={t('Duplicate')}
+      primaryButtonName={t('重复')}
     >
-      <FormLabel htmlFor="duplicate">{t('New dataset name')}</FormLabel>
+      {/* <FormLabel htmlFor="duplicate">{t('New dataset name')}</FormLabel> */}
+      <FormLabel htmlFor="duplicate">{t('新数据集名称')}</FormLabel>
       <Input
         data-test="duplicate-modal-input"
         type="text"

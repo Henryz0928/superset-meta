@@ -197,7 +197,7 @@ function ChartTable({
                   data-test="add-annotation-layer-button"
                 />
                 {/* {t('Chart')} */}
-                {'报表'}
+                {'图表'}
               </>
             ),
             buttonStyle: 'tertiary',

@@ -222,7 +222,8 @@ export class ChartCreation extends PureComponent<
         datasource.label = datasource.customLabel;
         this.setState({ datasource });
       });
-      this.props.addSuccessToast(t('The dataset has been saved'));
+      // this.props.addSuccessToast(t('The dataset has been saved'));
+      this.props.addSuccessToast(t('数据集已保存'));
     }
   }
 
@@ -296,13 +297,16 @@ export class ChartCreation extends PureComponent<
   render() {
     const { theme } = this.props;
     const isButtonDisabled = this.isBtnDisabled();
-    const VIEW_INSTRUCTIONS_TEXT = t('view instructions');
+    // const VIEW_INSTRUCTIONS_TEXT = t('view instructions');
+    const VIEW_INSTRUCTIONS_TEXT = t('查看说明');
     const datasetHelpText = this.state.canCreateDataset ? (
       <span data-test="dataset-write">
         <Link to="/dataset/add/" data-test="add-chart-new-dataset">
-          {t('Add a dataset')}
+          {/* {t('Add a dataset')} */}
+          {t('添加数据集 ')}
         </Link>
-        {t('or')}{' '}
+        {/* {t('or')}{' '} */}
+        {t('或')}{' '}
         <a
           href="https://superset.apache.org/docs/creating-charts-dashboards/creating-your-first-dashboard/#registering-a-new-table"
           rel="noopener noreferrer"
@@ -330,21 +334,25 @@ export class ChartCreation extends PureComponent<
 
     return (
       <StyledContainer>
-        <h3>{t('Create a new chart')}</h3>
+        {/* <h3>{t('Create a new chart')}</h3> */}
+        <h3>{t('创建一个新的图表')}</h3>
         <Steps direction="vertical" size="small">
           <Steps.Step
-            title={<StyledStepTitle>{t('Choose a dataset')}</StyledStepTitle>}
+            // title={<StyledStepTitle>{t('Choose a dataset')}</StyledStepTitle>}
+            title={<StyledStepTitle>{t('选择一个数据集')}</StyledStepTitle>}
             status={this.state.datasource?.value ? 'finish' : 'process'}
             description={
               <StyledStepDescription className="dataset">
                 <AsyncSelect
                   autoFocus
-                  ariaLabel={t('Dataset')}
+                  // ariaLabel={t('Dataset')}
+                  ariaLabel={t('数据集')}
                   name="select-datasource"
                   onChange={this.changeDatasource}
                   options={this.loadDatasources}
                   optionFilterProps={['id', 'label']}
-                  placeholder={t('Choose a dataset')}
+                  // placeholder={t('Choose a dataset')}
+                  placeholder={t('选择一个数据集')}
                   showSearch
                   value={this.state.datasource}
                 />
@@ -353,7 +361,8 @@ export class ChartCreation extends PureComponent<
             }
           />
           <Steps.Step
-            title={<StyledStepTitle>{t('Choose chart type')}</StyledStepTitle>}
+            // title={<StyledStepTitle>{t('Choose chart type')}</StyledStepTitle>}
+            title={<StyledStepTitle>{t('选择图表类型')}</StyledStepTitle>}
             status={this.state.vizType ? 'finish' : 'process'}
             description={
               <StyledStepDescription>
@@ -371,7 +380,8 @@ export class ChartCreation extends PureComponent<
         <div className="footer">
           {isButtonDisabled && (
             <span>
-              {t('Please select both a Dataset and a Chart type to proceed')}
+              {/* {t('Please select both a Dataset and a Chart type to proceed')} */}
+              {t('请同时选择数据集和图表类型以继续')}
             </span>
           )}
           <Button
@@ -379,7 +389,8 @@ export class ChartCreation extends PureComponent<
             disabled={isButtonDisabled}
             onClick={this.gotoSlice}
           >
-            {t('Create new chart')}
+            {/* {t('Create new chart')} */}
+            {t('创建新的图表')}
           </Button>
         </div>
       </StyledContainer>
