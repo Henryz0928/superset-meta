@@ -313,8 +313,10 @@ const Tabs = props => {
           handleDeleteTab(tabIndex);
         },
         okType: 'danger',
-        okText: t('DELETE'),
-        cancelText: t('CANCEL'),
+        // okText: t('DELETE'),
+        // cancelText: t('CANCEL'),
+        okText: t('删除'),
+        cancelText: t('取消'),
         icon: null,
       });
     },

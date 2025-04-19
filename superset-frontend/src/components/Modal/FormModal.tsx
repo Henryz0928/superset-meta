@@ -95,7 +95,8 @@ function FormModal({
             data-test="modal-cancel-button"
             onClick={handleClose}
           >
-            {t('Cancel')}
+            {/* {t('Cancel')} */}
+            {t('取消')}
           </Button>
           <Button
             buttonStyle="primary"

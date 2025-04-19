@@ -23,9 +23,11 @@ import { ControlPanelSectionConfig } from '../types';
 // Not recommended for use in third-party plugins.
 
 const baseTimeSection = {
-  label: t('Time'),
+  // label: t('Time'),
+  label: t('时间'),
   expanded: true,
-  description: t('Time related form attributes'),
+  // description: t('Time related form attributes'),
+  description: t('时间相关的表单属性'),
 };
 
 export const legacyTimeseriesTime: ControlPanelSectionConfig = {
@@ -39,7 +41,8 @@ export const legacyTimeseriesTime: ControlPanelSectionConfig = {
 };
 
 export const datasourceAndVizType: ControlPanelSectionConfig = {
-  label: t('Datasource & Chart Type'),
+  // label: t('Datasource & Chart Type'),
+  label: t('数据源 & 图表类型'),
   expanded: true,
   controlSetRows: [
     ['datasource'],
@@ -49,28 +52,36 @@ export const datasourceAndVizType: ControlPanelSectionConfig = {
         name: 'slice_id',
         config: {
           type: 'HiddenControl',
-          label: t('Chart ID'),
+          // label: t('Chart ID'),
+          label: t('图表 ID'),
           hidden: true,
-          description: t('The id of the active chart'),
+          // description: t('The id of the active chart'),
+          description: t('当前活动图表的 ID'),
         },
       },
       {
         name: 'cache_timeout',
         config: {
           type: 'HiddenControl',
-          label: t('Cache Timeout (seconds)'),
+          // label: t('Cache Timeout (seconds)'),
+          label: t('缓存超时（秒）'),
           hidden: true,
-          description: t('The number of seconds before expiring the cache'),
+          // description: t('The number of seconds before expiring the cache'),
+          description: t('缓存过期前的秒数'),
         },
       },
       {
         name: 'url_params',
         config: {
           type: 'HiddenControl',
-          label: t('URL Parameters'),
+          // label: t('URL Parameters'),
+          label: t('URL 参数'),
           hidden: true,
+          // description: t(
+          //   'Extra url parameters for use in Jinja templated queries',
+          // ),
           description: t(
-            'Extra url parameters for use in Jinja templated queries',
+            '额外的 URL 参数用于 Jinja 模板查询中',
           ),
         },
       },
@@ -78,10 +89,14 @@ export const datasourceAndVizType: ControlPanelSectionConfig = {
         name: 'custom_params',
         config: {
           type: 'HiddenControl',
-          label: t('Extra Parameters'),
+          // label: t('Extra Parameters'),
+          label: t('额外参数'),
           hidden: true,
+          // description: t(
+          //   'Extra parameters that any plugins can choose to set for use in Jinja templated queries',
+          // ),
           description: t(
-            'Extra parameters that any plugins can choose to set for use in Jinja templated queries',
+            '任何插件可以选择设置的额外参数，用于在 Jinja 模板查询中使用',
           ),
         },
       },
@@ -90,12 +105,14 @@ export const datasourceAndVizType: ControlPanelSectionConfig = {
 };
 
 export const colorScheme: ControlPanelSectionConfig = {
-  label: t('Color Scheme'),
+  // label: t('Color Scheme'),
+  label: t('颜色方案'),
   controlSetRows: [['color_scheme']],
 };
 
 export const annotations: ControlPanelSectionConfig = {
-  label: t('Annotations and Layers'),
+  // label: t('Annotations and Layers'),
+  label: t('注释和图层'),
   tabOverride: 'data',
   expanded: true,
   controlSetRows: [
@@ -106,7 +123,8 @@ export const annotations: ControlPanelSectionConfig = {
           type: 'AnnotationLayerControl',
           label: '',
           default: [],
-          description: t('Annotation Layers'),
+          // description: t('Annotation Layers'),
+          description: t('注释层'),
           renderTrigger: true,
         },
       },

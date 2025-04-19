@@ -22,7 +22,8 @@ import { ControlPanelSectionConfig } from '../types';
 export const annotationLayers = [];
 
 export const annotationsAndLayersControls: ControlPanelSectionConfig = {
-  label: t('Annotations and Layers'),
+  // label: t('Annotations and Layers'),
+  label: t('注释和图层'),
   expanded: false,
   tabOverride: 'data',
   controlSetRows: [
@@ -33,7 +34,8 @@ export const annotationsAndLayersControls: ControlPanelSectionConfig = {
           type: 'AnnotationLayerControl',
           label: '',
           default: annotationLayers,
-          description: t('Annotation Layers'),
+          // description: t('Annotation Layers'),
+          description: t('注释层'),
           renderTrigger: false,
         },
       },

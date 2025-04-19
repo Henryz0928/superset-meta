@@ -287,12 +287,15 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
 
   const onClickSave = () => {
     dialog.current = modal.confirm({
-      title: t('Confirm save'),
+      // title: t('Confirm save'),
+      title: t('确认保存'),
       content: renderSaveDialog(),
       onOk: onConfirmSave,
       icon: null,
-      okText: t('OK'),
-      cancelText: t('Cancel'),
+      // okText: t('OK'),
+      // cancelText: t('Cancel'),
+      okText: t('确定'),
+      cancelText: t('取消'),
     });
   };
 
@@ -322,7 +325,8 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
             className="m-r-5"
             onClick={onHide}
           >
-            {t('Cancel')}
+            {/* {t('Cancel')} */}
+            {t('取消')}
           </Button>
           <Button
             buttonSize="small"
