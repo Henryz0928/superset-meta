@@ -145,9 +145,13 @@ const StyledButtonWrapper = styled.span`
 
 const sqlTooltipOptions = {
   placement: 'topRight',
+  // title: t(
+  //   'If changes are made to your SQL query, ' +
+  //     'columns in your dataset will be synced when saving the dataset.',
+  // ),
   title: t(
-    'If changes are made to your SQL query, ' +
-      'columns in your dataset will be synced when saving the dataset.',
+    '如果对您的 SQL 查询进行了更改， ' +
+    '您的数据集中列将在保存数据集时同步。',
   ),
 };
 
@@ -155,15 +159,21 @@ const checkboxGenerator = (d, onChange) => (
   <CheckboxControl value={d} onChange={onChange} />
 );
 const DATA_TYPES = [
-  { value: 'STRING', label: t('STRING') },
-  { value: 'NUMERIC', label: t('NUMERIC') },
-  { value: 'DATETIME', label: t('DATETIME') },
-  { value: 'BOOLEAN', label: t('BOOLEAN') },
+  // { value: 'STRING', label: t('STRING') },
+  // { value: 'NUMERIC', label: t('NUMERIC') },
+  // { value: 'DATETIME', label: t('DATETIME') },
+  // { value: 'BOOLEAN', label: t('BOOLEAN') },
+  { value: 'STRING', label: t('字符串') },
+  { value: 'NUMERIC', label: t('数字') },
+  { value: 'DATETIME', label: t('日期时间') },
+  { value: 'BOOLEAN', label: t('布尔') },
 ];
 
 const DATASOURCE_TYPES_ARR = [
-  { key: 'physical', label: t('Physical (table or view)') },
-  { key: 'virtual', label: t('Virtual (SQL)') },
+  // { key: 'physical', label: t('Physical (table or view)') },
+  // { key: 'virtual', label: t('Virtual (SQL)') },
+  { key: 'physical', label: t('物理（表或视图）') },
+  { key: 'virtual', label: t('虚拟 (SQL)') },
 ];
 const DATASOURCE_TYPES = {};
 DATASOURCE_TYPES_ARR.forEach(o => {
@@ -204,42 +214,42 @@ function ColumnCollectionTable({
       tableColumns={
         isFeatureEnabled(FeatureFlag.EnableAdvancedDataTypes)
           ? [
-              'column_name',
-              'advanced_data_type',
-              'type',
-              'is_dttm',
-              'main_dttm_col',
-              'filterable',
-              'groupby',
-            ]
+            'column_name',
+            'advanced_data_type',
+            'type',
+            'is_dttm',
+            'main_dttm_col',
+            'filterable',
+            'groupby',
+          ]
           : [
-              'column_name',
-              'type',
-              'is_dttm',
-              'main_dttm_col',
-              'filterable',
-              'groupby',
-            ]
+            'column_name',
+            'type',
+            'is_dttm',
+            'main_dttm_col',
+            'filterable',
+            'groupby',
+          ]
       }
       sortColumns={
         isFeatureEnabled(FeatureFlag.EnableAdvancedDataTypes)
           ? [
-              'column_name',
-              'advanced_data_type',
-              'type',
-              'is_dttm',
-              'main_dttm_col',
-              'filterable',
-              'groupby',
-            ]
+            'column_name',
+            'advanced_data_type',
+            'type',
+            'is_dttm',
+            'main_dttm_col',
+            'filterable',
+            'groupby',
+          ]
           : [
-              'column_name',
-              'type',
-              'is_dttm',
-              'main_dttm_col',
-              'filterable',
-              'groupby',
-            ]
+            'column_name',
+            'type',
+            'is_dttm',
+            'main_dttm_col',
+            'filterable',
+            'groupby',
+          ]
       }
       allowDeletes
       allowAddItem={allowAddItem}
@@ -253,7 +263,8 @@ function ColumnCollectionTable({
             {showExpression && (
               <Field
                 fieldKey="expression"
-                label={t('SQL expression')}
+                // label={t('SQL expression')}
+                label={t('SQL 表达式')}
                 control={
                   <TextAreaControl
                     language="markdown"
@@ -265,31 +276,37 @@ function ColumnCollectionTable({
             )}
             <Field
               fieldKey="verbose_name"
-              label={t('Label')}
+              // label={t('Label')}
+              label={t('标签')}
               control={
                 <TextControl
                   controlId="verbose_name"
-                  placeholder={t('Label')}
+                  // placeholder={t('Label')}
+                  placeholder={t('标签')}
                 />
               }
             />
             <Field
               fieldKey="description"
-              label={t('Description')}
+              // label={t('Description')}
+              label={t('描述')}
               control={
                 <TextControl
                   controlId="description"
-                  placeholder={t('Description')}
+                  // placeholder={t('Description')}
+                  placeholder={t('描述')}
                 />
               }
             />
             {allowEditDataType && (
               <Field
                 fieldKey="type"
-                label={t('Data type')}
+                // label={t('Data type')}
+                label={t('数据类型')}
                 control={
                   <Select
-                    ariaLabel={t('Data type')}
+                    // ariaLabel={t('Data type')}
+                    ariaLabel={t('数据类型')}
                     options={DATA_TYPES}
                     name="type"
                     allowNewOptions
@@ -301,11 +318,13 @@ function ColumnCollectionTable({
             {isFeatureEnabled(FeatureFlag.EnableAdvancedDataTypes) ? (
               <Field
                 fieldKey="advanced_data_type"
-                label={t('Advanced data type')}
+                // label={t('Advanced data type')}
+                label={t('高级数据类型')}
                 control={
                   <TextControl
                     controlId="advanced_data_type"
-                    placeholder={t('Advanced Data type')}
+                    // placeholder={t('Advanced Data type')}
+                    placeholder={t('高级数据类型')}
                   />
                 }
               />
@@ -314,27 +333,47 @@ function ColumnCollectionTable({
             )}
             <Field
               fieldKey="python_date_format"
-              label={t('Datetime format')}
+              // label={t('Datetime format')}
+              label={t('日期时间格式')}
               description={
                 /* Note the fragmented translations may not work. */
+                // <div>
+                //   {t('The pattern of timestamp format. For strings use ')}
+                //   <a href="https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior">
+                //     {t('Python datetime string pattern')}
+                //   </a>
+                //   {t(' expression which needs to adhere to the ')}
+                //   <a href="https://en.wikipedia.org/wiki/ISO_8601">
+                //     {t('ISO 8601')}
+                //   </a>
+                //   {t(` standard to ensure that the lexicographical ordering
+                //       coincides with the chronological ordering. If the
+                //       timestamp format does not adhere to the ISO 8601 standard
+                //       you will need to define an expression and type for
+                //       transforming the string into a date or timestamp. Note
+                //       currently time zones are not supported. If time is stored
+                //       in epoch format, put \`epoch_s\` or \`epoch_ms\`. If no pattern
+                //       is specified we fall back to using the optional defaults on a per
+                //       database/column name level via the extra parameter.`)}
+                // </div>
                 <div>
-                  {t('The pattern of timestamp format. For strings use ')}
+                  {t('时间戳格式的模式。对于字符串使用 ')}
                   <a href="https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior">
-                    {t('Python datetime string pattern')}
+                    {t('Python 日期时间字符串模式')}
                   </a>
-                  {t(' expression which needs to adhere to the ')}
+                  {t(' 需要遵守的表达式 ')}
                   <a href="https://en.wikipedia.org/wiki/ISO_8601">
                     {t('ISO 8601')}
                   </a>
-                  {t(` standard to ensure that the lexicographical ordering
-                      coincides with the chronological ordering. If the
-                      timestamp format does not adhere to the ISO 8601 standard
-                      you will need to define an expression and type for
-                      transforming the string into a date or timestamp. Note
-                      currently time zones are not supported. If time is stored
-                      in epoch format, put \`epoch_s\` or \`epoch_ms\`. If no pattern
-                      is specified we fall back to using the optional defaults on a per
-                      database/column name level via the extra parameter.`)}
+                  {t(` 确保按照字典顺序排序的标准
+                    与时间顺序一致如果
+                    时间戳格式不符合 ISO 8601 标准
+                    您需要定义一个表达式和类型
+                    将字符串转换为日期或时间戳。注意
+                    目前时区不被支持。如果存储了时间，请注意时区问题。
+                    在 epoch 格式中，请使用`epoch_s`或`epoch_ms`。如果没有指定模式，则会退回到使用每个数据库/列名称级别的可选默认值。
+                    在没有指定模式的情况下，我们将退回到使用每个数据库/列名称级别的可选默认值。
+                    通过 extra 参数在数据库/列名称级别进行设置。`)}
                 </div>
               }
               control={
@@ -346,23 +385,29 @@ function ColumnCollectionTable({
             />
             <Field
               fieldKey="certified_by"
-              label={t('Certified By')}
-              description={t('Person or group that has certified this metric')}
+              // label={t('Certified By')}
+              label={t('认证由')}
+              // description={t('Person or group that has certified this metric')}
+              description={t('已认证此指标的个人或团体')}
               control={
                 <TextControl
                   controlId="certified"
-                  placeholder={t('Certified by')}
+                  // placeholder={t('Certified by')}
+                  placeholder={t('认证由')}
                 />
               }
             />
             <Field
               fieldKey="certification_details"
-              label={t('Certification details')}
-              description={t('Details of the certification')}
+              // label={t('Certification details')}
+              // description={t('Details of the certification')}
+              label={t('认证详情')}
+              description={t('认证详情')}
               control={
                 <TextControl
                   controlId="certificationDetails"
-                  placeholder={t('Certification details')}
+                  // placeholder={t('Certification details')}
+                  placeholder={t('认证详情')}
                 />
               }
             />
@@ -371,128 +416,145 @@ function ColumnCollectionTable({
       }
       columnLabels={
         isFeatureEnabled(FeatureFlag.EnableAdvancedDataTypes)
+          // ? {
+          //   column_name: t('Column'),
+          //   advanced_data_type: t('Advanced data type'),
+          //   type: t('Data type'),
+          //   groupby: t('Is dimension'),
+          //   is_dttm: t('Is temporal'),
+          //   main_dttm_col: t('Default datetime'),
+          //   filterable: t('Is filterable'),
+          // }
+          // : {
+          //   column_name: t('Column'),
+          //   type: t('Data type'),
+          //   groupby: t('Is dimension'),
+          //   is_dttm: t('Is temporal'),
+          //   main_dttm_col: t('Default datetime'),
+          //   filterable: t('Is filterable'),
+          // }
           ? {
-              column_name: t('Column'),
-              advanced_data_type: t('Advanced data type'),
-              type: t('Data type'),
-              groupby: t('Is dimension'),
-              is_dttm: t('Is temporal'),
-              main_dttm_col: t('Default datetime'),
-              filterable: t('Is filterable'),
-            }
+            column_name: t('列'),
+            advanced_data_type: t('高级数据类型'),
+            type: t('数据类型'),
+            groupby: t('维度'),
+            is_dttm: t('临时的'),
+            main_dttm_col: t('默认日期时间'),
+            filterable: t('可筛选'),
+          }
           : {
-              column_name: t('Column'),
-              type: t('Data type'),
-              groupby: t('Is dimension'),
-              is_dttm: t('Is temporal'),
-              main_dttm_col: t('Default datetime'),
-              filterable: t('Is filterable'),
-            }
+            column_name: t('列'),
+            type: t('数据类型'),
+            groupby: t('维度'),
+            is_dttm: t('临时的'),
+            main_dttm_col: t('默认日期时间'),
+            filterable: t('可筛选'),
+          }
       }
       onChange={onColumnsChange}
       itemRenderers={
         isFeatureEnabled(FeatureFlag.EnableAdvancedDataTypes)
           ? {
-              column_name: (v, onItemChange, _, record) =>
-                editableColumnName ? (
-                  <StyledLabelWrapper>
-                    {record.is_certified && (
-                      <CertifiedBadge
-                        certifiedBy={record.certified_by}
-                        details={record.certification_details}
-                      />
-                    )}
-                    <EditableTitle
-                      canEdit
-                      title={v}
-                      onSaveTitle={onItemChange}
+            column_name: (v, onItemChange, _, record) =>
+              editableColumnName ? (
+                <StyledLabelWrapper>
+                  {record.is_certified && (
+                    <CertifiedBadge
+                      certifiedBy={record.certified_by}
+                      details={record.certification_details}
                     />
-                  </StyledLabelWrapper>
-                ) : (
-                  <StyledLabelWrapper>
-                    {record.is_certified && (
-                      <CertifiedBadge
-                        certifiedBy={record.certified_by}
-                        details={record.certification_details}
-                      />
-                    )}
-                    {v}
-                  </StyledLabelWrapper>
-                ),
-              main_dttm_col: (value, _onItemChange, _label, record) => {
-                const checked = datasource.main_dttm_col === record.column_name;
-                const disabled = !columns.find(
-                  column => column.column_name === record.column_name,
-                ).is_dttm;
-                return (
-                  <Radio
-                    data-test={`radio-default-dttm-${record.column_name}`}
-                    checked={checked}
-                    disabled={disabled}
-                    onChange={() =>
-                      onDatasourceChange({
-                        ...datasource,
-                        main_dttm_col: record.column_name,
-                      })
-                    }
+                  )}
+                  <EditableTitle
+                    canEdit
+                    title={v}
+                    onSaveTitle={onItemChange}
                   />
-                );
-              },
-              type: d => (d ? <Label>{d}</Label> : null),
-              advanced_data_type: d => (
-                <Label onChange={onColumnsChange}>{d}</Label>
+                </StyledLabelWrapper>
+              ) : (
+                <StyledLabelWrapper>
+                  {record.is_certified && (
+                    <CertifiedBadge
+                      certifiedBy={record.certified_by}
+                      details={record.certification_details}
+                    />
+                  )}
+                  {v}
+                </StyledLabelWrapper>
               ),
-              is_dttm: checkboxGenerator,
-              filterable: checkboxGenerator,
-              groupby: checkboxGenerator,
-            }
+            main_dttm_col: (value, _onItemChange, _label, record) => {
+              const checked = datasource.main_dttm_col === record.column_name;
+              const disabled = !columns.find(
+                column => column.column_name === record.column_name,
+              ).is_dttm;
+              return (
+                <Radio
+                  data-test={`radio-default-dttm-${record.column_name}`}
+                  checked={checked}
+                  disabled={disabled}
+                  onChange={() =>
+                    onDatasourceChange({
+                      ...datasource,
+                      main_dttm_col: record.column_name,
+                    })
+                  }
+                />
+              );
+            },
+            type: d => (d ? <Label>{d}</Label> : null),
+            advanced_data_type: d => (
+              <Label onChange={onColumnsChange}>{d}</Label>
+            ),
+            is_dttm: checkboxGenerator,
+            filterable: checkboxGenerator,
+            groupby: checkboxGenerator,
+          }
           : {
-              column_name: (v, onItemChange, _, record) =>
-                editableColumnName ? (
-                  <StyledLabelWrapper>
-                    {record.is_certified && (
-                      <CertifiedBadge
-                        certifiedBy={record.certified_by}
-                        details={record.certification_details}
-                      />
-                    )}
-                    <TextControl value={v} onChange={onItemChange} />
-                  </StyledLabelWrapper>
-                ) : (
-                  <StyledLabelWrapper>
-                    {record.is_certified && (
-                      <CertifiedBadge
-                        certifiedBy={record.certified_by}
-                        details={record.certification_details}
-                      />
-                    )}
-                    {v}
-                  </StyledLabelWrapper>
-                ),
-              main_dttm_col: (value, _onItemChange, _label, record) => {
-                const checked = datasource.main_dttm_col === record.column_name;
-                const disabled = !columns.find(
-                  column => column.column_name === record.column_name,
-                ).is_dttm;
-                return (
-                  <Radio
-                    data-test={`radio-default-dttm-${record.column_name}`}
-                    checked={checked}
-                    disabled={disabled}
-                    onChange={() =>
-                      onDatasourceChange({
-                        ...datasource,
-                        main_dttm_col: record.column_name,
-                      })
-                    }
-                  />
-                );
-              },
-              type: d => (d ? <Label>{d}</Label> : null),
-              is_dttm: checkboxGenerator,
-              filterable: checkboxGenerator,
-              groupby: checkboxGenerator,
-            }
+            column_name: (v, onItemChange, _, record) =>
+              editableColumnName ? (
+                <StyledLabelWrapper>
+                  {record.is_certified && (
+                    <CertifiedBadge
+                      certifiedBy={record.certified_by}
+                      details={record.certification_details}
+                    />
+                  )}
+                  <TextControl value={v} onChange={onItemChange} />
+                </StyledLabelWrapper>
+              ) : (
+                <StyledLabelWrapper>
+                  {record.is_certified && (
+                    <CertifiedBadge
+                      certifiedBy={record.certified_by}
+                      details={record.certification_details}
+                    />
+                  )}
+                  {v}
+                </StyledLabelWrapper>
+              ),
+            main_dttm_col: (value, _onItemChange, _label, record) => {
+              const checked = datasource.main_dttm_col === record.column_name;
+              const disabled = !columns.find(
+                column => column.column_name === record.column_name,
+              ).is_dttm;
+              return (
+                <Radio
+                  data-test={`radio-default-dttm-${record.column_name}`}
+                  checked={checked}
+                  disabled={disabled}
+                  onChange={() =>
+                    onDatasourceChange({
+                      ...datasource,
+                      main_dttm_col: record.column_name,
+                    })
+                  }
+                />
+              );
+            },
+            type: d => (d ? <Label>{d}</Label> : null),
+            is_dttm: checkboxGenerator,
+            filterable: checkboxGenerator,
+            groupby: checkboxGenerator,
+          }
       }
     />
   );
@@ -514,7 +576,8 @@ ColumnCollectionTable.defaultProps = {
   allowAddItem: false,
   allowEditDataType: false,
   itemGenerator: () => ({
-    column_name: t('<new column>'),
+    // column_name: t('<new column>'),
+    column_name: t('<新建列>'),
     filterable: true,
     groupby: true,
   }),
@@ -575,13 +638,15 @@ function OwnersSelector({ datasource, onChange }) {
 
   return (
     <AsyncSelect
-      ariaLabel={t('Select owners')}
+      // ariaLabel={t('Select owners')}
+      ariaLabel={t('选择所有者')}
       mode="multiple"
       name="owners"
       value={datasource.owners}
       options={loadOptions}
       onChange={onChange}
-      header={<FormLabel>{t('Owners')}</FormLabel>}
+      // header={<FormLabel>{t('Owners')}</FormLabel>}
+      header={<FormLabel>{t('所有者')}</FormLabel>}
       allowClear
     />
   );
@@ -720,13 +785,15 @@ class DatasourceEditor extends PureComponent {
           col => !col.expression, // remove calculated columns
         ),
       });
-      this.props.addSuccessToast(t('Metadata has been synced'));
+      // this.props.addSuccessToast(t('Metadata has been synced'));
+      this.props.addSuccessToast(t('元数据已同步'));
       this.setState({ metadataLoading: false });
     } catch (error) {
       const { error: clientError, statusText } =
         await getClientErrorObject(error);
       this.props.addDangerToast(
-        clientError || statusText || t('An error has occurred'),
+        // clientError || statusText || t('An error has occurred'),
+        clientError || statusText || t('发生了一个错误'),
       );
       this.setState({ metadataLoading: false });
     }
@@ -754,13 +821,15 @@ class DatasourceEditor extends PureComponent {
     // Looking for duplicate column_name
     dups = this.findDuplicates(datasource.columns, obj => obj.column_name);
     errors = errors.concat(
-      dups.map(name => t('Column name [%s] is duplicated', name)),
+      // dups.map(name => t('Column name [%s] is duplicated', name)),
+      dups.map(name => t('列名 [%s] 重复', name)),
     );
 
     // Looking for duplicate metric_name
     dups = this.findDuplicates(datasource.metrics, obj => obj.metric_name);
     errors = errors.concat(
-      dups.map(name => t('Metric name [%s] is duplicated', name)),
+      // dups.map(name => t('Metric name [%s] is duplicated', name)),
+      dups.map(name => t('指标名 [%s] 重复的', name)),
     );
 
     // Making sure calculatedColumns have an expression defined
@@ -769,7 +838,8 @@ class DatasourceEditor extends PureComponent {
     );
     errors = errors.concat(
       noFilterCalcCols.map(col =>
-        t('Calculated column [%s] requires an expression', col.column_name),
+        // t('Calculated column [%s] requires an expression', col.column_name),
+        t('计算列 [%s] 需要一个表达式', col.column_name),
       ),
     );
 
@@ -784,7 +854,8 @@ class DatasourceEditor extends PureComponent {
           }),
       );
     } catch {
-      errors = errors.concat([t('Invalid currency code in saved metrics')]);
+      // errors = errors.concat([t('Invalid currency code in saved metrics')]);
+      errors = errors.concat([t('保存的指标中无效的货币代码')]);
     }
 
     this.setState({ errors }, callback);
@@ -802,13 +873,15 @@ class DatasourceEditor extends PureComponent {
     const { datasource } = this.state;
     return (
       <Fieldset
-        title={t('Basic')}
+        // title={t('Basic')}
+        title={t('基本')}
         item={datasource}
         onChange={this.onDatasourceChange}
       >
         <Field
           fieldKey="description"
-          label={t('Description')}
+          // label={t('Description')}
+          label={t('描述')}
           control={
             <TextAreaControl
               language="markdown"
@@ -819,30 +892,45 @@ class DatasourceEditor extends PureComponent {
         />
         <Field
           fieldKey="default_endpoint"
-          label={t('Default URL')}
+          // label={t('Default URL')}
+          label={t('默认 URL')}
+          // description={t(
+          //   `Default URL to redirect to when accessing from the dataset list page.
+          //   Accepts relative URLs such as <span style=„white-space: nowrap;”>/superset/dashboard/{id}/</span>`,
+          // )}
           description={t(
-            `Default URL to redirect to when accessing from the dataset list page.
-            Accepts relative URLs such as <span style=„white-space: nowrap;”>/superset/dashboard/{id}/</span>`,
+            `从数据集列表页面访问时重定向的默认 URL。
+            接受类似<span style="white-space: nowrap;">/superset/dashboard/{id}/</span>这样的相对 URL`,
           )}
           control={<TextControl controlId="default_endpoint" />}
         />
         <Field
           inline
           fieldKey="filter_select_enabled"
-          label={t('Autocomplete filters')}
-          description={t('Whether to populate autocomplete filters options')}
+          // label={t('Autocomplete filters')}
+          // description={t('Whether to populate autocomplete filters options')}
+          label={t('自动补全过滤器')}
+          description={t('是否填充自动完成过滤选项')}
           control={<CheckboxControl />}
         />
         {this.state.isSqla && (
           <Field
             fieldKey="fetch_values_predicate"
-            label={t('Autocomplete query predicate')}
+            // label={t('Autocomplete query predicate')}
+            label={t('自动补全查询谓词')}
+            // description={t(
+            //   'When using "Autocomplete filters", this can be used to improve performance ' +
+            //   'of the query fetching the values. Use this option to apply a ' +
+            //   'predicate (WHERE clause) to the query selecting the distinct ' +
+            //   'values from the table. Typically the intent would be to limit the scan ' +
+            //   'by applying a relative time filter on a partitioned or indexed time-related field.',
+            // )}
             description={t(
-              'When using "Autocomplete filters", this can be used to improve performance ' +
-                'of the query fetching the values. Use this option to apply a ' +
-                'predicate (WHERE clause) to the query selecting the distinct ' +
-                'values from the table. Typically the intent would be to limit the scan ' +
-                'by applying a relative time filter on a partitioned or indexed time-related field.',
+              '使用“自动完成过滤器”时，这可以用来提高性能 ' +
+              '查询获取值时使用。请使用此选项应用一个 ' +
+              '将 WHERE 子句作为谓词添加到查询中以选择不同的 ' +
+              '表中的值。通常的意图是限制扫描。 ' +
+              '通过在分区或索引的时间相关字段上应用相对时间过滤器。',
             )}
             control={
               <TextAreaControl
@@ -857,12 +945,19 @@ class DatasourceEditor extends PureComponent {
         {this.state.isSqla && (
           <Field
             fieldKey="extra"
-            label={t('Extra')}
+            // label={t('Extra')}
+            label={t('额外')}
+            // description={t(
+            //   'Extra data to specify table metadata. Currently supports ' +
+            //   'metadata of the format: `{ "certification": { "certified_by": ' +
+            //   '"Data Platform Team", "details": "This table is the source of truth." ' +
+            //   '}, "warning_markdown": "This is a warning." }`.',
+            // )}
             description={t(
-              'Extra data to specify table metadata. Currently supports ' +
-                'metadata of the format: `{ "certification": { "certified_by": ' +
-                '"Data Platform Team", "details": "This table is the source of truth." ' +
-                '}, "warning_markdown": "This is a warning." }`.',
+              '额外的数据以指定表元数据。当前支持 ' +
+              'metadata 格式如下：```{ "certification": { "certified_by": ```' +
+              '"Data Platform Team", "details": "这张表是真相的来源。"" ' +
+              '}, "warning_markdown": "这是一条警告。" }`.',
             )}
             control={
               <TextAreaControl
@@ -888,32 +983,45 @@ class DatasourceEditor extends PureComponent {
     const { datasource } = this.state;
     return (
       <Fieldset
-        title={t('Advanced')}
+        // title={t('Advanced')}
+        title={t('高级')}
         item={datasource}
         onChange={this.onDatasourceChange}
       >
         <Field
           fieldKey="cache_timeout"
-          label={t('Cache timeout')}
+          // label={t('Cache timeout')}
+          label={t('缓存超时')}
+          // description={t(
+          //   'The duration of time in seconds before the cache is invalidated. Set to -1 to bypass the cache.',
+          // )}
           description={t(
-            'The duration of time in seconds before the cache is invalidated. Set to -1 to bypass the cache.',
+            '缓存失效前的秒数。设置为-1 以跳过缓存。',
           )}
           control={<TextControl controlId="cache_timeout" />}
         />
         <Field
           fieldKey="offset"
-          label={t('Hours offset')}
+          // label={t('Hours offset')}
+          label={t('时区偏移量')}
           control={<TextControl controlId="offset" />}
+          // description={t(
+          //   'The number of hours, negative or positive, to shift the time column. This can be used to move UTC time to local time.',
+          // )}
           description={t(
-            'The number of hours, negative or positive, to shift the time column. This can be used to move UTC time to local time.',
+            '要将时间列向前或向后移动的小时数，可以是正数或负数。这可以用于将 UTC 时间转换为本地时间。',
           )}
         />
         {this.state.isSqla && (
           <Field
             fieldKey="template_params"
-            label={t('Template parameters')}
+            // label={t('Template parameters')}
+            label={t('模板参数')}
+            // description={t(
+            //   'A set of parameters that become available in the query using Jinja templating syntax',
+            // )}
             description={t(
-              'A set of parameters that become available in the query using Jinja templating syntax',
+              '在查询中使用 Jinja 模板语法可用的一组参数',
             )}
             control={<TextControl controlId="template_params" />}
           />
@@ -921,18 +1029,26 @@ class DatasourceEditor extends PureComponent {
         <Field
           inline
           fieldKey="normalize_columns"
-          label={t('Normalize column names')}
+          // label={t('Normalize column names')}
+          // description={t(
+          //   'Allow column names to be changed to case insensitive format, if supported (e.g. Oracle, Snowflake).',
+          // )}
+          label={t('规范化列名称')}
           description={t(
-            'Allow column names to be changed to case insensitive format, if supported (e.g. Oracle, Snowflake).',
+            '允许将列名更改为不区分大小写的格式（例如：Oracle、Snowflake）。',
           )}
           control={<CheckboxControl controlId="normalize_columns" />}
         />
         <Field
           inline
           fieldKey="always_filter_main_dttm"
-          label={t('Always filter main datetime column')}
+          // label={t('Always filter main datetime column')}
+          // description={t(
+          //   `When the secondary temporal columns are filtered, apply the same filter to the main datetime column.`,
+          // )}
+          label={t('始终过滤主要时间日期列')}
           description={t(
-            `When the secondary temporal columns are filtered, apply the same filter to the main datetime column.`,
+            `当次级时间列被过滤时，将相同的过滤器应用于主日期时间列。`,
           )}
           control={<CheckboxControl controlId="always_filter_main_dttm" />}
         />
@@ -952,8 +1068,10 @@ class DatasourceEditor extends PureComponent {
           tableColumns={['name', 'config']}
           onChange={this.onDatasourcePropChange.bind(this, 'spatials')}
           itemGenerator={() => ({
-            name: t('<new spatial>'),
-            type: t('<no type>'),
+            // name: t('<new spatial>'),
+            // type: t('<no type>'),
+            name: t('<新空间>'),
+            type: t('<无类型>'),
             config: null,
           })}
           collection={spatials}
@@ -994,10 +1112,12 @@ class DatasourceEditor extends PureComponent {
             )}
           </span>
           {!this.state.isEditMode && (
-            <div>{t('Click the lock to make changes.')}</div>
+            // <div>{t('Click the lock to make changes.')}</div>
+            <div>{t('点击锁以进行更改。')}</div>
           )}
           {this.state.isEditMode && (
-            <div>{t('Click the lock to prevent further changes.')}</div>
+            // <div>{t('Click the lock to prevent further changes.')}</div>
+            <div>{t('点击锁以防止进一步更改。')}</div>
           )}
         </EditLockContainer>
         <div className="m-l-10 m-t-20 m-b-10">
@@ -1023,7 +1143,8 @@ class DatasourceEditor extends PureComponent {
                   <Col xs={24} md={12}>
                     <Field
                       fieldKey="databaseSelector"
-                      label={t('Virtual')}
+                      // label={t('Virtual')}
+                      label={t('虚拟')}
                       control={
                         <div css={{ marginTop: 8 }}>
                           <DatabaseSelector
@@ -1052,14 +1173,16 @@ class DatasourceEditor extends PureComponent {
                     <div css={{ width: 'calc(100% - 34px)', marginTop: -16 }}>
                       <Field
                         fieldKey="table_name"
-                        label={t('Name')}
+                        // label={t('Name')}
+                        label={t('名称')}
                         control={
                           <TextControl
                             controlId="table_name"
                             onChange={table => {
                               this.onDatasourcePropChange('table_name', table);
                             }}
-                            placeholder={t('Dataset name')}
+                            // placeholder={t('Dataset name')}
+                            placeholder={t('数据集名称')}
                             disabled={!this.state.isEditMode}
                           />
                         }
@@ -1069,10 +1192,15 @@ class DatasourceEditor extends PureComponent {
                   <Field
                     fieldKey="sql"
                     label={t('SQL')}
+                    // description={t(
+                    //   'When specifying SQL, the datasource acts as a view. ' +
+                    //   'Superset will use this statement as a subquery while grouping and filtering ' +
+                    //   'on the generated parent queries.',
+                    // )}
                     description={t(
-                      'When specifying SQL, the datasource acts as a view. ' +
-                        'Superset will use this statement as a subquery while grouping and filtering ' +
-                        'on the generated parent queries.',
+                      '在指定 SQL 时，数据源充当视图。 ' +
+                      'Superset 将会使用这条语句作为子查询，在分组和过滤时使用 ' +
+                      '在生成的父查询上。',
                     )}
                     control={
                       <TextAreaControl
@@ -1095,7 +1223,8 @@ class DatasourceEditor extends PureComponent {
               {this.state.isSqla && (
                 <Field
                   fieldKey="tableSelector"
-                  label={t('Physical')}
+                  // label={t('Physical')}
+                  label={t('物理')}
                   control={
                     <div css={{ marginTop: 8 }}>
                       <TableSelector
@@ -1115,38 +1244,43 @@ class DatasourceEditor extends PureComponent {
                         onCatalogChange={
                           this.state.isEditMode
                             ? catalog =>
-                                this.onDatasourcePropChange('catalog', catalog)
+                              this.onDatasourcePropChange('catalog', catalog)
                             : undefined
                         }
                         onSchemaChange={
                           this.state.isEditMode
                             ? schema =>
-                                this.onDatasourcePropChange('schema', schema)
+                              this.onDatasourcePropChange('schema', schema)
                             : undefined
                         }
                         onDbChange={
                           this.state.isEditMode
                             ? database =>
-                                this.onDatasourcePropChange(
-                                  'database',
-                                  database,
-                                )
+                              this.onDatasourcePropChange(
+                                'database',
+                                database,
+                              )
                             : undefined
                         }
                         onTableSelectChange={
                           this.state.isEditMode
                             ? table =>
-                                this.onDatasourcePropChange('table_name', table)
+                              this.onDatasourcePropChange('table_name', table)
                             : undefined
                         }
                         readOnly={!this.state.isEditMode}
                       />
                     </div>
                   }
+                  // description={t(
+                  //   'The pointer to a physical table (or view). Keep in mind that the chart is ' +
+                  //   'associated to this Superset logical table, and this logical table points ' +
+                  //   'the physical table referenced here.',
+                  // )}
                   description={t(
-                    'The pointer to a physical table (or view). Keep in mind that the chart is ' +
-                      'associated to this Superset logical table, and this logical table points ' +
-                      'the physical table referenced here.',
+                    '指向一个物理表（或视图）的指针。请注意，图表是 ' +
+                    '与此 Superset 逻辑表关联，并且该逻辑表指向 ' +
+                    '这里引用的物理表。',
                   )}
                 />
               )}
@@ -1185,15 +1319,23 @@ class DatasourceEditor extends PureComponent {
         tableColumns={['metric_name', 'verbose_name', 'expression']}
         sortColumns={['metric_name', 'verbose_name', 'expression']}
         columnLabels={{
-          metric_name: t('Metric Key'),
-          verbose_name: t('Label'),
-          expression: t('SQL expression'),
+          // metric_name: t('Metric Key'),
+          // verbose_name: t('Label'),
+          // expression: t('SQL expression'),
+          metric_name: t('指标键'),
+          verbose_name: t('标签'),
+          expression: t('SQL 表达式'),
         }}
         columnLabelTooltips={{
+          // metric_name: t(
+          //   'This field is used as a unique identifier to attach ' +
+          //   'the metric to charts. It is also used as the alias in the ' +
+          //   'SQL query.',
+          // ),
           metric_name: t(
-            'This field is used as a unique identifier to attach ' +
-              'the metric to charts. It is also used as the alias in the ' +
-              'SQL query.',
+            '此字段用作唯一标识符以附加 ' +
+            '指标图表。它也被用作其中的别名。 ' +
+            'SQL 查询。',
           ),
         }}
         expandFieldset={
@@ -1201,28 +1343,33 @@ class DatasourceEditor extends PureComponent {
             <Fieldset compact>
               <Field
                 fieldKey="description"
-                label={t('Description')}
+                // label={t('Description')}
+                label={t('描述')}
                 control={
                   <TextControl
                     controlId="description"
-                    placeholder={t('Description')}
+                    // placeholder={t('Description')}
+                    placeholder={t('描述')}
                   />
                 }
               />
               <Field
                 fieldKey="d3format"
-                label={t('D3 format')}
+                // label={t('D3 format')}
+                label={t('D3 格式')}
                 control={
                   <TextControl controlId="d3format" placeholder="%y/%m/%d" />
                 }
               />
               <Field
                 fieldKey="currency"
-                label={t('Metric currency')}
+                // label={t('Metric currency')}
+                label={t('度量货币')}
                 control={
                   <CurrencyControl
                     currencySelectOverrideProps={{
-                      placeholder: t('Select or type currency symbol'),
+                      // placeholder: t('Select or type currency symbol'),
+                      placeholder: t('选择或输入货币符号'),
                     }}
                     symbolSelectAdditionalStyles={css`
                       max-width: 30%;
@@ -1231,33 +1378,43 @@ class DatasourceEditor extends PureComponent {
                 }
               />
               <Field
-                label={t('Certified by')}
+                // label={t('Certified by')}
+                label={t('认证由')}
                 fieldKey="certified_by"
+                // description={t(
+                //   'Person or group that has certified this metric',
+                // )}
                 description={t(
-                  'Person or group that has certified this metric',
+                  '已认证此指标的人员或团体',
                 )}
                 control={
                   <TextControl
                     controlId="certified_by"
-                    placeholder={t('Certified by')}
+                    // placeholder={t('Certified by')}
+                    placeholder={t('认证由')}
                   />
                 }
               />
               <Field
-                label={t('Certification details')}
+                // label={t('Certification details')}
+                label={t('认证详情')}
                 fieldKey="certification_details"
-                description={t('Details of the certification')}
+                // description={t('Details of the certification')}
+                description={t('认证详情')}
                 control={
                   <TextControl
                     controlId="certification_details"
-                    placeholder={t('Certification details')}
+                    // placeholder={t('Certification details')}
+                    placeholder={t('认证详情')}
                   />
                 }
               />
               <Field
-                label={t('Warning')}
+                // label={t('Warning')}
+                label={t('警告')}
                 fieldKey="warning_markdown"
-                description={t('Optional warning about use of this metric')}
+                // description={t('Optional warning about use of this metric')}
+                description={t('关于使用此指标的可选警告')}
                 control={
                   <TextAreaControl
                     controlId="warning_markdown"
@@ -1274,7 +1431,8 @@ class DatasourceEditor extends PureComponent {
         allowAddItem
         onChange={this.onDatasourcePropChange.bind(this, 'metrics')}
         itemGenerator={() => ({
-          metric_name: t('<new metric>'),
+          // metric_name: t('<new metric>'),
+          metric_name: t('<新指标>'),
           verbose_name: '',
           expression: '',
         })}
@@ -1349,10 +1507,14 @@ class DatasourceEditor extends PureComponent {
           type="warning"
           message={
             <>
-              {' '}
-              <strong>{t('Be careful.')} </strong>
+              {/* <strong>{t('Be careful.')} </strong>
               {t(
                 'Changing these settings will affect all charts using this dataset, including charts owned by other people.',
+              )} */}
+              {' '}
+                <strong>{t('小心。')} </strong>
+              {t(
+                '更改这些设置将会影响使用此数据集的所有图表，包括其他人员拥有的图表。',
               )}
             </>
           }
@@ -1364,14 +1526,16 @@ class DatasourceEditor extends PureComponent {
           onChange={this.handleTabSelect}
           defaultActiveKey={activeTabKey}
         >
-          <Tabs.TabPane key={0} tab={t('Source')}>
+          {/* <Tabs.TabPane key={0} tab={t('Source')}> */}
+          <Tabs.TabPane key={0} tab={t('源')}>
             {this.renderSourceFieldset(theme)}
           </Tabs.TabPane>
           <Tabs.TabPane
             tab={
               <CollectionTabTitle
                 collection={sortedMetrics}
-                title={t('Metrics')}
+                // title={t('Metrics')}
+                title={t('指标')}
               />
             }
             key={1}
@@ -1382,7 +1546,8 @@ class DatasourceEditor extends PureComponent {
             tab={
               <CollectionTabTitle
                 collection={this.state.databaseColumns}
-                title={t('Columns')}
+                // title={t('Columns')}
+                title={t('列')}
               />
             }
             key={2}
@@ -1398,7 +1563,8 @@ class DatasourceEditor extends PureComponent {
                     disabled={this.state.isEditMode}
                   >
                     <Icons.DatabaseOutlined iconSize="m" />
-                    {t('Sync columns from source')}
+                    {/* {t('Sync columns from source')} */}
+                    {t('从源同步列')}
                   </Button>
                 </StyledButtonWrapper>
               </ColumnButtonWrapper>
@@ -1418,7 +1584,8 @@ class DatasourceEditor extends PureComponent {
             tab={
               <CollectionTabTitle
                 collection={this.state.calculatedColumns}
-                title={t('Calculated columns')}
+                // title={t('Calculated columns')}
+                title={t('计算列')}
               />
             }
             key={3}
@@ -1430,10 +1597,15 @@ class DatasourceEditor extends PureComponent {
                   this.setColumns({ calculatedColumns })
                 }
                 columnLabelTooltips={{
+                  // column_name: t(
+                  //   'This field is used as a unique identifier to attach ' +
+                  //   'the calculated dimension to charts. It is also used ' +
+                  //   'as the alias in the SQL query.',
+                  // ),
                   column_name: t(
-                    'This field is used as a unique identifier to attach ' +
-                      'the calculated dimension to charts. It is also used ' +
-                      'as the alias in the SQL query.',
+                    '此字段用作唯一标识符以附加 ' +
+                    '计算得到的尺寸用于图表。它也被用于 ' +
+                    '作为 SQL 查询中的别名。',
                   ),
                 }}
                 onDatasourceChange={this.onDatasourceChange}
@@ -1443,16 +1615,19 @@ class DatasourceEditor extends PureComponent {
                 allowAddItem
                 allowEditDataType
                 itemGenerator={() => ({
-                  column_name: t('<new column>'),
+                  // column_name: t('<new column>'),
+                  column_name: t('<新列>'),
                   filterable: true,
                   groupby: true,
-                  expression: t('<enter SQL expression here>'),
+                  // expression: t('<enter SQL expression here>'),
+                  expression: t('<在此处输入 SQL 表达式>'),
                   __expanded: true,
                 })}
               />
             </StyledColumnsTabWrapper>
           </Tabs.TabPane>
-          <Tabs.TabPane key={4} tab={t('Settings')}>
+          {/* <Tabs.TabPane key={4} tab={t('Settings')}> */}
+          <Tabs.TabPane key={4} tab={t('设置')}>
             <Row gutter={16}>
               <Col xs={24} md={12}>
                 <FormContainer>{this.renderSettingsFieldset()}</FormContainer>
