@@ -179,9 +179,11 @@ function SortIcon<D extends object>({ column }: { column: ColumnInstance<D> }) {
 function SearchInput({ count, value, onChange }: SearchInputProps) {
   return (
     <span className="dt-global-filter">
-      {t('Search')}{' '}
+      {/* {t('Search')}{' '} */}
+      {t('搜索')}{' '}
       <input
-        aria-label={t('Search %s records', count)}
+        // aria-label={t('Search %s records', count)}
+        aria-label={t('搜索 %s 记录', count)}
         className="form-control input-sm"
         placeholder={tn('search.num_records', count)}
         value={value}
@@ -203,9 +205,11 @@ function SelectPageSize({
       aria-label={t('Select page size')}
     >
       <label htmlFor="pageSizeSelect" className="sr-only">
-        {t('Select page size')}
+        {/* {t('Select page size')} */}
+        {t('选择页面大小')}
       </label>
-      {t('Show')}{' '}
+      {/* {t('Show')}{' '} */}
+      {t('展示')}{' '}
       <select
         id="pageSizeSelect"
         className="form-control input-sm"
@@ -213,7 +217,8 @@ function SelectPageSize({
         onChange={e => {
           onChange(Number((e.target as HTMLSelectElement).value));
         }}
-        aria-label={t('Show entries per page')}
+        // aria-label={t('Show entries per page')}
+        aria-label={t('显示每页条目')}
       >
         {options.map(option => {
           const [size, text] = Array.isArray(option)
@@ -226,7 +231,8 @@ function SelectPageSize({
           );
         })}
       </select>{' '}
-      {t('entries per page')}
+      {/* {t('entries per page')} */}
+      {t('每页条目数')}
     </span>
   );
 }
@@ -409,7 +415,8 @@ export default function TableChart<D extends DataRecord = DataRecord>(
     };
   };
 
-  const comparisonLabels = [t('Main'), '#', '△', '%'];
+  // const comparisonLabels = [t('Main'), '#', '△', '%'];
+  const comparisonLabels = [t('主要'), '#', '△', '%'];
   const filteredColumnsMeta = useMemo(() => {
     if (!isUsingTimeComparison) {
       return columnsMeta;
@@ -562,8 +569,11 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                 font-size: ${theme.typography.sizes.s}px;
               `}
             >
-              {t(
+              {/* {t(
                 'Select columns that will be displayed in the table. You can multiselect columns.',
+              )} */}
+              {t(
+                '选择要在表格中显示的列。您可以多选列。',
               )}
             </div>
             {comparisonColumns.map(column => (
@@ -694,12 +704,16 @@ export default function TableChart<D extends DataRecord = DataRecord>(
       const label = config.customColumnName || originalLabel;
       let displayLabel = label;
 
-      const isComparisonColumn = ['#', '△', '%', t('Main')].includes(
+      // const isComparisonColumn = ['#', '△', '%', t('Main')].includes(
+      //   column.label,
+      // );
+      const isComparisonColumn = ['#', '△', '%', t('主要')].includes(
         column.label,
       );
 
       if (isComparisonColumn) {
-        if (column.label === t('Main')) {
+        // if (column.label === t('Main')) {
+        if (column.label === t('主要')) {
           displayLabel = config.customColumnName || column.originalLabel || '';
         } else if (config.customColumnName) {
           displayLabel =
@@ -954,7 +968,8 @@ export default function TableChart<D extends DataRecord = DataRecord>(
         Header: ({ column: col, onClick, style, onDragStart, onDrop }) => (
           <th
             id={`header-${column.key}`}
-            title={t('Shift + Click to sort by multiple columns')}
+            // title={t('Shift + Click to sort by multiple columns')}
+            title={t('Shift + Click 按钮以按多列排序')}
             className={[className, col.isSorted ? 'is-sorted' : ''].join(' ')}
             style={{
               ...sharedStyle,
@@ -1014,10 +1029,14 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                   }
                 `}
               >
-                {t('Summary')}
+                {/* {t('Summary')} */}
+                {t('总结')}
                 <Tooltip
+                  // overlay={t(
+                  //   'Show total aggregations of selected metrics. Note that row limit does not apply to the result.',
+                  // )}
                   overlay={t(
-                    'Show total aggregations of selected metrics. Note that row limit does not apply to the result.',
+                    '显示所选指标的总聚合值。请注意，行限制不适用于结果。',
                   )}
                 >
                   <InfoCircleOutlined />

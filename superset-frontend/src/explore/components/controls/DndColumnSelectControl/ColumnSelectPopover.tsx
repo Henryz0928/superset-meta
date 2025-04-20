@@ -287,8 +287,10 @@ const ColumnSelectPopover = ({
     selectedSimpleColumn?.column_name !== initialSimpleColumn?.column_name ||
     adhocColumn?.sqlExpression !== initialAdhocColumn?.sqlExpression;
 
-  const savedExpressionsLabel = t('Saved expressions');
-  const simpleColumnsLabel = t('Column');
+  // const savedExpressionsLabel = t('Saved expressions');
+  // const simpleColumnsLabel = t('Column');
+  const savedExpressionsLabel = t('保存的表达式');
+  const simpleColumnsLabel = t('列');
   const keywords = useMemo(
     () => sqlKeywords.concat(getColumnKeywords(columns)),
     [columns],
@@ -309,7 +311,8 @@ const ColumnSelectPopover = ({
       >
         <Tabs.TabPane
           key="saved"
-          tab={t('Saved')}
+          // tab={t('Saved')}
+          tab={t('已保存')}
           disabled={disabledTabs.has('saved')}
         >
           {calculatedColumns.length > 0 ? (
@@ -320,7 +323,8 @@ const ColumnSelectPopover = ({
                 onChange={onCalculatedColumnChange}
                 allowClear
                 autoFocus={!selectedCalculatedColumn}
-                placeholder={t('%s column(s)', calculatedColumns.length)}
+                // placeholder={t('%s column(s)', calculatedColumns.length)}
+                placeholder={t('%s 列(s)', calculatedColumns.length)}
                 options={calculatedColumns.map(calculatedColumn => ({
                   value: calculatedColumn.column_name,
                   label:
@@ -339,17 +343,25 @@ const ColumnSelectPopover = ({
               size="small"
               title={
                 isTemporal
-                  ? t('No temporal columns found')
-                  : t('No saved expressions found')
+                  // ? t('No temporal columns found')
+                  // : t('No saved expressions found')
+                  ? t('未找到时间列')
+                  : t('未找到保存的表达式')
               }
               description={
                 isTemporal
+                  // ? t(
+                  //     'Add calculated temporal columns to dataset in "Edit datasource" modal',
+                  //   )
+                  // : t(
+                  //     'Add calculated columns to dataset in "Edit datasource" modal',
+                  //   )
                   ? t(
-                      'Add calculated temporal columns to dataset in "Edit datasource" modal',
-                    )
-                  : t(
-                      'Add calculated columns to dataset in "Edit datasource" modal',
-                    )
+                    '在“编辑数据源”模态中向数据集添加计算时间列',
+                  )
+                : t(
+                    '在“编辑数据源”模态中向数据集添加计算列',
+                  )
               }
             />
           ) : (
@@ -357,9 +369,12 @@ const ColumnSelectPopover = ({
               image="empty.svg"
               size="small"
               title={
+                // isTemporal
+                //   ? t('No temporal columns found')
+                //   : t('No saved expressions found')
                 isTemporal
-                  ? t('No temporal columns found')
-                  : t('No saved expressions found')
+                ? t('未找到时间列')
+                : t('未找到保存的表达式')
               }
               description={
                 isTemporal ? (
@@ -369,9 +384,11 @@ const ColumnSelectPopover = ({
                       tabIndex={0}
                       onClick={setDatasetAndClose}
                     >
-                      {t('Create a dataset')}
+                      {/* {t('Create a dataset')} */}
+                      {t('创建一个数据集')}
                     </span>{' '}
-                    {t(' to mark a column as a time column')}
+                    {/* {t(' to mark a column as a time column')} */}
+                    {t(' 将一列标记为时间列')}
                   </>
                 ) : (
                   <>
@@ -380,9 +397,11 @@ const ColumnSelectPopover = ({
                       tabIndex={0}
                       onClick={setDatasetAndClose}
                     >
-                      {t('Create a dataset')}
+                      {/* {t('Create a dataset')} */}
+                      {t('创建一个数据集')}
                     </span>{' '}
-                    {t(' to add calculated columns')}
+                    {/* {t(' to add calculated columns')} */}
+                    {t(' 添加计算列')}
                   </>
                 )
               }
@@ -391,17 +410,20 @@ const ColumnSelectPopover = ({
         </Tabs.TabPane>
         <Tabs.TabPane
           key="simple"
-          tab={t('Simple')}
+          // tab={t('Simple')}
+          tab={t('简单')}
           disabled={disabledTabs.has('simple')}
         >
           {isTemporal && simpleColumns.length === 0 ? (
             <EmptyState
               image="empty.svg"
               size="small"
-              title={t('No temporal columns found')}
+              // title={t('No temporal columns found')}
+              title={t('未找到时间列')}
               description={
                 datasourceType === DatasourceType.Table ? (
-                  t('Mark a column as temporal in "Edit datasource" modal')
+                  // t('Mark a column as temporal in "Edit datasource" modal')
+                  t('在“编辑数据源”模态中将一列标记为时间戳')
                 ) : (
                   <>
                     <span
@@ -409,9 +431,11 @@ const ColumnSelectPopover = ({
                       tabIndex={0}
                       onClick={setDatasetAndClose}
                     >
-                      {t('Create a dataset')}
+                      {/* {t('Create a dataset')} */}
+                      {t('创建一个数据集')}
                     </span>{' '}
-                    {t(' to mark a column as a time column')}
+                    {/* {t(' to mark a column as a time column')} */}
+                    {t(' 将一列标记为时间列')}
                   </>
                 )
               }
@@ -424,7 +448,8 @@ const ColumnSelectPopover = ({
                 onChange={onSimpleColumnChange}
                 allowClear
                 autoFocus={!selectedSimpleColumn}
-                placeholder={t('%s column(s)', simpleColumns.length)}
+                // placeholder={t('%s column(s)', simpleColumns.length)}
+                placeholder={t('%s 列(s)', simpleColumns.length)}
                 options={simpleColumns.map(simpleColumn => ({
                   value: simpleColumn.column_name,
                   label: simpleColumn.verbose_name || simpleColumn.column_name,
@@ -440,7 +465,8 @@ const ColumnSelectPopover = ({
 
         <Tabs.TabPane
           key="sqlExpression"
-          tab={t('Custom SQL')}
+          // tab={t('Custom SQL')}
+          tab={t('自定义 SQL')}
           disabled={disabledTabs.has('sqlExpression')}
         >
           <SQLEditor
@@ -466,7 +492,8 @@ const ColumnSelectPopover = ({
       </Tabs>
       <div>
         <Button buttonSize="small" onClick={onResetStateAndClose} cta>
-          {t('Close')}
+          {/* {t('Close')} */}
+          {t('关闭')}
         </Button>
         <Button
           disabled={!stateIsValid || !hasUnsavedChanges}
@@ -476,7 +503,8 @@ const ColumnSelectPopover = ({
           data-test="ColumnEdit#save"
           cta
         >
-          {t('Save')}
+          {/* {t('Save')} */}
+          {t('保存')}
         </Button>
         {resizeButton}
       </div>

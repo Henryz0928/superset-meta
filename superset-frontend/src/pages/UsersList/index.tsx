@@ -77,12 +77,20 @@ enum ModalType {
 }
 
 const isActiveOptions = [
+  // {
+  //   label: 'Yes',
+  //   value: true,
+  // },
+  // {
+  //   label: 'No',
+  //   value: false,
+  // },
   {
-    label: 'Yes',
+    label: '是',
     value: true,
   },
   {
-    label: 'No',
+    label: '否',
     value: false,
   },
 ];
@@ -102,7 +110,8 @@ function UsersList({ user }: UsersListProps) {
     toggleBulkSelect,
   } = useListViewResource<UserObject>(
     'security/users',
-    t('User'),
+    // t('User'),
+    t('用户'),
     addDangerToast,
   );
   const [modalState, setModalState] = useState({
@@ -173,7 +182,8 @@ function UsersList({ user }: UsersListProps) {
         ...remainingResults.flatMap(res => res.result),
       ]);
     } catch (err) {
-      addDangerToast(t('Error while fetching roles'));
+      // addDangerToast(t('Error while fetching roles'));
+      addDangerToast(t('获取角色时出错'));
     } finally {
       setIsLoading(false);
     }
@@ -188,9 +198,11 @@ function UsersList({ user }: UsersListProps) {
       await deleteUser(id);
       refreshData();
       setUserCurrentlyDeleting(null);
-      addSuccessToast(t('Deleted user: %s', username));
+      // addSuccessToast(t('Deleted user: %s', username));
+      addSuccessToast(t('已删除用户: %s', username));
     } catch (error) {
-      addDangerToast(t('There was an issue deleting %s', username));
+      // addDangerToast(t('There was an issue deleting %s', username));
+      addDangerToast(t('删除时出现问题 %s', username));
     }
   };
 
@@ -204,13 +216,15 @@ function UsersList({ user }: UsersListProps) {
             deletedUserNames.push(user.username);
           })
           .catch(err => {
-            addDangerToast(t('Error deleting %s', user.username));
+            // addDangerToast(t('Error deleting %s', user.username));
+            addDangerToast(t('删除时出错 %s', user.username));
           }),
       ),
     )
       .then(() => {
         if (deletedUserNames.length > 0) {
-          addSuccessToast(t('Deleted users: %s', deletedUserNames.join(', ')));
+          // addSuccessToast(t('Deleted users: %s', deletedUserNames.join(', ')));
+          addSuccessToast(t('已删除用户: %s', deletedUserNames.join(', ')));
         }
       })
       .finally(() => {
@@ -223,7 +237,8 @@ function UsersList({ user }: UsersListProps) {
     () => [
       {
         accessor: 'first_name',
-        Header: t('First name'),
+        // Header: t('First name'),
+        Header: t('名字'),
         Cell: ({
           row: {
             original: { first_name },
@@ -232,7 +247,8 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'last_name',
-        Header: t('Last name'),
+        // Header: t('Last name'),
+        Header: t('姓氏'),
         Cell: ({
           row: {
             original: { last_name },
@@ -241,7 +257,8 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'username',
-        Header: t('Username'),
+        // Header: t('Username'),
+        Header: t('用户名'),
         Cell: ({
           row: {
             original: { username },
@@ -250,7 +267,8 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'email',
-        Header: t('Email'),
+        // Header: t('Email'),
+        Header: t('电子邮件'),
         Cell: ({
           row: {
             original: { email },
@@ -259,16 +277,23 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'active',
-        Header: t('Is active?'),
+        // Header: t('Is active?'),
+        Header: t('是活跃的？'),
+        // Cell: ({
+        //   row: {
+        //     original: { active },
+        //   },
+        // }: any) => <span>{active ? 'Yes' : 'No'}</span>,
         Cell: ({
           row: {
             original: { active },
           },
-        }: any) => <span>{active ? 'Yes' : 'No'}</span>,
+        }: any) => <span>{active ? '是' : '否'}</span>,
       },
       {
         accessor: 'roles',
-        Header: t('Roles'),
+        // Header: t('Roles'),
+        Header: t('角色'),
         Cell: ({
           row: {
             original: { roles },
@@ -280,19 +305,22 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'login_count',
-        Header: t('Login count'),
+        // Header: t('Login count'),
+        Header: t('登录次数'),
         hidden: true,
         Cell: ({ row: { original } }: any) => original.login_count,
       },
       {
         accessor: 'fail_login_count',
-        Header: t('Fail login count'),
+        // Header: t('Fail login count'),
+        Header: t('登录失败计数'),
         hidden: true,
         Cell: ({ row: { original } }: any) => original.fail_login_count,
       },
       {
         accessor: 'created_on',
-        Header: t('Created on'),
+        // Header: t('Created on'),
+        Header: t('创建于'),
         hidden: true,
         Cell: ({
           row: {
@@ -302,7 +330,8 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'changed_on',
-        Header: t('Changed on'),
+        // Header: t('Changed on'),
+        Header: t('更改于'),
         hidden: true,
         Cell: ({
           row: {
@@ -312,7 +341,8 @@ function UsersList({ user }: UsersListProps) {
       },
       {
         accessor: 'last_login',
-        Header: t('Last login'),
+        // Header: t('Last login'),
+        Header: t('上次登录'),
         hidden: true,
         Cell: ({
           row: {
@@ -331,14 +361,16 @@ function UsersList({ user }: UsersListProps) {
             ? [
                 {
                   label: 'user-list-edit-action',
-                  tooltip: t('Edit user'),
+                  // tooltip: t('Edit user'),
+                  tooltip: t('修改用户'),
                   placement: 'bottom',
                   icon: 'EditOutlined',
                   onClick: handleEdit,
                 },
                 {
                   label: 'role-list-delete-action',
-                  tooltip: t('Delete user'),
+                  // tooltip: t('Delete user'),
+                  tooltip: t('删除用户'),
                   placement: 'bottom',
                   icon: 'DeleteOutlined',
                   onClick: handleDelete,
@@ -348,7 +380,8 @@ function UsersList({ user }: UsersListProps) {
 
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
         hidden: !isAdmin,
@@ -373,7 +406,8 @@ function UsersList({ user }: UsersListProps) {
                 vertical-align: text-top;
               `}
             />
-            {t('User')}
+            {/* {t('User')} */}
+            {t('用户')}
           </>
         ),
         buttonStyle: 'primary',
@@ -384,7 +418,8 @@ function UsersList({ user }: UsersListProps) {
         'data-test': 'add-user-button',
       },
       {
-        name: t('Bulk select'),
+        // name: t('Bulk select'),
+        name: t('批量选择'),
         onClick: toggleBulkSelect,
         buttonStyle: 'secondary',
       },
@@ -394,40 +429,46 @@ function UsersList({ user }: UsersListProps) {
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('First name'),
+        // Header: t('First name'),
+        Header: t('名字'),
         key: 'first_name',
         id: 'first_name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Last name'),
+        // Header: t('Last name'),
+        Header: t('姓氏'),
         key: 'last_name',
         id: 'last_name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Username'),
+        // Header: t('Username'),
+        Header: t('用户名'),
         key: 'username',
         id: 'username',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Email'),
+        // Header: t('Email'),
+        Header: t('电子邮件'),
         key: 'email',
         id: 'email',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Is active?'),
+        // Header: t('Is active?'),
+        Header: t('是活跃的？'),
         key: 'active',
         id: 'active',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         selects: isActiveOptions?.map(option => ({
           label: option.label,
           value: option.value,
@@ -435,12 +476,14 @@ function UsersList({ user }: UsersListProps) {
         loading: isLoading,
       },
       {
-        Header: t('Roles'),
+        // Header: t('Roles'),
+        Header: t('角色'),
         key: 'roles',
         id: 'roles',
         input: 'select',
         operator: FilterOperator.RelationManyMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         selects: roles?.map(role => ({
           label: role.name,
           value: role.id,
@@ -448,7 +491,8 @@ function UsersList({ user }: UsersListProps) {
         loading: isLoading,
       },
       {
-        Header: t('Created on'),
+        // Header: t('Created on'),
+        Header: t('创建于'),
         key: 'created_on',
         id: 'created_on',
         input: 'datetime_range',
@@ -456,7 +500,8 @@ function UsersList({ user }: UsersListProps) {
         dateFilterValueType: 'iso',
       },
       {
-        Header: t('Changed on'),
+        // Header: t('Changed on'),
+        Header: t('修改于'),
         key: 'changed_on',
         id: 'changed_on',
         input: 'datetime_range',
@@ -464,7 +509,8 @@ function UsersList({ user }: UsersListProps) {
         dateFilterValueType: 'iso',
       },
       {
-        Header: t('Last login'),
+        // Header: t('Last login'),
+        Header: t('最后登录'),
         key: 'last_login',
         id: 'last_login',
         input: 'datetime_range',
@@ -472,7 +518,8 @@ function UsersList({ user }: UsersListProps) {
         dateFilterValueType: 'iso',
       },
       {
-        Header: t('Login count'),
+        // Header: t('Login count'),
+        Header: t('登陆次数'),
         key: 'login_count',
         id: 'login_count',
         input: 'numerical_range',
@@ -481,7 +528,8 @@ function UsersList({ user }: UsersListProps) {
         max: loginCountStats.max,
       },
       {
-        Header: t('Fail login count'),
+        // Header: t('Fail login count'),
+        Header: t('登陆失败次数'),
         key: 'fail_login_count',
         id: 'fail_login_count',
         input: 'numerical_range',
@@ -492,7 +540,8 @@ function UsersList({ user }: UsersListProps) {
   );
 
   const emptyState = {
-    title: t('No users yet'),
+    // title: t('No users yet'),
+    title: t('尚无用户'),
     image: 'filter-results.svg',
     ...(isAdmin && {
       buttonAction: () => {
@@ -508,7 +557,8 @@ function UsersList({ user }: UsersListProps) {
               vertical-align: text-top;
             `}
           />
-          {t('User')}
+          {/* {t('User')} */}
+          {t('用户')}
         </>
       ),
     }),
@@ -516,7 +566,8 @@ function UsersList({ user }: UsersListProps) {
 
   return (
     <>
-      <SubMenu name={t('List Users')} buttons={subMenuButtons} />
+      {/* <SubMenu name={t('List Users')} buttons={subMenuButtons} /> */}
+      <SubMenu name={t('用户列表')} buttons={subMenuButtons} />
       <UserListAddModal
         onHide={() => closeModal(ModalType.ADD)}
         show={modalState.add}
@@ -541,7 +592,8 @@ function UsersList({ user }: UsersListProps) {
 
       {userCurrentlyDeleting && (
         <DeleteModal
-          description={t('This action will permanently delete the user.')}
+          // description={t('This action will permanently delete the user.')}
+          description={t('此操作将永久删除用户。')}
           onConfirm={() => {
             if (userCurrentlyDeleting) {
               handleUserDelete(userCurrentlyDeleting);
@@ -549,12 +601,15 @@ function UsersList({ user }: UsersListProps) {
           }}
           onHide={() => setUserCurrentlyDeleting(null)}
           open
-          title={t('Delete User?')}
+          // title={t('Delete User?')}
+          title={t('删除用户？')}
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
-        description={t('Are you sure you want to delete the selected users?')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t('Are you sure you want to delete the selected users?')}
+        description={t('您确定要删除已选用户吗？')}
         onConfirm={handleBulkUsersDelete}
       >
         {confirmDelete => {
@@ -562,7 +617,8 @@ function UsersList({ user }: UsersListProps) {
             ? [
                 {
                   key: 'delete',
-                  name: t('Delete'),
+                  // name: t('Delete'),
+                  name: t('删除'),
                   onSelect: confirmDelete,
                   type: 'danger',
                 },

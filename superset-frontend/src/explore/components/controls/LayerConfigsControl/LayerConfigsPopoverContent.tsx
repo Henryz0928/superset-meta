@@ -329,7 +329,8 @@ export const LayerConfigsPopoverContent: FC<
         });
         setGeoStylerData(gsData);
       } catch {
-        console.warn('Could not read geostyler data');
+        // console.warn('Could not read geostyler data');
+        console.warn('无法读取地理样式数据');
         setGeoStylerData(undefined);
       }
     };
@@ -342,31 +343,56 @@ export const LayerConfigsPopoverContent: FC<
     };
   }, [currentLayerConf]);
 
-  const layerTabLabel = t('Layer');
-  const styleTabLabel = t('Style');
-  const layerTypeLabel = t('Layer type');
-  const layerTypeDescription = t('The type of the layer');
-  const serviceVersionLabel = t('Service version');
-  const serviceVersionDescription = t('The version of the service');
-  const layersParamLabel = t('Layer Name');
+  // const layerTabLabel = t('Layer');
+  // const styleTabLabel = t('Style');
+  // const layerTypeLabel = t('Layer type');
+  // const layerTypeDescription = t('The type of the layer');
+  // const serviceVersionLabel = t('Service version');
+  // const serviceVersionDescription = t('The version of the service');
+  // const layersParamLabel = t('Layer Name');
+  // const layersParamDescription = t(
+  //   'The name of the layer as described in GetCapabilities',
+  // );
+  const layerTabLabel = t('层');
+  const styleTabLabel = t('风格');
+  const layerTypeLabel = t('层类型');
+  const layerTypeDescription = t('层的类型');
+  const serviceVersionLabel = t('服务版本');
+  const serviceVersionDescription = t('该版本的服务');
+  const layersParamLabel = t('层名称');
   const layersParamDescription = t(
-    'The name of the layer as described in GetCapabilities',
+    'GetCapabilities 中所述的图层名称',
   );
-  const layersParamPlaceholder = t('Layer Name');
-  const layerTitleLabel = t('Layer title');
-  const layerTitleDescription = t('The visible title of the layer');
-  const layerTitlePlaceholder = t('Insert Layer title');
-  const layerUrlLabel = t('Layer URL');
-  const layerUrlDescription = t('The service url of the layer');
-  const layerUrlPlaceholder = t('Insert Layer URL');
-  const maxFeaturesLabel = t('Max. features');
+  // const layersParamPlaceholder = t('Layer Name');
+  // const layerTitleLabel = t('Layer title');
+  // const layerTitleDescription = t('The visible title of the layer');
+  // const layerTitlePlaceholder = t('Insert Layer title');
+  // const layerUrlLabel = t('Layer URL');
+  // const layerUrlDescription = t('The service url of the layer');
+  // const layerUrlPlaceholder = t('Insert Layer URL');
+  // const maxFeaturesLabel = t('Max. features');
+  // const maxFeaturesDescription = t(
+  //   'Maximum number of features to fetch from service',
+  // );
+  const layersParamPlaceholder = t('层名称');
+  const layerTitleLabel = t('层标题');
+  const layerTitleDescription = t('图层的可见标题');
+  const layerTitlePlaceholder = t('插入图层标题');
+  const layerUrlLabel = t('图层 URL');
+  const layerUrlDescription = t('该图层的服务 URL');
+  const layerUrlPlaceholder = t('插入图层 URL');
+  const maxFeaturesLabel = t('最大特征数');
   const maxFeaturesDescription = t(
-    'Maximum number of features to fetch from service',
+    '从服务获取的最大特征数',
   );
+  // const maxFeaturesPlaceholder = t('10000');
+  // const attributionLabel = t('Attribution');
+  // const attributionDescription = t('The layer attribution');
+  // const attributionPlaceholder = t('© Layer attribution');
   const maxFeaturesPlaceholder = t('10000');
-  const attributionLabel = t('Attribution');
-  const attributionDescription = t('The layer attribution');
-  const attributionPlaceholder = t('© Layer attribution');
+  const attributionLabel = t('归属');
+  const attributionDescription = t('图层属性');
+  const attributionPlaceholder = t('© 层属性归属');
 
   const wmsVersionOptions: { value: any; label: string }[] =
     serviceVersions.WMS.map(version => ({ value: version, label: version }));
@@ -493,10 +519,12 @@ export const LayerConfigsPopoverContent: FC<
         </Tabs>
         <StyledButtonContainer>
           <StyledCloseButton type="default" onClick={onCloseClick}>
-            {t('Close')}
+            {/* {t('Close')} */}
+            {t('关闭')}
           </StyledCloseButton>
           <StyledSaveButton type="primary" onClick={onSaveClick}>
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </StyledSaveButton>
         </StyledButtonContainer>
       </Form>

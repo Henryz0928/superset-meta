@@ -313,8 +313,10 @@ export default class AdhocMetricEditPopover extends PureComponent {
 
     // autofocus on column if there's no value in column; otherwise autofocus on aggregate
     const columnSelectProps = {
-      ariaLabel: t('Select column'),
-      placeholder: t('%s column(s)', columns.length),
+      // ariaLabel: t('Select column'),
+      // placeholder: t('%s column(s)', columns.length),
+      ariaLabel: t('选择列'),
+      placeholder: t('%s 列(s)', columns.length),
       value: columnValue,
       onChange: this.onColumnChange,
       allowClear: true,
@@ -322,8 +324,10 @@ export default class AdhocMetricEditPopover extends PureComponent {
     };
 
     const aggregateSelectProps = {
-      ariaLabel: t('Select aggregate options'),
-      placeholder: t('%s aggregates(s)', AGGREGATES_OPTIONS.length),
+      // ariaLabel: t('Select aggregate options'),
+      // placeholder: t('%s aggregates(s)', AGGREGATES_OPTIONS.length),
+      ariaLabel: t('选择聚合选项'),
+      placeholder: t('%s 聚合(s)', AGGREGATES_OPTIONS.length),
       value: adhocMetric.aggregate || adhocMetric.inferSqlExpressionAggregate(),
       onChange: this.onAggregateChange,
       allowClear: true,
@@ -331,8 +335,10 @@ export default class AdhocMetricEditPopover extends PureComponent {
     };
 
     const savedSelectProps = {
-      ariaLabel: t('Select saved metrics'),
-      placeholder: t('%s saved metric(s)', savedMetricsOptions?.length ?? 0),
+      // ariaLabel: t('Select saved metrics'),
+      // placeholder: t('%s saved metric(s)', savedMetricsOptions?.length ?? 0),
+      ariaLabel: t('选择已保存的指标'),
+      placeholder: t('%s 已保存的指标(s)', savedMetricsOptions?.length ?? 0),
       value: savedMetric?.metric_name,
       onChange: this.onSavedMetricChange,
       allowClear: true,
@@ -373,9 +379,11 @@ export default class AdhocMetricEditPopover extends PureComponent {
           onChange={this.onTabChange}
           allowOverflow
         >
-          <Tabs.TabPane key={SAVED_TAB_KEY} tab={t('Saved')}>
+          {/* <Tabs.TabPane key={SAVED_TAB_KEY} tab={t('Saved')}> */}
+          <Tabs.TabPane key={SAVED_TAB_KEY} tab={t('已保存')}>
             {ensureIsArray(savedMetricsOptions).length > 0 ? (
-              <FormItem label={t('Saved metric')}>
+              // <FormItem label={t('Saved metric')}>
+              <FormItem label={t('保存的指标')}>
                 <StyledSelect
                   options={ensureIsArray(savedMetricsOptions).map(
                     savedMetric => ({
@@ -392,16 +400,21 @@ export default class AdhocMetricEditPopover extends PureComponent {
               <EmptyState
                 image="empty.svg"
                 size="small"
-                title={t('No saved metrics found')}
+                // title={t('No saved metrics found')}
+                // description={t(
+                //   'Add metrics to dataset in "Edit datasource" modal',
+                // )}
+                title={t('未找到保存的指标')}
                 description={t(
-                  'Add metrics to dataset in "Edit datasource" modal',
+                  '在“编辑数据源”模态中向数据集添加指标',
                 )}
               />
             ) : (
               <EmptyState
                 image="empty.svg"
                 size="small"
-                title={t('No saved metrics found')}
+                // title={t('No saved metrics found')}
+                title={t('未找到保存的指标')}
                 description={
                   <>
                     <span
@@ -412,9 +425,11 @@ export default class AdhocMetricEditPopover extends PureComponent {
                         this.props.onClose();
                       }}
                     >
-                      {t('Create a dataset')}
+                      {/* {t('Create a dataset')} */}
+                      {t('创建一个数据集')}
                     </span>
-                    {t(' to add metrics')}
+                    {/* {t(' to add metrics')} */}
+                    {t(' 添加指标')}
                   </>
                 }
               />
@@ -425,19 +440,25 @@ export default class AdhocMetricEditPopover extends PureComponent {
             tab={
               extra.disallow_adhoc_metrics ? (
                 <Tooltip
+                  // title={t(
+                  //   'Simple ad-hoc metrics are not enabled for this dataset',
+                  // )}
                   title={t(
-                    'Simple ad-hoc metrics are not enabled for this dataset',
+                    '这种简单的临时度量并未启用于此数据集',
                   )}
                 >
-                  {t('Simple')}
+                  {/* {t('Simple')} */}
+                  {t('简单')}
                 </Tooltip>
               ) : (
-                t('Simple')
+                // t('Simple')
+                t('简单')
               )
             }
             disabled={extra.disallow_adhoc_metrics}
           >
-            <FormItem label={t('column')}>
+            {/* <FormItem label={t('column')}> */}
+            <FormItem label={t('列')}>
               <Select
                 options={columns.map(column => ({
                   value: column.column_name,
@@ -461,17 +482,30 @@ export default class AdhocMetricEditPopover extends PureComponent {
           </Tabs.TabPane>
           <Tabs.TabPane
             key={EXPRESSION_TYPES.SQL}
+            // tab={
+            //   extra.disallow_adhoc_metrics ? (
+            //     <Tooltip
+            //       title={t(
+            //         'Custom SQL ad-hoc metrics are not enabled for this dataset',
+            //       )}
+            //     >
+            //       {t('Custom SQL')}
+            //     </Tooltip>
+            //   ) : (
+            //     t('Custom SQL')
+            //   )
+            // }
             tab={
               extra.disallow_adhoc_metrics ? (
                 <Tooltip
                   title={t(
-                    'Custom SQL ad-hoc metrics are not enabled for this dataset',
+                    '自定义 SQL 即用即抛指标未启用于此数据集',
                   )}
                 >
-                  {t('Custom SQL')}
+                  {t('自定义 SQL')}
                 </Tooltip>
               ) : (
-                t('Custom SQL')
+                t('自定义 SQL')
               )
             }
             data-test="adhoc-metric-edit-tab#custom"
@@ -504,7 +538,8 @@ export default class AdhocMetricEditPopover extends PureComponent {
             data-test="AdhocMetricEdit#cancel"
             cta
           >
-            {t('Close')}
+            {/* {t('Close')} */}
+            {t('关闭')}
           </Button>
           <Button
             disabled={!stateIsValid || !hasUnsavedChanges}
@@ -514,7 +549,8 @@ export default class AdhocMetricEditPopover extends PureComponent {
             onClick={this.onSave}
             cta
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
           {/* TODO: Remove fa-icon */}
           {/* eslint-disable-next-line icons/no-fa-icons-usage */}

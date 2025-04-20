@@ -34,8 +34,10 @@ interface UsersFieldProps {
 export const RoleNameField = () => (
   <FormItem
     name="roleName"
-    label={t('Role Name')}
-    rules={[{ required: true, message: t('Role name is required') }]}
+    // label={t('Role Name')}
+    label={t('权限名称')}
+    // rules={[{ required: true, message: t('Role name is required') }]}
+    rules={[{ required: true, message: t('角色名称为必填项') }]}
   >
     <Input name="roleName" data-test="role-name-input" />
   </FormItem>
@@ -44,7 +46,8 @@ export const RoleNameField = () => (
 export const PermissionsField: FC<PermissionsFieldProps> = ({
   permissions,
 }) => (
-  <FormItem name="rolePermissions" label={t('Permissions')}>
+  // <FormItem name="rolePermissions" label={t('Permissions')}>
+  <FormItem name="rolePermissions" label={t('权限')}>
     <Select
       mode="multiple"
       name="rolePermissions"
@@ -59,7 +62,8 @@ export const PermissionsField: FC<PermissionsFieldProps> = ({
 );
 
 export const UsersField: FC<UsersFieldProps> = ({ users }) => (
-  <FormItem name="roleUsers" label={t('Users')}>
+  // <FormItem name="roleUsers" label={t('Users')}>
+  <FormItem name="roleUsers" label={t('用户')}>
     <Select
       mode="multiple"
       name="roleUsers"

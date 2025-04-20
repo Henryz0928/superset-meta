@@ -705,7 +705,8 @@ export default class FilterScopeSelector extends PureComponent {
       <>
         <input
           className="filter-text scope-search multi-edit-mode"
-          placeholder={t('Search...')}
+          // placeholder={t('Search...')}
+          placeholder={t('搜索...')}
           type="text"
           value={searchText}
           onChange={this.onSearchInputChange}
@@ -736,10 +737,17 @@ export default class FilterScopeSelector extends PureComponent {
 
     return (
       <div className="selected-fields multi-edit-mode">
-        {currentFilterLabels.length === 0 && t('No filter is selected.')}
+        {/* {currentFilterLabels.length === 0 && t('No filter is selected.')}
         {currentFilterLabels.length === 1 && t('Editing 1 filter:')}
         {currentFilterLabels.length > 1 &&
           t('Batch editing %d filters:', currentFilterLabels.length)}
+        <span className="selected-scopes">
+          {currentFilterLabels.join(', ')}
+        </span> */}
+        {currentFilterLabels.length === 0 && t('未选择任何过滤器。')}
+        {currentFilterLabels.length === 1 && t('编辑 1 个过滤器：')}
+        {currentFilterLabels.length > 1 &&
+          t('批量编辑 %d 过滤器:', currentFilterLabels.length)}
         <span className="selected-scopes">
           {currentFilterLabels.join(', ')}
         </span>
@@ -753,14 +761,16 @@ export default class FilterScopeSelector extends PureComponent {
     return (
       <ScopeContainer>
         <ScopeHeader>
-          <h4>{t('Configure filter scopes')}</h4>
+          {/* <h4>{t('Configure filter scopes')}</h4> */}
+          <h4>{t('配置过滤范围')}</h4>
           {showSelector && this.renderEditingFiltersName()}
         </ScopeHeader>
 
         <ScopeBody className="filter-scope-body">
           {!showSelector ? (
             <div className="warning-message">
-              {t('There are no filters in this dashboard.')}
+              {/* {t('There are no filters in this dashboard.')} */}
+              {t('这个仪表盘中没有过滤器。')}
             </div>
           ) : (
             <ScopeSelector className="filters-scope-selector">
@@ -776,7 +786,8 @@ export default class FilterScopeSelector extends PureComponent {
 
         <ActionsContainer>
           <Button buttonSize="small" onClick={this.onClose}>
-            {t('Close')}
+            {/* {t('Close')} */}
+            {t('关闭')}
           </Button>
           {showSelector && (
             <Button
@@ -784,7 +795,8 @@ export default class FilterScopeSelector extends PureComponent {
               buttonStyle="primary"
               onClick={this.onSave}
             >
-              {t('Save')}
+              {/* {t('Save')} */}
+              {t('保存')}
             </Button>
           )}
         </ActionsContainer>

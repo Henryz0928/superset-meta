@@ -308,9 +308,11 @@ export const ScopingModal = ({
     <Modal
       onHide={closeModal}
       show={isVisible}
-      title={t('Cross-filtering scoping')}
+      // title={t('Cross-filtering scoping')}
+      title={t('跨过滤作用域')}
       onHandledPrimaryAction={saveScoping}
-      primaryButtonName={t('Save')}
+      // primaryButtonName={t('Save')}
+      primaryButtonName={t('保存')}
       responsive
       destroyOnClose
       bodyStyle={{

@@ -135,7 +135,8 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
       } catch (error) {
         logging.warn(error);
         this.props.addDangerToast(
-          t('An error occurred while loading dashboard information.'),
+          // t('An error occurred while loading dashboard information.'),
+          t('加载仪表板信息时发生错误。'),
         );
       }
     }
@@ -343,7 +344,8 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
             onChange={() => this.changeAction('overwrite')}
             data-test="save-overwrite-radio"
           >
-            {t('Save (Overwrite)')}
+            {/* {t('Save (Overwrite)')} */}
+            {t('保存（覆盖）')}
           </Radio>
           <Radio
             id="saveas-radio"
@@ -351,30 +353,35 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
             checked={this.state.action === 'saveas'}
             onChange={() => this.changeAction('saveas')}
           >
-            {t('Save as...')}
+            {/* {t('Save as...')} */}
+            {t('保存为...')}
           </Radio>
         </FormItem>
         <hr />
-        <FormItem label={t('Chart name')} required>
+        {/* <FormItem label={t('Chart name')} required> */}
+        <FormItem label={t('图表名称')} required>
           <Input
             name="new_slice_name"
             type="text"
-            placeholder="Name"
+            placeholder="名称"
             value={this.state.newSliceName}
             onChange={this.onSliceNameChange}
             data-test="new-chart-name"
           />
         </FormItem>
         {this.props.datasource?.type === 'query' && (
-          <FormItem label={t('Dataset Name')} required>
+          // <FormItem label={t('Dataset Name')} required>
+          <FormItem label={t('数据集名称')} required>
             <InfoTooltipWithTrigger
-              tooltip={t('A reusable dataset will be saved with your chart.')}
+              // tooltip={t('A reusable dataset will be saved with your chart.')}
+              tooltip={t('可重复使用的数据集将与图表一起保存。')}
               placement="right"
             />
             <Input
               name="dataset_name"
               type="text"
-              placeholder="Dataset Name"
+              // placeholder="Dataset Name"
+              placeholder="数据集名称"
               value={this.state.datasetName}
               onChange={this.handleDatasetNameChange}
               data-test="new-dataset-name"
@@ -382,22 +389,28 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
           </FormItem>
         )}
         <FormItem
-          label={t('Add to dashboard')}
+          // label={t('Add to dashboard')}
+          label={t('添加到仪表盘')}
           data-test="save-chart-modal-select-dashboard-form"
         >
           <AsyncSelect
             allowClear
             allowNewOptions
-            ariaLabel={t('Select a dashboard')}
+            // ariaLabel={t('Select a dashboard')}
+            ariaLabel={t('选择一个仪表盘')}
             options={this.loadDashboards}
             onChange={this.onDashboardChange}
             value={this.state.dashboard}
             placeholder={
               <div>
-                <b>{t('Select')}</b>
+                {/* <b>{t('Select')}</b>
                 {t(' a dashboard OR ')}
                 <b>{t('create')}</b>
-                {t(' a new one')}
+                {t(' a new one')} */}
+                <b>{t('选择')}</b>
+                {t(' 仪表板或 ')}
+                <b>{t('创建')}</b>
+                {t(' 一个新的')}
               </div>
             }
           />
@@ -425,13 +438,16 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
       chartWillBeCreated = true;
     }
     if (chartWillBeCreated && isNewDashboard) {
-      return t('A new chart and dashboard will be created.');
+      // return t('A new chart and dashboard will be created.');
+      return t('将创建一个新的图表和仪表板。');
     }
     if (chartWillBeCreated) {
-      return t('A new chart will be created.');
+      // return t('A new chart will be created.');
+      return t('将创建一个新的图表。');
     }
     if (isNewDashboard) {
-      return t('A new dashboard will be created.');
+      // return t('A new dashboard will be created.');
+      return t('将创建一个新的仪表板。');
     }
     return null;
   };
@@ -469,7 +485,8 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
         }
         data-test="btn-modal-save"
       >
-        {t('Save')}
+        {/* {t('Save')} */}
+        {t('保存')}
       </Button>
     </div>
   );
@@ -479,7 +496,8 @@ class SaveModal extends Component<SaveModalProps, SaveModalState> {
       <StyledModal
         show={this.props.isVisible}
         onHide={this.onHide}
-        title={t('Save chart')}
+        // title={t('Save chart')}
+        title={t('保存图表')}
         footer={this.renderFooter()}
       >
         {this.state.isLoading ? (

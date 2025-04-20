@@ -40,7 +40,8 @@ interface ColumnSelectPopoverTriggerProps {
   disabledTabs?: Set<string>;
 }
 
-const defaultPopoverLabel = t('My column');
+// const defaultPopoverLabel = t('My column');
+const defaultPopoverLabel = t('我的专栏');
 const editableTitleTab = 'sqlExpression';
 
 const ColumnSelectPopoverTrigger = ({
@@ -154,10 +155,15 @@ const ColumnSelectPopoverTrigger = ({
         <SaveDatasetModal
           visible={showDatasetModal}
           onHide={() => setDatasetModal(false)}
-          buttonTextOnSave={t('Save')}
-          buttonTextOnOverwrite={t('Overwrite')}
+          // buttonTextOnSave={t('Save')}
+          // buttonTextOnOverwrite={t('Overwrite')}
+          // modalDescription={t(
+          //   'Save this query as a virtual dataset to continue exploring',
+          // )}
+          buttonTextOnSave={t('保存')}
+          buttonTextOnOverwrite={t('覆盖')}
           modalDescription={t(
-            'Save this query as a virtual dataset to continue exploring',
+            '将此查询保存为虚拟数据集以继续探索',
           )}
           datasource={datasource}
         />

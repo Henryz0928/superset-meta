@@ -210,7 +210,8 @@ export default class AdhocFilterEditPopover extends Component {
           <Tabs.TabPane
             className="adhoc-filter-edit-tab"
             key={ExpressionTypes.Simple}
-            tab={t('Simple')}
+            // tab={t('Simple')}
+            tab={t('简单')}
           >
             <ErrorBoundary>
               <AdhocFilterEditPopoverSimpleTabContent
@@ -229,7 +230,8 @@ export default class AdhocFilterEditPopover extends Component {
           <Tabs.TabPane
             className="adhoc-filter-edit-tab"
             key={ExpressionTypes.Sql}
-            tab={t('Custom SQL')}
+            // tab={t('Custom SQL')}
+            tab={t('自定义 SQL')}
           >
             <ErrorBoundary>
               <AdhocFilterEditPopoverSqlTabContent
@@ -244,7 +246,8 @@ export default class AdhocFilterEditPopover extends Component {
         </Tabs>
         <FilterActionsContainer>
           <Button buttonSize="small" onClick={this.props.onClose} cta>
-            {t('Close')}
+            {/* {t('Close')} */}
+            {t('关闭')}
           </Button>
           <Button
             data-test="adhoc-filter-edit-popover-save-button"
@@ -259,7 +262,8 @@ export default class AdhocFilterEditPopover extends Component {
             onClick={this.onSave}
             cta
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
           <ResizeIcon
             role="button"

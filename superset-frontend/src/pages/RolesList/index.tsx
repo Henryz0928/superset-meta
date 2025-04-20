@@ -82,7 +82,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
     toggleBulkSelect,
   } = useListViewResource<RoleObject>(
     'security/roles/search',
-    t('Role'),
+    // t('Role'),
+    t('角色'),
     addDangerToast,
     false,
   );
@@ -151,7 +152,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
         ...remainingResults.flatMap(res => res.results),
       ]);
     } catch (err) {
-      addDangerToast(t('Error while fetching permissions'));
+      // addDangerToast(t('Error while fetching permissions'));
+      addDangerToast(t('获取权限时出错'));
     } finally {
       setLoadingState(prev => ({ ...prev, permissions: false }));
     }
@@ -189,7 +191,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
         ...remainingResults.flatMap(res => res.result),
       ]);
     } catch (err) {
-      addDangerToast(t('Error while fetching users'));
+      // addDangerToast(t('Error while fetching users'));
+      addDangerToast(t('获取用户时出错'));
     } finally {
       setLoadingState(prev => ({ ...prev, users: false }));
     }
@@ -211,9 +214,11 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
 
       refreshData();
       setRoleCurrentlyDeleting(null);
-      addSuccessToast(t('Deleted role: %s', name));
+      // addSuccessToast(t('Deleted role: %s', name));
+      addSuccessToast(t('删除角色: %s', name));
     } catch (error) {
-      addDangerToast(t('There was an issue deleting %s', name));
+      // addDangerToast(t('There was an issue deleting %s', name));
+      addDangerToast(t('删除时出现问题 %s', name));
     }
   };
 
@@ -229,13 +234,15 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
 
           deletedRoleNames.push(role.name);
         } catch (error) {
-          addDangerToast(t('Error deleting %s', role.name));
+          // addDangerToast(t('Error deleting %s', role.name));
+          addDangerToast(t('删除时出错 %s', role.name));
         }
       }),
     );
 
     if (deletedRoleNames.length > 0) {
-      addSuccessToast(t('Deleted roles: %s', deletedRoleNames.join(', ')));
+      // addSuccessToast(t('Deleted roles: %s', deletedRoleNames.join(', ')));
+      addSuccessToast(t('删除角色: %s', deletedRoleNames.join(', ')));
     }
 
     refreshData();
@@ -246,7 +253,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
     () => [
       {
         accessor: 'name',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         Cell: ({
           row: {
             original: { name },
@@ -255,13 +263,15 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
       },
       {
         accessor: 'user_ids',
-        Header: t('Users'),
+        // Header: t('Users'),
+        Header: t('用户'),
         hidden: true,
         Cell: ({ row: { original } }: any) => original.user_ids.join(', '),
       },
       {
         accessor: 'permission_ids',
-        Header: t('Permissions'),
+        // Header: t('Permissions'),
+        Header: t('权限'),
         hidden: true,
         Cell: ({ row: { original } }: any) =>
           original.permission_ids.join(', '),
@@ -282,21 +292,24 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
             ? [
                 {
                   label: 'role-list-edit-action',
-                  tooltip: t('Edit role'),
+                  // tooltip: t('Edit role'),
+                  tooltip: t('修改角色'),
                   placement: 'bottom',
                   icon: 'EditOutlined',
                   onClick: handleEdit,
                 },
                 {
                   label: 'role-list-duplicate-action',
-                  tooltip: t('Duplicate role'),
+                  // tooltip: t('Duplicate role'),
+                  tooltip: t('重复角色'),
                   placement: 'bottom',
                   icon: 'CopyOutlined',
                   onClick: handleDuplicate,
                 },
                 {
                   label: 'role-list-delete-action',
-                  tooltip: t('Delete role'),
+                  // tooltip: t('Delete role'),
+                  tooltip: t('删除角色'),
                   placement: 'bottom',
                   icon: 'DeleteOutlined',
                   onClick: handleDelete,
@@ -306,7 +319,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
 
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
         hidden: !isAdmin,
@@ -331,7 +345,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
                 vertical-align: text-top;
               `}
             />
-            {t('Role')}
+            {/* {t('Role')} */}
+            {t('角色')}
           </>
         ),
         buttonStyle: 'primary',
@@ -342,7 +357,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
         'data-test': 'add-role-button',
       },
       {
-        name: t('Bulk select'),
+        // name: t('Bulk select'),
+        name: t('批量选择'),
         onClick: toggleBulkSelect,
         buttonStyle: 'secondary',
       },
@@ -352,19 +368,22 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'name',
         id: 'name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Users'),
+        // Header: t('Users'),
+        Header: t('用户'),
         key: 'user_ids',
         id: 'user_ids',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         selects: users?.map(user => ({
           label: user.username,
           value: user.id,
@@ -372,12 +391,14 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
         loading: loadingState.users,
       },
       {
-        Header: t('Permissions'),
+        // Header: t('Permissions'),
+        Header: t('权限'),
         key: 'permission_ids',
         id: 'permission_ids',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         selects: permissions?.map(permission => ({
           label: permission.label,
           value: permission.id,
@@ -389,7 +410,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
   );
 
   const emptyState = {
-    title: t('No roles yet'),
+    // title: t('No roles yet'),
+    title: t('暂无角色'),
     image: 'filter-results.svg',
     ...(isAdmin && {
       buttonAction: () => {
@@ -405,7 +427,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
               vertical-align: text-top;
             `}
           />
-          {t('Role')}
+          {/* {t('Role')} */}
+          {t('角色')}
         </>
       ),
     }),
@@ -413,7 +436,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
 
   return (
     <>
-      <SubMenu name={t('List Roles')} buttons={subMenuButtons} />
+      {/* <SubMenu name={t('List Roles')} buttons={subMenuButtons} /> */}
+      <SubMenu name={t('角色名单')} buttons={subMenuButtons} />
       <RoleListAddModal
         onHide={() => closeModal(ModalType.ADD)}
         show={modalState.add}
@@ -450,7 +474,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
       )}
       {roleCurrentlyDeleting && (
         <DeleteModal
-          description={t('This action will permanently delete the role.')}
+          // description={t('This action will permanently delete the role.')}
+          description={t('此作将永久删除该角色。')}
           onConfirm={() => {
             if (roleCurrentlyDeleting) {
               handleRoleDelete(roleCurrentlyDeleting);
@@ -458,12 +483,15 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
           }}
           onHide={() => setRoleCurrentlyDeleting(null)}
           open
-          title={t('Delete Role?')}
+          // title={t('Delete Role?')}
+          title={t('删除角色？')}
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
-        description={t('Are you sure you want to delete the selected roles?')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t('Are you sure you want to delete the selected roles?')}
+        description={t('是否确实要删除选定的角色？')}
         onConfirm={handleBulkRolesDelete}
       >
         {confirmDelete => {
@@ -471,7 +499,8 @@ function RolesList({ addDangerToast, addSuccessToast, user }: RolesListProps) {
             ? [
                 {
                   key: 'delete',
-                  name: t('Delete'),
+                  // name: t('Delete'),
+                  name: t('删除'),
                   onSelect: confirmDelete,
                   type: 'danger',
                 },

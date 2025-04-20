@@ -208,15 +208,19 @@ export default class TimeSeriesColumnControl extends Component {
           <Input
             value={this.state.tooltip}
             onChange={this.onTextInputChange.bind(this, 'tooltip')}
-            placeholder={t('Tooltip')}
+            // placeholder={t('Tooltip')}
+            placeholder={t('提示框')}
           />,
         )}
         {this.formRow(
-          t('Type'),
-          t('Type of comparison, value difference or percentage'),
+          // t('Type'),
+          // t('Type of comparison, value difference or percentage'),
+          t('类型'),
+          t('比较类型、值差或百分比'),
           'col-type',
           <Select
-            ariaLabel={t('Type')}
+            // ariaLabel={t('Type')}
+            ariaLabel={t('类型')}
             value={this.state.colType || undefined}
             onChange={this.onSelectChange.bind(this, 'colType')}
             options={colTypeOptions}
@@ -225,57 +229,74 @@ export default class TimeSeriesColumnControl extends Component {
         <hr />
         {this.state.colType === 'spark' &&
           this.formRow(
-            t('Width'),
-            t('Width of the sparkline'),
+            // t('Width'),
+            // t('Width of the sparkline'),
+            t('宽度'),
+            t('迷你图的宽度'),
             'spark-width',
             <Input
               value={this.state.width}
               onChange={this.onTextInputChange.bind(this, 'width')}
-              placeholder={t('Width')}
+              // placeholder={t('Width')}
+              placeholder={t('宽度')}
             />,
           )}
         {this.state.colType === 'spark' &&
           this.formRow(
-            t('Height'),
-            t('Height of the sparkline'),
+            // t('Height'),
+            // t('Height of the sparkline'),
+            t('高度'),
+            t('迷你图的高度'),
             'spark-width',
             <Input
               value={this.state.height}
               onChange={this.onTextInputChange.bind(this, 'height')}
-              placeholder={t('Height')}
+              // placeholder={t('Height')}
+              placeholder={t('高度')}
             />,
           )}
         {['time', 'avg'].indexOf(this.state.colType) >= 0 &&
           this.formRow(
-            t('Time lag'),
+            // t('Time lag'),
+            // t(
+            //   'Number of periods to compare against. You can use negative numbers to compare from the beginning of the time range.',
+            // ),
+            t('时间滞后'),
             t(
-              'Number of periods to compare against. You can use negative numbers to compare from the beginning of the time range.',
+              '要比较的期间数。您可以使用负数从时间范围的开始进行比较。',
             ),
             'time-lag',
             <Input
               value={this.state.timeLag}
               onChange={this.onTextInputChange.bind(this, 'timeLag')}
-              placeholder={t('Time Lag')}
+              // placeholder={t('Time Lag')}
+              placeholder={t('时间滞后')}
             />,
           )}
         {['spark'].indexOf(this.state.colType) >= 0 &&
           this.formRow(
-            t('Time ratio'),
-            t('Number of periods to ratio against'),
+            // t('Time ratio'),
+            // t('Number of periods to ratio against'),
+            t('时间比例'),
+            t('比率对应的周期数'),
             'time-ratio',
             <Input
               value={this.state.timeRatio}
               onChange={this.onTextInputChange.bind(this, 'timeRatio')}
-              placeholder={t('Time Ratio')}
+              // placeholder={t('Time Ratio')}
+              placeholder={t('时间比例')}
             />,
           )}
         {this.state.colType === 'time' &&
           this.formRow(
-            t('Type'),
-            t('Type of comparison, value difference or percentage'),
+            // t('Type'),
+            // t('Type of comparison, value difference or percentage'),
+            t('类型'),
+            t('比较类型，值差异或百分比'),
             'comp-type',
             <Select
-              ariaLabel={t('Type')}
+              // ariaLabel={t('Type')}
+              ariaLabel={t('类型')}
               value={this.state.comparisonType || undefined}
               onChange={this.onSelectChange.bind(this, 'comparisonType')}
               options={comparisonTypeOptions}
@@ -283,9 +304,13 @@ export default class TimeSeriesColumnControl extends Component {
           )}
         {this.state.colType === 'spark' &&
           this.formRow(
-            t('Show Y-axis'),
+            // t('Show Y-axis'),
+            // t(
+            //   'Show Y-axis on the sparkline. Will display the manually set min/max if set or min/max values in the data otherwise.',
+            // ),
+            t('显示 Y 轴'),
             t(
-              'Show Y-axis on the sparkline. Will display the manually set min/max if set or min/max values in the data otherwise.',
+              '显示折线图上的 Y 轴。如果手动设置了最小值和最大值，则显示这些值；否则，显示数据中的最小值和最大值。',
             ),
             'show-y-axis-bounds',
             <CheckboxControl
@@ -295,8 +320,10 @@ export default class TimeSeriesColumnControl extends Component {
           )}
         {this.state.colType === 'spark' &&
           this.formRow(
-            t('Y-axis bounds'),
-            t('Manually set min/max values for the y-axis.'),
+            // t('Y-axis bounds'),
+            // t('Manually set min/max values for the y-axis.'),
+            t('Y 轴范围'),
+            t('手动设置 y 轴的最小/最大值。'),
             'y-axis-bounds',
             <BoundsControl
               value={this.state.yAxisBounds}
@@ -305,10 +332,15 @@ export default class TimeSeriesColumnControl extends Component {
           )}
         {this.state.colType !== 'spark' &&
           this.formRow(
-            t('Color bounds'),
-            t(`Number bounds used for color encoding from red to blue.
-               Reverse the numbers for blue to red. To get pure red or blue,
-               you can enter either only min or max.`),
+            // t('Color bounds'),
+            // t(`Number bounds used for color encoding from red to blue.
+            //    Reverse the numbers for blue to red. To get pure red or blue,
+            //    you can enter either only min or max.`),
+            // 'bounds',
+            t('颜色范围'),
+            t(`从红色到蓝色用于颜色编码的数值范围。
+               将蓝色的数字颠倒过来，以获得纯粹的红色或蓝色。
+               您可以输入最小值或最大值。`),
             'bounds',
             <BoundsControl
               value={this.state.bounds}
@@ -316,29 +348,36 @@ export default class TimeSeriesColumnControl extends Component {
             />,
           )}
         {this.formRow(
-          t('Number format'),
-          t('Optional d3 number format string'),
+          // t('Number format'),
+          // t('Optional d3 number format string'),
+          t('数字格式'),
+          t('可选的 d3 数字格式字符串'),
           'd3-format',
           <Input
             value={this.state.d3format}
             onChange={this.onTextInputChange.bind(this, 'd3format')}
-            placeholder={t('Number format string')}
+            // placeholder={t('Number format string')}
+            placeholder={t('数字格式字符串')}
           />,
         )}
         {this.state.colType === 'spark' &&
           this.formRow(
-            t('Date format'),
-            t('Optional d3 date format string'),
+            // t('Date format'),
+            // t('Optional d3 date format string'),
+            t('日期格式'),
+            t('可选的 d3 日期格式字符串'),
             'date-format',
             <Input
               value={this.state.dateFormat}
               onChange={this.onTextInputChange.bind(this, 'dateFormat')}
-              placeholder={t('Date format string')}
+              // placeholder={t('Date format string')}
+              placeholder={t('日期格式字符串')}
             />,
           )}
         <ButtonBar>
           <Button buttonSize="small" onClick={this.onClose} cta>
-            {t('Close')}
+            {/* {t('Close')} */}
+            {t('关闭')}
           </Button>
           <Button
             buttonStyle="primary"
@@ -346,7 +385,8 @@ export default class TimeSeriesColumnControl extends Component {
             onClick={this.onSave}
             cta
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
         </ButtonBar>
       </div>

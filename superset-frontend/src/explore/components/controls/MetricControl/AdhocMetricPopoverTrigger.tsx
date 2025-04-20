@@ -247,10 +247,15 @@ class AdhocMetricPopoverTrigger extends PureComponent<
           <SaveDatasetModal
             visible={this.state.showSaveDatasetModal}
             onHide={() => this.handleDatasetModal(false)}
-            buttonTextOnSave={t('Save')}
-            buttonTextOnOverwrite={t('Overwrite')}
+            // buttonTextOnSave={t('Save')}
+            // buttonTextOnOverwrite={t('Overwrite')}
+            // modalDescription={t(
+            //   'Save this query as a virtual dataset to continue exploring',
+            // )}
+            buttonTextOnSave={t('保存')}
+            buttonTextOnOverwrite={t('覆盖')}
             modalDescription={t(
-              'Save this query as a virtual dataset to continue exploring',
+              '将此查询保存为虚拟数据集以继续探索',
             )}
             datasource={datasource}
           />

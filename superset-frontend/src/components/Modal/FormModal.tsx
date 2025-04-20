@@ -105,7 +105,8 @@ function FormModal({
             data-test="form-modal-save-button"
             disabled={isSaving || submitDisabled}
           >
-            {isSaving ? t('Saving...') : t('Save')}
+            {/* {isSaving ? t('Saving...') : t('Save')} */}
+            {isSaving ? t('保存...') : t('保存')}
           </Button>
         </>
       }

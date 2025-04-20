@@ -70,7 +70,8 @@ function CssTemplatesList({
     toggleBulkSelect,
   } = useListViewResource<TemplateObject>(
     'css_template',
-    t('CSS templates'),
+    // t('CSS templates'),
+    t('CSS 模板'),
     addDangerToast,
   );
   const [cssTemplateModalOpen, setCssTemplateModalOpen] =
@@ -189,7 +190,8 @@ function CssTemplatesList({
   );
 
   const menuData: SubMenuProps = {
-    name: t('CSS templates'),
+    // name: t('CSS templates'),
+    name: t('CSS 模板'),
   };
 
   const subMenuButtons: SubMenuProps['buttons'] = [];

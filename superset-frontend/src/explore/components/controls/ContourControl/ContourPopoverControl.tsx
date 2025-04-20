@@ -224,16 +224,21 @@ const ContourPopoverControl = ({
         <Tabs.TabPane
           className="adhoc-filter-edit-tab"
           key={ContourTypes.Isoline}
-          tab={t('Isoline')}
+          // tab={t('Isoline')}
+          tab={t('等值线')}
         >
           <div key={ContourTypes.Isoline} className="isoline-popover-section">
             <StyledRow>
               <Col flex="1">
                 <ControlHeader
                   name="isoline-threshold"
-                  label={t('Threshold')}
+                  // label={t('Threshold')}
+                  // description={t(
+                  //   'Defines the value that determines the boundary between different regions or levels in the data ',
+                  // )}
+                  label={t('阈值')}
                   description={t(
-                    'Defines the value that determines the boundary between different regions or levels in the data ',
+                    '定义了区分数据中不同区域或层级的边界值 ',
                   )}
                   validationErrors={validationErrors.lowerThreshold}
                   hovered
@@ -248,8 +253,10 @@ const ContourPopoverControl = ({
               <Col flex="1">
                 <ControlHeader
                   name="isoline-stroke-width"
-                  label={t('Stroke Width')}
-                  description={t('The width of the Isoline in pixels')}
+                  // label={t('Stroke Width')}
+                  // description={t('The width of the Isoline in pixels')}
+                  label={t('描边宽度')}
+                  description={t('等值线的宽度（以像素为单位）')}
                   validationErrors={validationErrors.strokeWidth}
                   hovered
                 />
@@ -261,8 +268,10 @@ const ContourPopoverControl = ({
               <Col flex="1">
                 <ControlHeader
                   name="isoline-color"
-                  label={t('Color')}
-                  description={t('The color of the isoline')}
+                  // label={t('Color')}
+                  // description={t('The color of the isoline')}
+                  label={t('颜色')}
+                  description={t('等值线的颜色')}
                   validationErrors={validationErrors.color}
                   hovered
                 />
@@ -277,16 +286,21 @@ const ContourPopoverControl = ({
         <Tabs.TabPane
           className="adhoc-filter-edit-tab"
           key={ContourTypes.Isoband}
-          tab={t('Isoband')}
+          // tab={t('Isoband')}
+          tab={t('等高线')}
         >
           <div key={ContourTypes.Isoband} className="isoline-popover-section">
             <StyledRow>
               <Col flex="1">
                 <ControlHeader
                   name="isoband-threshold-lower"
-                  label={t('Lower Threshold')}
+                  // label={t('Lower Threshold')}
+                  // description={t(
+                  //   'The lower limit of the threshold range of the Isoband',
+                  // )}
+                  label={t('阈值下限')}
                   description={t(
-                    'The lower limit of the threshold range of the Isoband',
+                    '阈值范围的下限',
                   )}
                   validationErrors={validationErrors.lowerThreshold}
                   hovered
@@ -299,9 +313,13 @@ const ContourPopoverControl = ({
               <Col flex="1">
                 <ControlHeader
                   name="isoband-threshold-upper"
-                  label={t('Upper Threshold')}
+                  // label={t('Upper Threshold')}
+                  // description={t(
+                  //   'The upper limit of the threshold range of the Isoband',
+                  // )}
+                  label={t('上限')}
                   description={t(
-                    'The upper limit of the threshold range of the Isoband',
+                    '阈值范围的最高限',
                   )}
                   validationErrors={validationErrors.upperThreshold}
                   hovered
@@ -316,8 +334,10 @@ const ContourPopoverControl = ({
               <Col flex="1">
                 <ControlHeader
                   name="isoband-color"
-                  label={t('Color')}
-                  description={t('The color of the isoband')}
+                  // label={t('Color')}
+                  label={t('颜色')}
+                  // description={t('The color of the isoband')}
+                  description={t('等高线的颜色')}
                   validationErrors={validationErrors.color}
                   hovered
                 />
@@ -332,7 +352,8 @@ const ContourPopoverControl = ({
       </Tabs>
       <ContourActionsContainer>
         <Button buttonSize="small" onClick={onClose} cta>
-          {t('Close')}
+          {/* {t('Close')} */}
+          {t('关闭')}
         </Button>
         <Button
           data-test="adhoc-filter-edit-popover-save-button"
@@ -343,7 +364,8 @@ const ContourPopoverControl = ({
           onClick={handleSave}
           cta
         >
-          {t('Save')}
+          {/* {t('Save')} */}
+          {t('保存')}
         </Button>
       </ContourActionsContainer>
     </>

@@ -56,7 +56,8 @@ const DashboardsSubMenu = ({
       {showSearch && (
         <Input
           allowClear
-          placeholder={t('Search')}
+          // placeholder={t('Search')}
+          placeholder={t('搜索')}
           prefix={<Icons.StarOutlined iconSize="l" />}
           css={css`
             width: ${WIDTH}px;
@@ -134,7 +135,8 @@ const DashboardsSubMenu = ({
             `}
             {...menuProps}
           >
-            {t('None')}
+            {/* {t('None')} */}
+            {t('无')}
           </Menu.Item>
         )}
       </div>

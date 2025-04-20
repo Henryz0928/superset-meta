@@ -76,7 +76,8 @@ export const CopyToClipboardButton = ({
     copyNode={
       <Icons.CopyOutlined
         iconSize="l"
-        aria-label={t('Copy')}
+        // aria-label={t('Copy')}
+        aria-label={t('拷贝')}
         role="button"
         css={css`
           &.anticon > * {
@@ -109,7 +110,8 @@ export const FilterInput = ({
   return (
     <Input
       prefix={<Icons.SearchOutlined iconSize="l" />}
-      placeholder={t('Search')}
+      // placeholder={t('Search')}
+      placeholder={t('搜索')}
       onChange={(event: any) => {
         const filterText = event.target.value;
         debouncedChangeHandler(filterText);

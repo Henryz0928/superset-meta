@@ -290,7 +290,8 @@ class DatasourceControl extends PureComponent {
 
     const canAccessSqlLab = userHasPermission(user, 'SQL Lab', 'menu_access');
 
-    const editText = t('Edit dataset');
+    // const editText = t('Edit dataset');
+    const editText = t('修改数据集');
     const requestedQuery = {
       datasourceKey: `${datasource.id}__${datasource.type}`,
       sql: datasource.sql,
@@ -306,8 +307,11 @@ class DatasourceControl extends PureComponent {
           >
             {!allowEdit ? (
               <Tooltip
+                // title={t(
+                //   'You must be a dataset owner in order to edit. Please reach out to a dataset owner to request modifications or edit access.',
+                // )}
                 title={t(
-                  'You must be a dataset owner in order to edit. Please reach out to a dataset owner to request modifications or edit access.',
+                  '您必须是数据集的所有者才能编辑。请联系数据集的所有者以请求修改或编辑权限。',
                 )}
               >
                 {editText}
@@ -317,7 +321,8 @@ class DatasourceControl extends PureComponent {
             )}
           </Menu.Item>
         )}
-        <Menu.Item key={CHANGE_DATASET}>{t('Swap dataset')}</Menu.Item>
+        {/* <Menu.Item key={CHANGE_DATASET}>{t('Swap dataset')}</Menu.Item> */}
+        <Menu.Item key={CHANGE_DATASET}>{t('交换数据集')}</Menu.Item>
         {!isMissingDatasource && canAccessSqlLab && (
           <Menu.Item key={VIEW_IN_SQL_LAB}>
             <Link
@@ -327,7 +332,8 @@ class DatasourceControl extends PureComponent {
               }}
               onClick={preventRouterLinkWhileMetaClicked}
             >
-              {t('View in SQL Lab')}
+              {/* {t('View in SQL Lab')} */}
+              {t('在SQL实验室中查看')}
             </Link>
           </Menu.Item>
         )}
@@ -339,9 +345,11 @@ class DatasourceControl extends PureComponent {
         <Menu.Item key={QUERY_PREVIEW}>
           <ModalTrigger
             triggerNode={
-              <div data-test="view-query-menu-item">{t('Query preview')}</div>
+              // <div data-test="view-query-menu-item">{t('Query preview')}</div>
+              <div data-test="view-query-menu-item">{t('查询预览')}</div>
             }
-            modalTitle={t('Query preview')}
+            // modalTitle={t('Query preview')}
+            modalTitle={t('查询预览')}
             modalBody={
               <ViewQuery
                 sql={datasource?.sql || datasource?.select_star || ''}
@@ -367,11 +375,13 @@ class DatasourceControl extends PureComponent {
               }}
               onClick={preventRouterLinkWhileMetaClicked}
             >
-              {t('View in SQL Lab')}
+              {/* {t('View in SQL Lab')} */}
+              {t('在SQL实验室 中查看')}
             </Link>
           </Menu.Item>
         )}
-        <Menu.Item key={SAVE_AS_DATASET}>{t('Save as dataset')}</Menu.Item>
+        {/* <Menu.Item key={SAVE_AS_DATASET}>{t('Save as dataset')}</Menu.Item> */}
+        <Menu.Item key={SAVE_AS_DATASET}>{t('保存为数据集')}</Menu.Item>
       </Menu>
     );
 
@@ -389,7 +399,8 @@ class DatasourceControl extends PureComponent {
     }
 
     const titleText = isMissingDatasource
-      ? t('Missing dataset')
+      // ? t('Missing dataset')
+      ? t('缺失数据集')
       : getDatasourceTitle(datasource);
 
     const tooltip = titleText;
@@ -434,9 +445,13 @@ class DatasourceControl extends PureComponent {
           <div className="error-alert">
             <ErrorAlert
               level="warning"
-              errorType={t('Missing URL parameters')}
+              // errorType={t('Missing URL parameters')}
+              // description={t(
+              //   'The URL is missing the dataset_id or slice_id parameters.',
+              // )}
+              errorType={t('缺少 URL 参数')}
               description={t(
-                'The URL is missing the dataset_id or slice_id parameters.',
+                'URL 缺少 dataset_id 或 slice_id 参数。',
               )}
             />
           </div>
@@ -445,17 +460,20 @@ class DatasourceControl extends PureComponent {
           <div className="error-alert">
             <ErrorAlert
               level="warning"
-              errorType={t('Missing dataset')}
+              // errorType={t('Missing dataset')}
+              errorType={t('缺失数据集')}
               description={
                 <>
-                  {t('The dataset linked to this chart may have been deleted.')}
+                  {/* {t('The dataset linked to this chart may have been deleted.')} */}
+                  {t('这个图表链接的数据集可能已被删除。')}
                   <Button
                     buttonStyle="primary"
                     onClick={() =>
                       this.handleMenuItemClick({ key: CHANGE_DATASET })
                     }
                   >
-                    {t('Swap dataset')}
+                    {/* {t('Swap dataset')} */}
+                    {t('交换数据集')}
                   </Button>
                 </>
               }
@@ -482,10 +500,15 @@ class DatasourceControl extends PureComponent {
           <SaveDatasetModal
             visible={showSaveDatasetModal}
             onHide={this.toggleSaveDatasetModal}
-            buttonTextOnSave={t('Save')}
-            buttonTextOnOverwrite={t('Overwrite')}
+            // buttonTextOnSave={t('Save')}
+            // buttonTextOnOverwrite={t('Overwrite')}
+            // modalDescription={t(
+            //   'Save this query as a virtual dataset to continue exploring',
+            // )}
+            buttonTextOnSave={t('保存')}
+            buttonTextOnOverwrite={t('覆盖')}
             modalDescription={t(
-              'Save this query as a virtual dataset to continue exploring',
+              '将此查询保存为虚拟数据集以继续探索',
             )}
             datasource={getDatasourceAsSaveableDataset(datasource)}
             openWindow={false}

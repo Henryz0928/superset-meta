@@ -119,7 +119,8 @@ const PropertiesModal = ({
   const [dashboardInfo, setDashboardInfo] = useState<DashboardInfo>();
   const [owners, setOwners] = useState<Owners>([]);
   const [roles, setRoles] = useState<Roles>([]);
-  const saveLabel = onlyApply ? t('Apply') : t('Save');
+  // const saveLabel = onlyApply ? t('Apply') : t('Save');
+  const saveLabel = onlyApply ? t('应用') : t('保存');
   const [tags, setTags] = useState<TagType[]>([]);
   const categoricalSchemeRegistry = getCategoricalSchemeRegistry();
   const originalDashboardMetadata = useRef<Record<string, any>>({});
@@ -134,19 +135,22 @@ const PropertiesModal = ({
 
   const handleErrorResponse = async (response: Response) => {
     const { error, statusText, message } = await getClientErrorObject(response);
-    let errorText = error || statusText || t('An error has occurred');
+    // let errorText = error || statusText || t('An error has occurred');
+    let errorText = error || statusText || t('发生了一个错误');
     if (typeof message === 'object' && 'json_metadata' in message) {
       errorText = (message as { json_metadata: string }).json_metadata;
     } else if (typeof message === 'string') {
       errorText = message;
 
       if (message === 'Forbidden') {
-        errorText = t('You do not have permission to edit this dashboard');
+        // errorText = t('You do not have permission to edit this dashboard');
+        errorText = t('您没有编辑此仪表板的权限');
       }
     }
 
     Modal.error({
-      title: t('Error'),
+      // title: t('Error'),
+      title: t('错误'),
       content: errorText,
       okButtonProps: { danger: true, className: 'btn-danger' },
     });
@@ -299,12 +303,15 @@ const PropertiesModal = ({
     // only fire if the color_scheme is present and invalid
     if (colorScheme && !colorChoices.includes(colorScheme)) {
       Modal.error({
-        title: t('Error'),
-        content: t('A valid color scheme is required'),
+        // title: t('Error'),
+        title: t('错误'),
+        // content: t('A valid color scheme is required'),
+        content: t('需要有效的配色方案'),
         okButtonProps: { danger: true, className: 'btn-danger' },
       });
       onHide();
-      throw new Error('A valid color scheme is required');
+      // throw new Error('A valid color scheme is required');
+      throw new Error('需要有效的配色方案');
     }
 
     jsonMetadataObj.color_scheme = colorScheme;
@@ -335,7 +342,8 @@ const PropertiesModal = ({
       }
       metadata = JSON.parse(currentJsonMetadata);
     } catch (error) {
-      addDangerToast(t('JSON metadata is invalid!'));
+      // addDangerToast(t('JSON metadata is invalid!'));
+      addDangerToast(t('JSON 元数据无效！'));
       return;
     }
 
@@ -406,7 +414,8 @@ const PropertiesModal = ({
     if (onlyApply) {
       onSubmit(onSubmitProps);
       onHide();
-      addSuccessToast(t('Dashboard properties updated'));
+      // addSuccessToast(t('Dashboard properties updated'));
+      addSuccessToast(t('仪表板属性已更新'));
     } else {
       SupersetClient.put({
         endpoint: `/api/v1/dashboard/${dashboardId}`,
@@ -424,7 +433,8 @@ const PropertiesModal = ({
       }).then(() => {
         onSubmit(onSubmitProps);
         onHide();
-        addSuccessToast(t('The dashboard has been saved'));
+        // addSuccessToast(t('The dashboard has been saved'));
+        addSuccessToast(t('仪表盘已保存'));
       }, handleErrorResponse);
     }
   };
@@ -438,11 +448,14 @@ const PropertiesModal = ({
     return (
       <Row gutter={16}>
         <Col xs={24} md={12}>
-          <h3 style={{ marginTop: '1em' }}>{t('Access')}</h3>
-          <StyledFormItem label={t('Owners')}>
+          {/* <h3 style={{ marginTop: '1em' }}>{t('Access')}</h3> */}
+          <h3 style={{ marginTop: '1em' }}>{t('访问')}</h3>
+          {/* <StyledFormItem label={t('Owners')}> */}
+          <StyledFormItem label={t('所有者')}>
             <AsyncSelect
               allowClear
-              ariaLabel={t('Owners')}
+              // ariaLabel={t('Owners')}
+              ariaLabel={t('所有者')}
               disabled={isLoading}
               mode="multiple"
               onChange={handleOnChangeOwners}
@@ -453,13 +466,17 @@ const PropertiesModal = ({
             />
           </StyledFormItem>
           <p className="help-block">
-            {t(
+            {/* {t(
               'Owners is a list of users who can alter the dashboard. Searchable by name or username.',
+            )} */}
+             {t(
+              '所有者可以更改仪表板的用户列表。可按名称或用户名搜索。',
             )}
           </p>
         </Col>
         <Col xs={24} md={12}>
-          <h3 style={{ marginTop: '1em' }}>{t('Colors')}</h3>
+          {/* <h3 style={{ marginTop: '1em' }}>{t('Colors')}</h3> */}
+          <h3 style={{ marginTop: '1em' }}>{t('颜色')}</h3>
           <ColorSchemeControlWrapper
             hasCustomLabelsColor={hasCustomLabelsColor}
             onChange={onColorSchemeChange}
@@ -480,16 +497,19 @@ const PropertiesModal = ({
       <>
         <Row>
           <Col xs={24} md={24}>
-            <h3 style={{ marginTop: '1em' }}>{t('Access')}</h3>
+            {/* <h3 style={{ marginTop: '1em' }}>{t('Access')}</h3> */}
+            <h3 style={{ marginTop: '1em' }}>{t('访问')}</h3>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col xs={24} md={12}>
-            <StyledFormItem label={t('Owners')}>
+            {/* <StyledFormItem label={t('Owners')}> */}
+            <StyledFormItem label={t('所有者')}>
               <AsyncSelect
                 allowClear
                 allowNewOptions
-                ariaLabel={t('Owners')}
+                // ariaLabel={t('Owners')}
+                ariaLabel={t('所有者')}
                 disabled={isLoading}
                 mode="multiple"
                 onChange={handleOnChangeOwners}
@@ -500,16 +520,21 @@ const PropertiesModal = ({
               />
             </StyledFormItem>
             <p className="help-block">
-              {t(
+              {/* {t(
                 'Owners is a list of users who can alter the dashboard. Searchable by name or username.',
+              )} */}
+                {t(
+                '所有者可以更改仪表板的用户列表。可按名称或用户名搜索。',
               )}
             </p>
           </Col>
           <Col xs={24} md={12}>
-            <StyledFormItem label={t('Roles')}>
+            {/* <StyledFormItem label={t('Roles')}> */}
+            <StyledFormItem label={t('角色')}>
               <AsyncSelect
                 allowClear
-                ariaLabel={t('Roles')}
+                // ariaLabel={t('Roles')}
+                ariaLabel={t('角色')}
                 disabled={isLoading}
                 mode="multiple"
                 onChange={handleOnChangeRoles}
@@ -520,8 +545,11 @@ const PropertiesModal = ({
               />
             </StyledFormItem>
             <p className="help-block">
-              {t(
+              {/* {t(
                 'Roles is a list which defines access to the dashboard. Granting a role access to a dashboard will bypass dataset level checks. If no roles are defined, regular access permissions apply.',
+              )} */}
+               {t(
+                '角色是一个定义仪表板访问权限的列表。授予角色对仪表板的访问权限将绕过数据集级别检查。如果未定义角色，则应用常规访问权限。',
               )}
             </p>
           </Col>
@@ -576,7 +604,8 @@ const PropertiesModal = ({
         },
         (tags: TagType[]) => setTags(tags),
         (error: Response) => {
-          addDangerToast(`Error fetching tags: ${error.text}`);
+          // addDangerToast(`Error fetching tags: ${error.text}`);
+          addDangerToast(`获取标签时出错: ${error.text}`);
         },
       );
     } catch (error) {
@@ -596,7 +625,8 @@ const PropertiesModal = ({
     <Modal
       show={show}
       onHide={handleOnCancel}
-      title={t('Dashboard properties')}
+      // title={t('Dashboard properties')}
+      title={t('仪表板属性')}
       footer={
         <>
           <Button
@@ -619,10 +649,14 @@ const PropertiesModal = ({
             disabled={dashboardInfo?.isManagedExternally}
             tooltip={
               dashboardInfo?.isManagedExternally
+                // ? t(
+                //     "This dashboard is managed externally, and can't be edited in Superset",
+                //   )
+                // : ''
                 ? t(
-                    "This dashboard is managed externally, and can't be edited in Superset",
-                  )
-                : ''
+                  "这个仪表盘由外部管理，无法在 Superset 中编辑",
+                )
+              : ''
             }
           >
             {saveLabel}
@@ -640,12 +674,14 @@ const PropertiesModal = ({
       >
         <Row>
           <Col xs={24} md={24}>
-            <h3>{t('Basic information')}</h3>
+            {/* <h3>{t('Basic information')}</h3> */}
+            <h3>{t('基本信息')}</h3>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col xs={24} md={12}>
-            <FormItem label={t('Name')} name="title">
+            {/* <FormItem label={t('Name')} name="title"> */}
+            <FormItem label={t('名称')} name="title">
               <Input
                 data-test="dashboard-title-input"
                 type="text"
@@ -654,11 +690,13 @@ const PropertiesModal = ({
             </FormItem>
           </Col>
           <Col xs={24} md={12}>
-            <StyledFormItem label={t('URL slug')} name="slug">
+            {/* <StyledFormItem label={t('URL slug')} name="slug"> */}
+            <StyledFormItem label={t('URL 标段')} name="slug">
               <Input type="text" disabled={isLoading} />
             </StyledFormItem>
             <p className="help-block">
-              {t('A readable URL for your dashboard')}
+              {/* {t('A readable URL for your dashboard')} */}
+              {t('仪表板的可读 URL')}
             </p>
           </Col>
         </Row>
@@ -667,34 +705,40 @@ const PropertiesModal = ({
           : getRowsWithoutRoles()}
         <Row>
           <Col xs={24} md={24}>
-            <h3>{t('Certification')}</h3>
+            {/* <h3>{t('Certification')}</h3> */}
+            <h3>{t('认证')}</h3>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col xs={24} md={12}>
-            <StyledFormItem label={t('Certified by')} name="certifiedBy">
+            {/* <StyledFormItem label={t('Certified by')} name="certifiedBy"> */}
+            <StyledFormItem label={t('认证由')} name="certifiedBy">
               <Input type="text" disabled={isLoading} />
             </StyledFormItem>
             <p className="help-block">
-              {t('Person or group that has certified this dashboard.')}
+              {/* {t('Person or group that has certified this dashboard.')} */}
+              {t('已认证此仪表板的人员或组。')}
             </p>
           </Col>
           <Col xs={24} md={12}>
             <StyledFormItem
-              label={t('Certification details')}
+              // label={t('Certification details')}
+              label={t('认证详情')}
               name="certificationDetails"
             >
               <Input type="text" disabled={isLoading} />
             </StyledFormItem>
             <p className="help-block">
-              {t('Any additional detail to show in the certification tooltip.')}
+              {/* {t('Any additional detail to show in the certification tooltip.')} */}
+              {t('需要在认证提示框中显示的额外详细信息。')}
             </p>
           </Col>
         </Row>
         {isFeatureEnabled(FeatureFlag.TaggingSystem) ? (
           <Row gutter={16}>
             <Col xs={24} md={12}>
-              <h3 css={{ marginTop: '1em' }}>{t('Tags')}</h3>
+              {/* <h3 css={{ marginTop: '1em' }}>{t('Tags')}</h3> */}
+              <h3 css={{ marginTop: '1em' }}>{t('标签')}</h3>
             </Col>
           </Row>
         ) : null}
@@ -712,7 +756,8 @@ const PropertiesModal = ({
                 />
               </StyledFormItem>
               <p className="help-block">
-                {t('A list of tags that have been applied to this chart.')}
+                {/* {t('A list of tags that have been applied to this chart.')} */}
+                {t('已应用到此图表的标签列表。')}
               </p>
             </Col>
           </Row>
@@ -732,12 +777,14 @@ const PropertiesModal = ({
                   className={`fa fa-angle-${isAdvancedOpen ? 'down' : 'right'}`}
                   style={{ minWidth: '1em' }}
                 />
-                {t('Advanced')}
+                {/* {t('Advanced')} */}
+                {t('高级')}
               </Button>
             </h3>
             {isAdvancedOpen && (
               <>
-                <StyledFormItem label={t('JSON metadata')}>
+                {/* <StyledFormItem label={t('JSON metadata')}> */}
+                <StyledFormItem label={t('JSON 元数据')}>
                   <StyledJsonEditor
                     showLoadingForImport
                     name="json_metadata"
@@ -750,20 +797,30 @@ const PropertiesModal = ({
                   />
                 </StyledFormItem>
                 <p className="help-block">
-                  {t(
+                  {/* {t(
                     'This JSON object is generated dynamically when clicking the save or overwrite button in the dashboard view. It is exposed here for reference and for power users who may want to alter specific parameters.',
+                  )} */}
+                   {t(
+                    '在仪表板视图中单击保存或覆盖按钮时，会动态生成此 JSON 对象。这里公开它以供参考，并供可能想要更改特定参数的高级用户使用。',
                   )}
                   {onlyApply && (
                     <>
-                      {' '}
+                      {/* {' '}
                       {t(
                         'Please DO NOT overwrite the "filter_scopes" key.',
+                      )}{' '} */}
+                       {' '}
+                      {t(
+                        '请不要覆盖“filter_scopes”键。',
                       )}{' '}
                       <FilterScopeModal
                         triggerNode={
                           <span className="alert-link">
-                            {t('Use "%(menuName)s" menu instead.', {
+                            {/* {t('Use "%(menuName)s" menu instead.', {
                               menuName: t('Set filter mapping'),
+                            })} */}
+                             {t('使用 "%(menuName)s" 菜单代替。', {
+                              menuName: t('设置过滤器映射'),
                             })}
                           </span>
                         }

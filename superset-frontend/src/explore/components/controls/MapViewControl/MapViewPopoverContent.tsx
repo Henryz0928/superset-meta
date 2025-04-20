@@ -141,11 +141,16 @@ export const MapViewPopoverContent: FC<MapViewPopoverContentProps> = ({
     });
   };
 
-  const zoomLabel = t('Zoom');
-  const latitudeLabel = t('Latitude');
-  const longitudeLabel = t('Longitude');
-  const closeButtonText = t('close');
-  const saveButtonText = t('save');
+  // const zoomLabel = t('Zoom');
+  // const latitudeLabel = t('Latitude');
+  // const longitudeLabel = t('Longitude');
+  // const closeButtonText = t('close');
+  // const saveButtonText = t('save');
+  const zoomLabel = t('缩放');
+  const latitudeLabel = t('纬度');
+  const longitudeLabel = t('经度');
+  const closeButtonText = t('关闭');
+  const saveButtonText = t('保存');
 
   return (
     <div>

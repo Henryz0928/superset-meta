@@ -46,11 +46,13 @@ export interface RoleListEditModalProps extends BaseModalProps {
 const roleTabs = {
   edit: {
     key: 'edit',
-    name: t('Edit Role'),
+    // name: t('Edit Role'),
+    name: t('修改角色'),
   },
   users: {
     key: 'users',
-    name: t('Users'),
+    // name: t('Users'),
+    name: t('用户'),
   },
 };
 
@@ -75,7 +77,8 @@ const userColumns = [
     accessor: 'active',
     Header: 'Is Active?',
     Cell: ({ cell }: CellProps<{ active: boolean }>) =>
-      cell.value ? 'Yes' : 'No',
+      // cell.value ? 'Yes' : 'No',
+    cell.value ? '是' : '否',
   },
 ];
 
@@ -99,9 +102,11 @@ function RoleListEditModal({
       await updateRoleName(id, values.roleName);
       await updateRolePermissions(id, values.rolePermissions);
       await updateRoleUsers(id, values.roleUsers);
-      addSuccessToast(t('Role successfully updated!'));
+      // addSuccessToast(t('Role successfully updated!'));
+      addSuccessToast(t('角色信息成功更新！'));
     } catch (err) {
-      addDangerToast(t('Error while updating role!'));
+      // addDangerToast(t('Error while updating role!'));
+      addDangerToast(t('更新角色时出错！'));
       throw err;
     }
   };
@@ -116,7 +121,8 @@ function RoleListEditModal({
     <FormModal
       show={show}
       onHide={onHide}
-      title={t('Edit Role')}
+      // title={t('Edit Role')}
+      title={t('修改角色')}
       onSave={onSave}
       formSubmitHandler={handleFormSubmit}
       initialValues={initialValues}

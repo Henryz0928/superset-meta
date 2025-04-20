@@ -206,11 +206,13 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
           currentDatasource.columns = columnChanges.finalColumns;
           dispatch(syncDatasourceMetadata(currentDatasource));
           dispatch(stopMetaDataLoading());
-          addSuccessToast(t('Metadata has been synced'));
+          // addSuccessToast(t('Metadata has been synced'));
+          addSuccessToast(t('元数据已同步'));
         } catch (error) {
           dispatch(stopMetaDataLoading());
           addDangerToast(
-            t('An error has occurred while syncing virtual dataset columns'),
+            // t('An error has occurred while syncing virtual dataset columns'),
+            t('同步虚拟数据集列时出错'),
           );
         }
         await SupersetClient.put({
@@ -221,7 +223,8 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
       const { json } = await SupersetClient.get({
         endpoint: `/api/v1/dataset/${currentDatasource?.id}`,
       });
-      addSuccessToast(t('The dataset has been saved'));
+      // addSuccessToast(t('The dataset has been saved'));
+      addSuccessToast(t('数据集已保存'));
       // eslint-disable-next-line no-param-reassign
       json.result.type = 'table';
       onDatasourceSave({
@@ -242,7 +245,8 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
         errorText = error.error;
       }
       modal.error({
-        title: t('Error saving dataset'),
+        // title: t('Error saving dataset'),
+        title: t('保存数据集时出错'),
         okButtonProps: { danger: true, className: 'btn-danger' },
         content: (
           <ErrorMessageWithStackTrace
@@ -275,13 +279,19 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
         })}
         type="warning"
         showIcon
-        message={t(`The dataset configuration exposed here
-                affects all the charts using this dataset.
-                Be mindful that changing settings
-                here may affect other charts
-                in undesirable ways.`)}
+        // message={t(`The dataset configuration exposed here
+        //         affects all the charts using this dataset.
+        //         Be mindful that changing settings
+        //         here may affect other charts
+        //         in undesirable ways.`)}
+        message={t(`此处公开的数据集配置
+          影响使用此数据集的所有图表。
+          请注意，更改设置
+          这里可能会影响其他图表
+          以不理想的方式。`)}
       />
-      {t('Are you sure you want to save and apply changes?')}
+      {/* {t('Are you sure you want to save and apply changes?')} */}
+      {t('您确定要保存并应用更改吗？')}
     </div>
   );
 
@@ -312,7 +322,8 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
             `}
             data-test="edit-alt"
           />
-          {t('Edit Dataset ')}
+          {/* {t('Edit Dataset ')} */}
+          {t('修改数据集 ')}
           <strong>{currentDatasource.table_name}</strong>
         </span>
       }
@@ -340,13 +351,18 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
             }
             tooltip={
               currentDatasource.is_managed_externally
+                // ? t(
+                //     "This dataset is managed externally, and can't be edited in Superset",
+                //   )
+                // : ''
                 ? t(
-                    "This dataset is managed externally, and can't be edited in Superset",
-                  )
-                : ''
+                  "这个数据集由外部管理，无法在 Superset 中编辑",
+                )
+              : ''
             }
           >
-            {t('Save')}
+            {/* {t('Save')} */}
+            {t('保存')}
           </Button>
         </>
       }
