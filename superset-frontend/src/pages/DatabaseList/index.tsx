@@ -187,10 +187,14 @@ function DatabaseList({
       })
       .catch(
         createErrorHandler(errMsg =>
+          // t(
+          //   'An error occurred while fetching database related data: %s',
+          //   errMsg,
+          // ),
           t(
-            'An error occurred while fetching database related data: %s',
+            '获取数据库相关数据时发生错误: %s',
             errMsg,
-          ),
+          ),  
         ),
       );
 
@@ -201,7 +205,8 @@ function DatabaseList({
     }).then(
       () => {
         refreshData();
-        addSuccessToast(t('Deleted: %s', dbName));
+        // addSuccessToast(t('Deleted: %s', dbName));
+        addSuccessToast(t('已删除: %s', dbName));
 
         // Remove any extension-related data
         if (dbConfigExtraExtension?.onDelete) {
@@ -215,7 +220,8 @@ function DatabaseList({
         setDatabaseCurrentlyDeleting(null);
       },
       createErrorHandler(errMsg =>
-        addDangerToast(t('There was an issue deleting %s: %s', dbName, errMsg)),
+        // addDangerToast(t('There was an issue deleting %s: %s', dbName, errMsg)),
+        addDangerToast(t('删除时出现了一个问题 %s: %s', dbName, errMsg)),
       ),
     );
   }
@@ -246,10 +252,12 @@ function DatabaseList({
 
   const uploadDropdownMenu = [
     {
-      label: t('Upload file to database'),
+      // label: t('Upload file to database'),
+      label: t('将文件上传到数据库'),
       childs: [
         {
-          label: t('Upload CSV'),
+          // label: t('Upload CSV'),
+          label: t('上传 CSV'),
           name: 'Upload CSV file',
           url: '#',
           onClick: () => {
@@ -259,7 +267,8 @@ function DatabaseList({
           disable: isDisabled,
         },
         {
-          label: t('Upload Excel'),
+          // label: t('Upload Excel'),
+          label: t('上传 Excel'),
           name: 'Upload Excel file',
           url: '#',
           onClick: () => {
@@ -269,7 +278,8 @@ function DatabaseList({
           disable: isDisabled,
         },
         {
-          label: t('Upload Columnar'),
+          // label: t('Upload Columnar'),
+          label: t('上传列'),
           name: 'Upload columnar file',
           url: '#',
           onClick: () => {
@@ -314,7 +324,8 @@ function DatabaseList({
   const menuData: SubMenuProps = {
     activeChild: 'Databases',
     dropDownLinks: filteredDropDown,
-    name: t('Databases'),
+    // name: t('Databases'),
+    name: t('数据库'),
   };
 
   if (canCreate) {
@@ -330,7 +341,8 @@ function DatabaseList({
               iconColor={theme.colors.primary.light5}
               iconSize="m"
             />
-            {t('Database')}
+            {/* {t('Database')} */}
+            {t('数据库')}
           </>
         ),
         buttonStyle: 'primary',
@@ -355,9 +367,13 @@ function DatabaseList({
 
   function handleDatabasePermSync(database: DatabaseObject) {
     if (shouldSyncPermsInAsyncMode) {
-      addInfoToast(t('Validating connectivity for %s', database.database_name));
+      // addInfoToast(t('Validating connectivity for %s', database.database_name));
+      addInfoToast(t('正在验证以下对象的连接 %s', database.database_name));
+
     } else {
-      addInfoToast(t('Syncing permissions for %s', database.database_name));
+      // addInfoToast(t('Syncing permissions for %s', database.database_name));
+      addInfoToast(t('正在同步的权限 %s', database.database_name));
+
     }
     SupersetClient.post({
       endpoint: `/api/v1/database/${database.id}/sync_permissions/`,
@@ -366,14 +382,19 @@ function DatabaseList({
         // Sync request
         if (response.status === 200) {
           addSuccessToast(
-            t('Permissions successfully synced for %s', database.database_name),
+            // t('Permissions successfully synced for %s', database.database_name),
+            t('已成功同步 %s', database.database_name),
           );
         }
         // Async request
         else {
           addInfoToast(
+            // t(
+            //   'Syncing permissions for %s in the background',
+            //   database.database_name,
+            // ),
             t(
-              'Syncing permissions for %s in the background',
+              '正在后台同步 %s 的权限',
               database.database_name,
             ),
           );
@@ -381,8 +402,13 @@ function DatabaseList({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
+          // t(
+          //   'An error occurred while syncing permissions for %s: %s',
+          //   database.database_name,
+          //   errMsg,
+          // ),
           t(
-            'An error occurred while syncing permissions for %s: %s',
+            '同步权限时发生错误 %s: %s',
             database.database_name,
             errMsg,
           ),
@@ -397,11 +423,13 @@ function DatabaseList({
     () => [
       {
         accessor: 'database_name',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
       },
       {
         accessor: 'backend',
-        Header: t('Backend'),
+        // Header: t('Backend'),
+        Header: t('后台'),
         size: 'lg',
         disableSortBy: true, // TODO: api support for sorting by 'backend'
       },
@@ -410,10 +438,12 @@ function DatabaseList({
         Header: (
           <Tooltip
             id="allow-run-async-header-tooltip"
-            title={t('Asynchronous query execution')}
+            // title={t('Asynchronous query execution')}
+            title={t('异步查询执行')}
             placement="top"
           >
-            <span>{t('AQE')}</span>
+            {/* <span>{t('AQE')}</span> */}
+            <span>{t('质量指标')}</span>
           </Tooltip>
         ),
         Cell: ({
@@ -430,10 +460,13 @@ function DatabaseList({
         Header: (
           <Tooltip
             id="allow-dml-header-tooltip"
-            title={t('Allow data manipulation language')}
+            // title={t('Allow data manipulation language')}
+            title={t('允许数据操作语言')}
             placement="top"
           >
-            <span>{t('DML')}</span>
+            {/* <span>{t('DML')}</span> */}
+            <span>{t('数据管理语言')}</span>
+
           </Tooltip>
         ),
         Cell: ({
@@ -445,7 +478,8 @@ function DatabaseList({
       },
       {
         accessor: 'allow_file_upload',
-        Header: t('File upload'),
+        // Header: t('File upload'),
+        Header: t('文件上传'),
         Cell: ({
           row: {
             original: { allow_file_upload: allowFileUpload },
@@ -455,7 +489,8 @@ function DatabaseList({
       },
       {
         accessor: 'expose_in_sqllab',
-        Header: t('Expose in SQL Lab'),
+        // Header: t('Expose in SQL Lab'),
+        Header: t('在 SQL 实验室中公开'),
         Cell: ({
           row: {
             original: { expose_in_sqllab: exposeInSqllab },
@@ -472,7 +507,8 @@ function DatabaseList({
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改于'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
       },
@@ -498,7 +534,8 @@ function DatabaseList({
                 >
                   <Tooltip
                     id="delete-action-tooltip"
-                    title={t('Delete database')}
+                    // title={t('Delete database')}
+                    title={t('删除数据库')}
                     placement="bottom"
                   >
                     <Icons.DeleteOutlined iconSize="l" />
@@ -508,7 +545,8 @@ function DatabaseList({
               {canExport && (
                 <Tooltip
                   id="export-action-tooltip"
-                  title={t('Export')}
+                  // title={t('Export')}
+                  title={t('导出')}
                   placement="bottom"
                 >
                   <span
@@ -524,7 +562,8 @@ function DatabaseList({
               {canEdit && (
                 <Tooltip
                   id="edit-action-tooltip"
-                  title={t('Edit')}
+                  // title={t('Edit')}
+                  title={t('修改')}
                   placement="bottom"
                 >
                   <span
@@ -541,7 +580,8 @@ function DatabaseList({
               {canEdit && (
                 <Tooltip
                   id="sync-action-tooltip"
-                  title={t('Sync Permissions')}
+                  // title={t('Sync Permissions')}
+                  title={t('同步权限')}
                   placement="bottom"
                 >
                   <span
@@ -558,7 +598,8 @@ function DatabaseList({
             </Actions>
           );
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         hidden: !canEdit && !canDelete,
         disableSortBy: true,
@@ -574,57 +615,73 @@ function DatabaseList({
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'search',
         id: 'database_name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Expose in SQL Lab'),
+        // Header: t('Expose in SQL Lab'),
+        Header: t('在 SQL 实验室中公开'),
         key: 'expose_in_sql_lab',
         id: 'expose_in_sqllab',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         selects: [
-          { label: t('Yes'), value: true },
-          { label: t('No'), value: false },
+          // { label: t('Yes'), value: true },
+          // { label: t('No'), value: false },
+          { label: t('是'), value: true },
+          { label: t('否'), value: false },
         ],
       },
       {
         Header: (
           <Tooltip
             id="allow-run-async-filter-header-tooltip"
-            title={t('Asynchronous query execution')}
+            // title={t('Asynchronous query execution')}
+            title={t('异步查询执行')}
             placement="top"
           >
-            <span>{t('AQE')}</span>
+            {/* <span>{t('AQE')}</span> */}
+            <span>{t('质量指标')}</span>
           </Tooltip>
         ),
         key: 'allow_run_async',
         id: 'allow_run_async',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         selects: [
-          { label: t('Yes'), value: true },
-          { label: t('No'), value: false },
+          // { label: t('Yes'), value: true },
+          // { label: t('No'), value: false },
+          { label: t('是'), value: true },
+          { label: t('否'), value: false },
         ],
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: t('修改于'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'database',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
             ),
           ),
@@ -682,10 +739,18 @@ function DatabaseList({
           description={
             <>
               <p>
-                {t('The database')}{' '}
+                {/* {t('The database')}{' '} */}
+                {t('该数据库')}{' '}
+
                 <b>{databaseCurrentlyDeleting.database_name}</b>{' '}
-                {t(
+                {/* {t(
                   'is linked to %s charts that appear on %s dashboards and users have %s SQL Lab tabs using this database open. Are you sure you want to continue? Deleting the database will break those objects.',
+                  databaseCurrentlyDeleting.charts.count,
+                  databaseCurrentlyDeleting.dashboards.count,
+                  databaseCurrentlyDeleting.sqllab_tab_count,
+                )} */}
+                {t(
+                  '链接到 %s 出现在 %s 仪表板和用户有 %s 使用此数据库的 SQL 实验室选项卡打开。你确定要继续吗？删除数据库将破坏这些对象。',
                   databaseCurrentlyDeleting.charts.count,
                   databaseCurrentlyDeleting.dashboards.count,
                   databaseCurrentlyDeleting.sqllab_tab_count,
@@ -693,7 +758,8 @@ function DatabaseList({
               </p>
               {databaseCurrentlyDeleting.dashboards.count >= 1 && (
                 <>
-                  <h4>{t('Affected Dashboards')}</h4>
+                  {/* <h4>{t('Affected Dashboards')}</h4> */}
+                  <h4>{t('受影响的仪表盘')}</h4>
                   <ul>
                     {databaseCurrentlyDeleting.dashboards.result
                       .slice(0, 10)
@@ -715,8 +781,13 @@ function DatabaseList({
                     {databaseCurrentlyDeleting.dashboards.result.length >
                       10 && (
                       <li>
-                        {t(
+                        {/* {t(
                           '... and %s others',
+                          databaseCurrentlyDeleting.dashboards.result.length -
+                            10,
+                        )} */}
+                         {t(
+                          '... 和 %s 其它',
                           databaseCurrentlyDeleting.dashboards.result.length -
                             10,
                         )}
@@ -727,7 +798,8 @@ function DatabaseList({
               )}
               {databaseCurrentlyDeleting.charts.count >= 1 && (
                 <>
-                  <h4>{t('Affected Charts')}</h4>
+                  {/* <h4>{t('Affected Charts')}</h4> */}
+                  <h4>{t('受影响的图表')}</h4>
                   <ul>
                     {databaseCurrentlyDeleting.charts.result.slice(0, 10).map(
                       (
@@ -749,8 +821,12 @@ function DatabaseList({
                     )}
                     {databaseCurrentlyDeleting.charts.result.length > 10 && (
                       <li>
-                        {t(
+                        {/* {t(
                           '... and %s others',
+                          databaseCurrentlyDeleting.charts.result.length - 10,
+                        )} */}
+                        {t(
+                          '... 和 %s 其它',
                           databaseCurrentlyDeleting.charts.result.length - 10,
                         )}
                       </li>
@@ -772,7 +848,8 @@ function DatabaseList({
           }}
           onHide={() => setDatabaseCurrentlyDeleting(null)}
           open
-          title={t('Delete Database?')}
+          // title={t('Delete Database?')}
+          title={t('删除数据库？')}
         />
       )}
 
