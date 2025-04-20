@@ -1,39 +1,59 @@
 {% extends "appbuilder/base.html" %}
 
+{% block head_css %}
+{{ super() }}
+<style>
+  body,
+  .container,
+  .container-fluid {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* 仅隐藏侧边栏，保留导航栏 */
+  .sidebar,
+  [class*="sidebar"] {
+    display: none !important;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 <div
-  style="min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 2rem;
+  style="min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 0; margin: 0; width: 100vw; box-sizing: border-box; padding-top: 70px;
   background-image: url('{{ url_for('static', filename='assets/images/solen-feyissa.jpg') }}'); background-size: cover; background-position: center;">
-  <div class="card shadow-lg" style="max-width: 400px; width: 100%; border-radius: 1.5rem; border: none;
-      background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);">
-    <div class="card-body p-5" style="padding: 3rem;">
-      <h3 class="card-title text-center mb-4" style="color: #2c3e50; font-weight: 600;">
+  <div class="card shadow-lg" style="max-width: 450px; width: 100%; border-radius: 1rem; border: none;
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);">
+    <div class="card-body p-4" style="padding: 2rem;">
+      <h3 class="card-title text-center mb-4" style="color: #2c3e50; font-weight: 700; font-size: 1.75rem;">
         欢迎登录
       </h3>
 
       <form method="POST" action="{{ url_for('AuthDBView.login') }}" class="needs-validation" novalidate>
         {{ form.hidden_tag() }}
 
-        <div class="form-group mb-5">
-          <label for="username" class="form-label" style="color: #34495e;">
+        <div class="form-group mb-4">
+          <label for="username" class="form-label" style="color: #34495e; font-weight: 500;">
             <span class="me-2">👤</span>用户名
           </label>
-          {{ form.username(class="form-control form-control-lg", placeholder="请输入用户名", style="border-radius: 10px;
-          border: 1px solid #e0e0e0;") }}
+          {{ form.username(class="form-control form-control-lg", placeholder="请输入用户名", style="border-radius: 8px;
+          border: 1px solid #d1d9e0; padding: 0.75rem;") }}
         </div>
 
-        <div class="form-group mb-5">
-          <label for="password" class="form-label" style="color: #34495e;">
+        <div class="form-group mb-4">
+          <label for="password" class="form-label" style="color: #34495e; font-weight: 500;">
             <span class="me-2">🔒</span>密码
           </label>
-          {{ form.password(class="form-control form-control-lg", placeholder="请输入密码", style="border-radius: 10px;
-          border: 1px solid #e0e0e0;") }}
+          {{ form.password(class="form-control form-control-lg", placeholder="请输入密码", style="border-radius: 8px;
+          border: 1px solid #d1d9e0; padding: 0.75rem;") }}
         </div>
 
         <!-- Button with width 100% to match input fields -->
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary w-100 py-3"
-            style="border-radius: 10px; font-size: 1.1rem; background: linear-gradient(45deg, #2980b9, #3498db); border: none; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);">
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary w-100 py-2"
+            style="border-radius: 8px; font-size: 1rem; font-weight: 500; background: linear-gradient(45deg, #2980b9, #3498db); border: none; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); transition: all 0.3s ease;">
             <span class="me-2">🚀</span>登录
           </button>
         </div>
@@ -43,7 +63,8 @@
       {% if messages %}
       <div class="mt-4">
         {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="border-radius: 10px;">
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert"
+          style="border-radius: 8px; font-size: 0.9rem;">
           {{ message }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
