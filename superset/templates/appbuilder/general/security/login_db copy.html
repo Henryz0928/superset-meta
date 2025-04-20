@@ -1,25 +1,57 @@
 {% extends "appbuilder/base.html" %}
+
 {% block content %}
-<div class="container">
-  <h2>自定义登录</h2>
-  <form method="POST" action="{{ url_for('AuthDBView.login') }}">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-      <label for="username">用户名</label>
-      {{ form.username(class="form-control", placeholder="输入用户名") }}
+<div
+  style="min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 2rem;
+  background-image: url('{{ url_for('static', filename='assets/images/solen-feyissa.jpg') }}'); background-size: cover; background-position: center;">
+  <div class="card shadow-lg" style="max-width: 400px; width: 100%; border-radius: 1.5rem; border: none;
+      background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);">
+    <div class="card-body p-5" style="padding: 3rem;">
+      <h3 class="card-title text-center mb-4" style="color: #2c3e50; font-weight: 600;">
+        欢迎登录
+      </h3>
+
+      <form method="POST" action="{{ url_for('AuthDBView.login') }}" class="needs-validation" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="form-group mb-5">
+          <label for="username" class="form-label" style="color: #34495e;">
+            <span class="me-2">👤</span>用户名
+          </label>
+          {{ form.username(class="form-control form-control-lg", placeholder="请输入用户名", style="border-radius: 10px;
+          border: 1px solid #e0e0e0;") }}
+        </div>
+
+        <div class="form-group mb-5">
+          <label for="password" class="form-label" style="color: #34495e;">
+            <span class="me-2">🔒</span>密码
+          </label>
+          {{ form.password(class="form-control form-control-lg", placeholder="请输入密码", style="border-radius: 10px;
+          border: 1px solid #e0e0e0;") }}
+        </div>
+
+        <!-- Button with width 100% to match input fields -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary w-100 py-3"
+            style="border-radius: 10px; font-size: 1.1rem; background: linear-gradient(45deg, #2980b9, #3498db); border: none; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);">
+            <span class="me-2">🚀</span>登录
+          </button>
+        </div>
+      </form>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="mt-4">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="border-radius: 10px;">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
     </div>
-    <div class="form-group">
-      <label for="password">密码</label>
-      {{ form.password(class="form-control", placeholder="输入密码") }}
-    </div>
-    <button type="submit" class="btn btn-primary">登录</button>
-  </form>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-  {% for category, message in messages %}
-  <div class="alert alert-{{ category }}">{{ message }}</div>
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
+  </div>
 </div>
 {% endblock %}
