@@ -177,7 +177,7 @@ SUPERSET_DASHBOARD_PERIODICAL_REFRESH_LIMIT = 0
 SUPERSET_DASHBOARD_PERIODICAL_REFRESH_WARNING_MESSAGE = None
 
 SUPERSET_DASHBOARD_POSITION_DATA_LIMIT = 65535
-CUSTOM_SECURITY_MANAGER = None
+# CUSTOM_SECURITY_MANAGER = None
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 # ---------------------------------------------------------
 
@@ -1890,6 +1890,21 @@ CATALOGS_SIMPLIFIED_MIGRATION: bool = False
 # 一个数据库连接可能有数百个目录，每个目录有数千个模式，这大大增加了处理
 # 时间。以异步模式运行可以避免长时间保持 Web API 调用打开。
 SYNC_DB_PERMISSIONS_IN_ASYNC_MODE: bool = False
+
+# 自定义登陆start
+# from custom_security import CustomSecurityManager
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from custom_security import CustomSecurityManager
+# 配置 Flask-AppBuilder 使用自定义安全管理器
+# AUTH_TYPE = 1  # AUTH_DB，数据库认证
+# SECURITY_MANAGER_CLASS = CustomSecurityManager
+CUSTOM_SECURITY_MANAGER = CustomSecurityManager
+
+# 可选：配置其他安全相关选项
+# FAB_ADD_SECURITY_VIEWS = True  # 确保安全视图可用
+# WTF_CSRF_ENABLED = True  # 启用 CSRF 保护
+# 自定义登陆end
 
 
 # -------------------------------------------------------------------
