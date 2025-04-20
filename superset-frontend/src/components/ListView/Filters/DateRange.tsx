@@ -82,7 +82,8 @@ function DateRangeFilter(
       <RangeFilterContainer>
         <FormLabel>{Header}</FormLabel>
         <RangePicker
-          placeholder={[t('Start date'), t('End date')]}
+          // placeholder={[t('Start date'), t('End date')]}
+          placeholder={[t('开始日期'), t('结束日期')]}
           showTime
           value={dayjsValue}
           onCalendarChange={(dayjsRange: [Dayjs, Dayjs]) => {

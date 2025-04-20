@@ -63,17 +63,29 @@ import SavedQueryPreviewModal from 'src/features/queries/SavedQueryPreviewModal'
 import { findPermission } from 'src/utils/findPermission';
 
 const PAGE_SIZE = 25;
+// const PASSWORDS_NEEDED_MESSAGE = t(
+//   'The passwords for the databases below are needed in order to ' +
+//     'import them together with the saved queries. Please note that the ' +
+//     '"Secure Extra" and "Certificate" sections of ' +
+//     'the database configuration are not present in export files, and ' +
+//     'should be added manually after the import if they are needed.',
+// );
 const PASSWORDS_NEEDED_MESSAGE = t(
-  'The passwords for the databases below are needed in order to ' +
-    'import them together with the saved queries. Please note that the ' +
-    '"Secure Extra" and "Certificate" sections of ' +
-    'the database configuration are not present in export files, and ' +
-    'should be added manually after the import if they are needed.',
+  '以下数据库需要密码，以便 ' +
+    '将它们与保存的查询一起导入。请注意 ' +
+    '"安全额外”和“证书”部分 ' +
+    '数据库配置不存在于导出文件中，并且 ' +
+    '如果需要，应在导入后手动添加。',
 );
+// const CONFIRM_OVERWRITE_MESSAGE = t(
+//   'You are importing one or more saved queries that already exist. ' +
+//     'Overwriting might cause you to lose some of your work. Are you ' +
+//     'sure you want to overwrite?',
+// );
 const CONFIRM_OVERWRITE_MESSAGE = t(
-  'You are importing one or more saved queries that already exist. ' +
-    'Overwriting might cause you to lose some of your work. Are you ' +
-    'sure you want to overwrite?',
+  '您正在导入一个或多个已存在的保存查询。' +
+    '覆盖可能会导致您丢失一些工作。您 ' +
+    '确定要覆盖吗？',
 );
 
 interface SavedQueryListProps {
@@ -118,7 +130,8 @@ function SavedQueryList({
     refreshData,
   } = useListViewResource<SavedQueryObject>(
     'saved_query',
-    t('Saved queries'),
+    // t('Saved queries'),
+    t('保存查询'),
     addDangerToast,
   );
   const { roles } = useSelector<any, UserWithPermissionsAndRoles>(
@@ -155,7 +168,8 @@ function SavedQueryList({
   const handleSavedQueryImport = () => {
     showImportModal(false);
     refreshData();
-    addSuccessToast(t('Query imported'));
+    // addSuccessToast(t('Query imported'));
+    addSuccessToast(t('查询已导入'));
   };
 
   const canCreate = hasPerm('can_write');
@@ -173,7 +187,8 @@ function SavedQueryList({
         },
         createErrorHandler(errMsg =>
           addDangerToast(
-            t('There was an issue previewing the selected query %s', errMsg),
+            // t('There was an issue previewing the selected query %s', errMsg),
+            t('预览所选查询时出现问题 %s', errMsg),
           ),
         ),
       );
@@ -190,7 +205,8 @@ function SavedQueryList({
 
   if (canDelete) {
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       onClick: toggleBulkSelect,
       buttonStyle: 'secondary',
     });
@@ -215,7 +231,8 @@ function SavedQueryList({
             margin: auto ${theme.gridUnit * 2}px auto 0;
           `}
         />
-        {t('Query')}
+        {/* {t('Query')} */}
+        {t('查询')}
       </Link>
     ),
     buttonStyle: 'primary',
@@ -226,7 +243,8 @@ function SavedQueryList({
       name: (
         <Tooltip
           id="import-tooltip"
-          title={t('Import queries')}
+          // title={t('Import queries')}
+          title={t('导入查询')}
           placement="bottomRight"
           data-test="import-tooltip-test"
         >
@@ -272,9 +290,11 @@ function SavedQueryList({
         const { url: permalink } = response.json;
 
         await navigator.clipboard.writeText(permalink);
-        addSuccessToast(t('Link Copied!'));
+        // addSuccessToast(t('Link Copied!'));
+        addSuccessToast(t('链接已复制!'));
       } catch (error) {
-        addDangerToast(t('There was an error generating the permalink.'));
+        // addDangerToast(t('There was an error generating the permalink.'));
+        addDangerToast(t('生成永久链接时出现错误。'));
       }
     },
     [addDangerToast, addSuccessToast],
@@ -287,10 +307,12 @@ function SavedQueryList({
       () => {
         refreshData();
         setQueryCurrentlyDeleting(null);
-        addSuccessToast(t('Deleted: %s', label));
+        // addSuccessToast(t('Deleted: %s', label));
+        addSuccessToast(t('已删除: %s', label));
       },
       createErrorHandler(errMsg =>
-        addDangerToast(t('There was an issue deleting %s: %s', label, errMsg)),
+        // addDangerToast(t('There was an issue deleting %s: %s', label, errMsg)),
+        addDangerToast(t('删除时出现了一个问题 %s: %s', label, errMsg)),
       ),
     );
   };
@@ -317,7 +339,8 @@ function SavedQueryList({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected queries: %s', errMsg),
+          // t('There was an issue deleting the selected queries: %s', errMsg),
+          t('删除选定的查询时遇到问题: %s', errMsg),
         ),
       ),
     );
@@ -328,7 +351,8 @@ function SavedQueryList({
     () => [
       {
         accessor: 'label',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         Cell: ({
           row: {
             original: { id, label },
@@ -337,11 +361,13 @@ function SavedQueryList({
       },
       {
         accessor: 'description',
-        Header: t('Description'),
+        // Header: t('Description'),
+        Header: t('描述'),
       },
       {
         accessor: 'database.database_name',
-        Header: t('Database'),
+        // Header: t('Database'),
+        Header: t('数据库'),
         size: 'xl',
       },
       {
@@ -369,7 +395,8 @@ function SavedQueryList({
                 <span>{main}</span>
                 <Popover
                   placement="right"
-                  title={t('TABLES')}
+                  // title={t('TABLES')}
+                  title={t('表')}
                   trigger="click"
                   content={
                     <>
@@ -388,7 +415,8 @@ function SavedQueryList({
           return main;
         },
         accessor: 'sql_tables',
-        Header: t('Tables'),
+        // Header: t('Tables'),
+        Header: t('表'),
         size: 'xl',
         disableSortBy: true,
       },
@@ -401,7 +429,8 @@ function SavedQueryList({
           // Only show custom type tags
           <TagsList tags={tags.filter((tag: Tag) => tag.type === 1)} />
         ),
-        Header: t('Tags'),
+        // Header: t('Tags'),
+        Header: t('标签'),
         accessor: 'tags',
         disableSortBy: true,
         hidden: !isFeatureEnabled(FeatureFlag.TaggingSystem),
@@ -415,7 +444,8 @@ function SavedQueryList({
             },
           },
         }: any) => <ModifiedInfo user={changedBy} date={changedOn} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
       },
@@ -433,35 +463,40 @@ function SavedQueryList({
           const actions = [
             {
               label: 'preview-action',
-              tooltip: t('Query preview'),
+              // tooltip: t('Query preview'),
+              tooltip: t('查询预览'),
               placement: 'bottom',
               icon: 'Binoculars',
               onClick: handlePreview,
             },
             canEdit && {
               label: 'edit-action',
-              tooltip: t('Edit query'),
+              // tooltip: t('Edit query'),
+              tooltip: t('编辑查询'),
               placement: 'bottom',
               icon: 'EditOutlined',
               onClick: handleEdit,
             },
             {
               label: 'copy-action',
-              tooltip: t('Copy query URL'),
+              // tooltip: t('Copy query URL'),
+              tooltip: t('复制查询 URL'),
               placement: 'bottom',
               icon: 'CopyOutlined',
               onClick: handleCopy,
             },
             canExport && {
               label: 'export-action',
-              tooltip: t('Export query'),
+              // tooltip: t('Export query'),
+              tooltip: t('导出查询'),
               placement: 'bottom',
               icon: 'UploadOutlined',
               onClick: handleExport,
             },
             canDelete && {
               label: 'delete-action',
-              tooltip: t('Delete query'),
+              // tooltip: t('Delete query'),
+              tooltip: t('删除查询'),
               placement: 'bottom',
               icon: 'DeleteOutlined',
               onClick: handleDelete,
@@ -470,7 +505,8 @@ function SavedQueryList({
 
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
       },
@@ -495,19 +531,25 @@ function SavedQueryList({
           'Searches all text fields: Name, Description, Database & Schema',
       },
       {
-        Header: t('Database'),
+        // Header: t('Database'),
+        Header: t('数据库'),
         key: 'database',
         id: 'database',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'saved_query',
           'database',
           createErrorHandler(errMsg =>
             addDangerToast(
+              // t(
+              //   'An error occurred while fetching dataset datasource values: %s',
+              //   errMsg,
+              // ),
               t(
-                'An error occurred while fetching dataset datasource values: %s',
+                '获取数据集数据源时发生错误: %s',
                 errMsg,
               ),
             ),
@@ -521,13 +563,15 @@ function SavedQueryList({
         key: 'schema',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         fetchSelects: createFetchDistinct(
           'saved_query',
           'schema',
           createErrorHandler(errMsg =>
             addDangerToast(
-              t('An error occurred while fetching schema values: %s', errMsg),
+              // t('An error occurred while fetching schema values: %s', errMsg),
+              t('获取 schema 时发生错误: %s', errMsg),
             ),
           ),
         ),
@@ -536,7 +580,8 @@ function SavedQueryList({
       ...((isFeatureEnabled(FeatureFlag.TaggingSystem) && canReadTag
         ? [
             {
-              Header: t('Tag'),
+              // Header: t('Tag'),
+              Header: t('标签'),
               id: 'tags',
               key: 'tags',
               input: 'select',
@@ -546,18 +591,24 @@ function SavedQueryList({
           ]
         : []) as Filters),
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: t('修改于'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'saved_query',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源时发生错误: %s',
               errMsg,
             ),
           ),
@@ -574,8 +625,11 @@ function SavedQueryList({
       <SubMenu {...menuData} />
       {queryCurrentlyDeleting && (
         <DeleteModal
+          // description={t(
+          //   'This action will permanently delete the saved query.',
+          // )}
           description={t(
-            'This action will permanently delete the saved query.',
+            '此操作将永久删除保存的查询。',
           )}
           onConfirm={() => {
             if (queryCurrentlyDeleting) {
@@ -584,7 +638,8 @@ function SavedQueryList({
           }}
           onHide={() => setQueryCurrentlyDeleting(null)}
           open
-          title={t('Delete Query?')}
+          // title={t('Delete Query?')}
+          title={t('删除查询?')}
         />
       )}
       {savedQueryCurrentlyPreviewing && (
@@ -598,8 +653,10 @@ function SavedQueryList({
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
-        description={t('Are you sure you want to delete the selected queries?')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t('Are you sure you want to delete the selected queries?')}
+        escription={t('您确定要删除已选的查询吗？')}
         onConfirm={handleBulkQueryDelete}
       >
         {confirmDelete => {
@@ -607,7 +664,8 @@ function SavedQueryList({
           if (canDelete) {
             bulkActions.push({
               key: 'delete',
-              name: t('Delete'),
+              // name: t('Delete'),
+              name: t('删除'),
               onSelect: confirmDelete,
               type: 'danger',
             });
@@ -615,7 +673,8 @@ function SavedQueryList({
           if (canExport) {
             bulkActions.push({
               key: 'export',
-              name: t('Export'),
+              // name: t('Export'),
+              name: t('导出'),
               type: 'primary',
               onSelect: handleBulkSavedQueryExport,
             });
@@ -647,7 +706,8 @@ function SavedQueryList({
 
       <ImportModelsModal
         resourceName="saved_query"
-        resourceLabel={t('queries')}
+        // resourceLabel={t('queries')}
+        resourceLabel={t('查询')}
         passwordsNeededMessage={PASSWORDS_NEEDED_MESSAGE}
         confirmOverwriteMessage={CONFIRM_OVERWRITE_MESSAGE}
         addDangerToast={addDangerToast}

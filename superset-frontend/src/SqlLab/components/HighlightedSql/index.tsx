@@ -72,13 +72,15 @@ function TriggerNode({ shrink, sql, maxLines, maxWidth }: TriggerNodeProps) {
 function HighlightSqlModal({ rawSql, sql }: HighlightedSqlModalTypes) {
   return (
     <div>
-      <h4>{t('Source SQL')}</h4>
+      {/* <h4>{t('Source SQL')}</h4> */}
+      <h4>{t('源 SQL')}</h4>
       <SyntaxHighlighter language="sql" style={github}>
         {sql}
       </SyntaxHighlighter>
       {rawSql && rawSql !== sql && (
         <div>
-          <h4>{t('Executed SQL')}</h4>
+          {/* <h4>{t('Executed SQL')}</h4> */}
+          <h4>{t('执行的 SQL')}</h4>
           <SyntaxHighlighter language="sql" style={github}>
             {rawSql}
           </SyntaxHighlighter>

@@ -81,14 +81,22 @@ const QueryTable = ({
   const dispatch = useDispatch();
 
   const QUERY_HISTORY_TABLE_HEADERS_LOCALIZED = {
-    state: t('State'),
-    started: t('Started'),
-    duration: t('Duration'),
-    progress: t('Progress'),
-    rows: t('Rows'),
+    // state: t('State'),
+    // started: t('Started'),
+    // duration: t('Duration'),
+    // progress: t('Progress'),
+    // rows: t('Rows'),
+    // sql: t('SQL'),
+    // results: t('Results'),
+    // actions: t('Actions'),
+    state: t('状态'),
+    started: t('开始'),
+    duration: t('持续时间'),
+    progress: t('进展'),
+    rows: t('行'),
     sql: t('SQL'),
-    results: t('Results'),
-    actions: t('Actions'),
+    results: t('结果'),
+    actions: t('操作'),
   };
 
   const setHeaders = (column: string) => {
@@ -138,7 +146,8 @@ const QueryTable = ({
             />
           ),
           // icon: <Icons.Edit iconSize="xl" />,
-          label: t('Success'),
+          // label: t('Success'),
+          label: t('成功'),
         },
       },
       failed: {
@@ -149,7 +158,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Failed'),
+          // label: t('Failed'),
+          label: t('失败'),
         },
       },
       stopped: {
@@ -160,7 +170,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Failed'),
+          // label: t('Failed'),
+          label: t('失败'),
         },
       },
       running: {
@@ -171,7 +182,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Running'),
+          // label: t('Running'),
+          label: t('运行中'),
         },
       },
       fetching: {
@@ -182,7 +194,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Fetching'),
+          // label: t('Fetching'),
+          label: t('获取中'),
         },
       },
       timed_out: {
@@ -193,7 +206,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Offline'),
+          // label: t('Offline'),
+          label: t('离线'),
         },
       },
       scheduled: {
@@ -204,7 +218,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Scheduled'),
+          // label: t('Scheduled'),
+          label: t('计划中的'),
         },
       },
       pending: {
@@ -215,7 +230,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Scheduled'),
+          // label: t('Scheduled'),
+          label: t('计划中的'),
         },
       },
       error: {
@@ -223,7 +239,8 @@ const QueryTable = ({
           icon: (
             <Icons.Error iconColor={theme.colors.error.base} iconSize="m" />
           ),
-          label: t('Unknown Status'),
+          // label: t('Unknown Status'),
+          label: t('未知状态'),
         },
       },
       started: {
@@ -234,7 +251,8 @@ const QueryTable = ({
               iconSize="m"
             />
           ),
-          label: t('Started'),
+          // label: t('Started'),
+          label: t('开始'),
         },
       },
     };
@@ -300,10 +318,12 @@ const QueryTable = ({
               className="ResultsModal"
               triggerNode={
                 <Button buttonSize="xsmall" buttonStyle="tertiary">
-                  {t('View')}
+                  {/* {t('View')} */}
+                  {t('查看')}
                 </Button>
               }
-              modalTitle={t('Data preview')}
+              // modalTitle={t('Data preview')}
+              modalTitle={t('数据预览')}
               beforeOpen={() => openAsyncResults(query, displayLimit)}
               onExit={() => dispatch(clearQueryResults(query))}
               modalBody={
@@ -339,8 +359,11 @@ const QueryTable = ({
           <div>
             <StyledTooltip
               onClick={() => restoreSql(query)}
+              // tooltip={t(
+              //   'Overwrite text in the editor with a query on this table',
+              // )}
               tooltip={t(
-                'Overwrite text in the editor with a query on this table',
+                '将编辑器中的文本替换为对该表的查询',
               )}
               placement="top"
               className="pointer"
@@ -349,7 +372,8 @@ const QueryTable = ({
             </StyledTooltip>
             <StyledTooltip
               onClick={() => openQueryInNewTab(query)}
-              tooltip={t('Run query in a new tab')}
+              // tooltip={t('Run query in a new tab')}
+              tooltip={t('在新标签页中运行查询')}
               placement="top"
               className="pointer"
             >
@@ -357,7 +381,8 @@ const QueryTable = ({
             </StyledTooltip>
             {q.id !== latestQueryId && (
               <StyledTooltip
-                tooltip={t('Remove query from log')}
+                // tooltip={t('Remove query from log')}
+                tooltip={t('从日志中移除查询')}
                 onClick={() => dispatch(removeQuery(query))}
                 className="pointer"
               >

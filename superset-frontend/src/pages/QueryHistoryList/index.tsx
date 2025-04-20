@@ -102,7 +102,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
     fetchData,
   } = useListViewResource<QueryObject>(
     'query',
-    t('Query history'),
+    // t('Query history'),
+    t('查询历史'),
     addDangerToast,
     false,
   );
@@ -123,7 +124,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
         },
         createErrorHandler(errMsg =>
           addDangerToast(
-            t('There was an issue previewing the selected query. %s', errMsg),
+            // t('There was an issue previewing the selected query. %s', errMsg),
+            t('预览所选查询时出现了一些问题。 %s', errMsg),
           ),
         ),
       );
@@ -168,7 +170,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
                 `}
               />
             );
-            statusConfig.label = t('Success');
+            // statusConfig.label = t('Success');
+            statusConfig.label = t('成功');
           } else if (
             status === QueryState.Failed ||
             status === QueryState.Stopped
@@ -183,23 +186,27 @@ function QueryList({ addDangerToast }: QueryListProps) {
                 }
               />
             );
-            statusConfig.label = t('Failed');
+            // statusConfig.label = t('Failed');
+            statusConfig.label = t('失败');
           } else if (status === QueryState.Running) {
             statusConfig.name = (
               <Icons.Running iconColor={theme.colors.primary.base} />
             );
-            statusConfig.label = t('Running');
+            // statusConfig.label = t('Running');
+            statusConfig.label = t('运行中');
           } else if (status === QueryState.TimedOut) {
             statusConfig.name = (
               <Icons.CircleSolid iconColor={theme.colors.grayscale.light1} />
             );
-            statusConfig.label = t('Offline');
+            // statusConfig.label = t('Offline');
+            statusConfig.label = t('离线');
           } else if (
             status === QueryState.Scheduled ||
             status === QueryState.Pending
           ) {
             statusConfig.name = <Icons.Queued />;
-            statusConfig.label = t('Scheduled');
+            // statusConfig.label = t('Scheduled');
+            statusConfig.label = t('计划中的');
           }
           return (
             <Tooltip title={statusConfig.label} placement="bottom">
@@ -213,7 +220,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
       },
       {
         accessor: QueryObjectColumns.StartTime,
-        Header: t('Time'),
+        // Header: t('Time'),
+        Header: t('时间'),
         size: 'xl',
         Cell: ({
           row: {
@@ -235,7 +243,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
         },
       },
       {
-        Header: t('Duration'),
+        // Header: t('Duration'),
+        Header: t('持续时间'),
         size: 'xl',
         Cell: ({
           row: {
@@ -257,12 +266,14 @@ function QueryList({ addDangerToast }: QueryListProps) {
       },
       {
         accessor: QueryObjectColumns.TabName,
-        Header: t('Tab name'),
+        // Header: t('Tab name'),
+        Header: t('标签名称'),
         size: 'xl',
       },
       {
         accessor: QueryObjectColumns.DatabaseName,
-        Header: t('Database'),
+        // Header: t('Database'),
+        Header: t('数据库'),
         size: 'xl',
       },
       {
@@ -289,7 +300,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
                 <span>{main}</span>
                 <Popover
                   placement="right"
-                  title={t('TABLES')}
+                  // title={t('TABLES')}
+                  title={t('表')}
                   trigger="click"
                   content={
                     <>
@@ -308,13 +320,15 @@ function QueryList({ addDangerToast }: QueryListProps) {
           return main;
         },
         accessor: QueryObjectColumns.SqlTables,
-        Header: t('Tables'),
+        // Header: t('Tables'),
+        Header: t('表'),
         size: 'xl',
         disableSortBy: true,
       },
       {
         accessor: QueryObjectColumns.UserFirstName,
-        Header: t('User'),
+        // Header: t('User'),
+        Header: t('用户'),
         size: 'xl',
         Cell: ({
           row: {
@@ -328,7 +342,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
       },
       {
         accessor: QueryObjectColumns.Rows,
-        Header: t('Rows'),
+        // Header: t('Rows'),
+        Header: t('行'),
         size: 'md',
       },
       {
@@ -348,7 +363,8 @@ function QueryList({ addDangerToast }: QueryListProps) {
         ),
       },
       {
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
         Cell: ({
@@ -370,68 +386,79 @@ function QueryList({ addDangerToast }: QueryListProps) {
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Database'),
+        // Header: t('Database'),
+        Header: t('数据库'),
         key: 'database',
         id: 'database',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'query',
           'database',
           createErrorHandler(errMsg =>
             addDangerToast(
-              t('An error occurred while fetching database values: %s', errMsg),
+              // t('An error occurred while fetching database values: %s', errMsg),
+              t('获取数据库时发生错误: %s', errMsg),
             ),
           ),
         ),
         paginate: true,
       },
       {
-        Header: t('State'),
+        // Header: t('State'),
+        Header: t('状态'),
         key: 'state',
         id: 'status',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         fetchSelects: createFetchDistinct(
           'query',
           'status',
           createErrorHandler(errMsg =>
             addDangerToast(
-              t('An error occurred while fetching schema values: %s', errMsg),
+              // t('An error occurred while fetching schema values: %s', errMsg),
+              t('获取 schema 值时发生错误: %s', errMsg),
             ),
           ),
         ),
         paginate: true,
       },
       {
-        Header: t('User'),
+        // Header: t('User'),
+        Header: t('用户'),
         key: 'user',
         id: 'user',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: 'All',
+        // unfilteredLabel: 'All',
+        unfilteredLabel: '全部',
         fetchSelects: createFetchRelated(
           'query',
           'user',
           createErrorHandler(errMsg =>
             addDangerToast(
-              t('An error occurred while fetching user values: %s', errMsg),
+              // t('An error occurred while fetching user values: %s', errMsg),
+              t('获取用户时发生错误: %s', errMsg),
             ),
           ),
         ),
         paginate: true,
       },
       {
-        Header: t('Time range'),
+        // Header: t('Time range'),
+        Header: t('时间范围'),
         key: 'start_time',
         id: 'start_time',
         input: 'datetime_range',
         operator: FilterOperator.Between,
       },
       {
-        Header: t('Search by query text'),
+        // Header: t('Search by query text'),
+        Header: t('按查询文本搜索'),
         key: 'sql',
         id: 'sql',
         input: 'search',

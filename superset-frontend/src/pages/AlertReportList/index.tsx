@@ -64,11 +64,16 @@ const extensionsRegistry = getExtensionsRegistry();
 const PAGE_SIZE = 25;
 
 const AlertStateLabel: Record<AlertState, string> = {
-  [AlertState.Success]: t('Success'),
-  [AlertState.Working]: t('Working'),
-  [AlertState.Error]: t('Error'),
-  [AlertState.Noop]: t('Not triggered'),
-  [AlertState.Grace]: t('On Grace'),
+  // [AlertState.Success]: t('Success'),
+  // [AlertState.Working]: t('Working'),
+  // [AlertState.Error]: t('Error'),
+  // [AlertState.Noop]: t('Not triggered'),
+  // [AlertState.Grace]: t('On Grace'),
+  [AlertState.Success]: t('成功'),
+  [AlertState.Working]: t('工作'),
+  [AlertState.Error]: t('错误'),
+  [AlertState.Noop]: t('未触发'),
+  [AlertState.Grace]: t('宽限'),
 };
 
 interface AlertListProps {
@@ -113,8 +118,10 @@ function AlertList({
   addSuccessToast,
 }: AlertListProps) {
   const theme = useTheme();
-  const title = isReportEnabled ? t('Report') : t('Alert');
-  const titlePlural = isReportEnabled ? t('reports') : t('alerts');
+  // const title = isReportEnabled ? t('Report') : t('Alert');
+  // const titlePlural = isReportEnabled ? t('reports') : t('alerts');
+  const title = isReportEnabled ? t('报告') : t('警报');
+  const titlePlural = isReportEnabled ? t('报告') : t('警报');
   const pathName = isReportEnabled ? 'Reports' : 'Alerts';
   const initialFilters = useMemo(
     () => [
@@ -141,7 +148,8 @@ function AlertList({
     toggleBulkSelect,
   } = useListViewResource<AlertObject>(
     'report',
-    t('report'),
+    // t('report'),
+    t('报告'),
     addDangerToast,
     true,
     undefined,
@@ -150,7 +158,8 @@ function AlertList({
 
   const { updateResource } = useSingleViewResource<Partial<AlertObject>>(
     'report',
-    t('reports'),
+    // t('reports'),
+    t('报告'),
     addDangerToast,
   );
 
@@ -186,10 +195,12 @@ function AlertList({
       () => {
         refreshData();
         setCurrentAlertDeleting(null);
-        addSuccessToast(t('Deleted: %s', name));
+        // addSuccessToast(t('Deleted: %s', name));
+        addSuccessToast(t('已删除: %s', name));
       },
       createErrorHandler(errMsg =>
-        addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),
+        // addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),
+        addDangerToast(t('删除时出现了一个问题 %s: %s', name, errMsg)),
       ),
     );
   };
@@ -204,8 +215,13 @@ function AlertList({
     } catch (e) {
       createErrorHandler(errMsg =>
         addDangerToast(
+          // t(
+          //   'There was an issue deleting the selected %s: %s',
+          //   titlePlural,
+          //   errMsg,
+          // ),
           t(
-            'There was an issue deleting the selected %s: %s',
+            '删除所选项时出现了问题 %s: %s',
             titlePlural,
             errMsg,
           ),
@@ -358,7 +374,8 @@ function AlertList({
             />
           );
         },
-        Header: t('Active'),
+        // Header: t('Active'),
+        Header: t('活跃'),
         accessor: 'active',
         id: 'active',
         size: 'xl',
@@ -379,7 +396,8 @@ function AlertList({
             canEdit
               ? {
                   label: 'execution-log-action',
-                  tooltip: t('Execution log'),
+                  // tooltip: t('Execution log'),
+                  tooltip: t('执行日志'),
                   placement: 'bottom',
                   icon: 'FileTextOutlined',
                   onClick: handleGotoExecutionLog,
@@ -388,7 +406,8 @@ function AlertList({
             canEdit
               ? {
                   label: allowEdit ? 'edit-action' : 'preview-action',
-                  tooltip: allowEdit ? t('Edit') : t('View'),
+                  // tooltip: allowEdit ? t('Edit') : t('View'),
+                  tooltip: allowEdit ? t('修改') : t('查看'),
                   placement: 'bottom',
                   icon: allowEdit ? 'EditOutlined' : 'Binoculars',
                   onClick: handleEdit,
@@ -397,7 +416,8 @@ function AlertList({
             allowEdit && canDelete
               ? {
                   label: 'delete-action',
-                  tooltip: t('Delete'),
+                  // tooltip: t('Delete'),
+                  tooltip: t('删除'),
                   placement: 'bottom',
                   icon: 'DeleteOutlined',
                   onClick: handleDelete,
@@ -407,7 +427,8 @@ function AlertList({
 
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         hidden: !canEdit && !canDelete,
         disableSortBy: true,
@@ -446,7 +467,8 @@ function AlertList({
   }
   if (canDelete) {
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       onClick: toggleBulkSelect,
       buttonStyle: 'secondary',
       'data-test': 'bulk-select-toggle',
@@ -454,7 +476,8 @@ function AlertList({
   }
 
   const emptyState = {
-    title: t('No %s yet', titlePlural),
+    // title: t('No %s yet', titlePlural),
+    title: t('暂无 %s', titlePlural),
     image: 'filter-results.svg',
     buttonAction: () => handleAlertEdit(null),
     buttonText: canCreate ? (
@@ -476,36 +499,42 @@ function AlertList({
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'search',
         id: 'name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Owner'),
+        // Header: t('Owner'),
+        Header: t('所有者'),
         key: 'owner',
         id: 'owners',
         input: 'select',
         operator: FilterOperator.RelationManyMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'report',
           'owners',
           createErrorHandler(errMsg =>
-            t('An error occurred while fetching owners values: %s', errMsg),
+            // t('An error occurred while fetching owners values: %s', errMsg),
+            t('获取所有者时发生错误: %s', errMsg),
           ),
           user,
         ),
         paginate: true,
       },
       {
-        Header: t('Status'),
+        // Header: t('Status'),
+        Header: t('状态'),
         key: 'status',
         id: 'last_state',
         input: 'select',
         operator: FilterOperator.Equals,
-        unfilteredLabel: 'Any',
+        // unfilteredLabel: 'Any',
+        unfilteredLabel: '任何',
         selects: [
           {
             label: AlertStateLabel[AlertState.Success],
@@ -521,18 +550,24 @@ function AlertList({
         ],
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: t('修改于'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'report',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
             ),
           ),
@@ -546,11 +581,13 @@ function AlertList({
 
   const header = HeaderExtension ? (
     <StyledHeaderWithIcon>
-      <div>{t('Alerts & reports')}</div>
+      {/* <div>{t('Alerts & reports')}</div> */}
+      <div>{t('警报及报告')}</div>
       <HeaderExtension />
     </StyledHeaderWithIcon>
   ) : (
-    t('Alerts & reports')
+    // t('Alerts & reports')
+    t('警报及报告')
   );
 
   return (
@@ -561,14 +598,16 @@ function AlertList({
         tabs={[
           {
             name: 'Alerts',
-            label: t('Alerts'),
+            // label: t('Alerts'),
+            label: t('警报'),
             url: '/alert/list/',
             usesRouter: true,
             'data-test': 'alert-list',
           },
           {
             name: 'Reports',
-            label: t('Reports'),
+            // label: t('Reports'),
+            label: t('报告'),
             url: '/report/list/',
             usesRouter: true,
             'data-test': 'report-list',
@@ -595,8 +634,12 @@ function AlertList({
       />
       {currentAlertDeleting && (
         <DeleteModal
+          // description={t(
+          //   'This action will permanently delete %s.',
+          //   currentAlertDeleting.name,
+          // )}
           description={t(
-            'This action will permanently delete %s.',
+            '此操作将永久删除 %s.',
             currentAlertDeleting.name,
           )}
           onConfirm={() => {
@@ -606,13 +649,19 @@ function AlertList({
           }}
           onHide={() => setCurrentAlertDeleting(null)}
           open
-          title={t('Delete %s?', title)}
+          // title={t('Delete %s?', title)}
+          title={t('删除 %s?', title)}
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t(
+        //   'Are you sure you want to delete the selected %s?',
+        //   titlePlural,
+        // )}
         description={t(
-          'Are you sure you want to delete the selected %s?',
+          '您确定要删除已选中的项吗？ %s?',
           titlePlural,
         )}
         onConfirm={handleBulkAlertDelete}
@@ -622,7 +671,8 @@ function AlertList({
             ? [
                 {
                   key: 'delete',
-                  name: t('Delete'),
+                  // name: t('Delete'),
+                  name: t('删除'),
                   onSelect: confirmDelete,
                   type: 'danger',
                 },

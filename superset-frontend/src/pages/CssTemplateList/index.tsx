@@ -93,11 +93,13 @@ function CssTemplatesList({
       () => {
         refreshData();
         setTemplateCurrentlyDeleting(null);
-        addSuccessToast(t('Deleted: %s', template_name));
+        // addSuccessToast(t('Deleted: %s', template_name));
+        addSuccessToast(t('已删除: %s', template_name));
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting %s: %s', template_name, errMsg),
+          // t('There was an issue deleting %s: %s', template_name, errMsg),
+           t('删除时出现了一个问题 %s: %s', template_name, errMsg),
         ),
       ),
     );
@@ -115,7 +117,8 @@ function CssTemplatesList({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected templates: %s', errMsg),
+          // t('There was an issue deleting the selected templates: %s', errMsg),
+          t('删除选定的模板时出现了问题: %s', errMsg),
         ),
       ),
     );
@@ -131,7 +134,8 @@ function CssTemplatesList({
     () => [
       {
         accessor: 'template_name',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
       },
       {
         Cell: ({
@@ -142,7 +146,8 @@ function CssTemplatesList({
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改'),
         accessor: 'changed_on_delta_humanized',
         size: 'xl',
         disableSortBy: true,
@@ -156,7 +161,8 @@ function CssTemplatesList({
             canEdit
               ? {
                   label: 'edit-action',
-                  tooltip: t('Edit template'),
+                  // tooltip: t('Edit template'),
+                  tooltip: t('编辑模板'),
                   placement: 'bottom',
                   icon: 'EditOutlined',
                   onClick: handleEdit,
@@ -165,7 +171,8 @@ function CssTemplatesList({
             canDelete
               ? {
                   label: 'delete-action',
-                  tooltip: t('Delete template'),
+                  // tooltip: t('Delete template'),
+                  tooltip: t('删除模板'),
                   placement: 'bottom',
                   icon: 'DeleteOutlined',
                   onClick: handleDelete,
@@ -175,7 +182,8 @@ function CssTemplatesList({
 
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
         hidden: !canEdit && !canDelete,
@@ -208,7 +216,8 @@ function CssTemplatesList({
               vertical-align: text-top;
             `}
           />
-          {t('CSS template')}
+          {/* {t('CSS template')} */}
+          {t('CSS 模板')}
         </>
       ),
       buttonStyle: 'primary',
@@ -221,7 +230,8 @@ function CssTemplatesList({
 
   if (canDelete) {
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       onClick: toggleBulkSelect,
       buttonStyle: 'secondary',
     });
@@ -232,25 +242,32 @@ function CssTemplatesList({
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'search',
         id: 'template_name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Modified by'),
+        // Header: t('Modified by'),
+        Header: t('修改于'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'css_template',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源值时发生错误: %s',
               errMsg,
             ),
           ),
@@ -274,7 +291,8 @@ function CssTemplatesList({
       />
       {templateCurrentlyDeleting && (
         <DeleteModal
-          description={t('This action will permanently delete the template.')}
+          // description={t('This action will permanently delete the template.')}
+          description={t('此操作将永久删除模板。')}
           onConfirm={() => {
             if (templateCurrentlyDeleting) {
               handleTemplateDelete(templateCurrentlyDeleting);
@@ -282,13 +300,18 @@ function CssTemplatesList({
           }}
           onHide={() => setTemplateCurrentlyDeleting(null)}
           open
-          title={t('Delete Template?')}
+          // title={t('Delete Template?')}
+          title={t('删除模板？')}
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t(
+        //   'Are you sure you want to delete the selected templates?',
+        // )}
         description={t(
-          'Are you sure you want to delete the selected templates?',
+          '您确定要删除已选模板吗？',
         )}
         onConfirm={handleBulkTemplateDelete}
       >
@@ -297,7 +320,8 @@ function CssTemplatesList({
             ? [
                 {
                   key: 'delete',
-                  name: t('Delete'),
+                  // name: t('Delete'),
+                  name: t('删除'),
                   onSelect: confirmDelete,
                   type: 'danger',
                 },
