@@ -108,7 +108,8 @@ const AnnotationLayerModal: FunctionComponent<AnnotationLayerModalProps> = ({
     updateResource,
   } = useSingleViewResource<AnnotationLayerObject>(
     'annotation_layer',
-    t('annotation_layer'),
+    // t('annotation_layer'),
+    t('注释层'),
     addDangerToast,
   );
 
@@ -143,7 +144,8 @@ const AnnotationLayerModal: FunctionComponent<AnnotationLayerModalProps> = ({
           }
 
           hide();
-          addSuccessToast(t('Annotation template updated'));
+          // addSuccessToast(t('Annotation template updated'));
+          addSuccessToast(t('注释模板更新'));
         });
       }
     } else if (currentLayer) {
@@ -158,7 +160,8 @@ const AnnotationLayerModal: FunctionComponent<AnnotationLayerModalProps> = ({
         }
 
         hide();
-        addSuccessToast(t('Annotation template created'));
+        // addSuccessToast(t('Annotation template created'));
+        addSuccessToast(t('注释模板创建'));
       });
     }
   };
@@ -231,7 +234,8 @@ const AnnotationLayerModal: FunctionComponent<AnnotationLayerModalProps> = ({
       disablePrimaryButton={disableSave}
       onHandledPrimaryAction={onSave}
       onHide={hide}
-      primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      // primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      primaryButtonName={isEditMode ? t('保存') : t('添加')}
       show={show}
       width="55%"
       title={
@@ -253,17 +257,21 @@ const AnnotationLayerModal: FunctionComponent<AnnotationLayerModalProps> = ({
             />
           )}
           {isEditMode
-            ? t('Edit annotation layer properties')
-            : t('Add annotation layer')}
+            // ? t('Edit annotation layer properties')
+            // : t('Add annotation layer')}
+            ? t('编辑注解图层属性')
+            : t('添加注解层')}
         </h4>
       }
     >
       <StyledAnnotationLayerTitle>
-        <h4>{t('Basic information')}</h4>
+        {/* <h4>{t('Basic information')}</h4> */}
+        <h4>{t('基本信息')}</h4>
       </StyledAnnotationLayerTitle>
       <LayerContainer>
         <div className="control-label">
-          {t('Annotation layer name')}
+          {/* {t('Annotation layer name')} */}
+          {t('注解层名称')}
           <span className="required">*</span>
         </div>
         <input
@@ -274,11 +282,13 @@ const AnnotationLayerModal: FunctionComponent<AnnotationLayerModalProps> = ({
         />
       </LayerContainer>
       <LayerContainer>
-        <div className="control-label">{t('description')}</div>
+        {/* <div className="control-label">{t('description')}</div> */}
+        <div className="control-label">{t('描述')}</div>
         <textarea
           name="descr"
           value={currentLayer?.descr}
-          placeholder={t('Description (this can be seen in the list)')}
+          // placeholder={t('Description (this can be seen in the list)')}
+          placeholder={t('描述（可以在列表中看到）')}
           onChange={onTextChange}
         />
       </LayerContainer>

@@ -312,15 +312,19 @@ const ExploreChartPanel = ({
       >
         {vizTypeNeedsDataset && (
           <Alert
-            message={t('Chart type requires a dataset')}
+            // message={t('Chart type requires a dataset')}
+            message={t('图表类型需要一个数据集')}
             type="error"
             css={theme => css`
               margin: 0 0 ${theme.gridUnit * 4}px 0;
             `}
             description={
               <>
-                {t(
+                {/* {t(
                   'This chart type is not supported when using an unsaved query as a chart source. ',
+                )} */}
+                {t(
+                  '使用未保存查询作为图表数据源时，此图表类型不受支持。 ',
                 )}
                 <span
                   role="button"
@@ -328,9 +332,11 @@ const ExploreChartPanel = ({
                   onClick={() => setShowDatasetModal(true)}
                   css={{ textDecoration: 'underline' }}
                 >
-                  {t('Create a dataset')}
+                  {/* {t('Create a dataset')} */}
+                  {t('创建一个数据集')}
                 </span>
-                {t(' to visualize your data.')}
+                {/* {t(' to visualize your data.')} */}
+                {t(' 可视化您的数据。')}
               </>
             }
           />
@@ -339,19 +345,25 @@ const ExploreChartPanel = ({
           <ExploreAlert
             title={
               errorMessage
-                ? t('Required control values have been removed')
-                : t('Your chart is not up to date')
+                // ? t('Required control values have been removed')
+                // : t('Your chart is not up to date')
+                ? t('所需的控制值已被移除')
+                : t('您的图表不是最新的')
             }
             bodyText={
               errorMessage ? (
                 getChartRequiredFieldsMissingMessage(false)
               ) : (
                 <span>
-                  {t(
+                  {/* {t(
                     'You updated the values in the control panel, but the chart was not updated automatically. Run the query by clicking on the "Update chart" button or',
+                  )}{' '} */}
+                   {t(
+                    '您在控制面板中更新了值，但图表并未自动更新。点击“更新图表”按钮或',
                   )}{' '}
                   <span role="button" tabIndex={0} onClick={onQuery}>
-                    {t('click here')}
+                    {/* {t('click here')} */}
+                    {t('点击此处')}
                   </span>
                   .
                 </span>
@@ -457,8 +469,10 @@ const ExploreChartPanel = ({
         <SaveDatasetModal
           visible={showDatasetModal}
           onHide={() => setShowDatasetModal(false)}
-          buttonTextOnSave={t('Save')}
-          buttonTextOnOverwrite={t('Overwrite')}
+          // buttonTextOnSave={t('Save')}
+          // buttonTextOnOverwrite={t('Overwrite')}
+          buttonTextOnSave={t('保存')}
+          buttonTextOnOverwrite={t('覆盖')}
           datasource={getDatasourceAsSaveableDataset(datasource)}
           openWindow={false}
           formData={formData}

@@ -34,7 +34,8 @@ const SaveDatasetActionButton = ({
 
   return !overlayMenu ? (
     <Button onClick={() => setShowSave(true)} buttonStyle="primary">
-      {t('Save')}
+      {/* {t('Save')} */}
+      {t('保存')}
     </Button>
   ) : (
     <DropdownButton
@@ -48,7 +49,8 @@ const SaveDatasetActionButton = ({
       }
       trigger={['click']}
     >
-      {t('Save')}
+      {/* {t('Save')} */}
+      {t('保存')}
     </DropdownButton>
   );
 };

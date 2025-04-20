@@ -99,7 +99,8 @@ const CssTemplateModal: FunctionComponent<CssTemplateModalProps> = ({
     updateResource,
   } = useSingleViewResource<TemplateObject>(
     'css_template',
-    t('css_template'),
+    // t('css_template'),
+    t('css模板'),
     addDangerToast,
   );
 
@@ -228,7 +229,8 @@ const CssTemplateModal: FunctionComponent<CssTemplateModalProps> = ({
       disablePrimaryButton={disableSave}
       onHandledPrimaryAction={onSave}
       onHide={hide}
-      primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      // primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      primaryButtonName={isEditMode ? t('保存') : t('添加')}
       show={show}
       width="55%"
       title={
@@ -249,17 +251,21 @@ const CssTemplateModal: FunctionComponent<CssTemplateModalProps> = ({
             />
           )}
           {isEditMode
-            ? t('Edit CSS template properties')
-            : t('Add CSS template')}
+            // ? t('Edit CSS template properties')
+            // : t('Add CSS template')}
+            ? t('编辑 CSS 模板属性')
+            : t('添加 CSS 模板')}
         </h4>
       }
     >
       <StyledCssTemplateTitle>
-        <h4>{t('Basic information')}</h4>
+        {/* <h4>{t('Basic information')}</h4> */}
+        <h4>{t('基本信息')}</h4>
       </StyledCssTemplateTitle>
       <TemplateContainer>
         <div className="control-label">
-          {t('Name')}
+          {/* {t('Name')} */}
+          {t('名称')}
           <span className="required">*</span>
         </div>
         <input

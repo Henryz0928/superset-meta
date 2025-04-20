@@ -113,79 +113,96 @@ const DEFAULT_EXTRA_DASHBOARD_OPTIONS: Extra = {
 
 const CONDITIONS = [
   {
-    label: t('< (Smaller than)'),
+    // label: t('< (Smaller than)'),
+    label: t('小于'),
     value: '<',
   },
   {
-    label: t('> (Larger than)'),
+    // label: t('> (Larger than)'),
+    label: t('大于'),
     value: '>',
   },
   {
-    label: t('<= (Smaller or equal)'),
+    // label: t('<= (Smaller or equal)'),
+    label: t('小于等于'),
     value: '<=',
   },
   {
-    label: t('>= (Larger or equal)'),
+    // label: t('>= (Larger or equal)'),
+    label: t('大于等于'),
     value: '>=',
   },
   {
-    label: t('== (Is equal)'),
+    // label: t('== (Is equal)'),
+    label: t('等于'),
     value: '==',
   },
   {
-    label: t('!= (Is not equal)'),
+    // label: t('!= (Is not equal)'),
+    label: t('不等于'),
     value: '!=',
   },
   {
-    label: t('Not null'),
+    // label: t('Not null'),
+    label: t('非空'),
     value: 'not null',
   },
 ];
 
 const RETENTION_OPTIONS = [
   {
-    label: t('None'),
+    // label: t('None'),
+    label: t('无'),
     value: 0,
   },
   {
-    label: t('30 days'),
+    // label: t('30 days'),
+    label: t('30 天'),
     value: 30,
   },
   {
-    label: t('60 days'),
+    // label: t('60 days'),
+    label: t('60 天'),
     value: 60,
   },
   {
-    label: t('90 days'),
+    // label: t('90 days'),
+    label: t('90 天'),
     value: 90,
   },
 ];
 
 const CONTENT_TYPE_OPTIONS = [
   {
-    label: t('Dashboard'),
+    // label: t('Dashboard'),
+    label: t('仪表盘'),
     value: 'dashboard',
   },
   {
-    label: t('Chart'),
+    // label: t('Chart'),
+    label: t('图表'),
     value: 'chart',
   },
 ];
 const FORMAT_OPTIONS = {
   pdf: {
-    label: t('Send as PDF'),
+    // label: t('Send as PDF'),
+    label: t('以 PDF 格式发送'),
     value: 'PDF',
   },
   png: {
-    label: t('Send as PNG'),
+    // label: t('Send as PNG'),
+    label: t('以 PNG 格式发送'),
     value: 'PNG',
   },
   csv: {
-    label: t('Send as CSV'),
+    // label: t('Send as CSV'),
+    label: t('以 CSV 格式发送'),
     value: 'CSV',
   },
   txt: {
-    label: t('Send as text'),
+    // label: t('Send as text'),
+    label: t('以文本方式发送'),
     value: 'TEXT',
   },
 };
@@ -369,26 +386,46 @@ interface NotificationMethodAddProps {
 
 export const TRANSLATIONS = {
   // Panel titles
-  GENERAL_TITLE: t('General information'),
-  ALERT_CONDITION_TITLE: t('Alert condition'),
-  ALERT_CONTENTS_TITLE: t('Alert contents'),
-  REPORT_CONTENTS_TITLE: t('Report contents'),
-  SCHEDULE_TITLE: t('Schedule'),
-  NOTIFICATION_TITLE: t('Notification method'),
+  // GENERAL_TITLE: t('General information'),
+  // ALERT_CONDITION_TITLE: t('Alert condition'),
+  // ALERT_CONTENTS_TITLE: t('Alert contents'),
+  // REPORT_CONTENTS_TITLE: t('Report contents'),
+  // SCHEDULE_TITLE: t('Schedule'),
+  // NOTIFICATION_TITLE: t('Notification method'),
+  GENERAL_TITLE: t('通用信息'),
+  ALERT_CONDITION_TITLE: t('警报条件'),
+  ALERT_CONTENTS_TITLE: t('警报内容'),
+  REPORT_CONTENTS_TITLE: t('报表内容'),
+  SCHEDULE_TITLE: t('日程'),
+  NOTIFICATION_TITLE: t('通知方式'),
   // Error text
-  NAME_ERROR_TEXT: t('name'),
-  OWNERS_ERROR_TEXT: t('owners'),
-  CONTENT_ERROR_TEXT: t('content type'),
-  DATABASE_ERROR_TEXT: t('database'),
+  // NAME_ERROR_TEXT: t('name'),
+  // OWNERS_ERROR_TEXT: t('owners'),
+  // CONTENT_ERROR_TEXT: t('content type'),
+  // DATABASE_ERROR_TEXT: t('database'),
+  // SQL_ERROR_TEXT: t('sql'),
+  // ALERT_CONDITION_ERROR_TEXT: t('alert condition'),
+  // CRONTAB_ERROR_TEXT: t('crontab'),
+  // WORKING_TIMEOUT_ERROR_TEXT: t('working timeout'),
+  // RECIPIENTS_ERROR_TEXT: t('recipients'),
+  // EMAIL_SUBJECT_ERROR_TEXT: t('email subject'),
+  // EMAIL_VALIDATION_ERROR_TEXT: t('invalid email'),
+  // ERROR_TOOLTIP_MESSAGE: t(
+  //   'Not all required fields are complete. Please provide the following:',
+  // ),
+  NAME_ERROR_TEXT: t('名称'),
+  OWNERS_ERROR_TEXT: t('所有者'),
+  CONTENT_ERROR_TEXT: t('内容类型'),
+  DATABASE_ERROR_TEXT: t('数据库'),
   SQL_ERROR_TEXT: t('sql'),
-  ALERT_CONDITION_ERROR_TEXT: t('alert condition'),
-  CRONTAB_ERROR_TEXT: t('crontab'),
-  WORKING_TIMEOUT_ERROR_TEXT: t('working timeout'),
-  RECIPIENTS_ERROR_TEXT: t('recipients'),
-  EMAIL_SUBJECT_ERROR_TEXT: t('email subject'),
-  EMAIL_VALIDATION_ERROR_TEXT: t('invalid email'),
+  ALERT_CONDITION_ERROR_TEXT: t('警报条件'),
+  CRONTAB_ERROR_TEXT: t('定时任务'),
+  WORKING_TIMEOUT_ERROR_TEXT: t('工作超时'),
+  RECIPIENTS_ERROR_TEXT: t('收件人'),
+  EMAIL_SUBJECT_ERROR_TEXT: t('邮件主题'),
+  EMAIL_VALIDATION_ERROR_TEXT: t('无效的电子邮件'),
   ERROR_TOOLTIP_MESSAGE: t(
-    'Not all required fields are complete. Please provide the following:',
+    '并非所有必填字段都已填写。请提供以下内容：',
   ),
 };
 
@@ -416,8 +453,10 @@ const NotificationMethodAdd: FunctionComponent<NotificationMethodAddProps> = ({
         })}
       />
       {status === 'active'
-        ? t('Add another notification method')
-        : t('Add delivery method')}
+        // ? t('Add another notification method')
+        // : t('Add delivery method')}
+        ? t('添加另一种通知方式')
+        : t('添加交付方式')}
     </StyledNotificationAddButton>
   );
 };
@@ -641,7 +680,9 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     createResource,
     updateResource,
     clearError,
-  } = useSingleViewResource<AlertObject>('report', t('report'), addDangerToast);
+  } = 
+  // useSingleViewResource<AlertObject>('report', t('report'), addDangerToast);
+  useSingleViewResource<AlertObject>('report', t('报表'), addDangerToast);
 
   // Functions
   const hide = () => {
@@ -718,7 +759,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             return;
           }
 
-          addSuccessToast(t('%s updated', data.type));
+          // addSuccessToast(t('%s updated', data.type));
+          addSuccessToast(t('%s 已修改', data.type));
 
           if (onAdd) {
             onAdd();
@@ -734,7 +776,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           return;
         }
 
-        addSuccessToast(t('%s updated', data.type));
+        // addSuccessToast(t('%s updated', data.type));
+        addSuccessToast(t('%s 已修改', data.type));
 
         if (onAdd) {
           onAdd(response);
@@ -859,7 +902,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                   updateAnchorState(undefined);
                 }
               } else {
-                throw new Error('Parsed value is not an array');
+                // throw new Error('Parsed value is not an array');
+                throw new Error('解析的值不是一个数组');
               }
             } catch (error) {
               if (!(anchor in allTabs)) {
@@ -869,7 +913,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           }
         })
         .catch(() => {
-          addDangerToast(t('There was an error retrieving dashboard tabs.'));
+          // addDangerToast(t('There was an error retrieving dashboard tabs.'));
+          addDangerToast(t('获取仪表板标签时出错。'));
         });
     }
   }, [dashboard, tabsEnabled, currentAlert?.extra, addDangerToast]);
@@ -1432,16 +1477,20 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
     switch (true) {
       case isEditMode && isReport:
-        titleText = t('Edit Report');
+        // titleText = t('Edit Report');
+        titleText = t('修改报表');
         break;
       case isEditMode:
-        titleText = t('Edit Alert');
+        // titleText = t('Edit Alert');
+        titleText = t('修改警报');
         break;
       case isReport:
-        titleText = t('Add Report');
+        // titleText = t('Add Report');
+        titleText = t('添加报表');
         break;
       default:
-        titleText = t('Add Alert');
+        // titleText = t('Add Alert');
+        titleText = t('添加警报');
         break;
     }
 
@@ -1460,7 +1509,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
       primaryTooltipMessage={errorTooltipMessage}
       onHandledPrimaryAction={onSave}
       onHide={hide}
-      primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      // primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      primaryButtonName={isEditMode ? t('保存') : t('添加')}
       show={show}
       width="500px"
       centered
@@ -1478,8 +1528,11 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           header={
             <ValidatedPanelHeader
               title={TRANSLATIONS.GENERAL_TITLE}
+              // subtitle={t(
+              //   'Set up basic details, such as name and description.',
+              // )}
               subtitle={t(
-                'Set up basic details, such as name and description.',
+                '设置基本信息，如名称和描述。',
               )}
               validateCheckStatus={
                 !validationStatus[Sections.General].hasErrors
@@ -1492,7 +1545,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           <div className="header-section">
             <StyledInputContainer>
               <div className="control-label">
-                {isReport ? t('Report name') : t('Alert name')}
+                {/* {isReport ? t('Report name') : t('Alert name')} */}
+                {isReport ? t('报表名称') : t('警报名称')}
                 <span className="required">*</span>
               </div>
               <div className="input-container">
@@ -1501,7 +1555,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                   name="name"
                   value={currentAlert ? currentAlert.name : ''}
                   placeholder={
-                    isReport ? t('Enter report name') : t('Enter alert name')
+                    // isReport ? t('Enter report name') : t('Enter alert name')
+                    isReport ? t('输入报表名称') : t('输入警报名称')
                   }
                   onChange={onInputChange}
                 />
@@ -1509,16 +1564,19 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             </StyledInputContainer>
             <StyledInputContainer>
               <div className="control-label">
-                {t('Owners')}
+                {/* {t('Owners')} */}
+                {t('所有者')}
                 <span className="required">*</span>
               </div>
               <div data-test="owners-select" className="input-container">
                 <AsyncSelect
-                  ariaLabel={t('Owners')}
+                  // ariaLabel={t('Owners')}
+                  ariaLabel={t('所有者')}
                   allowClear
                   name="owners"
                   mode="multiple"
-                  placeholder={t('Select owners')}
+                  // placeholder={t('Select owners')}
+                  placeholder={t('选择所有者')}
                   value={
                     (currentAlert?.owners as {
                       label: string;
@@ -1531,14 +1589,19 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
               </div>
             </StyledInputContainer>
             <StyledInputContainer>
-              <div className="control-label">{t('Description')}</div>
+              {/* <div className="control-label">{t('Description')}</div> */}
+              <div className="control-label">{t('描述')}</div>
               <div className="input-container">
                 <input
                   type="text"
                   name="description"
                   value={currentAlert ? currentAlert.description || '' : ''}
+                  // placeholder={t(
+                  //   'Include description to be sent with %s',
+                  //   reportOrAlert,
+                  // )}
                   placeholder={t(
-                    'Include description to be sent with %s',
+                    '包括要发送的描述 %s',
                     reportOrAlert,
                   )}
                   onChange={onInputChange}
@@ -1552,7 +1615,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                 onChange={onActiveSwitch}
               />
               <div className="switch-label">
-                {isReport ? t('Report is active') : t('Alert is active')}
+                {/* {isReport ? t('Report is active') : t('Alert is active')} */}
+                {isReport ? t('报表已激活') : t('警报已激活')}
               </div>
             </StyledSwitchContainer>
           </div>
@@ -1562,8 +1626,11 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             header={
               <ValidatedPanelHeader
                 title={TRANSLATIONS.ALERT_CONDITION_TITLE}
+                // subtitle={t(
+                //   'Define the database, SQL query, and triggering conditions for alert.',
+                // )}
                 subtitle={t(
-                  'Define the database, SQL query, and triggering conditions for alert.',
+                  '定义数据库、SQL 查询以及触发告警的条件。',
                 )}
                 validateCheckStatus={
                   !validationStatus[Sections.Alert].hasErrors
@@ -1575,14 +1642,17 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           >
             <StyledInputContainer>
               <div className="control-label">
-                {t('Database')}
+                {/* {t('Database')} */}
+                {t('数据库')}
                 <span className="required">*</span>
               </div>
               <div className="input-container">
                 <AsyncSelect
-                  ariaLabel={t('Database')}
+                  // ariaLabel={t('Database')}
+                  ariaLabel={t('数据库')}
                   name="source"
-                  placeholder={t('Select database')}
+                  // placeholder={t('Select database')}
+                  placeholder={t('选择数据库')}
                   value={
                     currentAlert?.database?.label &&
                     currentAlert?.database?.value
@@ -1599,10 +1669,14 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             </StyledInputContainer>
             <StyledInputContainer>
               <div className="control-label">
-                {t('SQL Query')}
+                {/* {t('SQL Query')} */}
+                {t('SQL 查询')}
                 <StyledTooltip
+                  // tooltip={t(
+                  //   'The result of this query must be a value capable of numeric interpretation e.g. 1, 1.0, or "1" (compatible with Python\'s float() function).',
+                  // )}
                   tooltip={t(
-                    'The result of this query must be a value capable of numeric interpretation e.g. 1, 1.0, or "1" (compatible with Python\'s float() function).',
+                    '此查询的结果必须是一个能够进行数值解释的值，例如 1、1.0 或“1”（与 Python 的 float（）函数兼容）。',
                   )}
                 />
                 <span className="required">*</span>
@@ -1622,14 +1696,17 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             <div className="inline-container wrap">
               <StyledInputContainer css={noMarginBottom}>
                 <div className="control-label" css={inputSpacer}>
-                  {t('Trigger Alert If...')}
+                  {/* {t('Trigger Alert If...')} */}
+                  {t('触发警报，如果...')}
                   <span className="required">*</span>
                 </div>
                 <div className="input-container">
                   <Select
-                    ariaLabel={t('Condition')}
+                    // ariaLabel={t('Condition')}
+                    ariaLabel={t('条件')}
                     onChange={onConditionChange}
-                    placeholder={t('Condition')}
+                    // placeholder={t('Condition')}
+                    placeholder={t('条件')}
                     value={currentAlert?.validator_config_json?.op || undefined}
                     options={CONDITIONS}
                     css={inputSpacer}
@@ -1638,7 +1715,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
               </StyledInputContainer>
               <StyledInputContainer css={noMarginBottom}>
                 <div className="control-label">
-                  {t('Value')}{' '}
+                  {/* {t('Value')}{' '} */}
+                  {t('值')}{' '}
                   {!conditionNotNull && <span className="required">*</span>}
                 </div>
                 <div className="input-container">
@@ -1652,7 +1730,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                         ? currentAlert.validator_config_json.threshold
                         : ''
                     }
-                    placeholder={t('Value')}
+                    // placeholder={t('Value')}
+                    placeholder={t('值')}
                     onChange={onThresholdChange}
                   />
                 </div>
@@ -1668,7 +1747,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                   ? TRANSLATIONS.REPORT_CONTENTS_TITLE
                   : TRANSLATIONS.ALERT_CONTENTS_TITLE
               }
-              subtitle={t('Customize data source, filters, and layout.')}
+              // subtitle={t('Customize data source, filters, and layout.')}
+              subtitle={t('自定义数据源、过滤条件和布局。')}
               validateCheckStatus={
                 !validationStatus[Sections.Content].hasErrors
               }
@@ -1679,26 +1759,31 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
         >
           <StyledInputContainer>
             <div className="control-label">
-              {t('Content type')}
+              {/* {t('Content type')} */}
+              {t('内容类型')}
               <span className="required">*</span>
             </div>
             <Select
-              ariaLabel={t('Select content type')}
+              // ariaLabel={t('Select content type')}
+              ariaLabel={t('选择内容类型')}
               onChange={onContentTypeChange}
               value={contentType}
               options={CONTENT_TYPE_OPTIONS}
-              placeholder={t('Select content type')}
+              // placeholder={t('Select content type')}
+              placeholder={t('选择内容类型')}
             />
           </StyledInputContainer>
           <StyledInputContainer>
             {contentType === ContentType.Chart ? (
               <>
                 <div className="control-label">
-                  {t('Select chart')}
+                  {/* {t('Select chart')} */}
+                  {t('选择图表')}
                   <span className="required">*</span>
                 </div>
                 <AsyncSelect
-                  ariaLabel={t('Chart')}
+                  // ariaLabel={t('Chart')}
+                  ariaLabel={t('图表')}
                   name="chart"
                   value={
                     currentAlert?.chart?.label && currentAlert?.chart?.value
@@ -1710,17 +1795,20 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                   }
                   options={loadChartOptions}
                   onChange={onChartChange}
-                  placeholder={t('Select chart to use')}
+                  // placeholder={t('Select chart to use')}
+                  placeholder={t('选择要使用的图表')}
                 />
               </>
             ) : (
               <>
                 <div className="control-label">
-                  {t('Select dashboard')}
+                  {/* {t('Select dashboard')} */}
+                  {t('选择仪表盘')}
                   <span className="required">*</span>
                 </div>
                 <AsyncSelect
-                  ariaLabel={t('Dashboard')}
+                  // ariaLabel={t('Dashboard')}
+                  ariaLabel={t('仪表盘')}
                   name="dashboard"
                   value={
                     currentAlert?.dashboard?.label &&
@@ -1733,7 +1821,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                   }
                   options={loadDashboardOptions}
                   onChange={onDashboardChange}
-                  placeholder={t('Select dashboard to use')}
+                  // placeholder={t('Select dashboard to use')}
+                  placeholder={t('选择要使用的仪表盘')}
                 />
               </>
             )}
@@ -1746,11 +1835,13 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             {formatOptionEnabled && (
               <>
                 <div className="control-label">
-                  {t('Content format')}
+                  {/* {t('Content format')} */}
+                  {t('内容格式')}
                   <span className="required">*</span>
                 </div>
                 <Select
-                  ariaLabel={t('Select format')}
+                  // ariaLabel={t('Select format')}
+                  ariaLabel={t('选择格式')}
                   onChange={onFormatChange}
                   value={reportFormat}
                   options={
@@ -1766,7 +1857,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                             key => FORMAT_OPTIONS[key as FORMAT_OPTIONS_KEY],
                           )
                   }
-                  placeholder={t('Select format')}
+                  // placeholder={t('Select format')}
+                  placeholder={t('选择格式')}
                 />
               </>
             )}
@@ -1793,7 +1885,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                 !isReport && contentType === ContentType.Chart && noMarginBottom
               }
             >
-              <div className="control-label">{t('Screenshot width')}</div>
+              {/* <div className="control-label">{t('Screenshot width')}</div> */}
+              <div className="control-label">{t('屏幕截图宽度')}</div>
               <div className="input-container">
                 <InputNumber
                   type="number"
@@ -1801,7 +1894,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                   value={currentAlert?.custom_width || undefined}
                   min={600}
                   max={2400}
-                  placeholder={t('Input custom width in pixels')}
+                  // placeholder={t('Input custom width in pixels')}
+                  placeholder={t('输入自定义宽度（以像素为单位）')}
                   onChange={onCustomWidthChange}
                 />
               </div>
@@ -1815,7 +1909,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                 checked={forceScreenshot}
                 onChange={onForceScreenshotChange}
               >
-                {t('Ignore cache when generating report')}
+                {/* {t('Ignore cache when generating report')} */}
+                {t('生成报告时忽略缓存')}
               </StyledCheckbox>
             </div>
           )}
@@ -1824,8 +1919,11 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           header={
             <ValidatedPanelHeader
               title={TRANSLATIONS.SCHEDULE_TITLE}
+              // subtitle={t(
+              //   'Define delivery schedule, timezone, and frequency settings.',
+              // )}
               subtitle={t(
-                'Define delivery schedule, timezone, and frequency settings.',
+                '定义交付计划、时区和频率设置。',
               )}
               validateCheckStatus={
                 !validationStatus[Sections.Schedule].hasErrors
@@ -1841,7 +1939,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           />
           <StyledInputContainer>
             <div className="control-label">
-              {t('Timezone')} <span className="required">*</span>
+              {/* {t('Timezone')} <span className="required">*</span> */}
+              {t('时区')} <span className="required">*</span>
             </div>
             <TimezoneSelector
               onTimezoneChange={onTimezoneChange}
@@ -1851,13 +1950,16 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           </StyledInputContainer>
           <StyledInputContainer>
             <div className="control-label">
-              {t('Log retention')}
+              {/* {t('Log retention')} */}
+              {t('日志保留')}
               <span className="required">*</span>
             </div>
             <div className="input-container">
               <Select
-                ariaLabel={t('Log retention')}
-                placeholder={t('Log retention')}
+                // ariaLabel={t('Log retention')}
+                // placeholder={t('Log retention')}
+                ariaLabel={t('日志保留')}
+                placeholder={t('日志保留')}
                 onChange={onLogRetentionChange}
                 value={currentAlert?.log_retention}
                 options={RETENTION_OPTIONS}
@@ -1869,7 +1971,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
             {isReport ? (
               <>
                 <div className="control-label">
-                  {t('Working timeout')}
+                  {/* {t('Working timeout')} */}
+                  {t('工作超时')}
                   <span className="required">*</span>
                 </div>
                 <div className="input-container">
@@ -1877,23 +1980,28 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
                     min={1}
                     name="working_timeout"
                     value={currentAlert?.working_timeout || ''}
-                    placeholder={t('Time in seconds')}
+                    // placeholder={t('Time in seconds')}
+                    placeholder={t('时间（秒）')}
                     onChange={onTimeoutVerifyChange}
-                    timeUnit={t('seconds')}
+                    // timeUnit={t('seconds')}
+                    timeUnit={t('秒')}
                   />
                 </div>
               </>
             ) : (
               <>
-                <div className="control-label">{t('Grace period')}</div>
+                {/* <div className="control-label">{t('Grace period')}</div> */}
+                <div className="control-label">{t('宽限期')}</div>
                 <div className="input-container">
                   <NumberInput
                     min={1}
                     name="grace_period"
                     value={currentAlert?.grace_period || ''}
-                    placeholder={t('Time in seconds')}
+                    // placeholder={t('Time in seconds')}
+                    placeholder={t('时间（秒）')}
                     onChange={onTimeoutVerifyChange}
-                    timeUnit={t('seconds')}
+                    // timeUnit={t('seconds')}
+                    timeUnit={t('秒')}
                   />
                 </div>
               </>
@@ -1904,7 +2012,8 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
           header={
             <ValidatedPanelHeader
               title={TRANSLATIONS.NOTIFICATION_TITLE}
-              subtitle={t('Choose notification method and recipients.')}
+              // subtitle={t('Choose notification method and recipients.')}
+              subtitle={t('选择通知方式和接收者。')}
               validateCheckStatus={
                 !validationStatus[Sections.Notification].hasErrors
               }

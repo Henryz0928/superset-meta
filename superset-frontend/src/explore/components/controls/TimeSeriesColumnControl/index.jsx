@@ -61,17 +61,25 @@ const defaultProps = {
 };
 
 const comparisonTypeOptions = [
-  { value: 'value', label: t('Actual value'), key: 'value' },
-  { value: 'diff', label: t('Difference'), key: 'diff' },
-  { value: 'perc', label: t('Percentage'), key: 'perc' },
-  { value: 'perc_change', label: t('Percentage change'), key: 'perc_change' },
+  // { value: 'value', label: t('Actual value'), key: 'value' },
+  // { value: 'diff', label: t('Difference'), key: 'diff' },
+  // { value: 'perc', label: t('Percentage'), key: 'perc' },
+  // { value: 'perc_change', label: t('Percentage change'), key: 'perc_change' },
+  { value: 'value', label: t('实际值'), key: 'value' },
+  { value: 'diff', label: t('差异'), key: 'diff' },
+  { value: 'perc', label: t('百分比'), key: 'perc' },
+  { value: 'perc_change', label: t('百分比变化'), key: 'perc_change' },
 ];
 
 const colTypeOptions = [
-  { value: 'time', label: t('Time comparison'), key: 'time' },
-  { value: 'contrib', label: t('Contribution'), key: 'contrib' },
-  { value: 'spark', label: t('Sparkline'), key: 'spark' },
-  { value: 'avg', label: t('Period average'), key: 'avg' },
+  // { value: 'time', label: t('Time comparison'), key: 'time' },
+  // { value: 'contrib', label: t('Contribution'), key: 'contrib' },
+  // { value: 'spark', label: t('Sparkline'), key: 'spark' },
+  // { value: 'avg', label: t('Period average'), key: 'avg' },
+  { value: 'time', label: t('时间比较'), key: 'time' },
+  { value: 'contrib', label: t('贡献'), key: 'contrib' },
+  { value: 'spark', label: t('迷你图'), key: 'spark' },
+  { value: 'avg', label: t('周期平均值'), key: 'avg' },
 ];
 
 const StyledRow = styled(Row)`
@@ -192,18 +200,23 @@ export default class TimeSeriesColumnControl extends Component {
     return (
       <div id="ts-col-popo" style={{ width: 320 }}>
         {this.formRow(
-          t('Label'),
-          t('The column header label'),
+          // t('Label'),
+          // t('The column header label'),
+          t('标签'),
+          t('列标题标签'),
           'time-lag',
           <Input
             value={this.state.label}
             onChange={this.onTextInputChange.bind(this, 'label')}
-            placeholder={t('Label')}
+            // placeholder={t('Label')}
+            placeholder={t('标签')}
           />,
         )}
         {this.formRow(
-          t('Tooltip'),
-          t('Column header tooltip'),
+          // t('Tooltip'),
+          // t('Column header tooltip'),
+          t('提示框'),
+          t('列标题提示框'),
           'col-tooltip',
           <Input
             value={this.state.tooltip}

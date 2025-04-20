@@ -132,8 +132,10 @@ function ReportModal({
     () => ({
       ...INITIAL_STATE,
       name: entityName
-        ? t('Weekly Report for %s', entityName)
-        : t('Weekly Report'),
+        // ? t('Weekly Report for %s', entityName)
+        // : t('Weekly Report'),
+        ? t('%s 的每周报告', entityName)
+        : t('周报'),
     }),
     [entityName],
   );
@@ -227,7 +229,8 @@ function ReportModal({
     <StyledIconWrapper>
       <Icons.CalendarOutlined />
       <span className="text">
-        {isEditMode ? t('Edit email report') : t('Schedule a new email report')}
+        {/* {isEditMode ? t('Edit email report') : t('Schedule a new email report')} */}
+        {isEditMode ? t('编辑电子邮件报表') : t('安排新的电子邮件报表')}
       </span>
     </StyledIconWrapper>
   );
@@ -271,15 +274,18 @@ function ReportModal({
           value={currentReport.report_format || defaultNotificationFormat}
           options={[
             {
-              label: t('Text embedded in email'),
+              // label: t('Text embedded in email'),
+              label: t('电子邮件中嵌入的文本'),
               value: NotificationFormats.Text,
             },
             {
-              label: t('Image (PNG) embedded in email'),
+              // label: t('Image (PNG) embedded in email'),
+              label: t('电子邮件中嵌入的图像 （PNG）'),
               value: NotificationFormats.PNG,
             },
             {
-              label: t('Formatted CSV attached in email'),
+              // label: t('Formatted CSV attached in email'),
+              label: t('电子邮件中附加的格式化 CSV'),
               value: NotificationFormats.CSV,
             },
           ]}
@@ -290,14 +296,16 @@ function ReportModal({
   const renderCustomWidthSection = (
     <StyledInputContainer>
       <div className="control-label" css={CustomWidthHeaderStyle}>
-        {t('Screenshot width')}
+        {/* {t('Screenshot width')} */}
+        {t('屏幕截图宽度')}
       </div>
       <div className="input-container">
         <Input
           type="number"
           name="custom_width"
           value={currentReport?.custom_width || ''}
-          placeholder={t('Input custom width in pixels')}
+          // placeholder={t('Input custom width in pixels')}
+          placeholder={t('输入自定义宽度（以像素为单位）')}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setCurrentReport({
               custom_width: parseInt(event.target.value, 10) || null,
@@ -328,7 +336,8 @@ function ReportModal({
             onChange: ({ target }: { target: HTMLInputElement }) =>
               setCurrentReport({ name: target.value }),
           }}
-          label={t('Report Name')}
+          // label={t('Report Name')}
+          label={t('报表名称')}
           data-test="report-name-test"
         />
         <LabeledErrorBoundInput
@@ -340,9 +349,13 @@ function ReportModal({
               setCurrentReport({ description: target.value });
             },
           }}
-          label={t('Description')}
+          // label={t('Description')}
+          // placeholder={t(
+          //   'Include a description that will be sent with your report',
+          // )}
+          label={t('描述')}
           placeholder={t(
-            'Include a description that will be sent with your report',
+            '包括将与您的报表一起发送的描述',
           )}
           css={noBottomMargin}
           data-test="report-description-test"
@@ -352,9 +365,11 @@ function ReportModal({
       <StyledBottomSection>
         <StyledScheduleTitle>
           <h4 css={(theme: SupersetTheme) => SectionHeaderStyle(theme)}>
-            {t('Schedule')}
+            {/* {t('Schedule')} */}
+            {t('附表')}
           </h4>
-          <p>{t('The report will be sent to your email at')}</p>
+          {/* <p>{t('The report will be sent to your email at')}</p> */}
+          <p>{t('报表将会发送到您的电子邮件中')}</p>
         </StyledScheduleTitle>
 
         <StyledCronPicker
@@ -370,7 +385,8 @@ function ReportModal({
           className="control-label"
           css={(theme: SupersetTheme) => TimezoneHeaderStyle(theme)}
         >
-          {t('Timezone')}
+          {/* {t('Timezone')} */}
+          {t('时区')}
         </div>
         <TimezoneSelector
           timezone={currentReport.timezone}
@@ -387,8 +403,10 @@ function ReportModal({
           css={(theme: SupersetTheme) => antDErrorAlertStyles(theme)}
           message={
             isEditMode
-              ? t('Failed to update report')
-              : t('Failed to create report')
+              // ? t('Failed to update report')
+              // : t('Failed to create report')
+              ? t('更新报表失败')
+              : t('创建报表失败')
           }
           description={currentReport.error}
         />

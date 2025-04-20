@@ -274,7 +274,8 @@ export default function DataSourcePanel({
           }}
           value={inputValue}
           className="form-control input-md"
-          placeholder={t('Search Metrics & Columns')}
+          // placeholder={t('Search Metrics & Columns')}
+          placeholder={t('搜索指标与列')}
         />
         <div className="field-selections" data-test="fieldSelections">
           {datasourceIsSaveable && showInfoboxCheck() && (
@@ -298,9 +299,10 @@ export default function DataSourcePanel({
                       onClick={() => setShowSaveDatasetModal(true)}
                       className="add-dataset-alert-description"
                     >
-                      {t('Create a dataset')}
+                      {/* {t('Create a dataset')} */}
+                      {t('创建一个数据集')}
                     </span>
-                    {t(' to edit or add columns and metrics.')}
+                    {t(' 编辑或添加列和指标。')}
                   </>
                 }
               />
@@ -327,8 +329,10 @@ export default function DataSourcePanel({
         <SaveDatasetModal
           visible={showSaveDatasetModal}
           onHide={() => setShowSaveDatasetModal(false)}
-          buttonTextOnSave={t('Save')}
-          buttonTextOnOverwrite={t('Overwrite')}
+          // buttonTextOnSave={t('Save')}
+          // buttonTextOnOverwrite={t('Overwrite')}
+          buttonTextOnSave={t('保存')}
+          buttonTextOnOverwrite={t('覆盖')}
           datasource={getDatasourceAsSaveableDataset(datasource)}
           openWindow={false}
           formData={formData}

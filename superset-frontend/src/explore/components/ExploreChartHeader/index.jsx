@@ -117,7 +117,8 @@ export const ExploreChartHeader = ({
         // ensure consistency with the dashboard
         applyColors(dashboardMetadata);
       } catch (error) {
-        logging.info(t('Unable to retrieve dashboard colors'));
+        // logging.info(t('Unable to retrieve dashboard colors'));
+        logging.info(t('无法获取仪表盘颜色'));
       }
     }
   };
@@ -194,8 +195,10 @@ export const ExploreChartHeader = ({
             canOverwrite ||
             (slice?.owners || []).includes(user?.userId),
           onSave: actions.updateChartTitle,
-          placeholder: t('Add the name of the chart'),
-          label: t('Chart title'),
+          // placeholder: t('Add the name of the chart'),
+          // label: t('Chart title'),
+          placeholder: t('添加图表的名称'),
+          label: t('图表标题'),
         }}
         showTitlePanelItems={!!slice}
         certificatiedBadgeProps={{
@@ -229,7 +232,8 @@ export const ExploreChartHeader = ({
           <Tooltip
             title={
               saveDisabled
-                ? t('Add required control values to save chart')
+                // ? t('Add required control values to save chart')
+                ? t('添加所需的控制值以保存图表')
                 : null
             }
           >
@@ -246,7 +250,8 @@ export const ExploreChartHeader = ({
                   iconSize="l"
                   iconColor={theme.colors.primary.dark2}
                 />
-                {t('Save')}
+                {/* {t('Save')} */}
+                {t('保存')}
               </Button>
             </div>
           </Tooltip>
@@ -278,8 +283,12 @@ export const ExploreChartHeader = ({
 
       {currentReportDeleting && (
         <DeleteModal
+          // description={t(
+          //   'This action will permanently delete %s.',
+          //   currentReportDeleting?.name,
+          // )}
           description={t(
-            'This action will permanently delete %s.',
+            '此操作将永久删除 %s.',
             currentReportDeleting?.name,
           )}
           onConfirm={() => {
@@ -289,7 +298,8 @@ export const ExploreChartHeader = ({
           }}
           onHide={() => setCurrentReportDeleting(null)}
           open
-          title={t('Delete Report?')}
+          // title={t('Delete Report?')}
+          title={t('删除报表？')}
         />
       )}
     </>

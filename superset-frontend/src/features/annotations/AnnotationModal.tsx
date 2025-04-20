@@ -105,7 +105,8 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
     updateResource,
   } = useSingleViewResource<AnnotationObject>(
     `annotation_layer/${annotationLayerId}/annotation`,
-    t('annotation'),
+    // t('annotation'),
+    t('注解'),
     addDangerToast,
   );
 
@@ -151,7 +152,8 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
 
           hide();
 
-          addSuccessToast(t('The annotation has been updated'));
+          // addSuccessToast(t('The annotation has been updated'));
+          addSuccessToast(t('注解已修改'));
         });
       }
     } else if (currentAnnotation) {
@@ -167,7 +169,8 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
 
         hide();
 
-        addSuccessToast(t('The annotation has been saved'));
+        // addSuccessToast(t('The annotation has been saved'));
+        addSuccessToast(t('注解已保存'));
       });
     }
   };
@@ -273,7 +276,8 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
       disablePrimaryButton={disableSave}
       onHandledPrimaryAction={onSave}
       onHide={hide}
-      primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      // primaryButtonName={isEditMode ? t('Save') : t('Add')}
+      primaryButtonName={isEditMode ? t('保存') : t('添加')}
       show={show}
       width="55%"
       title={
@@ -293,16 +297,19 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
               `}
             />
           )}
-          {isEditMode ? t('Edit annotation') : t('Add annotation')}
+          {/* {isEditMode ? t('Edit annotation') : t('Add annotation')} */}
+          {isEditMode ? t('编辑注解') : t('添加注解')}
         </h4>
       }
     >
       <StyledAnnotationTitle>
-        <h4>{t('Basic information')}</h4>
+        {/* <h4>{t('Basic information')}</h4> */}
+        <h4>{t('基本信息')}</h4>
       </StyledAnnotationTitle>
       <AnnotationContainer>
         <div className="control-label">
-          {t('Name')}
+          {/* {t('Name')} */}
+          {t('名称')}
           <span className="required">*</span>
         </div>
         <input
@@ -314,11 +321,13 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
       </AnnotationContainer>
       <AnnotationContainer>
         <div className="control-label">
-          {t('date')}
+          {/* {t('date')} */}
+          {t('日期')}
           <span className="required">*</span>
         </div>
         <RangePicker
-          placeholder={[t('Start date'), t('End date')]}
+          // placeholder={[t('Start date'), t('End date')]}
+          placeholder={[t('开始日期'), t('结束日期')]}
           format="YYYY-MM-DD HH:mm"
           onCalendarChange={onDateChange}
           showTime={{ format: 'hh:mm a' }}
@@ -335,19 +344,23 @@ const AnnotationModal: FunctionComponent<AnnotationModalProps> = ({
         />
       </AnnotationContainer>
       <StyledAnnotationTitle>
-        <h4>{t('Additional information')}</h4>
+        {/* <h4>{t('Additional information')}</h4> */}
+        <h4>{t('附加信息')}</h4>
       </StyledAnnotationTitle>
       <AnnotationContainer>
-        <div className="control-label">{t('description')}</div>
+        {/* <div className="control-label">{t('description')}</div> */}
+        <div className="control-label">{t('描述')}</div>
         <textarea
           name="long_descr"
           value={currentAnnotation ? currentAnnotation.long_descr : ''}
-          placeholder={t('Description (this can be seen in the list)')}
+          // placeholder={t('Description (this can be seen in the list)')}
+          placeholder={t('描述（可以在列表中看到）')}
           onChange={onAnnotationTextChange}
         />
       </AnnotationContainer>
       <AnnotationContainer>
-        <div className="control-label">{t('JSON metadata')}</div>
+        {/* <div className="control-label">{t('JSON metadata')}</div> */}
+        <div className="control-label">{t('JSON 元数据')}</div>
         <StyledJsonEditor
           onChange={onJsonChange}
           value={
