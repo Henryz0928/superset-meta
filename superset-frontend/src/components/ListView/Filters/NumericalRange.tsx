@@ -109,7 +109,8 @@ function NumericalRangeFilter(
         <InputNumber
           value={value[0]}
           onChange={handleMinChange}
-          placeholder={t('Value greater than')}
+          // placeholder={t('Value greater than')}
+          placeholder={t('值大于')}
           style={{ width: '100%' }}
           data-test="numerical-filter-min-input"
         />
@@ -117,13 +118,15 @@ function NumericalRangeFilter(
         <InputNumber
           value={value[1]}
           onChange={handleMaxChange}
-          placeholder={t('Value less than')}
+          // placeholder={t('Value less than')}
+          placeholder={t('值小于')}
           style={{ width: '100%' }}
           data-test="numerical-filter-max-input"
         />
         {hasError && (
           <ErrorMessage>
-            {t('Minimum must be strictly less than maximum')}
+            {/* {t('Minimum must be strictly less than maximum')} */}
+            {t('最小值必须严格小于最大值')}
           </ErrorMessage>
         )}
       </InputContainer>

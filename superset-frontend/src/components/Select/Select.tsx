@@ -452,7 +452,8 @@ const Select = forwardRef(
               handleSelectAll();
             }}
           >
-            {`${t('Select all')} (${bulkSelectCounts.selectable})`}
+            {/* {`${t('Select all')} (${bulkSelectCounts.selectable})`} */}
+            {`${t('选择全部')} (${bulkSelectCounts.selectable})`}
           </Button>
           <Button
             type="link"
@@ -464,7 +465,8 @@ const Select = forwardRef(
               handleDeselectAll();
             }}
           >
-            {`${t('Deselect all')} (${bulkSelectCounts.deselectable})`}
+            {/* {`${t('Deselect all')} (${bulkSelectCounts.deselectable})`} */}
+            {`${t('取消全选')} (${bulkSelectCounts.deselectable})`}
           </Button>
         </StyledBulkActionsContainer>
       ),
@@ -687,7 +689,8 @@ const Select = forwardRef(
           maxTagCount={actualMaxTagCount}
           maxTagPlaceholder={customMaxTagPlaceholder}
           mode={mappedMode}
-          notFoundContent={isLoading ? t('Loading...') : notFoundContent}
+          // notFoundContent={isLoading ? t('Loading...') : notFoundContent}
+          notFoundContent={isLoading ? t('加载中...') : notFoundContent}
           onBlur={handleOnBlur}
           onDeselect={handleOnDeselect}
           onDropdownVisibleChange={handleOnDropdownVisibleChange}
