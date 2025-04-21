@@ -38,17 +38,20 @@ const DividerConfigForm: FC<Props> = ({ componentId, divider }) => (
   <Container>
     <FormItem
       initialValue={divider ? divider.title : ''}
-      label={t('Title')}
+      // label={t('Title')}
+      label={t('标签')}
       name={['filters', componentId, 'title']}
       rules={[
-        { required: true, message: t('Title is required'), whitespace: true },
+        // { required: true, message: t('Title is required'), whitespace: true },
+        { required: true, message: t('标题是必需的'), whitespace: true },
       ]}
     >
       <Input />
     </FormItem>
     <FormItem
       initialValue={divider ? divider.description : ''}
-      label={t('Description')}
+      // label={t('Description')}
+      label={t('描述')}
       name={['filters', componentId, 'description']}
     >
       <TextArea rows={4} />

@@ -122,11 +122,13 @@ function AnnotationList({
       () => {
         refreshData();
         setAnnotationCurrentlyDeleting(null);
-        addSuccessToast(t('Deleted: %s', short_descr));
+        // addSuccessToast(t('Deleted: %s', short_descr));
+        addSuccessToast(t('已删除: %s', short_descr));
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting %s: %s', short_descr, errMsg),
+          // t('There was an issue deleting %s: %s', short_descr, errMsg),
+          t('删除时出现了一个问题 %s: %s', short_descr, errMsg),
         ),
       ),
     );
@@ -146,7 +148,8 @@ function AnnotationList({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected annotations: %s', errMsg),
+          // t('There was an issue deleting the selected annotations: %s', errMsg),
+          t('删除选定的注释时出现了问题: %s', errMsg),
         ),
       ),
     );
@@ -162,11 +165,13 @@ function AnnotationList({
     () => [
       {
         accessor: 'short_descr',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
       },
       {
         accessor: 'long_descr',
-        Header: t('Description'),
+        // Header: t('Description'),
+        Header: t('描述'),
       },
       {
         Cell: ({
@@ -176,7 +181,8 @@ function AnnotationList({
         }: {
           row: { original: AnnotationObject };
         }) => dayjs(new Date(startDttm)).format('ll'),
-        Header: t('Start'),
+        // Header: t('Start'),
+        Header: t('开始'),
         accessor: 'start_dttm',
       },
       {
@@ -187,7 +193,8 @@ function AnnotationList({
         }: {
           row: { original: AnnotationObject };
         }) => dayjs(new Date(endDttm)).format('ll'),
-        Header: t('End'),
+        // Header: t('End'),
+        Header: t('结束'),
         accessor: 'end_dttm',
       },
       {
@@ -201,14 +208,16 @@ function AnnotationList({
           const actions = [
             {
               label: 'edit-action',
-              tooltip: t('Edit annotation'),
+              // tooltip: t('Edit annotation'),
+              tooltip: t('编辑注解'),
               placement: 'bottom',
               icon: 'EditOutlined',
               onClick: handleEdit,
             },
             {
               label: 'delete-action',
-              tooltip: t('Delete annotation'),
+              // tooltip: t('Delete annotation'),
+              tooltip: t('删除注解'),
               placement: 'bottom',
               icon: 'DeleteOutlined',
               onClick: handleDelete,
@@ -216,7 +225,8 @@ function AnnotationList({
           ];
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
       },
@@ -237,7 +247,8 @@ function AnnotationList({
             vertical-align: text-top;
           `}
         />
-        {t('Annotation')}
+        {/* {t('Annotation')} */}
+        {t('注解')}
       </>
     ),
     buttonStyle: 'primary',
@@ -247,7 +258,8 @@ function AnnotationList({
   });
 
   subMenuButtons.push({
-    name: t('Bulk select'),
+    // name: t('Bulk select'),
+    name: t('批量选择'),
     onClick: toggleBulkSelect,
     buttonStyle: 'secondary',
     'data-test': 'annotation-bulk-select',
@@ -263,7 +275,8 @@ function AnnotationList({
   }
 
   const emptyState = {
-    title: t('No annotation yet'),
+    // title: t('No annotation yet'),
+    title: t('还没有注释'),
     image: 'filter-results.svg',
     buttonAction: () => {
       handleAnnotationEdit(null);
@@ -278,7 +291,8 @@ function AnnotationList({
             vertical-align: text-top;
           `}
         />
-        {t('Annotation')}
+        {/* {t('Annotation')} */}
+        {t('注解')}
       </>
     ),
   };
@@ -288,12 +302,18 @@ function AnnotationList({
       <SubMenu
         name={
           <StyledHeader>
-            <span>{t('Annotation Layer %s', annotationLayerName)}</span>
+            {/* <span>{t('Annotation Layer %s', annotationLayerName)}</span> */}
+            <span>{t('注解层 %s', annotationLayerName)}</span>
             <span>
-              {hasHistory ? (
+              {/* {hasHistory ? (
                 <Link to="/annotationlayer/list/">{t('Back to all')}</Link>
               ) : (
                 <a href="/annotationlayer/list/">{t('Back to all')}</a>
+              )} */}
+                  {hasHistory ? (
+                <Link to="/annotationlayer/list/">{t('返回全部')}</Link>
+              ) : (
+                <a href="/annotationlayer/list/">{t('返回全部')}</a>
               )}
             </span>
           </StyledHeader>
@@ -311,8 +331,12 @@ function AnnotationList({
       />
       {annotationCurrentlyDeleting && (
         <DeleteModal
+          // description={t(
+          //   'Are you sure you want to delete %s?',
+          //   annotationCurrentlyDeleting?.short_descr,
+          // )}
           description={t(
-            'Are you sure you want to delete %s?',
+            '您确定要删除吗？ %s?',
             annotationCurrentlyDeleting?.short_descr,
           )}
           onConfirm={() => {
@@ -322,13 +346,18 @@ function AnnotationList({
           }}
           onHide={() => setAnnotationCurrentlyDeleting(null)}
           open
-          title={t('Delete Annotation?')}
+          // title={t('Delete Annotation?')}
+          title={t('删除注释？')}
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
+        // title={t('Please confirm')}
+        // description={t(
+        //   'Are you sure you want to delete the selected annotations?',
+        // )}
+        title={t('请确认')}
         description={t(
-          'Are you sure you want to delete the selected annotations?',
+          '您确定要删除已选注释吗？',
         )}
         onConfirm={handleBulkAnnotationsDelete}
       >
@@ -336,7 +365,8 @@ function AnnotationList({
           const bulkActions: ListViewProps['bulkActions'] = [
             {
               key: 'delete',
-              name: t('Delete'),
+              // name: t('Delete'),
+              name: t('删除'),
               onSelect: confirmDelete,
               type: 'danger',
             },

@@ -35,8 +35,10 @@ const getAxisLabel = (
   formData: QueryFormData,
 ): Record<'label' | 'description', string> =>
   formData?.orientation === 'horizontal'
-    ? { label: t('Y-axis'), description: t('Dimension to use on y-axis.') }
-    : { label: t('X-axis'), description: t('Dimension to use on x-axis.') };
+    // ? { label: t('Y-axis'), description: t('Dimension to use on y-axis.') }
+    // : { label: t('X-axis'), description: t('Dimension to use on x-axis.') };
+    ? { label: t('Y 轴'), description: t('Y 轴上使用的维度。') }
+    : { label: t('X 轴'), description: t('X 轴上使用的维度。') };
 
 export const xAxisMixin = {
   label: (state: ControlPanelState) => getAxisLabel(state?.form_data).label,

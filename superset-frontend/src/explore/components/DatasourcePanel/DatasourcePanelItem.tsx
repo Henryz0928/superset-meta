@@ -150,7 +150,8 @@ const DatasourcePanelItem = ({
       if (labelIsTruncated) {
         tooltipNode = (
           <div>
-            <b>{t('Name')}:</b> {folder.name}
+            {/* <b>{t('Name')}:</b> {folder.name} */}
+            <b>{t('名称')}:</b> {folder.name}
           </div>
         );
       }
@@ -166,7 +167,8 @@ const DatasourcePanelItem = ({
                 `
               }
             >
-              <b>{t('Description')}:</b> {folder.description}
+              {/* <b>{t('Description')}:</b> {folder.description} */}
+              <b>{t('描述')}:</b> {folder.description}
             </div>
           </div>
         );

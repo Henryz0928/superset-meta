@@ -61,7 +61,8 @@ export function ControlHeader({
           {description && (
             <span>
               <InfoTooltipWithTrigger
-                label={t('description')}
+                // label={t('description')}
+                label={t('描述')}
                 tooltip={description}
                 placement="top"
                 onClick={tooltipOnClick}
@@ -71,8 +72,9 @@ export function ControlHeader({
           {renderTrigger && (
             <span>
               <InfoTooltipWithTrigger
-                label={t('bolt')}
-                tooltip={t('Changing this control takes effect instantly')}
+                // label={t('bolt')}
+                label={t('螺栓')}
+                tooltip={t('更改此控件立即生效')}
                 placement="top"
                 icon="bolt"
               />{' '}

@@ -339,7 +339,8 @@ export default class CRUDCollection extends PureComponent<
           <>
             {' '}
             <InfoTooltipWithTrigger
-              label={t('description')}
+              // label={t('description')}
+              label={t('描述')}
               tooltip={tooltip}
             />
           </>
@@ -401,7 +402,8 @@ export default class CRUDCollection extends PureComponent<
         <td key="__expand" className="expand">
           <i
             role="button"
-            aria-label="Toggle expand"
+            // aria-label="Toggle expand"
+              aria-label="展开"
             tabIndex={0}
             // TODO: Remove fa-icon
             // eslint-disable-next-line icons/no-fa-icons-usage
@@ -431,7 +433,8 @@ export default class CRUDCollection extends PureComponent<
           className="text-primary"
         >
           <Icons.DeleteOutlined
-            aria-label="Delete item"
+            // aria-label="Delete item"
+             aria-label="删除元素"
             className="pointer"
             data-test="crud-delete-icon"
             role="button"
@@ -494,7 +497,8 @@ export default class CRUDCollection extends PureComponent<
                   iconSize="m"
                   data-test="crud-add-table-item"
                 />
-                {t('Add item')}
+                {/* {t('Add item')} */}
+                {t('添加元素')}
               </Button>
             </StyledButtonWrapper>
           )}

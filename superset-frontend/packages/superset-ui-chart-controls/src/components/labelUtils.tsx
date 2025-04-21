@@ -67,7 +67,8 @@ export const getColumnTypeTooltipNode = (column: ColumnMeta): ReactNode => {
     return null;
   }
 
-  return <TooltipSection label={t('Column type')} text={column.type} />;
+  // return <TooltipSection label={t('Column type')} text={column.type} />;
+  return <TooltipSection label={t('列类型')} text={column.type} />;
 };
 
 export const getColumnTooltipNode = (
@@ -85,13 +86,16 @@ export const getColumnTooltipNode = (
   return (
     <>
       {column.column_name && (
-        <TooltipSection label={t('Column name')} text={column.column_name} />
+        // <TooltipSection label={t('Column name')} text={column.column_name} />
+        <TooltipSection label={t('列名')} text={column.column_name} />
       )}
       {column.verbose_name && (
-        <TooltipSection label={t('Label')} text={column.verbose_name} />
+        // <TooltipSection label={t('Label')} text={column.verbose_name} />
+        <TooltipSection label={t('标签')} text={column.verbose_name} />
       )}
       {column.description && (
-        <TooltipSection label={t('Description')} text={column.description} />
+        // <TooltipSection label={t('Description')} text={column.description} />
+        <TooltipSection label={t('描述')} text={column.description} />
       )}
     </>
   );
@@ -114,15 +118,18 @@ export const getMetricTooltipNode = (
 
   return (
     <>
-      <TooltipSection label={t('Metric name')} text={metric.metric_name} />
+      {/* <TooltipSection label={t('Metric name')} text={metric.metric_name} /> */}
+      <TooltipSection label={t('指标名称')} text={metric.metric_name} />
       {(metric.label || metric.verbose_name) && (
         <TooltipSection
-          label={t('Label')}
+          // label={t('Label')}
+          label={t('标签')}
           text={metric.label || metric.verbose_name}
         />
       )}
       {metric.description && (
-        <TooltipSection label={t('Description')} text={metric.description} />
+        // <TooltipSection label={t('Description')} text={metric.description} />
+        <TooltipSection label={t('描述')} text={metric.description} />
       )}
     </>
   );

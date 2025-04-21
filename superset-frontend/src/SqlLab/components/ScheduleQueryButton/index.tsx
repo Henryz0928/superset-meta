@@ -135,7 +135,8 @@ const StyledJsonSchema = styled.div`
 `;
 
 const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
-  defaultLabel = t('Undefined'),
+  // defaultLabel = t('Undefined'),
+  defaultLabel = t('未定义'),
   sql,
   schema,
   dbId,
@@ -170,10 +171,12 @@ const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
     <Form layout="vertical">
       <StyledRow>
         <Col xs={24}>
-          <FormItem label={t('Label')}>
+          {/* <FormItem label={t('Label')}> */}
+          <FormItem label={t('标签')}>
             <Input
               type="text"
-              placeholder={t('Label for your query')}
+              // placeholder={t('Label for your query')}
+              placeholder={t('您的查询标签')}
               value={label}
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 setLabel(event.target.value)
@@ -184,10 +187,12 @@ const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
       </StyledRow>
       <StyledRow>
         <Col xs={24}>
-          <FormItem label={t('Description')}>
+          {/* <FormItem label={t('Description')}> */}
+          <FormItem label={t('描述')}>
             <TextArea
               rows={4}
-              placeholder={t('Write a description for your query')}
+              // placeholder={t('Write a description for your query')}
+              placeholder={t('编写您的查询描述')}
               value={description}
               onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
                 setDescription(event.target.value)
@@ -211,7 +216,8 @@ const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
                 htmlType="submit"
                 css={{ float: 'right' }}
               >
-                {t('Submit')}
+                {/* {t('Submit')} */}
+                {t('提交')}
               </Button>
             </SchemaForm>
           </StyledJsonSchema>
@@ -231,7 +237,8 @@ const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
     <span className="ScheduleQueryButton">
       <ModalTrigger
         ref={saveModal}
-        modalTitle={t('Schedule query')}
+        // modalTitle={t('Schedule query')}
+        modalTitle={t('调度查询')}
         modalBody={renderModalBody()}
         triggerNode={
           <StyledButtonComponent
@@ -241,7 +248,8 @@ const ScheduleQueryButton: FunctionComponent<ScheduleQueryButtonProps> = ({
             tooltip={tooltip}
             disabled={disabled}
           >
-            {t('Schedule')}
+            {/* {t('Schedule')} */}
+            {t('调度')}
           </StyledButtonComponent>
         }
       />
