@@ -146,7 +146,8 @@ export const LayerConfigsControl: FC<LayerConfigsControlProps> = ({
 
   const popoverTitle = editItem.layerConf.title
     ? editItem.layerConf.title
-    : t('Add Layer');
+    // : t('Add Layer');
+    : t('添加图层');
   const controlHeaderProps = {
     name,
     label,

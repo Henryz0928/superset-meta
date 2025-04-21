@@ -413,7 +413,8 @@ export default class TimeSeriesColumnControl extends Component {
         <ControlPopover
           trigger="click"
           content={this.renderPopover()}
-          title={t('Column Configuration')}
+          // title={t('Column Configuration')}
+          title={t('列配置')}
           open={this.state.popoverVisible}
           onOpenChange={this.onPopoverVisibleChange}
         >

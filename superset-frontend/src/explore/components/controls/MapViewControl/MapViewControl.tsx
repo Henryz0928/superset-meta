@@ -124,10 +124,14 @@ export const MapViewControl: FC<MapViewConfigsControlProps> = ({
     setPopoverVisible(false);
   };
 
-  const popoverTitle = t('Extent');
-  const modeNameFitData = t('FIT DATA');
-  const modeNameCustom = t('CUSTOM');
-  const extentButtonText = t('Use current extent');
+  // const popoverTitle = t('Extent');
+  // const modeNameFitData = t('FIT DATA');
+  // const modeNameCustom = t('CUSTOM');
+  // const extentButtonText = t('Use current extent');
+  const popoverTitle = t('范围');
+  const modeNameFitData = t('拟合数据');
+  const modeNameCustom = t('自定义');
+  const extentButtonText = t('使用当前范围');
 
   const controlHeaderProps = {
     name,

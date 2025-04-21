@@ -132,7 +132,8 @@ export default class FixedOrMetricControl extends Component {
                 )}
                 {this.state.type === controlTypes.metric && (
                   <span>
-                    <span>{t('metric')}: </span>
+                    {/* <span>{t('metric')}: </span> */}
+                    <span>{t('度量')}: </span>
                     <strong>
                       {this.state.metricValue
                         ? this.state.metricValue.label
@@ -145,7 +146,8 @@ export default class FixedOrMetricControl extends Component {
           >
             <div className="well">
               <PopoverSection
-                title={t('Fixed')}
+                // title={t('Fixed')}
+                title={t('固定')}
                 isSelected={type === controlTypes.fixed}
                 onSelect={() => {
                   this.setType(controlTypes.fixed);
@@ -161,7 +163,8 @@ export default class FixedOrMetricControl extends Component {
                 />
               </PopoverSection>
               <PopoverSection
-                title={t('Based on a metric')}
+                // title={t('Based on a metric')}
+                title={t('基于量度')}
                 isSelected={type === controlTypes.metric}
                 onSelect={() => {
                   this.setType(controlTypes.metric);

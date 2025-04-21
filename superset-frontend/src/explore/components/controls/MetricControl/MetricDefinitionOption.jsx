@@ -46,8 +46,11 @@ function MetricDefinitionOption({ option, addWarningToast }) {
   if (option.aggregate_name) {
     return <AggregateOption aggregate={option} showType />;
   }
+  // addWarningToast(
+  //   'You must supply either a saved metric, column or aggregate to MetricDefinitionOption',
+  // );
   addWarningToast(
-    'You must supply either a saved metric, column or aggregate to MetricDefinitionOption',
+    '您必须向 MetricObservationOption 提供已保存的度量、列或聚合',
   );
   return null;
 }

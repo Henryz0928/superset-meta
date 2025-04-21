@@ -401,10 +401,14 @@ export const OptionControlLabel = ({
           bsStyle="warning"
           tooltip={
             datasourceWarningMessage ||
+            // t(`
+            //     This filter was inherited from the dashboard's context.
+            //     It won't be saved when saving the chart.
+            //   `)
             t(`
-                This filter was inherited from the dashboard's context.
-                It won't be saved when saving the chart.
-              `)
+              此筛选器是从仪表板的上下文中继承的。
+              保存图表时不会保存。
+            `)
           }
         />
       )}

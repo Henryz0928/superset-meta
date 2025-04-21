@@ -28,10 +28,14 @@ export const ExtentTag: FC<ExtentTagProps> = ({
   onClick,
   className,
 }) => {
-  const unsetName = t('unset');
-  const zoomName = t('Zoom');
-  const latName = t('Lat');
-  const lonName = t('Lon');
+  // const unsetName = t('unset');
+  // const zoomName = t('Zoom');
+  // const latName = t('Lat');
+  // const lonName = t('Lon');
+  const unsetName = t('取消设置');
+  const zoomName = t('缩放');
+  const latName = t('纬度');
+  const lonName = t('经度');
 
   return (
     <Tag onClick={onClick} className={className}>

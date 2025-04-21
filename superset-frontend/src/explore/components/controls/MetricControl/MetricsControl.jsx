@@ -333,7 +333,8 @@ const MetricsControl = ({
                   iconSize="m"
                   iconColor={theme.colors.grayscale.light1}
                 />
-                {t('Add metric')}
+                {/* {t('Add metric')} */}
+                {t('添加度量')}
               </AddControlLabel>,
             )}
       </LabelsContainer>

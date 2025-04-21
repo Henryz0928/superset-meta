@@ -59,7 +59,8 @@ const AdhocMetricEditPopoverTitle: FC<AdhocMetricEditPopoverTitleProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const defaultLabel = t('My metric');
+  // const defaultLabel = t('My metric');
+  const defaultLabel = t('我的度量');
 
   const handleMouseOver = useCallback(() => setIsHovered(true), []);
   const handleMouseOut = useCallback(() => setIsHovered(false), []);
@@ -109,7 +110,8 @@ const AdhocMetricEditPopoverTitle: FC<AdhocMetricEditPopoverTitleProps> = ({
   }
 
   return (
-    <Tooltip placement="top" title={t('Click to edit label')}>
+    // <Tooltip placement="top" title={t('Click to edit label')}>
+    <Tooltip placement="top" title={t('点击编辑标签')}>
       <span
         className="AdhocMetricEditPopoverTitle inline-editable"
         data-test="AdhocMetricEditTitle#trigger"

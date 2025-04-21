@@ -126,7 +126,8 @@ export const FlatLayerTree = forwardRef<HTMLDivElement, FlatLayerTreeProps>(
       onMoveLayer(movedLayerConfigs);
     };
 
-    const addLayerLabel = t('Click to add new layer');
+    // const addLayerLabel = t('Click to add new layer');
+    const addLayerLabel = t('单击以添加新图层');
 
     return (
       <div className={className} ref={ref}>
