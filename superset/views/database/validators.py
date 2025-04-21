@@ -31,17 +31,29 @@ def sqlalchemy_uri_validator(
 ) -> None:
     """
     Check if a user has submitted a valid SQLAlchemy URI
+    检查用户是否提交了有效的 SQLAlchemy URI
     """
     try:
         make_url_safe(uri.strip())
     except DatabaseInvalidError as ex:
+        # raise exception(
+        #     [
+        #         _(
+        #             "Invalid connection string, a valid string usually follows:"
+        #             "'DRIVER://USER:PASSWORD@DB-HOST/DATABASE-NAME'"
+        #             "<p>"
+        #             "Example:'postgresql://user:password@your-postgres-db/database'"
+        #             "</p>"
+        #         )
+        #     ]
+        # ) from ex
         raise exception(
             [
                 _(
-                    "Invalid connection string, a valid string usually follows:"
+                    "无效的连接字符串，有效的字符串通常跟在:"
                     "'DRIVER://USER:PASSWORD@DB-HOST/DATABASE-NAME'"
                     "<p>"
-                    "Example:'postgresql://user:password@your-postgres-db/database'"
+                    "示例:'postgresql://user:password@your-postgres-db/database'"
                     "</p>"
                 )
             ]

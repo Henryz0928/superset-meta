@@ -108,19 +108,28 @@ SQLLAB_QUERY_COST_ESTIMATE_TIMEOUT = config["SQLLAB_QUERY_COST_ESTIMATE_TIMEOUT"
 stats_logger = config["STATS_LOGGER"]
 logger = logging.getLogger(__name__)
 
-DATASOURCE_MISSING_ERR = __("The data source seems to have been deleted")
-USER_MISSING_ERR = __("The user seems to have been deleted")
+# DATASOURCE_MISSING_ERR = __("The data source seems to have been deleted")
+# USER_MISSING_ERR = __("The user seems to have been deleted")
+# PARAMETER_MISSING_ERR = __(
+#     "Please check your template parameters for syntax errors and make sure "
+#     "they match across your SQL query and Set Parameters. Then, try running "
+#     "your query again."
+# )
+DATASOURCE_MISSING_ERR = __("数据源似乎已被删除")
+USER_MISSING_ERR = __("用户似乎已被删除")
 PARAMETER_MISSING_ERR = __(
-    "Please check your template parameters for syntax errors and make sure "
-    "they match across your SQL query and Set Parameters. Then, try running "
-    "your query again."
+    "请检查您的模板参数语法错误，并确保 "
+    "它们在 SQL 查询和设置参数之间匹配。然后，试着运行 "
+    "再次执行您的查询。"
 )
 
 SqlResults = dict[str, Any]
 
 
 class Superset(BaseSupersetView):
-    """The base views for Superset!"""
+    """The base views for Superset!
+    Superset 的基础视图！
+    """
 
     logger = logging.getLogger(__name__)
 
@@ -286,7 +295,8 @@ class Superset(BaseSupersetView):
             and not security_manager.can_access("can_csv", "Superset")
         ):
             return json_error_response(
-                _("You don't have the rights to download as csv"),
+                # _("You don't have the rights to download as csv"),
+                _("您没有权限下载为 CSV"),
                 status=403,
             )
 
@@ -417,10 +427,12 @@ class Superset(BaseSupersetView):
                         initial_form_data["url_params"] = dict(url_params)
                 else:
                     return json_error_response(
-                        _("Error: permalink state not found"), status=404
+                        # _("Error: permalink state not found"), status=404
+                        _("错误：永久链接状态未找到"), status=404
                     )
             except (ChartNotFoundError, ExplorePermalinkGetFailedError) as ex:
-                flash(__("Error: %(msg)s", msg=ex.message), "danger")
+                # flash(__("Error: %(msg)s", msg=ex.message), "danger")
+                flash(__("错误: %(msg)s", msg=ex.message), "danger")
                 return redirect(url_for("SliceModelView.list"))
         elif form_data_key:
             parameters = CommandParameters(key=form_data_key)
@@ -434,14 +446,18 @@ class Superset(BaseSupersetView):
                 initial_form_data["slice_id"] = slice_id
                 if form_data_key:
                     flash(
-                        _("Form data not found in cache, reverting to chart metadata.")
+                        # _("Form data not found in cache, reverting to chart metadata.")
+                        _("在缓存中找不到表单数据，正在还原为图表元数据。")
                     )
             elif dataset_id:
                 initial_form_data["datasource"] = f"{dataset_id}__table"
                 if form_data_key:
                     flash(
+                        # _(
+                        #     "Form data not found in cache, reverting to dataset metadata."  # noqa: E501
+                        # )
                         _(
-                            "Form data not found in cache, reverting to dataset metadata."  # noqa: E501
+                            "在缓存中找不到表单数据，正在还原为数据集元数据。"  # noqa: E501
                         )
                     )
 
@@ -468,7 +484,8 @@ class Superset(BaseSupersetView):
                     datasource_id,
                 )
 
-        datasource_name = datasource.name if datasource else _("[Missing Dataset]")
+        # datasource_name = datasource.name if datasource else _("[Missing Dataset]")
+        datasource_name = datasource.name if datasource else _("[缺失数据集]")
         viz_type = form_data.get("viz_type")
         if not viz_type and datasource and datasource.default_endpoint:
             return redirect(datasource.default_endpoint)
@@ -506,13 +523,15 @@ class Superset(BaseSupersetView):
 
         if action == "overwrite" and not slice_overwrite_perm:
             return json_error_response(
-                _("You don't have the rights to alter this chart"),
+                # _("You don't have the rights to alter this chart"),
+                _("您没有权限修改这张图表"),
                 status=403,
             )
 
         if action == "saveas" and not slice_add_perm:
             return json_error_response(
-                _("You don't have the rights to create a chart"),
+                # _("You don't have the rights to create a chart"),
+                _("您没有创建图表的权限"),
                 status=403,
             )
 
@@ -567,9 +586,11 @@ class Superset(BaseSupersetView):
                 if datasource_type == "table"
                 else datasource.datasource_name
             )
-            title = _("Explore - %(table)s", table=table_name)
+            # title = _("Explore - %(table)s", table=table_name)
+            title = _("探索 - %(table)s", table=table_name)
         else:
-            title = _("Explore")
+            # title = _("Explore")
+            title = _("探索")
 
         return self.render_template(
             "superset/basic.html",
@@ -619,12 +640,14 @@ class Superset(BaseSupersetView):
         if action == "saveas" and slice_add_perm:
             ChartDAO.create(slc)
             db.session.commit()  # pylint: disable=consider-using-transaction
-            msg = _("Chart [{}] has been saved").format(slc.slice_name)
+            # msg = _("Chart [{}] has been saved").format(slc.slice_name)
+            msg = _("图表 [{}] 已保存").format(slc.slice_name)
             flash(msg, "success")
         elif action == "overwrite" and slice_overwrite_perm:
             ChartDAO.update(slc)
             db.session.commit()  # pylint: disable=consider-using-transaction
-            msg = _("Chart [{}] has been overwritten").format(slc.slice_name)
+            # msg = _("Chart [{}] has been overwritten").format(slc.slice_name)
+            msg = _("图表 [{}] 已被覆盖").format(slc.slice_name)
             flash(msg, "success")
 
         # Adding slice to a dashboard if requested
@@ -644,12 +667,16 @@ class Superset(BaseSupersetView):
             dash_overwrite_perm = security_manager.is_owner(dash)
             if not dash_overwrite_perm:
                 return json_error_response(
-                    _("You don't have the rights to alter this dashboard"),
+                    # _("You don't have the rights to alter this dashboard"),
+                    _("您没有权限修改这个仪表盘"),
                     status=403,
                 )
 
             flash(
-                _("Chart [{}] was added to dashboard [{}]").format(
+                # _("Chart [{}] was added to dashboard [{}]").format(
+                #     slc.slice_name, dash.dashboard_title
+                # ),
+                _("图表 [{}] 已添加到仪表盘 [{}]").format(
                     slc.slice_name, dash.dashboard_title
                 ),
                 "success",
@@ -660,7 +687,8 @@ class Superset(BaseSupersetView):
             dash_add_perm = security_manager.can_access("can_write", "Dashboard")
             if not dash_add_perm:
                 return json_error_response(
-                    _("You don't have the rights to create a dashboard"),
+                    # _("You don't have the rights to create a dashboard"),
+                    _("您没有创建仪表盘的权限"),
                     status=403,
                 )
 
@@ -669,8 +697,11 @@ class Superset(BaseSupersetView):
                 owners=[g.user] if g.user else [],
             )
             flash(
+                # _(
+                #     "Dashboard [{}] just got created and chart [{}] was added to it"
+                # ).format(dash.dashboard_title, slc.slice_name),
                 _(
-                    "Dashboard [{}] just got created and chart [{}] was added to it"
+                    "仪表板 [{}] 刚刚创建，并添加了图表 [{}]"
                 ).format(dash.dashboard_title, slc.slice_name),
                 "success",
             )
@@ -715,9 +746,12 @@ class Superset(BaseSupersetView):
 
         if not slice_id and not (table_name and db_name):
             return json_error_response(
+                # __(
+                #     "Malformed request. slice_id or table_name and db_name "
+                #     "arguments are expected"
+                # ),
                 __(
-                    "Malformed request. slice_id or table_name and db_name "
-                    "arguments are expected"
+                    "无效请求，不满足参数预期。"
                 ),
                 status=400,
             )
@@ -725,7 +759,8 @@ class Superset(BaseSupersetView):
             slices = db.session.query(Slice).filter_by(id=slice_id).all()
             if not slices:
                 return json_error_response(
-                    __("Chart %(id)s not found", id=slice_id), status=404
+                    # __("Chart %(id)s not found", id=slice_id), status=404
+                    __("图表 %(id)s 未找到", id=slice_id), status=404
                 )
         elif table_name and db_name:
             table = (
@@ -739,7 +774,8 @@ class Superset(BaseSupersetView):
             if not table:
                 return json_error_response(
                     __(
-                        "Table %(table)s wasn't found in the database %(db)s",
+                        # "Table %(table)s wasn't found in the database %(db)s",
+                        "表 %(table)s 未在数据库中找到 %(db)s",
                         table=table_name,
                         db=db_name,
                     ),
@@ -795,7 +831,8 @@ class Superset(BaseSupersetView):
             # anonymous users should get the login screen, others should go to dashboard list  # noqa: E501
             if g.user is None or g.user.is_anonymous:
                 redirect_url = f"{appbuilder.get_url_for_login}?next={request.url}"
-                warn_msg = "Users must be logged in to view this dashboard."
+                # warn_msg = "Users must be logged in to view this dashboard."
+                warn_msg = "用户必须登录后才能查看此仪表盘。"
             else:
                 redirect_url = url_for("DashboardModelView.list")
                 warn_msg = utils.error_msg_from_exception(ex)
@@ -845,7 +882,8 @@ class Superset(BaseSupersetView):
             flash(__("Error: %(msg)s", msg=ex.message), "danger")
             return redirect(url_for("DashboardModelView.list"))
         if not value:
-            return json_error_response(_("permalink state not found"), status=404)
+            # return json_error_response(_("permalink state not found"), status=404)
+            return json_error_response(_("未找到永久链接状态"), status=404)
         dashboard_id, state = value["dashboardId"], value.get("state", {})
         url = url_for(
             "Superset.dashboard", dashboard_id_or_slug=dashboard_id, permalink_key=key
