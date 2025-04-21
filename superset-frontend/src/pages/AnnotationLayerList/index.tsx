@@ -71,7 +71,8 @@ function AnnotationLayersList({
     toggleBulkSelect,
   } = useListViewResource<AnnotationLayerObject>(
     'annotation_layer',
-    t('Annotation layers'),
+    // t('Annotation layers'),
+    t('注释层'),
     addDangerToast,
   );
 
@@ -90,10 +91,12 @@ function AnnotationLayersList({
       () => {
         refreshData();
         setLayerCurrentlyDeleting(null);
-        addSuccessToast(t('Deleted: %s', name));
+        // addSuccessToast(t('Deleted: %s', name));
+        addSuccessToast(t('已删除: %s', name));
       },
       createErrorHandler(errMsg =>
-        addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),
+        // addDangerToast(t('There was an issue deleting %s: %s', name, errMsg)),
+        addDangerToast(t('删除时出现了一个问题 %s: %s', name, errMsg)),
       ),
     );
   };
@@ -110,7 +113,8 @@ function AnnotationLayersList({
       },
       createErrorHandler(errMsg =>
         addDangerToast(
-          t('There was an issue deleting the selected layers: %s', errMsg),
+          // t('There was an issue deleting the selected layers: %s', errMsg),
+          t('删除所选图层时出现问题: %s', errMsg),
         ),
       ),
     );
@@ -130,7 +134,8 @@ function AnnotationLayersList({
     () => [
       {
         accessor: 'name',
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         Cell: ({
           row: {
             original: { id, name },
@@ -154,7 +159,8 @@ function AnnotationLayersList({
       },
       {
         accessor: 'descr',
-        Header: t('Description'),
+        // Header: t('Description'),
+        Header: t('描述'),
       },
       {
         Cell: ({
@@ -165,7 +171,8 @@ function AnnotationLayersList({
             },
           },
         }: any) => <ModifiedInfo date={changedOn} user={changedBy} />,
-        Header: t('Last modified'),
+        // Header: t('Last modified'),
+        Header: t('最后修改'),
         accessor: 'changed_on',
         size: 'xl',
       },
@@ -178,7 +185,8 @@ function AnnotationLayersList({
             canEdit
               ? {
                   label: 'edit-action',
-                  tooltip: t('Edit template'),
+                  // tooltip: t('Edit template'),
+                  tooltip: t('修改模板'),
                   placement: 'bottom',
                   icon: 'EditOutlined',
                   onClick: handleEdit,
@@ -187,7 +195,8 @@ function AnnotationLayersList({
             canDelete
               ? {
                   label: 'delete-action',
-                  tooltip: t('Delete template'),
+                  // tooltip: t('Delete template'),
+                  tooltip: t('删除模板'),
                   placement: 'bottom',
                   icon: 'DeleteOutlined',
                   onClick: handleDelete,
@@ -197,7 +206,8 @@ function AnnotationLayersList({
 
           return <ActionsBar actions={actions as ActionProps[]} />;
         },
-        Header: t('Actions'),
+        // Header: t('Actions'),
+        Header: t('操作'),
         id: 'actions',
         disableSortBy: true,
         hidden: !canEdit && !canDelete,
@@ -224,7 +234,8 @@ function AnnotationLayersList({
               vertical-align: text-top;
             `}
           />
-          {t('Annotation layer')}
+          {/* {t('Annotation layer')} */}
+          {t('注释层')}
         </>
       ),
       buttonStyle: 'primary',
@@ -236,7 +247,8 @@ function AnnotationLayersList({
 
   if (canDelete) {
     subMenuButtons.push({
-      name: t('Bulk select'),
+      // name: t('Bulk select'),
+      name: t('批量选择'),
       onClick: toggleBulkSelect,
       buttonStyle: 'secondary',
     });
@@ -245,25 +257,32 @@ function AnnotationLayersList({
   const filters: Filters = useMemo(
     () => [
       {
-        Header: t('Name'),
+        // Header: t('Name'),
+        Header: t('名称'),
         key: 'search',
         id: 'name',
         input: 'search',
         operator: FilterOperator.Contains,
       },
       {
-        Header: t('Changed by'),
+        // Header: t('Changed by'),
+        Header: t('变更与'),
         key: 'changed_by',
         id: 'changed_by',
         input: 'select',
         operator: FilterOperator.RelationOneMany,
-        unfilteredLabel: t('All'),
+        // unfilteredLabel: t('All'),
+        unfilteredLabel: t('全部'),
         fetchSelects: createFetchRelated(
           'annotation_layer',
           'changed_by',
           createErrorHandler(errMsg =>
+            // t(
+            //   'An error occurred while fetching dataset datasource values: %s',
+            //   errMsg,
+            // ),
             t(
-              'An error occurred while fetching dataset datasource values: %s',
+              '获取数据集数据源时发生错误: %s',
               errMsg,
             ),
           ),
@@ -276,7 +295,8 @@ function AnnotationLayersList({
   );
 
   const emptyState = {
-    title: t('No annotation layers yet'),
+    // title: t('No annotation layers yet'),
+    title: t('没有注释层'),
     image: 'filter-results.svg',
     buttonAction: () => handleAnnotationLayerEdit(null),
     buttonText: (
@@ -285,7 +305,8 @@ function AnnotationLayersList({
           iconSize="m"
           iconColor={theme.colors.primary.light5}
         />
-        {t('Annotation layer')}
+        {/* {t('Annotation layer')} */}
+        {t('注释层')}
       </>
     ),
   };
@@ -301,7 +322,8 @@ function AnnotationLayersList({
 
   return (
     <>
-      <SubMenu name={t('Annotation layers')} buttons={subMenuButtons} />
+      {/* <SubMenu name={t('Annotation layers')} buttons={subMenuButtons} /> */}
+      <SubMenu name={t('注释层')} buttons={subMenuButtons} />
       <AnnotationLayerModal
         addDangerToast={addDangerToast}
         layer={currentAnnotationLayer}
@@ -311,7 +333,8 @@ function AnnotationLayersList({
       />
       {layerCurrentlyDeleting && (
         <DeleteModal
-          description={t('This action will permanently delete the layer.')}
+          // description={t('This action will permanently delete the layer.')}
+          description={t('此操作将永久删除图层。')}
           onConfirm={() => {
             if (layerCurrentlyDeleting) {
               handleLayerDelete(layerCurrentlyDeleting);
@@ -319,12 +342,15 @@ function AnnotationLayersList({
           }}
           onHide={() => setLayerCurrentlyDeleting(null)}
           open
-          title={t('Delete Layer?')}
+          // title={t('Delete Layer?')}
+          title={t('删除图层？')}
         />
       )}
       <ConfirmStatusChange
-        title={t('Please confirm')}
-        description={t('Are you sure you want to delete the selected layers?')}
+        // title={t('Please confirm')}
+        title={t('请确认')}
+        // description={t('Are you sure you want to delete the selected layers?')}
+        description={t('您确定要删除选定的图层吗？')}
         onConfirm={handleBulkLayerDelete}
       >
         {confirmDelete => {
@@ -332,7 +358,8 @@ function AnnotationLayersList({
             ? [
                 {
                   key: 'delete',
-                  name: t('Delete'),
+                  // name: t('Delete'),
+                  name: t('删除'),
                   onSelect: confirmDelete,
                   type: 'danger',
                 },
