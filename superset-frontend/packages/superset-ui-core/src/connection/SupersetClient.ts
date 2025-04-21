@@ -25,8 +25,11 @@ let singletonClient: SupersetClientClass | undefined;
 
 function getInstance(): SupersetClientClass {
   if (!singletonClient) {
+    // throw new Error(
+    //   'You must call SupersetClient.configure(...) before calling other methods',
+    // );
     throw new Error(
-      'You must call SupersetClient.configure(...) before calling other methods',
+      '您必须在调用其他方法之前调用 SupersetClient.configure(...)。',
     );
   }
   return singletonClient;

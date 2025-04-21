@@ -24,7 +24,8 @@ export default function rejectAfterTimeout<T>(timeout: number) {
       () =>
         // eslint-disable-next-line prefer-promise-reject-errors
         reject({
-          error: 'Request timed out',
+          // error: 'Request timed out',
+          error: '请求超时',
           statusText: 'timeout',
           timeout,
         }),

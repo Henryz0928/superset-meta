@@ -35,7 +35,11 @@ export const DEFAULT_FETCH_RETRY_OPTIONS: FetchRetryOptions = {
   retryOn: [503],
 };
 
+// export const COMMON_ERR_MESSAGES = {
+//   SESSION_TIMED_OUT:
+//     'Your session timed out, please refresh your page and try again.',
+// };
 export const COMMON_ERR_MESSAGES = {
   SESSION_TIMED_OUT:
-    'Your session timed out, please refresh your page and try again.',
+    '您的会话超时，请刷新您的页面并重试.',
 };

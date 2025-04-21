@@ -33,7 +33,8 @@ function tryParsePayload(payload: Payload) {
       ? (JSON.parse(payload) as JsonValue)
       : payload;
   } catch (error) {
-    throw new Error(`Invalid payload:\n\n${payload}`);
+    // throw new Error(`Invalid payload:\n\n${payload}`);
+    throw new Error(`无效的负载:\n\n${payload}`);
   }
 }
 
@@ -117,7 +118,8 @@ export default async function callApi({
       if (cachedFullResponse) {
         return cachedFullResponse.clone();
       }
-      throw new Error('Received 304 but no content is cached!');
+      // throw new Error('Received 304 but no content is cached!');
+      throw new Error('收到 304 但没有内容被缓存！');
     }
     if (
       supersetCache &&
@@ -133,7 +135,8 @@ export default async function callApi({
 
   if (method === 'POST' || method === 'PATCH' || method === 'PUT') {
     if (postPayload && jsonPayload) {
-      throw new Error('Please provide only one of jsonPayload or postPayload');
+      // throw new Error('Please provide only one of jsonPayload or postPayload');
+      throw new Error('请仅提供 jsonPayload 或 postPayload 中的一个');
     }
     if (postPayload instanceof FormData) {
       request.body = postPayload;
@@ -154,8 +157,13 @@ export default async function callApi({
               valueString = stringify ? JSON.stringify(value) : String(value);
             } catch (e) {
               // eslint-disable-next-line no-console
+              // console.error(
+              //   `Unable to convert attribute '${key}' to a String(). '${key}' was not added to the formData in request.body for call to ${url}`,
+              //   value,
+              //   e,
+              // );
               console.error(
-                `Unable to convert attribute '${key}' to a String(). '${key}' was not added to the formData in request.body for call to ${url}`,
+                `无法将属性 '${key}' 转换为 String（）。未将 '${key}' 添加到 request.body 的 formData 中以调用 ${url}`,
                 value,
                 e,
               );

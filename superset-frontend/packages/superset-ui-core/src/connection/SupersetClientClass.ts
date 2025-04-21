@@ -215,9 +215,14 @@ export default class SupersetClientClass {
     return (
       this.csrfPromise ??
       // eslint-disable-next-line prefer-promise-reject-errors
+      // Promise.reject({
+      //   error: `SupersetClient has not been provided a CSRF token, ensure it is
+      //   initialized with \`client.getCSRFToken()\` or try logging in at
+      //   ${this.getUrl({ endpoint: '/login' })}`,
+      // })
       Promise.reject({
-        error: `SupersetClient has not been provided a CSRF token, ensure it is
-        initialized with \`client.getCSRFToken()\` or try logging in at
+        error: `SupersetClient 尚未提供 CSRF 令牌，请确保提供
+        初始化为 \`client.getCSRFToken()\` 或尝试登录
         ${this.getUrl({ endpoint: '/login' })}`,
       })
     );
@@ -248,7 +253,8 @@ export default class SupersetClientClass {
         return this.csrfToken;
       }
       // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject({ error: 'Failed to fetch CSRF token' });
+      // return Promise.reject({ error: 'Failed to fetch CSRF token' });
+      return Promise.reject({ error: '获取 CSRF 令牌失败' });
     });
     return this.csrfPromise;
   }

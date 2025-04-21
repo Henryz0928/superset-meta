@@ -83,7 +83,10 @@ export default async function parseResponse<T extends ParseMethod = 'json'>(
     };
     return result as ReturnType;
   }
+  // throw new Error(
+  //   `Expected parseResponse=json|json-bigint|text|raw|null, got '${parseMethod}'.`,
+  // );
   throw new Error(
-    `Expected parseResponse=json|json-bigint|text|raw|null, got '${parseMethod}'.`,
+    `预期 parseResponse=json|json-bigint|text|raw|null，结果为 '${parseMethod}'.`,
   );
 }
